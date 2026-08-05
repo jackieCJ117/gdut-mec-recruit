@@ -1,11 +1,10 @@
 /* ============================================================
-   机创时报 CYBER 2026 · holo.css
-   浅色全息视觉语言全套（零依赖纯 CSS）：
-   彩虹箔 / 色差 / glitch 故障字 / 噪点 / 扫描线 / 深青发光+白晕 /
-   光斑层重构（.sheet__sheen 独立层，内容之下）
-   浅底演绎总原则：深青文字 + 白色光晕替代暗底霓虹；
-   全息箔用队标金属蓝灰（#B0B0D0→#9090B0→#707090）中等明度，
-   background-clip:text 出金属感，不靠发光。
+   机创全息终端 CYBER 2026 · holo.css
+   全息视觉语言全套（零依赖纯 CSS）：
+   彩虹箔 / 色差 / glitch 故障字 / 噪点 / 扫描线 / 霓虹发光 /
+   光斑层（.sheet__sheen 独立层，内容之下）
+   JARVIS 风格深色底：霓虹青直接发光，光斑为白色掠过；
+   全息箔用队标金属蓝灰（#B0B0D0→#9090B0→#707090）。
    ============================================================ */
 
 /* ============================================================
@@ -52,20 +51,20 @@
 .sheet--paper,
 .sheet--cover {
   background-image:
-    repeating-linear-gradient(0deg, rgba(16, 112, 144, 0.02) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(0deg, rgba(94, 200, 226, 0.02) 0 1px, transparent 1px 3px),
     var(--bg-stack, none);
 }
 /* 恢复各自的原背景（cover.css / paper.css 定义），扫描线叠加其上 */
 .sheet--cover {
   --bg-stack:
-    radial-gradient(90% 70% at 50% 0%, rgba(111, 215, 232, 0.28), transparent 55%),
-    radial-gradient(70% 55% at 90% 90%, rgba(162, 180, 212, 0.25), transparent 60%),
-    linear-gradient(160deg, rgba(255, 255, 255, 0.66) 0%, rgba(228, 245, 252, 0.46) 100%);
+    radial-gradient(90% 70% at 50% 0%, rgba(47, 196, 220, 0.16), transparent 55%),
+    radial-gradient(70% 55% at 90% 90%, rgba(122, 74, 158, 0.14), transparent 60%),
+    linear-gradient(160deg, rgba(9, 24, 40, 0.6) 0%, rgba(6, 16, 27, 0.5) 100%);
 }
 .sheet--paper {
   --bg-stack:
-    repeating-linear-gradient(90deg, rgba(16, 112, 144, 0.03) 0 1px, transparent 1px 4px),
-    linear-gradient(160deg, rgba(255, 255, 255, 0.62) 0%, rgba(232, 248, 253, 0.44) 100%);
+    repeating-linear-gradient(90deg, rgba(94, 200, 226, 0.035) 0 1px, transparent 1px 4px),
+    linear-gradient(160deg, rgba(9, 24, 40, 0.55) 0%, rgba(6, 16, 27, 0.45) 100%);
 }
 
 /* ============================================================
@@ -77,13 +76,7 @@
   background-clip: text;
   color: transparent;
 }
-/* 书脊：队标金属蓝灰竖版渐变 */
-.page__spine {
-  background: linear-gradient(90deg,
-    var(--foil-1) 0%, var(--foil-2) 12%, var(--foil-3) 38%,
-    #7c8cb4 50%, var(--foil-3) 62%, var(--foil-2) 88%, var(--foil-1) 100%);
-}
-/* 版式页脚页码 + 封面菱形分隔 → 金属箔 */
+/* 版式页脚模块编号 + 封面菱形分隔 → 金属箔 */
 .sheet__folio { background: var(--foil-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .cover__rule-gem { background: var(--foil-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 /* 封面双光环：--2 环改为金属箔渐变描边（conic 虹膜） */
@@ -96,12 +89,12 @@
 }
 
 /* ============================================================
-   色差（chromatic aberration）：静态双色偏移，浅底不刺眼
+   色差（chromatic aberration）：静态双色偏移（深底上亮青/品红）
    ============================================================ */
 .cover__masthead-en,
 .sheet__masthead-id,
 .trophy__num {
-  text-shadow: 2px 0 rgba(11, 90, 116, 0.5), -2px 0 rgba(122, 74, 158, 0.38);
+  text-shadow: 2px 0 rgba(47, 196, 220, 0.75), -2px 0 rgba(255, 82, 190, 0.5);
 }
 
 /* ============================================================
@@ -147,7 +140,7 @@
 }
 
 /* ============================================================
-   深青发光 + 白晕（浅底霓虹反转：光晕用白色）
+   霓虹发光（深底上直接发光）
    ============================================================ */
 .glow-deep,
 .cover__masthead-cn {
@@ -204,7 +197,7 @@
   margin-left: 6px;
   font-size: 8px;
   letter-spacing: 1px;
-  color: var(--ink);
+  color: var(--cyan);
   border: 1px solid var(--holo-border);
   border-radius: 999px;
   padding: 1px 6px;
@@ -239,7 +232,7 @@
 }
 /* 群号/公众号字符流收敛后的定格态（fx.js 控制） */
 .connect-anim.is-connected {
-  color: var(--ink-deep);
+  color: var(--cyan-soft);
   font-weight: 700;
 }
 .connect-anim.is-connected::after {

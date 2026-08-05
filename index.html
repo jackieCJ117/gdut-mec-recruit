@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>机创时报 CYBER 2026 · 机械创新团队秋季招新特刊</title>
-  <meta name="description" content="广东工业大学机械创新团队 2026 秋季招新特刊 —— 全息虚拟 3D 书刊，翻页浏览团队与各组别，直达报名。">
+  <title>机创全息终端 CYBER 2026 · 机械创新团队招新通道</title>
+  <meta name="description" content="广东工业大学机械创新团队 2026 秋季招新 —— 全息终端界面，一次一屏浏览团队、组别与报名通道。">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23107090' stroke-width='10'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23107090'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/cover.css">
   <link rel="stylesheet" href="css/paper.css">
-  <link rel="stylesheet" href="css/book3d.css">
+  <link rel="stylesheet" href="css/screen.css">
   <link rel="stylesheet" href="css/holo.css">
 </head>
 <body>
@@ -34,28 +34,24 @@
   </div>
 
   <main class="book-wrap" id="top">
-    <!-- ============ 报头条 ============ -->
+    <!-- ============ 终端状态栏 ============ -->
     <header class="topbar" role="banner">
       <div class="topbar__brand">
         <img class="topbar__logo" src="assets/logo.png" alt="机械创新团队队标">
-        <span class="topbar__title">机创时报 <i>MECH INNOVATION TIMES</i></span>
+        <span class="topbar__title">机创全息终端 <i>JICHUANG HOLO SYSTEM</i></span>
       </div>
       <div class="topbar__meta">
-        <span class="topbar__edition">CYBER 2026 · 秋季招新特刊</span>
-        <span class="topbar__edition topbar__edition--cn">第 001 期 · 免费赠阅</span>
+        <span class="topbar__edition">CYBER 2026 · RECRUITMENT</span>
+        <span class="topbar__edition topbar__edition--cn">招新通道开启</span>
         <span class="topbar__live">ONLINE</span>
       </div>
     </header>
 
-    <!-- ============ 全息 3D 书刊 ============ -->
-    <section class="holo" id="viewport" aria-label="机创时报：全息虚拟 3D 书刊，可翻页浏览六个版面">
-      <div class="holo__stage">
-        <div class="holo__track" id="track">
-
-        <!-- 跨页 1：封面 + 关于 -->
-        <div class="page page--1 is-current" data-page="1">
-          <article class="sheet sheet--cover leaf leaf--left" data-panel="1" aria-label="封面">
-            <span class="sheet__sheen" aria-hidden="true"></span>
+    <!-- ============ 全息终端大屏（一次一屏，淡入切换） ============ -->
+    <section class="holo" id="viewport" aria-label="机创全息终端：一次浏览一个模块，共六个模块">
+      <!-- 01 启动屏 -->
+      <article class="screen sheet--cover screen--boot is-active" data-screen="1" aria-label="01 · 启动屏">
+        <span class="sheet__sheen" aria-hidden="true"></span>
             <div class="cover__bg" aria-hidden="true" data-depth="12">
               <div class="cover__grid"></div>
               <div class="cover__scan"></div>
@@ -98,7 +94,7 @@
             </div>
 
             <div class="cover__status" aria-hidden="true">
-              <span>◤ JICHUANG TIMES // HOLO EDITION</span>
+              <span>◤ JICHUANG HOLO // SYS.01</span>
               <span>SYNC <span class="dot"></span></span>
             </div>
 
@@ -109,8 +105,8 @@
             <div class="cover__content">
               <p class="cover__est">EST. <span class="glitch" data-text="20XX">20XX</span> · 广东工业大学 GUANGDONG UNIVERSITY OF TECHNOLOGY</p>
               <h1 class="cover__masthead">
-                <span class="cover__masthead-cn">机创时报</span>
-                <span class="cover__masthead-en">MECH INNOVATION TIMES</span>
+                <span class="cover__masthead-cn">机创</span>
+                <span class="cover__masthead-en">JICHUANG HOLO SYSTEM</span>
               </h1>
               <div class="cover__rule"><span class="cover__rule-gem" aria-hidden="true">◆</span></div>
 
@@ -121,12 +117,12 @@
                 <div class="cover__beam" aria-hidden="true"></div>
               </div>
 
-              <p class="cover__kicker">AUTUMN RECRUITMENT SPECIAL · 秋季招新特刊</p>
+              <p class="cover__kicker">AUTUMN RECRUITMENT · 秋季招新接入</p>
               <h2 class="cover__headline">下一台改变世界的机器，<br><em>等你来造。</em></h2>
               <p class="cover__sub">结构 · 电控 · 视觉识别 · 运营 —— 四组联动，从图纸到赛场，只差一个你。</p>
 
               <div class="cover__meta">
-                <span>卷期 VOL.2026</span><span>定价 免费赠阅</span><span>出品 机械创新团队</span>
+                <span>接入协议 v2026</span><span>数据通道 OPEN</span><span>出品 机械创新团队</span>
               </div>
             </div>
 
@@ -135,16 +131,17 @@
                 <span class="cover__cta-label">开始浏览</span>
                 <span class="cover__cta-arrow" aria-hidden="true">→</span>
               </button>
-              <p class="cover__hint">← 横滑 / 拖动 / 键盘方向键 → 浏览版面</p>
+              <p class="cover__hint">← 键盘方向键 / 底部导航 → 切换模块</p>
             </div>
-          </article>
-          <span class="page__spine" aria-hidden="true"></span>
-          <article class="sheet sheet--paper leaf leaf--right" data-panel="2" aria-label="02 · 关于团队">
-            <span class="sheet__sheen" aria-hidden="true"></span>
+      </article>
+
+      <!-- 02 关于团队 -->
+      <article class="screen sheet--paper" data-screen="2" aria-label="02 · 关于团队">
+        <span class="sheet__sheen" aria-hidden="true"></span>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">02</span>
               <h2 class="sheet__masthead-title">关于机创 <i>ABOUT</i></h2>
-              <span class="sheet__masthead-meta">CYBER 2026 · 秋季招新特刊</span>
+              <span class="sheet__masthead-meta">MODULE 02/06 · DATA.SYNC</span>
             </header>
 
             <div class="sheet__body">
@@ -191,15 +188,13 @@
 
             <footer class="sheet__footer">
               <span>机械创新团队 · 2026 秋季招新</span>
-              <span class="sheet__folio">P.02</span>
+              <span class="sheet__folio">MOD.02</span>
             </footer>
-          </article>
-        </div><!-- /page 1 -->
+      </article>
 
-        <!-- 跨页 2：组别 + 战绩 -->
-        <div class="page page--2" data-page="2">
-          <article class="sheet sheet--paper leaf leaf--left" data-panel="3" aria-label="03 · 组别矩阵">
-            <span class="sheet__sheen" aria-hidden="true"></span>
+      <!-- 03 组别矩阵 -->
+      <article class="screen sheet--paper" data-screen="3" aria-label="03 · 组别矩阵">
+        <span class="sheet__sheen" aria-hidden="true"></span>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">03</span>
               <h2 class="sheet__masthead-title">组别矩阵 <i>DIVISIONS</i></h2>
@@ -242,12 +237,13 @@
 
             <footer class="sheet__footer">
               <span>机械创新团队 · 2026 秋季招新</span>
-              <span class="sheet__folio">P.03</span>
+              <span class="sheet__folio">MOD.03</span>
             </footer>
-          </article>
-          <span class="page__spine" aria-hidden="true"></span>
-          <article class="sheet sheet--paper leaf leaf--right" data-panel="4" aria-label="04 · 战绩与日程">
-            <span class="sheet__sheen" aria-hidden="true"></span>
+      </article>
+
+      <!-- 04 战绩与日程 -->
+      <article class="screen sheet--paper" data-screen="4" aria-label="04 · 战绩与日程">
+        <span class="sheet__sheen" aria-hidden="true"></span>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">04</span>
               <h2 class="sheet__masthead-title">战绩与日程 <i>HONORS &amp; TIMELINE</i></h2>
@@ -278,7 +274,7 @@
               <div class="timeline">
                 <h3 class="timeline__title">招新时间轴</h3>
                 <ol class="timeline__list">
-                  <li class="timeline__item"><b>报名开启</b><span>9 月上旬</span><small>填写本特刊第 05 版报名表</small></li>
+                  <li class="timeline__item"><b>报名开启</b><span>9 月上旬</span><small>填写本模块 05 报名表单</small></li>
                   <li class="timeline__item"><b>报名截止</b><span class="tl-date tbd" data-placeholder="9 月 X 日">9 月 X 日</span><small>截止时间请以群公告为准</small></li>
                   <li class="timeline__item"><b>面试安排</b><span class="tl-date tbd" data-placeholder="9 月中旬">9 月中旬</span><small>分方向面试 · 时间另行通知</small></li>
                   <li class="timeline__item"><b>结果公布</b><span class="tl-date tbd" data-placeholder="9 月底">9 月底</span><small>请关注招新群与公众号公告</small></li>
@@ -289,15 +285,13 @@
 
             <footer class="sheet__footer">
               <span>机械创新团队 · 2026 秋季招新</span>
-              <span class="sheet__folio">P.04</span>
+              <span class="sheet__folio">MOD.04</span>
             </footer>
-          </article>
-        </div><!-- /page 2 -->
+      </article>
 
-        <!-- 跨页 3：报名 + 加入 -->
-        <div class="page page--3" data-page="3">
-          <article class="sheet sheet--paper sheet--apply leaf leaf--left" data-panel="5" aria-label="05 · 报名">
-            <span class="sheet__sheen" aria-hidden="true"></span>
+      <!-- 05 报名 -->
+      <article class="screen sheet--paper sheet--apply" data-screen="5" aria-label="05 · 报名">
+        <span class="sheet__sheen" aria-hidden="true"></span>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">05</span>
               <h2 class="sheet__masthead-title">报名 <i>APPLY</i></h2>
@@ -417,12 +411,13 @@
 
             <footer class="sheet__footer">
               <span>机械创新团队 · 2026 秋季招新</span>
-              <span class="sheet__folio">P.05</span>
+              <span class="sheet__folio">MOD.05</span>
             </footer>
-          </article>
-          <span class="page__spine" aria-hidden="true"></span>
-          <article class="sheet sheet--paper sheet--cta leaf leaf--right" data-panel="6" aria-label="06 · 加入我们">
-            <span class="sheet__sheen" aria-hidden="true"></span>
+      </article>
+
+      <!-- 06 加入我们 -->
+      <article class="screen sheet--paper sheet--cta" data-screen="6" aria-label="06 · 加入我们">
+        <span class="sheet__sheen" aria-hidden="true"></span>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">06</span>
               <h2 class="sheet__masthead-title">想加入我们？ <i>JOIN US</i></h2>
@@ -461,13 +456,9 @@
 
             <footer class="sheet__footer sheet__footer--end">
               <span>END OF EDITION · 期待你的加入</span>
-              <span class="sheet__folio">P.06</span>
+              <span class="sheet__folio">MOD.06</span>
             </footer>
-          </article>
-        </div><!-- /page 3 -->
-
-        </div><!-- /holo__track -->
-      </div><!-- /holo__stage -->
+      </article>
     </section><!-- /holo -->
 
     <!-- ============ 全息轨道导航 ============ -->
@@ -484,7 +475,7 @@
       <button class="holo__rail-btn" id="nextBtn" type="button" aria-label="下一版面">›</button>
     </nav>
 
-    <p class="book-foot">设计：全息虚拟 3D 书刊 · 配色取自队标青 <code>#107090</code> · 占位文案可在 <code>index.html</code> 中直接替换</p>
+    <p class="book-foot">设计：机创全息终端 · 队标青 <code>#107090</code> · 占位文案在 <code>index.html</code> 中替换</p>
   </main>
 
   <script src="js/book.js"></script>

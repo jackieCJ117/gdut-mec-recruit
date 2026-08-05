@@ -5,22 +5,29 @@
    ============================================================ */
 
 :root {
-  /* —— 队标衍生色板（冷调浅色全息） ——
-     队标实际色块：深黑 #101010 32% / 队标青 #107090 13% / 金属蓝灰 24%。
-     浅色演绎：以队标青为基准色，金属蓝灰做全息箔。 */
-  --ink: #107090;            /* 队标主青（精确值，替代原 #176388） */
+  /* —— 全息终端色板（JARVIS 风格：深空底 + 深色玻璃 + 霓虹青发光） ——
+     队标青 #107090 为基准霓虹，暗底上改用亮青发光 */
+  --ink: #107090;            /* 队标青（基准色） */
   --ink-deep: #0b5a74;
-  --cyan: #22b3c8;           /* 全息高亮 */
-  --cyan-soft: #6fd7e8;
-  --mist: #3d5a6e;           /* 次级文字（加深至 ≥7:1 对比度） */
-  --holo-border: rgba(16, 112, 144, 0.32);
-  --holo-line: rgba(16, 112, 144, 0.14);
-  /* 边框/分隔线（此前从未定义，导致 paper.css 22 处引用全部失效：
-     时间轴竖线不可见、卡片描边丢失） */
-  --line: rgba(16, 112, 144, 0.18);
-  --line-soft: rgba(16, 112, 144, 0.11);
+  --cyan: #2fc4dc;           /* 霓虹高亮（深底上提亮） */
+  --cyan-soft: #7fd8e8;
+  --mist: #8fb4c9;           /* 次级文字（深底浅青） */
+  --holo-border: rgba(94, 200, 226, 0.38);
+  --holo-line: rgba(94, 200, 226, 0.16);
+  --line: rgba(120, 200, 226, 0.22);       /* 边框/分隔线 */
+  --line-soft: rgba(120, 200, 226, 0.12);
 
-  /* —— 队标金属蓝灰 → 全息箔 —— */
+  /* —— 深空底 + 深色玻璃 —— */
+  --bg-deep: #040b13;        /* 深空底色 */
+  --bg: #07121e;             /* 背景主色 */
+  --panel: rgba(8, 22, 36, 0.72);          /* 深色玻璃面板 */
+  --panel-hi: rgba(13, 34, 52, 0.85);      /* 面板高亮（卡片） */
+  --panel-lo: rgba(6, 16, 27, 0.6);        /* 面板弱化 */
+  --text: #cfe4f0;           /* 正文 */
+  --title: #eef8fd;          /* 标题 */
+  --on-ink: #eafaff;         /* 青色块上的文字 */
+
+  /* —— 队标金属蓝灰 → 全息箔（暗底上可发光） —— */
   --foil-1: #b0b0d0;
   --foil-2: #9090b0;
   --foil-3: #707090;
@@ -28,19 +35,13 @@
     #b0b0d0 0%, #9090b0 30%, #707090 48%,
     #7aa3c9 60%, #6fb0c8 74%, #b0b0d0 88%);
 
-  /* —— glitch 故障双色（深青 + 深品红，浅底不刺眼） —— */
-  --glitch-a: rgba(11, 90, 116, 0.62);
-  --glitch-b: rgba(122, 74, 158, 0.45);
-
-  --paper: #f4f9fd;
-  --paper-hi: #fbfdff;
-  --paper-lo: #e5f0f8;
-  --text: #16333f;           /* 正文深青墨 */
-  --title: #0c2a38;
+  /* —— glitch 故障双色（深底上更明显） —— */
+  --glitch-a: rgba(47, 196, 220, 0.8);
+  --glitch-b: rgba(255, 82, 190, 0.6);
 
   --font-en: "Orbitron", "Consolas", "Courier New", monospace;
-  --font-head-cn: "Smiley Sans", "PingFang SC", "Microsoft YaHei", sans-serif; /* 报头：得意黑 */
-  --font-cn: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Hiragino Sans GB", sans-serif; /* 正文：思源黑体 */
+  --font-head-cn: "Smiley Sans", "PingFang SC", "Microsoft YaHei", sans-serif; /* 标题：得意黑 */
+  --font-cn: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Hiragino Sans GB", sans-serif; /* 正文 */
 
   /* 面板尺寸预算：收窄留缝让相邻版面两侧露出 */
   --panel-h: calc(100vh - 176px);
@@ -66,7 +67,7 @@ html { -webkit-text-size-adjust: 100%; }
 body {
   font-family: var(--font-cn);
   color: var(--text);
-  background: linear-gradient(180deg, #e3f1fa 0%, #d4e8f6 55%, #c4dff1 100%);
+  background: linear-gradient(180deg, #07121e 0%, #050d16 45%, #040b13 100%);
   background-attachment: fixed;
   min-height: 100vh;
   display: flex;
@@ -88,8 +89,8 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(rgba(16, 112, 144, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16, 112, 144, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(94, 200, 226, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 200, 226, 0.07) 1px, transparent 1px);
   background-size: 44px 44px;
   -webkit-mask-image: radial-gradient(120% 100% at 50% 40%, #000 30%, transparent 92%);
   mask-image: radial-gradient(120% 100% at 50% 40%, #000 30%, transparent 92%);
@@ -190,7 +191,7 @@ body {
   justify-content: space-between;
   gap: 12px;
   padding: 4px 6px 8px;
-  border-bottom: 1px solid rgba(16, 112, 144, 0.25);
+  border-bottom: 1px solid rgba(94, 200, 226, 0.22);
   margin-bottom: 8px;
 }
 .topbar__brand { display: flex; align-items: center; gap: 10px; }
@@ -215,11 +216,11 @@ body {
   font-family: var(--font-en);
   font-size: 8px;
   letter-spacing: 1.5px;
-  color: var(--ink);
+  color: var(--cyan);
   border: 1px solid var(--holo-border);
   border-radius: 999px;
   padding: 3px 10px;
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(8, 22, 36, 0.6);
 }
 .topbar__live::before {
   content: "";
@@ -233,39 +234,33 @@ body {
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
 /* ============================================================
-   全息横滑大屏
+   全息终端大屏（一次一屏，淡入切换）
    ============================================================ */
 .holo {
-  width: 100%;
-  max-width: 1500px;
-  overflow: hidden;
-  touch-action: pan-y; /* 纵向滚动交给浏览器，横向拖拽交给 JS */
-}
-.holo__track {
-  display: flex;
-  transition: transform var(--dur-slide) var(--ease-slide);
-  will-change: transform;
-  transform-style: preserve-3d; /* 让页内 3D 姿态在轨道内成立 */
-}
-
-/* 每个版面的「全息玻璃屏」。
-   注意：这里不再设 background 与 overflow——
-   此前 background: rgba(255,255,255,0.66) 特异性压死了 cover.css/paper.css
-   的装饰渐变（封面三层渐变、纸面竖纹全部不生效）；
-   overflow:hidden 则压死 paper.css 的 overflow-y:auto（内容被裁且无法滚动）。
-   现在背景/滚动行为由各 sheet 自身（cover.css / paper.css）声明。
-   .leaf 的 3D 姿态见 book3d.css。 */
-.holo .leaf {
   position: relative;
   width: 100%;
+  max-width: 1500px;
   height: var(--panel-h);
-  min-height: 520px;
-  border-radius: 16px;
-  -webkit-backdrop-filter: blur(16px) saturate(1.5);
-  backdrop-filter: blur(16px) saturate(1.5);
+  overflow: hidden;
+  touch-action: pan-y; /* 纵向滚动交给面板内部滚动 */
+}
+
+/* 每个版面的「深色全息玻璃屏」。
+   一次一屏：所有 screen 绝对叠放，由 book.js 切换 is-active（淡入过渡见 screen.css）。
+   背景/滚动由各 screen 自身声明；overflow 交给 paper.css。 */
+.holo .screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  background: var(--panel);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  backdrop-filter: blur(14px) saturate(1.3);
   box-shadow:
-    0 20px 55px rgba(16, 112, 144, 0.22),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+    0 24px 70px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(94, 200, 226, 0.22),
+    0 0 40px rgba(34, 179, 200, 0.1);
 }
 
 /* ============================================================
@@ -282,17 +277,17 @@ body {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1px solid rgba(16, 112, 144, 0.45);
-  background: rgba(255, 255, 255, 0.6);
-  color: var(--ink);
+  border: 1px solid var(--holo-border);
+  background: rgba(8, 22, 36, 0.7);
+  color: var(--cyan);
   font-size: 22px;
   line-height: 1;
   cursor: pointer;
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
 }
 .holo__rail-btn:hover {
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 0 16px rgba(34, 179, 200, 0.45);
+  background: rgba(13, 34, 52, 0.9);
+  box-shadow: 0 0 18px rgba(47, 196, 220, 0.5);
   transform: translateY(-1px);
 }
 .holo__rail-btn:disabled { opacity: 0.3; cursor: default; transform: none; box-shadow: none; }
@@ -302,19 +297,19 @@ body {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1px;
-  color: var(--ink);
+  color: var(--mist);
   border: 1px solid var(--holo-border);
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(8, 22, 36, 0.7);
   border-radius: 999px;
   padding: 6px 12px;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
-.chip:hover { background: rgba(255, 255, 255, 0.95); }
+.chip:hover { background: rgba(13, 34, 52, 0.9); color: var(--cyan); }
 .chip.is-active {
-  background: var(--ink);
-  color: #fff;
-  box-shadow: 0 0 14px rgba(16, 112, 144, 0.5);
+  background: var(--cyan);
+  color: var(--bg);
+  box-shadow: 0 0 16px rgba(47, 196, 220, 0.6);
 }
 
 .book-foot {
@@ -325,8 +320,8 @@ body {
 }
 .book-foot code {
   font-family: var(--font-en);
-  color: var(--ink);
-  background: rgba(16, 112, 144, 0.1);
+  color: var(--cyan);
+  background: rgba(8, 22, 36, 0.6);
   padding: 1px 6px;
   border-radius: 3px;
 }
@@ -336,7 +331,7 @@ body {
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
-  .holo__track { transition-duration: 0.01ms; }
+  .screen { transition-duration: 0.01ms; }
 }
 
 /* ============================================================
@@ -349,8 +344,6 @@ body {
   .topbar__title i { display: none; }
   .topbar__edition { font-size: 8px; }
   .holo-bg__aurora--3 { display: none; }
-  .holo .leaf { min-height: 480px; }
   .holo__rail { gap: 8px; }
   .chip { padding: 5px 10px; font-size: 10px; }
-  :root { --panel-w: 72vw; }
 }

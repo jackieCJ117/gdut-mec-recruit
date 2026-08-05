@@ -1,0 +1,35 @@
+/* ============================================================
+   机创全息终端 CYBER 2026 · screen.css
+   一次一屏 + 全息淡入过渡：
+   所有 .screen 在 .holo 内绝对叠放，只有 .is-active 可见；
+   切换 = opacity + scale 空间淡入（JARVIS 式界面过渡，非翻页）。
+   ============================================================ */
+
+/* —— 隐藏屏：淡出后不可见、不可聚焦（visibility 延迟到过渡结束） —— */
+.screen {
+  opacity: 0;
+  transform: scale(0.97) translateY(8px);
+  pointer-events: none;
+  visibility: hidden;
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease,
+    visibility 0s linear 0.45s;
+}
+.screen.is-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+  visibility: visible;
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+/* —— 屏幕即内容容器：承接滚动（启动屏不滚动） —— */
+.screen { overflow-y: auto; }
+.screen.sheet--cover { overflow-y: hidden; }
+
+/* 滚动条（深色细条） */
+.screen::-webkit-scrollbar { width: 6px; }
+.screen::-webkit-scrollbar-thumb { background: rgba(94, 200, 226, 0.3); border-radius: 3px; }

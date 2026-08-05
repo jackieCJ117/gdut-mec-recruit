@@ -1,6 +1,6 @@
 /* ============================================================
-   机创日报 CYBER 2026 · cover.css  v3（浅色全息封面）
-   封面与全站统一冷浅色，靠光效与队标出层次
+   机创全息终端 CYBER 2026 · cover.css（启动屏）
+   深色霓虹启动屏：青/品红光晕 + 深色玻璃 + 旋转机械装饰
    ============================================================ */
 
 .sheet--cover {
@@ -8,9 +8,9 @@
   height: 100%;
   color: var(--title);
   background:
-    radial-gradient(90% 70% at 50% 0%, rgba(111, 215, 232, 0.28), transparent 55%),
-    radial-gradient(70% 55% at 90% 90%, rgba(162, 180, 212, 0.25), transparent 60%),
-    linear-gradient(160deg, rgba(255, 255, 255, 0.66) 0%, rgba(228, 245, 252, 0.46) 100%);
+    radial-gradient(90% 70% at 50% 0%, rgba(47, 196, 220, 0.16), transparent 55%),
+    radial-gradient(70% 55% at 90% 90%, rgba(122, 74, 158, 0.14), transparent 60%),
+    linear-gradient(160deg, rgba(9, 24, 40, 0.6) 0%, rgba(6, 16, 27, 0.5) 100%);
   overflow: hidden;
 }
 
@@ -24,8 +24,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(16, 112, 144, 0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16, 112, 144, 0.09) 1px, transparent 1px);
+    linear-gradient(rgba(94, 200, 226, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 200, 226, 0.09) 1px, transparent 1px);
   background-size: 38px 38px;
   -webkit-mask-image: radial-gradient(130% 95% at 50% 34%, #000 32%, transparent 88%);
   mask-image: radial-gradient(130% 95% at 50% 34%, #000 32%, transparent 88%);
@@ -33,20 +33,20 @@
 .cover__radial {
   position: absolute;
   inset: 0;
-  background: radial-gradient(60% 50% at 50% 44%, rgba(34, 179, 200, 0.22), transparent 72%);
+  background: radial-gradient(60% 50% at 50% 44%, rgba(47, 196, 220, 0.28), transparent 72%);
 }
 .cover__scan {
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
     0deg,
-    rgba(16, 112, 144, 0.025) 0 1px,
+    rgba(94, 200, 226, 0.035) 0 1px,
     transparent 1px 4px
   );
 }
 
-/* 齿轮 / 电路装饰（浅底用深青） */
-.deco { position: absolute; color: var(--ink); opacity: 0.4; }
+/* 齿轮 / 电路装饰（深底上发光青） */
+.deco { position: absolute; color: var(--cyan); opacity: 0.55; }
 .deco--gear-lg {
   width: 118px;
   top: 5%;
@@ -81,7 +81,7 @@
   font-family: var(--font-en);
   font-size: 8px;
   letter-spacing: 2.5px;
-  color: var(--ink);
+  color: var(--cyan);
   opacity: 0.8;
 }
 .cover__status .dot {
@@ -130,7 +130,7 @@
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 5.5px;
-  color: var(--ink);
+  color: var(--cyan);
   margin-top: 7px;
 }
 
@@ -140,14 +140,14 @@
   gap: 14px;
   margin: 13px 0 14px;
   width: min(78%, 340px);
-  color: var(--ink);
+  color: var(--cyan);
 }
 .cover__rule::before,
 .cover__rule::after {
   content: "";
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(16, 112, 144, 0.55), transparent);
+  background: linear-gradient(90deg, transparent, rgba(94, 200, 226, 0.55), transparent);
 }
 .cover__rule-gem { font-size: 9px; }
 
@@ -181,14 +181,14 @@
   width: 206px;
   height: 206px;
   margin: -103px 0 0 -103px;
-  border: 1px dashed rgba(16, 112, 144, 0.5);
+  border: 1px dashed rgba(94, 200, 226, 0.5);
   animation: spin 22s linear infinite;
 }
 .cover__ring--2 {
   width: 148px;
   height: 148px;
   margin: -74px 0 0 -74px;
-  border: 1px solid rgba(16, 112, 144, 0.35);
+  border: 1px solid rgba(94, 200, 226, 0.35);
   border-top-color: var(--cyan);
   animation: spin 14s linear infinite reverse;
 }
@@ -215,7 +215,7 @@
   font-family: var(--font-en);
   font-size: 9px;
   letter-spacing: 3px;
-  color: var(--ink);
+  color: var(--cyan);
   margin-bottom: 11px;
 }
 .cover__headline {
@@ -226,7 +226,7 @@
 }
 .cover__headline em {
   font-style: normal;
-  color: var(--ink);
+  color: var(--cyan);
   text-shadow: 0 0 16px rgba(34, 179, 200, 0.5);
 }
 .cover__sub {
@@ -247,7 +247,7 @@
   font-family: var(--font-en);
   font-size: 8px;
   letter-spacing: 1.6px;
-  color: var(--ink);
+  color: var(--cyan);
 }
 
 /* —— 漂浮数据芯片 —— */
@@ -257,11 +257,11 @@
   font-family: var(--font-en);
   font-size: 7.5px;
   letter-spacing: 1.5px;
-  color: var(--ink);
+  color: var(--cyan);
   border: 1px solid var(--holo-border);
   border-radius: 999px;
   padding: 3px 9px;
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(8, 22, 36, 0.7);
   animation: chip-float 7s ease-in-out infinite;
 }
 .cover__chip--a { top: 27%; left: 6%; }
@@ -292,17 +292,17 @@
   padding: 11px 26px;
   border-radius: 999px;
   border: none;
-  background: linear-gradient(90deg, var(--ink), var(--ink-deep));
-  color: #fff;
+  background: linear-gradient(135deg, var(--cyan), #0e8ba6);
+  color: var(--bg);
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 3px;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(16, 112, 144, 0.35);
+  box-shadow: 0 0 22px rgba(47, 196, 220, 0.45);
   transition: box-shadow 0.25s, transform 0.15s;
 }
 .cover__cta:hover {
-  box-shadow: 0 8px 26px rgba(34, 179, 200, 0.55), inset 0 0 12px rgba(111, 215, 232, 0.3);
+  box-shadow: 0 0 34px rgba(47, 196, 220, 0.7), inset 0 0 14px rgba(234, 250, 255, 0.35);
   transform: translateY(-1px);
 }
 .cover__cta-arrow { font-size: 16px; }

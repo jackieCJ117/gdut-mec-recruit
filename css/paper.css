@@ -10,14 +10,14 @@
   display: flex;
   flex-direction: column;
   background:
-    repeating-linear-gradient(90deg, rgba(16, 112, 144, 0.03) 0 1px, transparent 1px 4px),
-    linear-gradient(160deg, rgba(255, 255, 255, 0.62) 0%, rgba(232, 248, 253, 0.44) 100%);
-  border: 1px solid rgba(16, 112, 144, 0.42);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6), 0 10px 30px rgba(16, 112, 144, 0.16);
+    repeating-linear-gradient(90deg, rgba(94, 200, 226, 0.035) 0 1px, transparent 1px 4px),
+    linear-gradient(160deg, rgba(9, 24, 40, 0.55) 0%, rgba(6, 16, 27, 0.45) 100%);
+  border: 1px solid rgba(94, 200, 226, 0.28);
+  box-shadow: inset 0 0 0 1px rgba(94, 200, 226, 0.1), 0 10px 30px rgba(0, 0, 0, 0.35);
   color: var(--text);
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(16, 112, 144, 0.35) transparent;
+  scrollbar-color: rgba(94, 200, 226, 0.35) transparent;
 }
 /* HUD 四角定位角标 */
 .sheet--paper::before,
@@ -32,17 +32,17 @@
 .sheet--paper::before {
   top: 7px;
   left: 7px;
-  border-top: 2px solid rgba(16, 112, 144, 0.45);
-  border-left: 2px solid rgba(16, 112, 144, 0.45);
+  border-top: 2px solid rgba(94, 200, 226, 0.45);
+  border-left: 2px solid rgba(94, 200, 226, 0.45);
 }
 .sheet--paper::after {
   bottom: 7px;
   right: 7px;
-  border-bottom: 2px solid rgba(16, 112, 144, 0.45);
-  border-right: 2px solid rgba(16, 112, 144, 0.45);
+  border-bottom: 2px solid rgba(94, 200, 226, 0.45);
+  border-right: 2px solid rgba(94, 200, 226, 0.45);
 }
 .sheet--paper::-webkit-scrollbar { width: 6px; }
-.sheet--paper::-webkit-scrollbar-thumb { background: rgba(16, 112, 144, 0.35); border-radius: 3px; }
+.sheet--paper::-webkit-scrollbar-thumb { background: rgba(94, 200, 226, 0.35); border-radius: 3px; }
 
 /* —— 报头 —— */
 .sheet__masthead {
@@ -51,14 +51,14 @@
   align-items: baseline;
   gap: 12px;
   padding: 13px 22px 9px;
-  border-bottom: 3px double var(--ink);
-  background: linear-gradient(180deg, rgba(16, 112, 144, 0.05), transparent);
+  border-bottom: 3px double var(--cyan);
+  background: linear-gradient(180deg, rgba(94, 200, 226, 0.05), transparent);
 }
 .sheet__masthead-id {
   font-family: var(--font-en);
   font-size: 21px;
   font-weight: 900;
-  color: var(--ink);
+  color: var(--cyan);
   line-height: 1;
 }
 .sheet__masthead-title {
@@ -73,7 +73,7 @@
   font-size: 9px;
   font-weight: 500;
   letter-spacing: 2.5px;
-  color: var(--ink);
+  color: var(--cyan);
   margin-left: 6px;
 }
 .sheet__masthead-meta {
@@ -81,7 +81,7 @@
   font-family: var(--font-en);
   font-size: 8px;
   letter-spacing: 1.6px;
-  color: var(--ink);
+  color: var(--cyan);
   opacity: 0.7;
   white-space: nowrap;
 }
@@ -102,9 +102,9 @@
 .sheet__lead {
   font-size: 15px;
   font-weight: 700;
-  color: var(--ink-deep);
+  color: var(--cyan-soft);
   line-height: 1.7;
-  border-left: 3px solid var(--ink);
+  border-left: 3px solid var(--cyan);
   padding-left: 12px;
   margin-bottom: 12px;
 }
@@ -118,10 +118,10 @@
 }
 
 .link {
-  color: var(--ink);
+  color: var(--cyan);
   font-weight: 700;
   text-decoration: none;
-  border-bottom: 1px dashed var(--ink);
+  border-bottom: 1px dashed var(--cyan);
 }
 .link:hover { color: var(--cyan); }
 
@@ -135,9 +135,9 @@
 .blueprint {
   border: 1px solid var(--line);
   background:
-    repeating-linear-gradient(0deg, rgba(16, 112, 144, 0.05) 0 1px, transparent 1px 22px),
-    repeating-linear-gradient(90deg, rgba(16, 112, 144, 0.05) 0 1px, transparent 1px 22px),
-    rgba(16, 112, 144, 0.03);
+    repeating-linear-gradient(0deg, rgba(94, 200, 226, 0.05) 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(90deg, rgba(94, 200, 226, 0.05) 0 1px, transparent 1px 22px),
+    rgba(94, 200, 226, 0.03);
   border-radius: 3px;
   display: flex;
   flex-direction: column;
@@ -145,14 +145,14 @@
   justify-content: center;
   gap: 8px;
   padding: 10px;
-  color: var(--ink);
+  color: var(--cyan);
 }
 .blueprint svg { width: 82%; max-width: 150px; opacity: 0.85; }
 .blueprint__tag {
   font-family: var(--font-en);
   font-size: 8px;
   letter-spacing: 2px;
-  color: var(--ink);
+  color: var(--cyan);
   opacity: 0.7;
 }
 
@@ -163,14 +163,14 @@
   margin: 4px 0 12px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  background: linear-gradient(90deg, transparent, rgba(16, 112, 144, 0.05), transparent);
+  background: linear-gradient(90deg, transparent, rgba(94, 200, 226, 0.05), transparent);
 }
 .motto__mark {
   position: absolute;
   top: -2px;
   left: 10px;
   font-size: 26px;
-  color: var(--ink);
+  color: var(--cyan);
   opacity: 0.3;
   font-family: Georgia, serif;
 }
@@ -184,7 +184,7 @@
   font-family: var(--font-en);
   font-size: 7.5px;
   letter-spacing: 2px;
-  color: var(--ink);
+  color: var(--cyan);
   opacity: 0.75;
   display: block;
   margin-top: 5px;
@@ -198,18 +198,18 @@
 }
 .facts__item {
   border: 1px solid var(--line);
-  border-top: 3px solid var(--ink);
+  border-top: 3px solid var(--cyan);
   border-radius: 3px;
   padding: 10px 6px 8px;
   text-align: center;
-  background: var(--paper-hi);
+  background: var(--panel-hi);
 }
 .facts__num {
   display: block;
   font-family: var(--font-en);
   font-size: 22px;
   font-weight: 900;
-  color: var(--ink);
+  color: var(--cyan);
 }
 .facts__label {
   font-size: 10.5px;
@@ -228,11 +228,11 @@
   border: 1px solid var(--line);
   border-radius: 4px;
   padding: 11px 12px 10px 16px;
-  background: var(--paper-hi);
+  background: var(--panel-hi);
   transition: box-shadow 0.2s, transform 0.15s;
 }
 .group:hover {
-  box-shadow: 0 4px 14px rgba(16, 112, 144, 0.14);
+  box-shadow: 0 4px 14px rgba(94, 200, 226, 0.14);
   transform: translateY(-2px);
 }
 .group::before {
@@ -243,7 +243,7 @@
   bottom: 10px;
   width: 3px;
   border-radius: 2px;
-  background: var(--ink);
+  background: var(--cyan);
 }
 .group__no {
   position: absolute;
@@ -252,7 +252,7 @@
   font-family: var(--font-en);
   font-size: 18px;
   font-weight: 900;
-  color: rgba(16, 112, 144, 0.16);
+  color: rgba(94, 200, 226, 0.16);
 }
 .group__name {
   font-size: 14.5px;
@@ -265,15 +265,15 @@
   font-style: normal;
   font-size: 8px;
   letter-spacing: 2px;
-  color: var(--ink);
+  color: var(--cyan);
   margin-left: 4px;
 }
 .group__desc { font-size: 11px; line-height: 1.65; margin-bottom: 5px; }
 .group__who {
   font-size: 10.5px;
   line-height: 1.6;
-  color: var(--ink-deep);
-  background: rgba(16, 112, 144, 0.05);
+  color: var(--cyan-soft);
+  background: rgba(94, 200, 226, 0.05);
   border-radius: 3px;
   padding: 4px 7px;
   margin-bottom: 6px;
@@ -288,11 +288,11 @@
   font-family: var(--font-en);
   font-size: 7.5px;
   letter-spacing: 0.5px;
-  color: var(--ink);
+  color: var(--cyan);
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 1px 7px;
-  background: #fff;
+  background: var(--panel-hi);
 }
 
 /* —— 战绩 —— */
@@ -308,14 +308,14 @@
   border: 1px solid var(--line);
   border-radius: 4px;
   padding: 8px 12px;
-  background: var(--paper-hi);
+  background: var(--panel-hi);
 }
 .trophy__medal { font-size: 20px; line-height: 1; }
 .trophy__num {
   font-family: var(--font-en);
   font-size: 17px;
   font-weight: 900;
-  color: var(--ink);
+  color: var(--cyan);
   margin-right: 8px;
 }
 .trophy__text { font-size: 11.5px; font-weight: 700; color: var(--title); line-height: 1.4; }
@@ -326,7 +326,7 @@
   border: 1px solid var(--line);
   border-radius: 4px;
   padding: 10px 14px;
-  background: var(--paper-hi);
+  background: var(--panel-hi);
 }
 .timeline__title {
   font-size: 13px;
@@ -370,16 +370,17 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--paper-hi);
+  background: var(--panel-hi);
   border: 2px solid var(--ink);
 }
 .timeline__item b { color: var(--title); margin-right: 8px; }
-.timeline__item span { font-family: var(--font-en); font-size: 10px; font-weight: 700; color: var(--ink); }
+.timeline__item span { font-family: var(--font-en); font-size: 10px; font-weight: 700; color: var(--cyan); }
 .timeline__item small { display: block; color: var(--text); opacity: 0.7; margin-top: 1px; }
 .timeline__note {
   font-size: 9.5px;
-  color: #a05a1c;
-  background: rgba(160, 90, 28, 0.08);
+  color: #ffb26b;
+  background: rgba(255, 170, 80, 0.1);
+  border: 1px solid rgba(255, 170, 80, 0.25);
   border-radius: 3px;
   padding: 4px 7px;
   margin-top: 4px;
@@ -422,8 +423,9 @@
   width: 19px;
   height: 19px;
   border-radius: 50%;
-  background: var(--ink);
-  color: #fff;
+  background: var(--cyan);
+  color: var(--bg);
+  box-shadow: 0 0 10px rgba(47, 196, 220, 0.5);
   font-size: 11px;
   font-weight: 700;
   display: inline-flex;
@@ -436,12 +438,12 @@
   display: flex;
   gap: 10px;
   align-items: center;
-  border: 1px dashed var(--ink);
+  border: 1px dashed var(--cyan);
   border-radius: 5px;
   padding: 9px 11px;
-  background: rgba(16, 112, 144, 0.04);
+  background: rgba(94, 200, 226, 0.06);
 }
-.download__icon { font-size: 18px; color: var(--ink); }
+.download__icon { font-size: 18px; color: var(--cyan); }
 .download__title { font-size: 11.5px; font-weight: 800; color: var(--title); }
 .download__hint { font-size: 9.5px; color: var(--text); opacity: 0.7; margin: 2px 0 6px; }
 .btn-download {
@@ -450,25 +452,25 @@
   font-size: 9px;
   letter-spacing: 1.5px;
   font-weight: 700;
-  color: #fff;
-  background: var(--ink);
+  color: var(--bg);
+  background: linear-gradient(135deg, var(--cyan), #0e8ba6);
   border-radius: 3px;
   padding: 5px 12px;
   text-decoration: none;
   transition: background 0.2s, box-shadow 0.2s;
 }
-.btn-download:hover { background: var(--ink-deep); box-shadow: 0 0 10px rgba(16, 112, 144, 0.4); }
+.btn-download:hover { box-shadow: 0 0 14px rgba(47, 196, 220, 0.6); filter: brightness(1.08); }
 
 .notice {
   border: 1px solid var(--line);
   border-radius: 4px;
   padding: 9px 11px;
-  background: var(--paper-hi);
+  background: var(--panel-hi);
 }
 .notice__title {
   font-size: 11px;
   font-weight: 800;
-  color: var(--ink-deep);
+  color: var(--cyan-soft);
   margin-bottom: 5px;
 }
 .notice__list {
@@ -485,7 +487,7 @@
   content: "·";
   position: absolute;
   left: 2px;
-  color: var(--ink);
+  color: var(--cyan);
   font-weight: 900;
 }
 
@@ -506,7 +508,7 @@
 .field__label {
   font-size: 10.5px;
   font-weight: 700;
-  color: var(--ink-deep);
+  color: var(--cyan-soft);
   line-height: 1.4;
 }
 .field > label small,
@@ -528,10 +530,10 @@
   padding: 4px 2px;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-.field input::placeholder { color: rgba(35, 42, 51, 0.35); }
+.field input::placeholder { color: rgba(207, 228, 240, 0.3); }
 .field input:focus {
   outline: none;
-  border-color: var(--ink);
+  border-color: var(--cyan);
   box-shadow: 0 1px 0 var(--ink);
 }
 
@@ -547,7 +549,7 @@
   cursor: pointer;
 }
 .check input[type="checkbox"] {
-  accent-color: var(--ink);
+  accent-color: var(--cyan);
   width: 14px;
   height: 14px;
   cursor: pointer;
@@ -563,11 +565,11 @@
   padding: 2px 4px;
   width: 90px;
 }
-.check-other-input:focus { outline: none; border-color: var(--ink); }
+.check-other-input:focus { outline: none; border-color: var(--cyan); }
 
 .field textarea {
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(13, 34, 52, 0.55);
   border-radius: 3px;
   font-size: 12px;
   font-family: var(--font-cn);
@@ -580,37 +582,34 @@
 }
 .field textarea:focus {
   outline: none;
-  border-color: var(--ink);
-  box-shadow: 0 0 0 2px rgba(16, 112, 144, 0.12);
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 2px rgba(94, 200, 226, 0.12);
 }
 
 .form-reg__hint {
   font-size: 10.5px;
-  color: var(--ink);
+  color: var(--cyan);
   opacity: 0.8;
   border-top: 1px dashed var(--line-soft);
   padding-top: 7px;
   margin-top: 2px;
 }
 
-/* 提交区：sticky 固定在版面底部，长表单滚动时提交按钮常驻可视
-   （修复：桌面报名版内容超过面板高，按钮曾被裁出视口无法点击） */
+/* 提交区：表单末尾正常流 + 底部留白。
+   注意：不使用 position:sticky —— 面板淡入的 transform 会创建包含块，
+   破坏 sticky 相对滚动容器的行为（实测失效）；滚动到底自然可达即可。 */
 .form-submit {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  position: sticky;
-  bottom: 0;
-  z-index: 3;
-  padding: 10px 0 4px;
-  background: linear-gradient(180deg, transparent, rgba(244, 249, 253, 0.94) 30%);
+  padding: 10px 0 18px;
 }
 .form-submit__hint {
   font-size: 9.5px;
   line-height: 1.55;
   color: var(--text);
   opacity: 0.75;
-  background: rgba(16, 112, 144, 0.05);
+  background: rgba(94, 200, 226, 0.05);
   border-radius: 3px;
   padding: 6px 8px;
 }
@@ -618,8 +617,8 @@
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 2px;
-  color: #fff;
-  background: linear-gradient(90deg, var(--ink), var(--ink-deep));
+  color: var(--bg);
+  background: linear-gradient(135deg, var(--cyan), #0e8ba6);
   border: none;
   border-radius: 4px;
   padding: 11px 14px;
@@ -627,14 +626,14 @@
   transition: box-shadow 0.2s, transform 0.15s;
 }
 .btn-submit:hover {
-  box-shadow: 0 0 16px rgba(16, 112, 144, 0.45);
+  box-shadow: 0 0 16px rgba(94, 200, 226, 0.45);
   transform: translateY(-1px);
 }
 .form-submit__status {
   font-size: 11.5px;
   line-height: 1.6;
   min-height: 16px;
-  color: var(--ink-deep);
+  color: var(--cyan-soft);
 }
 .form-submit__status.ok { color: #0d7a4e; }
 .form-submit__status.err { color: #b03a2e; }
@@ -643,7 +642,7 @@
   margin: 8px 0 4px;
   border: 1px dashed var(--line);
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(13, 34, 52, 0.7);
   font-size: 11px;
   font-family: var(--font-cn);
   line-height: 1.6;
@@ -667,7 +666,7 @@
 .cta__logo {
   width: 118px;
   height: 118px;
-  filter: drop-shadow(0 4px 10px rgba(16, 112, 144, 0.35));
+  filter: drop-shadow(0 4px 10px rgba(94, 200, 226, 0.35));
 }
 .cta__slogan {
   font-size: 16px;
@@ -688,7 +687,7 @@
   border: 1px solid var(--line);
   border-radius: 5px;
   padding: 14px 16px;
-  background: var(--paper-hi);
+  background: var(--panel-hi);
 }
 .cta__contacts-title {
   font-size: 13px;
@@ -711,7 +710,7 @@
   font-size: 9.5px;
   font-weight: 700;
   color: #fff;
-  background: var(--ink);
+  background: var(--cyan);
   border-radius: 3px;
   padding: 1px 7px;
   margin-right: 6px;
@@ -728,11 +727,11 @@
 .qr__svg {
   width: 64px;
   height: 64px;
-  color: var(--title);
+  color: var(--cyan);
   padding: 4px;
   border: 1px solid var(--line);
   border-radius: 3px;
-  background: #fff;
+  background: var(--panel-hi);
 }
 .qr__label { font-size: 10px; line-height: 1.7; color: var(--text); opacity: 0.8; }
 
@@ -753,7 +752,7 @@
   font-family: var(--font-en);
   font-size: 11px;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--cyan);
   opacity: 1;
 }
 .sheet__folio::before {
@@ -839,17 +838,17 @@
   padding: 10px 14px;
   border: 1px solid var(--holo-border);
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(8, 22, 36, 0.5);
 }
 .holo-bar span,
 .holo-bar b {
   font-family: var(--font-en);
   font-size: 11px;
   letter-spacing: 1px;
-  color: var(--ink);
-  border: 1px solid rgba(16, 112, 144, 0.22);
+  color: var(--cyan);
+  border: 1px solid rgba(94, 200, 226, 0.22);
   border-radius: 999px;
   padding: 5px 12px;
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(8, 22, 36, 0.65);
 }
-.holo-bar b { color: #fff; background: var(--ink); border-color: var(--ink); }
+.holo-bar b { color: var(--bg); background: var(--cyan); border-color: var(--cyan); }
