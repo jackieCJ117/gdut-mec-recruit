@@ -193,8 +193,76 @@
 .qr__label { font-size: 11px; }
 .book-foot { font-size: 12px; }
 
+/* ============================================================
+   占位高级化动效（数据接入前的高级感占位）
+   替换真实数据后：删除 data-* 属性 / 类即可，或 fx.js 自动停用
+   ============================================================ */
+
+/* count-up 完成后的小标签 */
+.data-pending {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: var(--ink);
+  border: 1px solid var(--holo-border);
+  border-radius: 999px;
+  padding: 1px 6px;
+  animation: blink 2s ease-in-out infinite;
+  vertical-align: 3px;
+}
+/* N× 战绩数字故障帧（fx.js 周期性加 .flick） */
+.trophy__num.flick {
+  animation: flick-num 0.16s steps(2) 1;
+  color: var(--glitch-b);
+  text-shadow: 0 0 8px rgba(122, 74, 158, 0.5);
+}
+@keyframes flick-num {
+  0% { transform: translate(0); }
+  50% { transform: translate(-1px, 0) skewX(8deg); }
+}
+/* 战绩区 LOADING DATA 角标 */
+.loading-data {
+  display: block;
+  font-family: var(--font-en);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: var(--mist);
+  margin-top: 2px;
+}
+/* TBD 日期：呼吸光标 + 待填感 */
+.tbd::after {
+  content: "▮";
+  margin-left: 4px;
+  animation: blink 1.8s ease-in-out infinite;
+  color: var(--cyan);
+}
+/* 群号/公众号字符流收敛后的定格态（fx.js 控制） */
+.connect-anim.is-connected {
+  color: var(--ink-deep);
+  font-weight: 700;
+}
+.connect-anim.is-connected::after {
+  content: "▍";
+  animation: blink 1s steps(1) infinite;
+  margin-left: 2px;
+}
+/* 二维码：全息切片位移 + 青/品红双影（待激活感） */
+.qr--holo .qr__svg {
+  animation: qr-shift 2.6s steps(2) infinite;
+  filter:
+    drop-shadow(2px 0 rgba(11, 90, 116, 0.35))
+    drop-shadow(-2px 0 rgba(122, 74, 158, 0.3));
+}
+@keyframes qr-shift {
+  0%   { transform: translate(0); clip-path: inset(0 0 0 0); }
+  50%  { transform: translate(1px, 0); clip-path: inset(10% 0 22% 0); }
+  100% { transform: translate(0); clip-path: inset(0 0 0 0); }
+}
+
 /* 动效偏好降级：glitch/故障类动画一并关闭 */
 @media (prefers-reduced-motion: reduce) {
   .glitch::before, .glitch::after { animation: none; opacity: 0; }
   .cover__masthead-cn:hover { animation: none; }
+  .tbd::after, .qr--holo .qr__svg, .data-pending { animation: none; }
 }

@@ -20,7 +20,7 @@
 
   <!-- 全息背景层：网格 + 极光 + 漂浮粒子 + 噪点 -->
   <div class="holo-bg" aria-hidden="true">
-    <div class="holo-bg__grid"></div>
+    <div class="holo-bg__grid" data-depth="10"></div>
     <div class="holo-bg__noise"></div>
     <div class="holo-bg__aurora holo-bg__aurora--1"></div>
     <div class="holo-bg__aurora holo-bg__aurora--2"></div>
@@ -56,7 +56,7 @@
         <div class="page page--1 is-current" data-page="1">
           <article class="sheet sheet--cover leaf leaf--left" data-panel="1" aria-label="封面">
             <span class="sheet__sheen" aria-hidden="true"></span>
-            <div class="cover__bg" aria-hidden="true">
+            <div class="cover__bg" aria-hidden="true" data-depth="12">
               <div class="cover__grid"></div>
               <div class="cover__scan"></div>
               <div class="cover__radial"></div>
@@ -107,7 +107,7 @@
             <span class="cover__chip cover__chip--c" aria-hidden="true">CHANNEL.04</span>
 
             <div class="cover__content">
-              <p class="cover__est">EST. 20XX · 广东工业大学 GUANGDONG UNIVERSITY OF TECHNOLOGY</p>
+              <p class="cover__est">EST. <span class="glitch" data-text="20XX">20XX</span> · 广东工业大学 GUANGDONG UNIVERSITY OF TECHNOLOGY</p>
               <h1 class="cover__masthead">
                 <span class="cover__masthead-cn">机创时报</span>
                 <span class="cover__masthead-en">MECH INNOVATION TIMES</span>
@@ -117,7 +117,7 @@
               <div class="cover__logo-wrap">
                 <span class="cover__ring cover__ring--1" aria-hidden="true"></span>
                 <span class="cover__ring cover__ring--2" aria-hidden="true"></span>
-                <img class="cover__logo" src="assets/logo.png" alt="机械创新团队队标：青色齿轮线条标识" width="180" height="180">
+                <img class="cover__logo" src="assets/logo.png" alt="机械创新团队队标：青色齿轮线条标识" width="180" height="180" data-depth="8">
                 <div class="cover__beam" aria-hidden="true"></div>
               </div>
 
@@ -176,9 +176,9 @@
               </div>
 
               <ul class="facts">
-                <li class="facts__item"><b class="facts__num" data-placeholder="20XX">20XX</b><span class="facts__label">团队成立</span></li>
-                <li class="facts__item"><b class="facts__num" data-placeholder="30+">30+</b><span class="facts__label">在队成员</span></li>
-                <li class="facts__item"><b class="facts__num" data-placeholder="10+">10+</b><span class="facts__label">年度奖项</span></li>
+                <li class="facts__item"><b class="facts__num" data-count="20" data-placeholder="20XX">20XX</b><span class="facts__label">团队成立</span></li>
+                <li class="facts__item"><b class="facts__num count-up" data-count="30" data-placeholder="30+">30+</b><span class="facts__label">在队成员</span></li>
+                <li class="facts__item"><b class="facts__num count-up" data-count="10" data-placeholder="10+">10+</b><span class="facts__label">年度奖项</span></li>
               </ul>
 
               <div class="holo-bar" aria-hidden="true">
@@ -259,15 +259,15 @@
               <div class="trophies">
                 <div class="trophy">
                   <span class="trophy__medal" aria-hidden="true">🏆</span>
-                  <div><b class="trophy__num">N×</b><p class="trophy__text">国家级赛事奖项<br><small data-placeholder="例：中国大学生工程实践与创新能力大赛">大赛名称占位</small></p></div>
+                  <div><b class="trophy__num flick-target">N×</b><p class="trophy__text">国家级赛事奖项<br><small data-placeholder="例：中国大学生工程实践与创新能力大赛">大赛名称占位</small></p></div>
                 </div>
                 <div class="trophy">
                   <span class="trophy__medal" aria-hidden="true">🥇</span>
-                  <div><b class="trophy__num">N×</b><p class="trophy__text">省级赛事一等奖<br><small data-placeholder="省级竞赛列表">竞赛列表占位</small></p></div>
+                  <div><b class="trophy__num flick-target">N×</b><p class="trophy__text">省级赛事一等奖<br><small data-placeholder="省级竞赛列表">竞赛列表占位</small></p></div>
                 </div>
                 <div class="trophy">
                   <span class="trophy__medal" aria-hidden="true">📄</span>
-                  <div><b class="trophy__num">N×</b><p class="trophy__text">专利 · 论文 · 大创项目<br><small data-placeholder="科研产出清单">产出清单占位</small></p></div>
+                  <div><b class="trophy__num flick-target">N×</b><p class="trophy__text">专利 · 论文 · 大创项目<br><small data-placeholder="科研产出清单">产出清单占位</small></p></div>
                 </div>
               </div>
 
@@ -279,9 +279,9 @@
                 <h3 class="timeline__title">招新时间轴</h3>
                 <ol class="timeline__list">
                   <li class="timeline__item"><b>报名开启</b><span>9 月上旬</span><small>填写本特刊第 05 版报名表</small></li>
-                  <li class="timeline__item"><b>报名截止</b><span class="tl-date" data-placeholder="9 月 X 日">9 月 X 日</span><small>截止时间请以群公告为准</small></li>
-                  <li class="timeline__item"><b>面试安排</b><span class="tl-date" data-placeholder="9 月中旬">9 月中旬</span><small>分方向面试 · 时间另行通知</small></li>
-                  <li class="timeline__item"><b>结果公布</b><span class="tl-date" data-placeholder="9 月底">9 月底</span><small>请关注招新群与公众号公告</small></li>
+                  <li class="timeline__item"><b>报名截止</b><span class="tl-date tbd" data-placeholder="9 月 X 日">9 月 X 日</span><small>截止时间请以群公告为准</small></li>
+                  <li class="timeline__item"><b>面试安排</b><span class="tl-date tbd" data-placeholder="9 月中旬">9 月中旬</span><small>分方向面试 · 时间另行通知</small></li>
+                  <li class="timeline__item"><b>结果公布</b><span class="tl-date tbd" data-placeholder="9 月底">9 月底</span><small>请关注招新群与公众号公告</small></li>
                 </ol>
                 <p class="timeline__note">⚠ 以上日期均为占位，正式日程以团队官方群公告为准。</p>
               </div>
@@ -439,10 +439,10 @@
                 <h4 class="cta__contacts-title">联系与关注</h4>
                 <ul class="cta__list">
                   <li><span class="cta__tag">报名邮箱</span><a class="link" href="mailto:3607199098@qq.com">3607199098@qq.com</a></li>
-                  <li><span class="cta__tag">招新群</span><span data-placeholder="群号占位，进群关注群公告">QQ 群：XXXX（占位）</span></li>
-                  <li><span class="cta__tag">公众号</span><span data-placeholder="公众号名占位">公众号：XXXX（占位）</span></li>
+                  <li><span class="cta__tag">招新群</span><span class="connect-anim" data-placeholder="群号占位，进群关注群公告">QQ 群：XXXX（占位）</span></li>
+                  <li><span class="cta__tag">公众号</span><span class="connect-anim" data-placeholder="公众号名占位">公众号：XXXX（占位）</span></li>
                 </ul>
-                <div class="qr" aria-hidden="true">
+                <div class="qr qr--holo" aria-hidden="true">
                   <svg viewBox="0 0 21 21" class="qr__svg">
                     <rect x="1" y="1" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.4"/>
                     <rect x="12" y="1" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.4"/>
@@ -454,7 +454,7 @@
                       <rect x="14" y="14" width="2" height="2"/><rect x="18" y="14" width="2" height="2"/><rect x="12" y="12" width="2" height="2"/><rect x="16" y="18" width="2" height="2"/>
                     </g>
                   </svg>
-                  <span class="qr__label">扫码占位<br>进群看公告</span>
+                  <span class="qr__label">HOLO-SEAL · 待激活<br>进群看公告</span>
                 </div>
               </div>
             </div>
@@ -489,5 +489,6 @@
 
   <script src="js/book.js"></script>
   <script src="js/form.js"></script>
+  <script src="js/fx.js"></script>
 </body>
 </html>
