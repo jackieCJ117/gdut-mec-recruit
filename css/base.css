@@ -347,3 +347,10 @@ body {
   .holo__rail { gap: 8px; }
   .chip { padding: 5px 10px; font-size: 10px; }
 }
+
+/* 9 模块导航：窄屏换行 */
+.holo__rail-chips { flex-wrap: wrap; justify-content: center; }
+@media (max-width: 767px) {
+  .holo__rail-chips { gap: 5px; }
+  .chip { padding: 4px 8px; font-size: 9px; }
+}

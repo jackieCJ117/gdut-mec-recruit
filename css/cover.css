@@ -115,14 +115,14 @@
   margin-bottom: 12px;
 }
 
-.cover__masthead { line-height: 1.1; }
+.cover__masthead { line-height: 1.15; }
 .cover__masthead-cn {
   display: block;
-  font-size: clamp(34px, 4.4vw, 46px);
+  font-size: clamp(32px, 3.6vw, 46px);
   font-weight: 900;
-  letter-spacing: 10px;
+  letter-spacing: 8px;
   color: var(--title);
-  text-shadow: 0 0 26px rgba(34, 179, 200, 0.45);
+  text-shadow: 0 0 26px rgba(47, 196, 220, 0.5);
 }
 .cover__masthead-en {
   display: block;
@@ -192,6 +192,29 @@
   border-top-color: var(--cyan);
   animation: spin 14s linear infinite reverse;
 }
+/* —— 队标下清晰队名（不依赖队标图内文字） —— */
+.cover__teamname {
+  text-align: center;
+  margin: -4px 0 14px;
+}
+.cover__teamname-cn {
+  display: block;
+  font-family: var(--font-head-cn);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 6px;
+  color: var(--title);
+  text-shadow: 0 0 14px rgba(47, 196, 220, 0.55);
+}
+.cover__teamname-en {
+  display: block;
+  font-family: var(--font-en);
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  color: var(--mist);
+  margin-top: 4px;
+}
+
 .cover__beam {
   position: absolute;
   left: -14%;
@@ -321,4 +344,27 @@
 @media (max-width: 767px) {
   .cover__content { padding: 26px 22px 26px; }
   .cover__footer { position: relative; padding: 8px 0 22px; }
+}
+
+/* —— 启动屏 HUD 数据流条 —— */
+.cover__datastrip {
+  display: flex;
+  gap: 18px;
+  margin-top: 12px;
+  padding: 8px 18px;
+  border: 1px solid var(--holo-line);
+  border-radius: 8px;
+  background: rgba(8, 22, 36, 0.5);
+  font-family: var(--font-en);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: var(--mist);
+}
+.cover__datastrip b {
+  color: var(--cyan);
+  font-weight: 700;
+  margin-left: 4px;
+}
+@media (max-width: 767px) {
+  .cover__datastrip { gap: 10px; padding: 6px 10px; font-size: 7px; flex-wrap: wrap; justify-content: center; }
 }

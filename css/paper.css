@@ -852,3 +852,90 @@
   background: rgba(8, 22, 36, 0.65);
 }
 .holo-bar b { color: var(--bg); background: var(--cyan); border-color: var(--cyan); }
+
+/* ============================================================
+   组别整屏（每组一个模块的大版式）
+   ============================================================ */
+.group-screen__main {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 22px;
+  align-items: stretch;
+  margin-top: 6px;
+}
+.group-screen__desc { display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+.group-screen__desc .para { font-size: 15px; line-height: 1.9; }
+.group__tags--lg {
+  gap: 8px;
+}
+.group__tags--lg li {
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 5px 14px;
+  border-color: var(--holo-border);
+  background: var(--panel-hi);
+  box-shadow: 0 0 8px rgba(47, 196, 220, 0.15);
+}
+
+/* 组别装饰面板（专属 SVG + 扫描氛围） */
+.group-screen__art {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 240px;
+  border: 1px dashed var(--holo-border);
+  border-radius: 12px;
+  background:
+    radial-gradient(70% 70% at 50% 40%, rgba(47, 196, 220, 0.1), transparent 70%),
+    rgba(94, 200, 226, 0.03);
+  color: var(--cyan);
+  overflow: hidden;
+}
+.group-screen__art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(94, 200, 226, 0.04) 0 1px, transparent 1px 5px);
+  pointer-events: none;
+}
+.group-screen__svg {
+  width: 150px;
+  height: 150px;
+  filter: drop-shadow(0 0 12px rgba(47, 196, 220, 0.45));
+  animation: spin 24s linear infinite;
+}
+.group-screen__art-tag {
+  font-family: var(--font-en);
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: var(--mist);
+}
+
+/* 内容补充区：留给用户之后填充 */
+.group-screen__extra {
+  margin-top: 16px;
+  min-height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--holo-border);
+  border-radius: 10px;
+  background: rgba(94, 200, 226, 0.03);
+}
+.group-screen__extra-hint {
+  font-family: var(--font-en);
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: var(--mist);
+  animation: blink 2.4s ease-in-out infinite;
+}
+
+/* 窄屏（组别屏装饰下沉） */
+@media (max-width: 899px) {
+  .group-screen__main { grid-template-columns: 1fr; }
+  .group-screen__art { min-height: 180px; }
+  .group-screen__svg { width: 110px; height: 110px; }
+}

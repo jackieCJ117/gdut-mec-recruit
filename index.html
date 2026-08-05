@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/holo.css">
 </head>
 <body>
-  <a class="skip-link" href="#viewport">跳到报纸正文</a>
+  <a class="skip-link" href="#viewport">跳到终端主界面</a>
 
   <!-- 全息背景层：网格 + 极光 + 漂浮粒子 + 噪点 -->
   <div class="holo-bg" aria-hidden="true">
@@ -48,7 +48,7 @@
     </header>
 
     <!-- ============ 全息终端大屏（一次一屏，淡入切换） ============ -->
-    <section class="holo" id="viewport" aria-label="机创全息终端：一次浏览一个模块，共六个模块">
+    <section class="holo" id="viewport" aria-label="机创全息终端：一次浏览一个模块，共九个模块">
       <!-- 01 启动屏 -->
       <article class="screen sheet--cover screen--boot is-active" data-screen="1" aria-label="01 · 启动屏">
         <span class="sheet__sheen" aria-hidden="true"></span>
@@ -105,7 +105,7 @@
             <div class="cover__content">
               <p class="cover__est">EST. <span class="glitch" data-text="20XX">20XX</span> · 广东工业大学 GUANGDONG UNIVERSITY OF TECHNOLOGY</p>
               <h1 class="cover__masthead">
-                <span class="cover__masthead-cn">机创</span>
+                <span class="cover__masthead-cn">机械创新团队</span>
                 <span class="cover__masthead-en">JICHUANG HOLO SYSTEM</span>
               </h1>
               <div class="cover__rule"><span class="cover__rule-gem" aria-hidden="true">◆</span></div>
@@ -116,6 +116,10 @@
                 <img class="cover__logo" src="assets/logo.png" alt="机械创新团队队标：青色齿轮线条标识" width="180" height="180" data-depth="8">
                 <div class="cover__beam" aria-hidden="true"></div>
               </div>
+              <div class="cover__teamname">
+                <span class="cover__teamname-cn">机械创新团队</span>
+                <span class="cover__teamname-en">MECHANICAL INNOVATION TEAM</span>
+              </div>
 
               <p class="cover__kicker">AUTUMN RECRUITMENT · 秋季招新接入</p>
               <h2 class="cover__headline">下一台改变世界的机器，<br><em>等你来造。</em></h2>
@@ -123,6 +127,14 @@
 
               <div class="cover__meta">
                 <span>接入协议 v2026</span><span>数据通道 OPEN</span><span>出品 机械创新团队</span>
+              </div>
+
+              <div class="cover__datastrip" aria-hidden="true">
+                <span>MEMBERS <b>30+</b></span>
+                <span>AWARDS <b>N×</b></span>
+                <span>PROJECTS <b>10+</b></span>
+                <span>CHANNEL <b>04</b></span>
+                <span>RACE.2026 <b>──</b></span>
               </div>
             </div>
 
@@ -141,7 +153,7 @@
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">02</span>
               <h2 class="sheet__masthead-title">关于机创 <i>ABOUT</i></h2>
-              <span class="sheet__masthead-meta">MODULE 02/06 · DATA.SYNC</span>
+              <span class="sheet__masthead-meta">MODULE 02/09 · DATA.SYNC</span>
             </header>
 
             <div class="sheet__body">
@@ -192,46 +204,42 @@
             </footer>
       </article>
 
-      <!-- 03 组别矩阵 -->
-      <article class="screen sheet--paper" data-screen="3" aria-label="03 · 组别矩阵">
+      <!-- 03 结构组 -->
+      <article class="screen sheet--paper" data-screen="3" aria-label="03 · 结构组">
         <span class="sheet__sheen" aria-hidden="true"></span>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">03</span>
-              <h2 class="sheet__masthead-title">组别矩阵 <i>DIVISIONS</i></h2>
-              <span class="sheet__masthead-meta">FOUR TEAMS · ONE MACHINE</span>
+              <h2 class="sheet__masthead-title">结构组 <i>MECH</i></h2>
+              <span class="sheet__masthead-meta">MODULE 03/09 · TEAM.A</span>
             </header>
 
-            <div class="sheet__body sheet__body--groups">
-              <p class="sheet__lead sheet__lead--small">四组各司其职、协同作战。你可以多选感兴趣的方向，正式分组在入队后再定。</p>
-              <div class="groups">
-                <div class="group">
-                  <span class="group__no">A</span>
-                  <h3 class="group__name">结构组 <i>MECH</i></h3>
-                  <p class="group__desc">负责机械结构设计与建模装配，把创意变成看得见的骨架。精研齿轮、连杆与机构学。</p>
+            <div class="sheet__body group-screen">
+              <p class="sheet__lead">把创意变成看得见的骨架 —— 机械结构设计与建模装配。</p>
+              <div class="group-screen__main">
+                <div class="group-screen__desc">
+                  <p class="para">负责机械结构设计与建模装配，把创意变成看得见的骨架。精研齿轮、连杆与机构学，从三维建模到工程制图的全链路技能。</p>
                   <p class="group__who">适合喜欢动手、痴迷机构、想精通 SolidWorks 与工程制图的你。</p>
-                  <ul class="group__tags"><li>SolidWorks</li><li>AutoCAD</li><li>机械制图</li></ul>
+                  <ul class="group__tags group__tags--lg"><li>SolidWorks</li><li>AutoCAD</li><li>机械制图</li><li>3D 打印</li></ul>
                 </div>
-                <div class="group">
-                  <span class="group__no">B</span>
-                  <h3 class="group__name">电控组 <i>EMBED</i></h3>
-                  <p class="group__desc">负责电路设计与单片机开发，给机器装上大脑。让电机听话、让传感器就位。</p>
-                  <p class="group__who">适合想玩转单片机、爱焊接调电路、能用 C 语言控制硬件的你。</p>
-                  <ul class="group__tags"><li>单片机</li><li>C语言</li><li>电路设计</li></ul>
+                <div class="group-screen__art" aria-hidden="true">
+                  <svg viewBox="0 0 120 120" class="group-screen__svg">
+                    <g fill="none" stroke="currentColor" stroke-width="3">
+                      <circle cx="60" cy="60" r="34"/><circle cx="60" cy="60" r="15"/><circle cx="60" cy="60" r="4" fill="currentColor"/>
+                      <rect x="55" y="4" width="10" height="16" rx="1.5" transform="rotate(0 60 60)"/>
+                      <rect x="55" y="4" width="10" height="16" rx="1.5" transform="rotate(45 60 60)"/>
+                      <rect x="55" y="4" width="10" height="16" rx="1.5" transform="rotate(90 60 60)"/>
+                      <rect x="55" y="4" width="10" height="16" rx="1.5" transform="rotate(135 60 60)"/>
+                      <rect x="55" y="4" width="10" height="16" rx="1.5" transform="rotate(180 60 60)"/>
+                      <rect x="55" y="4" width="10" height="16" rx="1.5" transform="rotate(225 60 60)"/>
+                      <rect x="55" y="4" width="10" height="16" rx="1.5" transform="rotate(270 60 60)"/>
+                      <rect x="55" y="4" width="10" height="16" rx="1.5" transform="rotate(315 60 60)"/>
+                    </g>
+                  </svg>
+                  <span class="group-screen__art-tag">MECH · 齿轮组</span>
                 </div>
-                <div class="group">
-                  <span class="group__no">C</span>
-                  <h3 class="group__name">视觉识别组 <i>VISION</i></h3>
-                  <p class="group__desc">负责图像处理与视觉算法，让机器「看见」并理解世界。从 OpenCV 到深度学习。</p>
-                  <p class="group__who">适合对 Python、图像与算法好奇、愿意啃论文和跑模型的你。</p>
-                  <ul class="group__tags"><li>Python</li><li>OpenCV</li><li>视觉算法</li></ul>
-                </div>
-                <div class="group">
-                  <span class="group__no">D</span>
-                  <h3 class="group__name">运营组 <i>MEDIA</i></h3>
-                  <p class="group__desc">负责团队品牌、宣传、策划与对外联络，让机创被更多人看见，也承接团队运转。</p>
-                  <p class="group__who">适合擅长写作、剪辑、设计或活动组织，想为团队扛起门面的你。</p>
-                  <ul class="group__tags"><li>Office</li><li>Premiere</li><li>Photoshop</li></ul>
-                </div>
+              </div>
+              <div class="group-screen__extra" data-placeholder="结构组补充内容：作品照片 / 组内日常 / 招新问答">
+                <span class="group-screen__extra-hint">CONTENT SLOT · 结构组内容补充区</span>
               </div>
             </div>
 
@@ -241,11 +249,136 @@
             </footer>
       </article>
 
-      <!-- 04 战绩与日程 -->
-      <article class="screen sheet--paper" data-screen="4" aria-label="04 · 战绩与日程">
+      <!-- 04 电控组 -->
+      <article class="screen sheet--paper" data-screen="4" aria-label="04 · 电控组">
         <span class="sheet__sheen" aria-hidden="true"></span>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">04</span>
+              <h2 class="sheet__masthead-title">电控组 <i>EMBED</i></h2>
+              <span class="sheet__masthead-meta">MODULE 04/09 · TEAM.B</span>
+            </header>
+
+            <div class="sheet__body group-screen">
+              <p class="sheet__lead">给机器装上大脑 —— 电路设计与单片机开发。</p>
+              <div class="group-screen__main">
+                <div class="group-screen__desc">
+                  <p class="para">负责电路设计与单片机开发，给机器装上大脑。让电机听话、让传感器就位，从原理图到实物焊接的完整闭环。</p>
+                  <p class="group__who">适合想玩转单片机、爱焊接调电路、能用 C 语言控制硬件的你。</p>
+                  <ul class="group__tags group__tags--lg"><li>单片机</li><li>C 语言</li><li>电路设计</li><li>传感器</li></ul>
+                </div>
+                <div class="group-screen__art" aria-hidden="true">
+                  <svg viewBox="0 0 120 120" class="group-screen__svg">
+                    <g fill="none" stroke="currentColor" stroke-width="2.4">
+                      <rect x="16" y="30" width="88" height="60" rx="6"/>
+                      <rect x="26" y="42" width="12" height="12"/><rect x="48" y="42" width="12" height="12"/><rect x="70" y="42" width="12" height="12"/>
+                      <rect x="26" y="64" width="12" height="12"/><rect x="48" y="64" width="12" height="12"/><rect x="70" y="64" width="12" height="12"/>
+                      <circle cx="26" cy="42" r="2.5" fill="currentColor"/><circle cx="48" cy="42" r="2.5" fill="currentColor"/>
+                      <circle cx="70" cy="42" r="2.5" fill="currentColor"/><circle cx="26" cy="64" r="2.5" fill="currentColor"/>
+                      <circle cx="48" cy="64" r="2.5" fill="currentColor"/><circle cx="70" cy="64" r="2.5" fill="currentColor"/>
+                      <path d="M60 8 v10 M60 102 v10 M8 60 h10 M102 60 h10"/>
+                    </g>
+                  </svg>
+                  <span class="group-screen__art-tag">EMBED · 电路板</span>
+                </div>
+              </div>
+              <div class="group-screen__extra" data-placeholder="电控组补充内容：作品照片 / 组内日常 / 招新问答">
+                <span class="group-screen__extra-hint">CONTENT SLOT · 电控组内容补充区</span>
+              </div>
+            </div>
+
+            <footer class="sheet__footer">
+              <span>机械创新团队 · 2026 秋季招新</span>
+              <span class="sheet__folio">MOD.04</span>
+            </footer>
+      </article>
+
+      <!-- 05 视觉识别组 -->
+      <article class="screen sheet--paper" data-screen="5" aria-label="05 · 视觉识别组">
+        <span class="sheet__sheen" aria-hidden="true"></span>
+            <header class="sheet__masthead">
+              <span class="sheet__masthead-id">05</span>
+              <h2 class="sheet__masthead-title">视觉识别组 <i>VISION</i></h2>
+              <span class="sheet__masthead-meta">MODULE 05/09 · TEAM.C</span>
+            </header>
+
+            <div class="sheet__body group-screen">
+              <p class="sheet__lead">让机器「看见」并理解世界 —— 图像处理与视觉算法。</p>
+              <div class="group-screen__main">
+                <div class="group-screen__desc">
+                  <p class="para">负责图像处理与视觉算法，让机器「看见」并理解世界。从 OpenCV 到深度学习，从识别检测到路径规划。</p>
+                  <p class="group__who">适合对 Python、图像与算法好奇、愿意啃论文和跑模型的你。</p>
+                  <ul class="group__tags group__tags--lg"><li>Python</li><li>OpenCV</li><li>视觉算法</li><li>深度学习</li></ul>
+                </div>
+                <div class="group-screen__art" aria-hidden="true">
+                  <svg viewBox="0 0 120 120" class="group-screen__svg">
+                    <g fill="none" stroke="currentColor" stroke-width="2.6">
+                      <circle cx="60" cy="52" r="26"/>
+                      <circle cx="60" cy="52" r="10"/><circle cx="60" cy="52" r="3" fill="currentColor"/>
+                      <path d="M34 30 L26 14 L66 14 L58 30"/>
+                      <path d="M86 30 L94 14 L94 44"/>
+                      <path d="M40 96 q20 10 40 0"/>
+                    </g>
+                  </svg>
+                  <span class="group-screen__art-tag">VISION · 感知单元</span>
+                </div>
+              </div>
+              <div class="group-screen__extra" data-placeholder="视觉识别组补充内容：作品照片 / 组内日常 / 招新问答">
+                <span class="group-screen__extra-hint">CONTENT SLOT · 视觉识别组内容补充区</span>
+              </div>
+            </div>
+
+            <footer class="sheet__footer">
+              <span>机械创新团队 · 2026 秋季招新</span>
+              <span class="sheet__folio">MOD.05</span>
+            </footer>
+      </article>
+
+      <!-- 06 运营组 -->
+      <article class="screen sheet--paper" data-screen="6" aria-label="06 · 运营组">
+        <span class="sheet__sheen" aria-hidden="true"></span>
+            <header class="sheet__masthead">
+              <span class="sheet__masthead-id">06</span>
+              <h2 class="sheet__masthead-title">运营组 <i>MEDIA</i></h2>
+              <span class="sheet__masthead-meta">MODULE 06/09 · TEAM.D</span>
+            </header>
+
+            <div class="sheet__body group-screen">
+              <p class="sheet__lead">让机创被更多人看见 —— 品牌、宣传与团队运转。</p>
+              <div class="group-screen__main">
+                <div class="group-screen__desc">
+                  <p class="para">负责团队品牌、宣传、策划与对外联络，让机创被更多人看见，也承接团队运转与招新组织。</p>
+                  <p class="group__who">适合擅长写作、剪辑、设计或活动组织，想为团队扛起门面的你。</p>
+                  <ul class="group__tags group__tags--lg"><li>Office</li><li>Premiere</li><li>Photoshop</li><li>公众号运营</li></ul>
+                </div>
+                <div class="group-screen__art" aria-hidden="true">
+                  <svg viewBox="0 0 120 120" class="group-screen__svg">
+                    <g fill="none" stroke="currentColor" stroke-width="2.6">
+                      <path d="M22 46 h20 v28 h-20 z"/>
+                      <path d="M42 46 l30 -18 v64 l-30 -18"/>
+                      <path d="M78 40 a26 26 0 0 1 0 40"/>
+                      <path d="M86 30 a40 40 0 0 1 0 60"/>
+                      <path d="M30 30 l-8 -12 M90 30 l8 -12"/>
+                    </g>
+                  </svg>
+                  <span class="group-screen__art-tag">MEDIA · 广播单元</span>
+                </div>
+              </div>
+              <div class="group-screen__extra" data-placeholder="运营组补充内容：作品照片 / 组内日常 / 招新问答">
+                <span class="group-screen__extra-hint">CONTENT SLOT · 运营组内容补充区</span>
+              </div>
+            </div>
+
+            <footer class="sheet__footer">
+              <span>机械创新团队 · 2026 秋季招新</span>
+              <span class="sheet__folio">MOD.06</span>
+            </footer>
+      </article>
+
+      <!-- 04 战绩与日程 -->
+      <article class="screen sheet--paper" data-screen="7" aria-label="07 · 战绩与日程">
+        <span class="sheet__sheen" aria-hidden="true"></span>
+            <header class="sheet__masthead">
+              <span class="sheet__masthead-id">07</span>
               <h2 class="sheet__masthead-title">战绩与日程 <i>HONORS &amp; TIMELINE</i></h2>
               <span class="sheet__masthead-meta">BUILT TO COMPETE</span>
             </header>
@@ -274,7 +407,7 @@
               <div class="timeline">
                 <h3 class="timeline__title">招新时间轴</h3>
                 <ol class="timeline__list">
-                  <li class="timeline__item"><b>报名开启</b><span>9 月上旬</span><small>填写本模块 05 报名表单</small></li>
+                  <li class="timeline__item"><b>报名开启</b><span>9 月上旬</span><small>填写本模块 08 报名表单</small></li>
                   <li class="timeline__item"><b>报名截止</b><span class="tl-date tbd" data-placeholder="9 月 X 日">9 月 X 日</span><small>截止时间请以群公告为准</small></li>
                   <li class="timeline__item"><b>面试安排</b><span class="tl-date tbd" data-placeholder="9 月中旬">9 月中旬</span><small>分方向面试 · 时间另行通知</small></li>
                   <li class="timeline__item"><b>结果公布</b><span class="tl-date tbd" data-placeholder="9 月底">9 月底</span><small>请关注招新群与公众号公告</small></li>
@@ -285,15 +418,15 @@
 
             <footer class="sheet__footer">
               <span>机械创新团队 · 2026 秋季招新</span>
-              <span class="sheet__folio">MOD.04</span>
+              <span class="sheet__folio">MOD.07</span>
             </footer>
       </article>
 
       <!-- 05 报名 -->
-      <article class="screen sheet--paper sheet--apply" data-screen="5" aria-label="05 · 报名">
+      <article class="screen sheet--paper sheet--apply" data-screen="8" aria-label="08 · 报名">
         <span class="sheet__sheen" aria-hidden="true"></span>
             <header class="sheet__masthead">
-              <span class="sheet__masthead-id">05</span>
+              <span class="sheet__masthead-id">08</span>
               <h2 class="sheet__masthead-title">报名 <i>APPLY</i></h2>
               <span class="sheet__masthead-meta">APPLICATION FORM</span>
             </header>
@@ -411,15 +544,15 @@
 
             <footer class="sheet__footer">
               <span>机械创新团队 · 2026 秋季招新</span>
-              <span class="sheet__folio">MOD.05</span>
+              <span class="sheet__folio">MOD.08</span>
             </footer>
       </article>
 
       <!-- 06 加入我们 -->
-      <article class="screen sheet--paper sheet--cta" data-screen="6" aria-label="06 · 加入我们">
+      <article class="screen sheet--paper sheet--cta" data-screen="9" aria-label="09 · 加入我们">
         <span class="sheet__sheen" aria-hidden="true"></span>
             <header class="sheet__masthead">
-              <span class="sheet__masthead-id">06</span>
+              <span class="sheet__masthead-id">09</span>
               <h2 class="sheet__masthead-title">想加入我们？ <i>JOIN US</i></h2>
               <span class="sheet__masthead-meta">THE FUTURE NEEDS YOU</span>
             </header>
@@ -456,7 +589,7 @@
 
             <footer class="sheet__footer sheet__footer--end">
               <span>END OF EDITION · 期待你的加入</span>
-              <span class="sheet__folio">MOD.06</span>
+              <span class="sheet__folio">MOD.09</span>
             </footer>
       </article>
     </section><!-- /holo -->
@@ -471,6 +604,9 @@
         <button class="chip" type="button" role="tab" aria-selected="false" data-go="4">04</button>
         <button class="chip" type="button" role="tab" aria-selected="false" data-go="5">05</button>
         <button class="chip" type="button" role="tab" aria-selected="false" data-go="6">06</button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="7">07</button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="8">08</button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="9">09</button>
       </div>
       <button class="holo__rail-btn" id="nextBtn" type="button" aria-label="下一版面">›</button>
     </nav>
