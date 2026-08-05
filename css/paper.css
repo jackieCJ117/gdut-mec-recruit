@@ -386,13 +386,24 @@
 }
 
 /* ============================================================
-   报名版式（两栏：指南 / 表单）
+   报名版式（左指南栏 / 右完整表单）
    ============================================================ */
-.sheet__body--form {
+.sheet__body--apply {
   display: grid;
-  grid-template-columns: 1fr 1.35fr;
-  gap: 20px;
+  grid-template-columns: 0.85fr 2.15fr;
+  gap: 24px;
   padding-top: 12px;
+  align-items: start;
+}
+.apply-form { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.form-reg--b {
+  border-top: 1px dashed var(--holo-line);
+  padding-top: 12px;
+}
+.apply-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
 }
 
 /* 左栏：递交方式 */
@@ -739,6 +750,7 @@
   content: "◤ ";
   font-size: 9px;
 }
+.sheet__footer--end { justify-content: center; gap: 24px; }
 
 /* ============================================================
    移动端纸面调整
@@ -751,8 +763,9 @@
   .sheet__masthead-title { font-size: 15px; }
 
   .sheet__cols,
-  .sheet__body--form,
+  .sheet__body--apply,
   .sheet__body--cta { grid-template-columns: 1fr; }
+  .apply-form__grid { grid-template-columns: 1fr; }
   .blueprint { min-height: 160px; }
   .groups { grid-template-columns: 1fr; }
   .sheet__footer { padding: 8px 16px 12px; }

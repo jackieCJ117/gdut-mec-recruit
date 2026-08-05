@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>机创日报 CYBER 2026 · 机械创新团队秋季招新特刊</title>
+  <meta name="description" content="广东工业大学机械创新团队 2026 秋季招新特刊 —— 全息虚拟报纸，横滑浏览团队与各组别，直达报名。">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23176388' stroke-width='10'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23176388'/%3E%3C/svg%3E">
-  <meta name="description" content="广东工业大学机械创新团队 2026 秋季招新特刊 —— 未来式虚拟报纸，翻阅了解团队与各组别，直达报名。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/paper.css">
 </head>
 <body>
-  <a class="skip-link" href="#book">跳到报纸正文</a>
+  <a class="skip-link" href="#viewport">跳到报纸正文</a>
 
   <!-- 全息背景层：网格 + 极光 + 漂浮粒子 -->
   <div class="holo-bg" aria-hidden="true">
@@ -31,7 +31,7 @@
   </div>
 
   <main class="book-wrap" id="top">
-    <!-- ============ 报头条（浏览器顶部窄条） ============ -->
+    <!-- ============ 报头条 ============ -->
     <header class="topbar" role="banner">
       <div class="topbar__brand">
         <img class="topbar__logo" src="assets/logo.png" alt="机械创新团队队标">
@@ -44,469 +44,434 @@
       </div>
     </header>
 
-    <!-- ============ 书刊容器 ============ -->
-    <section class="book" id="book" aria-label="机创日报：可翻阅的未来式虚拟报纸">
-      <div class="book__stage" id="stage">
+    <!-- ============ 全息横滑大屏 ============ -->
+    <section class="holo" id="viewport" aria-label="机创日报：全息虚拟报纸，横滑浏览六个版面">
+      <div class="holo__track" id="track">
 
-        <!-- ====== Leaf 1 ====== -->
-        <!-- 正面：封面 -->
-        <section class="leaf" data-leaf="1">
-          <div class="leaf__face leaf__face--front">
-            <article class="sheet sheet--cover" aria-label="封面">
-              <!-- 封面背景层 -->
-              <div class="cover__bg" aria-hidden="true">
-                <div class="cover__grid"></div>
-                <div class="cover__scan"></div>
-                <div class="cover__radial"></div>
-                <svg class="deco deco--gear-lg" viewBox="0 0 100 100" aria-hidden="true">
-                  <g fill="none" stroke="currentColor" stroke-width="4">
-                    <circle cx="50" cy="50" r="26"/><circle cx="50" cy="50" r="11"/><circle cx="50" cy="50" r="3.5" fill="currentColor"/>
-                    <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(0 50 50)"/>
-                    <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(45 50 50)"/>
-                    <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(90 50 50)"/>
-                    <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(135 50 50)"/>
-                    <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(180 50 50)"/>
-                    <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(225 50 50)"/>
-                    <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(270 50 50)"/>
-                    <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(315 50 50)"/>
-                  </g>
-                </svg>
-                <svg class="deco deco--gear-sm" viewBox="0 0 100 100" aria-hidden="true">
-                  <g fill="none" stroke="currentColor" stroke-width="5">
-                    <circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="9"/><circle cx="50" cy="50" r="3" fill="currentColor"/>
-                    <rect x="45" y="4" width="10" height="12" rx="1" transform="rotate(0 50 50)"/>
-                    <rect x="45" y="4" width="10" height="12" rx="1" transform="rotate(60 50 50)"/>
-                    <rect x="45" y="4" width="10" height="12" rx="1" transform="rotate(120 50 50)"/>
-                    <rect x="45" y="4" width="10" height="12" rx="1" transform="rotate(180 50 50)"/>
-                    <rect x="45" y="4" width="10" height="12" rx="1" transform="rotate(240 50 50)"/>
-                    <rect x="45" y="4" width="10" height="12" rx="1" transform="rotate(300 50 50)"/>
-                  </g>
-                </svg>
-                <svg class="deco deco--circuit" viewBox="0 0 200 120" aria-hidden="true">
-                  <g fill="none" stroke="currentColor" stroke-width="1.4">
-                    <path d="M10 110 H70 V70 H120 M120 70 V30 H180"/>
-                    <path d="M30 10 H90 V50 H140 M140 50 V90 H190"/>
-                    <circle cx="70" cy="70" r="3.2" fill="currentColor"/>
-                    <circle cx="120" cy="30" r="3.2" fill="currentColor"/>
-                    <circle cx="140" cy="50" r="3.2" fill="currentColor"/>
-                    <circle cx="90" cy="50" r="3.2" fill="currentColor"/>
-                    <path d="M120 70 L126 64 M126 70 L120 64"/>
-                  </g>
-                </svg>
+        <!-- ① 封面 -->
+        <section class="holo__panel" data-panel="1" aria-label="封面">
+          <article class="sheet sheet--cover">
+            <div class="cover__bg" aria-hidden="true">
+              <div class="cover__grid"></div>
+              <div class="cover__scan"></div>
+              <div class="cover__radial"></div>
+              <svg class="deco deco--gear-lg" viewBox="0 0 100 100" aria-hidden="true">
+                <g fill="none" stroke="currentColor" stroke-width="4">
+                  <circle cx="50" cy="50" r="26"/><circle cx="50" cy="50" r="11"/><circle cx="50" cy="50" r="3.5" fill="currentColor"/>
+                  <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(0 50 50)"/>
+                  <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(45 50 50)"/>
+                  <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(90 50 50)"/>
+                  <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(135 50 50)"/>
+                  <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(180 50 50)"/>
+                  <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(225 50 50)"/>
+                  <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(270 50 50)"/>
+                  <rect x="46" y="3"  width="8" height="13" rx="1" transform="rotate(315 50 50)"/>
+                </g>
+              </svg>
+              <svg class="deco deco--gear-sm" viewBox="0 0 100 100" aria-hidden="true">
+                <g fill="none" stroke="currentColor" stroke-width="5">
+                  <circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="9"/><circle cx="50" cy="50" r="3" fill="currentColor"/>
+                  <rect x="45" y="4" width="10" height="12" rx="1" transform="rotate(0 50 50)"/>
+                  <rect x="45" y="4" width="10" height="12" rx="1" transform="rotate(60 50 50)"/>
+                  <rect x="45" y="4" width="10" height="12" rx="1" transform="rotate(120 50 50)"/>
+                  <rect x="45" y="4" width="10" height="12" rx="1" transform="rotate(180 50 50)"/>
+                  <rect x="45" y="4" width="10" height="12" rx="1" transform="rotate(240 50 50)"/>
+                  <rect x="45" y="4" width="10" height="12" rx="1" transform="rotate(300 50 50)"/>
+                </g>
+              </svg>
+              <svg class="deco deco--circuit" viewBox="0 0 200 120" aria-hidden="true">
+                <g fill="none" stroke="currentColor" stroke-width="1.4">
+                  <path d="M10 110 H70 V70 H120 M120 70 V30 H180"/>
+                  <path d="M30 10 H90 V50 H140 M140 50 V90 H190"/>
+                  <circle cx="70" cy="70" r="3.2" fill="currentColor"/>
+                  <circle cx="120" cy="30" r="3.2" fill="currentColor"/>
+                  <circle cx="140" cy="50" r="3.2" fill="currentColor"/>
+                  <circle cx="90" cy="50" r="3.2" fill="currentColor"/>
+                  <path d="M120 70 L126 64 M126 70 L120 64"/>
+                </g>
+              </svg>
+            </div>
+
+            <div class="cover__status" aria-hidden="true">
+              <span>◤ JICHUANG DAILY // HOLO EDITION</span>
+              <span>SYNC <span class="dot"></span></span>
+            </div>
+
+            <span class="cover__chip cover__chip--a" aria-hidden="true">DATA.SYNC</span>
+            <span class="cover__chip cover__chip--b" aria-hidden="true">SCAN.NEXT</span>
+            <span class="cover__chip cover__chip--c" aria-hidden="true">CHANNEL.04</span>
+
+            <div class="cover__content">
+              <p class="cover__est">EST. 20XX · 广东工业大学 GUANGDONG UNIVERSITY OF TECHNOLOGY</p>
+              <h1 class="cover__masthead">
+                <span class="cover__masthead-cn">机创日报</span>
+                <span class="cover__masthead-en">MECH INNOVATION DAILY</span>
+              </h1>
+              <div class="cover__rule"><span class="cover__rule-gem" aria-hidden="true">◆</span></div>
+
+              <div class="cover__logo-wrap">
+                <span class="cover__ring cover__ring--1" aria-hidden="true"></span>
+                <span class="cover__ring cover__ring--2" aria-hidden="true"></span>
+                <img class="cover__logo" src="assets/logo.png" alt="机械创新团队队标：青色齿轮线条标识" width="180" height="180">
+                <div class="cover__beam" aria-hidden="true"></div>
               </div>
 
-              <div class="cover__status" aria-hidden="true">
-                <span>◤ JICHUANG DAILY // HOLO EDITION</span>
-                <span>SYNC <span class="dot"></span></span>
+              <p class="cover__kicker">AUTUMN RECRUITMENT SPECIAL · 秋季招新特刊</p>
+              <h2 class="cover__headline">下一台改变世界的机器，<br><em>等你来造。</em></h2>
+              <p class="cover__sub">结构 · 电控 · 视觉识别 · 运营 —— 四组联动，从图纸到赛场，只差一个你。</p>
+
+              <div class="cover__meta">
+                <span>卷期 VOL.2026</span><span>定价 免费赠阅</span><span>出品 机械创新团队</span>
               </div>
+            </div>
 
-              <span class="cover__chip cover__chip--a" aria-hidden="true">DATA.SYNC</span>
-              <span class="cover__chip cover__chip--b" aria-hidden="true">SCAN.NEXT</span>
-              <span class="cover__chip cover__chip--c" aria-hidden="true">CHANNEL.04</span>
-
-              <div class="cover__content">
-                <p class="cover__est">EST. 20XX · 广东工业大学 GUANGDONG UNIVERSITY OF TECHNOLOGY</p>
-                <h1 class="cover__masthead">
-                  <span class="cover__masthead-cn">机创日报</span>
-                  <span class="cover__masthead-en">MECH INNOVATION DAILY</span>
-                </h1>
-                <div class="cover__rule"><span class="cover__rule-gem" aria-hidden="true">◆</span></div>
-
-                <div class="cover__logo-wrap">
-                  <span class="cover__ring cover__ring--1" aria-hidden="true"></span>
-                  <span class="cover__ring cover__ring--2" aria-hidden="true"></span>
-                  <img class="cover__logo" src="assets/logo.png" alt="机械创新团队队标：青色齿轮线条标识" width="180" height="180">
-                  <div class="cover__beam" aria-hidden="true"></div>
-                </div>
-
-                <p class="cover__kicker">AUTUMN RECRUITMENT SPECIAL · 秋季招新特刊</p>
-                <h2 class="cover__headline">下一台改变世界的机器，<br><em>等你来造。</em></h2>
-                <p class="cover__sub">结构 · 电控 · 视觉识别 · 运营 —— 四组联动，从图纸到赛场，只差一个你。</p>
-
-                <div class="cover__meta">
-                  <span>卷期 VOL.2026</span><span>定价 免费赠阅</span><span>出品 机械创新团队</span>
-                </div>
-              </div>
-
-              <div class="cover__footer">
-                <button class="cover__cta" id="coverStart" type="button">
-                  <span class="cover__cta-label">开始翻阅</span>
-                  <span class="cover__cta-arrow" aria-hidden="true">→</span>
-                </button>
-                <p class="cover__hint">↑ 拖动书页 / 点击页角 · 键盘 ← → 也可翻页</p>
-              </div>
-            </article>
-          </div>
-
-          <!-- 背面：关于团队 -->
-          <div class="leaf__face leaf__face--back">
-            <article class="sheet sheet--paper" aria-label="01 · 关于团队">
-              <header class="sheet__masthead">
-                <span class="sheet__masthead-id">01</span>
-                <h2 class="sheet__masthead-title">关于机创 <i>ABOUT</i></h2>
-                <span class="sheet__masthead-meta">CYBER 2026 · 秋季招新特刊</span>
-              </header>
-
-              <div class="sheet__body">
-                <p class="sheet__lead">一支把课堂变成图纸、把图纸变成机器的学生科创团队。</p>
-                <div class="sheet__cols">
-                  <div class="sheet__col">
-                    <p class="para">机械创新团队（<b>Mechanical Innovation Team</b>，简称「机创」）是广东工业大学的学生科创团队，以机械设计为根、以电控与视觉识别为翼，围绕机器人、智能装备与创新课题展开学习与实践。</p>
-                    <p class="para">在这里，你能接触到从三维建模、单片机控制到视觉算法、品牌运营的全链路技能；也能和一群愿意为作品熬夜、为调试较真、为比赛拼尽全力的伙伴并肩。</p>
-                  </div>
-                  <div class="sheet__col">
-                    <div class="blueprint" role="img" aria-label="机械蓝图风格装饰">
-                      <svg viewBox="0 0 180 180" aria-hidden="true">
-                        <g fill="none" stroke="currentColor">
-                          <circle cx="90" cy="90" r="62"/><circle cx="90" cy="90" r="46"/><circle cx="90" cy="90" r="30"/>
-                          <path d="M90 28 V90 M90 90 H152 M90 90 V152 M28 90 H90"/>
-                          <circle cx="90" cy="90" r="5" fill="currentColor"/>
-                          <path d="M90 152 l6 10 h-12 z" fill="currentColor"/>
-                        </g>
-                      </svg>
-                      <span class="blueprint__tag">DESIGN / BUILD / RACE</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="motto">
-                  <span class="motto__mark" aria-hidden="true">❝</span>
-                  <p class="motto__text">精益 · 创新 · 协作 · 突破</p>
-                  <span class="motto__en">PRECISION · INNOVATION · TEAMWORK · BREAKTHROUGH</span>
-                </div>
-
-                <ul class="facts">
-                  <li class="facts__item"><b class="facts__num" data-placeholder="20XX">20XX</b><span class="facts__label">团队成立</span></li>
-                  <li class="facts__item"><b class="facts__num" data-placeholder="30+">30+</b><span class="facts__label">在队成员</span></li>
-                  <li class="facts__item"><b class="facts__num" data-placeholder="10+">10+</b><span class="facts__label">年度奖项</span></li>
-                </ul>
-              </div>
-
-              <footer class="sheet__footer">
-                <span>机械创新团队 · 2026 秋季招新</span>
-                <span class="sheet__folio">P.02</span>
-              </footer>
-            </article>
-          </div>
+            <div class="cover__footer">
+              <button class="cover__cta" id="coverStart" type="button">
+                <span class="cover__cta-label">开始浏览</span>
+                <span class="cover__cta-arrow" aria-hidden="true">→</span>
+              </button>
+              <p class="cover__hint">← 横滑 / 拖动 / 键盘方向键 → 浏览版面</p>
+            </div>
+          </article>
         </section>
 
-        <!-- ====== Leaf 2 ====== -->
-        <!-- 正面：组别介绍 -->
-        <section class="leaf" data-leaf="2">
-          <div class="leaf__face leaf__face--front">
-            <article class="sheet sheet--paper" aria-label="02 · 组别介绍">
-              <header class="sheet__masthead">
-                <span class="sheet__masthead-id">02</span>
-                <h2 class="sheet__masthead-title">组别矩阵 <i>DIVISIONS</i></h2>
-                <span class="sheet__masthead-meta">FOUR TEAMS · ONE MACHINE</span>
-              </header>
+        <!-- ② 关于团队 -->
+        <section class="holo__panel" data-panel="2" aria-label="02 · 关于团队">
+          <article class="sheet sheet--paper">
+            <header class="sheet__masthead">
+              <span class="sheet__masthead-id">02</span>
+              <h2 class="sheet__masthead-title">关于机创 <i>ABOUT</i></h2>
+              <span class="sheet__masthead-meta">CYBER 2026 · 秋季招新特刊</span>
+            </header>
 
-              <div class="sheet__body sheet__body--groups">
-                <p class="sheet__lead sheet__lead--small">四组各司其职、协同作战。你可以多选感兴趣的方向，正式分组在入队后再定。</p>
-                <div class="groups">
-                  <div class="group">
-                    <span class="group__no">A</span>
-                    <h3 class="group__name">结构组 <i>MECH</i></h3>
-                    <p class="group__desc">负责机械结构设计与建模装配，把创意变成看得见的骨架。精研齿轮、连杆与机构学。</p>
-                    <p class="group__who">适合喜欢动手、痴迷机构、想精通 SolidWorks 与工程制图的你。</p>
-                    <ul class="group__tags"><li>SolidWorks</li><li>AutoCAD</li><li>机械制图</li></ul>
-                  </div>
-                  <div class="group">
-                    <span class="group__no">B</span>
-                    <h3 class="group__name">电控组 <i>EMBED</i></h3>
-                    <p class="group__desc">负责电路设计与单片机开发，给机器装上大脑。让电机听话、让传感器就位。</p>
-                    <p class="group__who">适合想玩转单片机、爱焊接调电路、能用 C 语言控制硬件的你。</p>
-                    <ul class="group__tags"><li>单片机</li><li>C语言</li><li>电路设计</li></ul>
-                  </div>
-                  <div class="group">
-                    <span class="group__no">C</span>
-                    <h3 class="group__name">视觉识别组 <i>VISION</i></h3>
-                    <p class="group__desc">负责图像处理与视觉算法，让机器「看见」并理解世界。从 OpenCV 到深度学习。</p>
-                    <p class="group__who">适合对 Python、图像与算法好奇、愿意啃论文和跑模型的你。</p>
-                    <ul class="group__tags"><li>Python</li><li>OpenCV</li><li>视觉算法</li></ul>
-                  </div>
-                  <div class="group">
-                    <span class="group__no">D</span>
-                    <h3 class="group__name">运营组 <i>MEDIA</i></h3>
-                    <p class="group__desc">负责团队品牌、宣传、策划与对外联络，让机创被更多人看见，也承接团队运转。</p>
-                    <p class="group__who">适合擅长写作、剪辑、设计或活动组织，想为团队扛起门面的你。</p>
-                    <ul class="group__tags"><li>Office</li><li>Premiere</li><li>Photoshop</li></ul>
-                  </div>
+            <div class="sheet__body">
+              <p class="sheet__lead">一支把课堂变成图纸、把图纸变成机器的学生科创团队。</p>
+              <div class="sheet__cols">
+                <div class="sheet__col">
+                  <p class="para">机械创新团队（<b>Mechanical Innovation Team</b>，简称「机创」）是广东工业大学的学生科创团队，以机械设计为根、以电控与视觉识别为翼，围绕机器人、智能装备与创新课题展开学习与实践。</p>
+                  <p class="para">在这里，你能接触到从三维建模、单片机控制到视觉算法、品牌运营的全链路技能；也能和一群愿意为作品熬夜、为调试较真、为比赛拼尽全力的伙伴并肩。</p>
                 </div>
-              </div>
-
-              <footer class="sheet__footer">
-                <span>机械创新团队 · 2026 秋季招新</span>
-                <span class="sheet__folio">P.03</span>
-              </footer>
-            </article>
-          </div>
-
-          <!-- 背面：成果 · 荣誉 · 时间线 -->
-          <div class="leaf__face leaf__face--back">
-            <article class="sheet sheet--paper" aria-label="03 · 战绩与日程">
-              <header class="sheet__masthead">
-                <span class="sheet__masthead-id">03</span>
-                <h2 class="sheet__masthead-title">战绩与日程 <i>HONORS &amp; TIMELINE</i></h2>
-                <span class="sheet__masthead-meta">BUILT TO COMPETE</span>
-              </header>
-
-              <div class="sheet__body">
-                <p class="sheet__lead sheet__lead--small">我们用作品说话 —— 以下为占位数据，正式介绍将由团队核实后替换。</p>
-                <div class="trophies">
-                  <div class="trophy">
-                    <span class="trophy__medal" aria-hidden="true">🏆</span>
-                    <div><b class="trophy__num">N×</b><p class="trophy__text">国家级赛事奖项<br><small data-placeholder="例：中国大学生工程实践与创新能力大赛">大赛名称占位</small></p></div>
-                  </div>
-                  <div class="trophy">
-                    <span class="trophy__medal" aria-hidden="true">🥇</span>
-                    <div><b class="trophy__num">N×</b><p class="trophy__text">省级赛事一等奖<br><small data-placeholder="省级竞赛列表">竞赛列表占位</small></p></div>
-                  </div>
-                  <div class="trophy">
-                    <span class="trophy__medal" aria-hidden="true">📄</span>
-                    <div><b class="trophy__num">N×</b><p class="trophy__text">专利 · 论文 · 大创项目<br><small data-placeholder="科研产出清单">产出清单占位</small></p></div>
-                  </div>
-                </div>
-
-                <div class="timeline">
-                  <h3 class="timeline__title">招新时间轴</h3>
-                  <ol class="timeline__list">
-                    <li class="timeline__item"><b>报名开启</b><span>9 月上旬</span><small>填写本特刊第 04-05 版报名表</small></li>
-                    <li class="timeline__item"><b>报名截止</b><span class="tl-date" data-placeholder="9 月 X 日">9 月 X 日</span><small>截止时间请以群公告为准</small></li>
-                    <li class="timeline__item"><b>面试安排</b><span class="tl-date" data-placeholder="9 月中旬">9 月中旬</span><small>分方向面试 · 时间另行通知</small></li>
-                    <li class="timeline__item"><b>结果公布</b><span class="tl-date" data-placeholder="9 月底">9 月底</span><small>请关注招新群与公众号公告</small></li>
-                  </ol>
-                  <p class="timeline__note">⚠ 以上日期均为占位，正式日程以团队官方群公告为准。</p>
-                </div>
-              </div>
-
-              <footer class="sheet__footer">
-                <span>机械创新团队 · 2026 秋季招新</span>
-                <span class="sheet__folio">P.04</span>
-              </footer>
-            </article>
-          </div>
-        </section>
-
-        <!-- ====== Leaf 3 ====== -->
-        <!-- 正面：报名指南 + 基础信息登记 -->
-        <section class="leaf" data-leaf="3">
-          <div class="leaf__face leaf__face--front">
-            <article class="sheet sheet--paper sheet--form-a" aria-label="04 · 报名指南与信息登记">
-              <header class="sheet__masthead">
-                <span class="sheet__masthead-id">04</span>
-                <h2 class="sheet__masthead-title">报名指南 <i>HOW TO JOIN</i></h2>
-                <span class="sheet__masthead-meta">APPLY FOR THE TEAM</span>
-              </header>
-
-              <div class="sheet__body sheet__body--form">
-                <div class="form-side">
-                  <h3 class="form-side__title">递交方式</h3>
-                  <ol class="steps">
-                    <li class="steps__item"><span class="steps__n">1</span><p>填写下方登记表（第 04-05 版），可在线填写或下载原版报名表。</p></li>
-                    <li class="steps__item"><span class="steps__n">2</span><p>将电子版报名表发送至邮箱：<a class="link" href="mailto:3607199098@qq.com">3607199098@qq.com</a></p></li>
-                    <li class="steps__item"><span class="steps__n">3</span><p>文件命名：<b>年级 + 专业 + 名字 + 组别</b>（多组别都要写上）。</p></li>
-                    <li class="steps__item"><span class="steps__n">4</span><p>截止时间与面试通知，请关注招新群群公告。</p></li>
-                  </ol>
-                  <div class="download">
-                    <span class="download__icon" aria-hidden="true">⬇</span>
-                    <div>
-                      <p class="download__title">下载原版报名表</p>
-                      <p class="download__hint">适合线下填写后发送邮件</p>
-                      <a class="btn-download" href="assets/报名表原版.docx" download="2026机械创新团队报名表.docx">下载 DOCX</a>
-                    </div>
-                  </div>
-                  <div class="notice">
-                    <p class="notice__title">递交提醒</p>
-                    <ul class="notice__list">
-                      <li>邮件主题：<b>机械创新团队招新</b></li>
-                      <li>多组别报名，请在文件名中全部注明</li>
-                      <li>报名表第 6 题的作品展示可另附一张纸</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <form class="form-reg" id="mec-form" novalidate>
-                  <h3 class="form-reg__title">信息登记 <small>带 * 为必填</small></h3>
-                  <div class="field">
-                    <label for="f-name">姓名 *</label>
-                    <input type="text" id="f-name" name="name" autocomplete="name" required>
-                  </div>
-                  <div class="field">
-                    <label for="f-class">年级专业班级 *</label>
-                    <input type="text" id="f-class" name="class_grade" placeholder="例：2026 级机械工程 1 班" required>
-                  </div>
-                  <div class="field">
-                    <label for="f-college">学院 *</label>
-                    <input type="text" id="f-college" name="college" placeholder="例：机电工程学院" required>
-                  </div>
-                  <div class="field">
-                    <label for="f-email">邮箱 *</label>
-                    <input type="email" id="f-email" name="email" autocomplete="email" required>
-                  </div>
-                  <div class="field">
-                    <label for="f-phone">联系方式 *</label>
-                    <input type="tel" id="f-phone" name="phone" placeholder="手机 / QQ 号均可" autocomplete="tel" required>
-                  </div>
-                  <div class="field field--wide">
-                    <label for="f-intro">1 · 个人介绍 <small>性格特点 / 兴趣爱好 / 技能特长 / 是否有余面试组别相关的经历</small></label>
-                    <textarea id="f-intro" name="intro" rows="3"></textarea>
-                  </div>
-                  <p class="form-reg__hint">↳ 请翻到下一页继续填写第 2-6 题</p>
-                </form>
-              </div>
-
-              <footer class="sheet__footer">
-                <span>机械创新团队 · 2026 秋季招新</span>
-                <span class="sheet__folio">P.05</span>
-              </footer>
-            </article>
-          </div>
-
-          <!-- 背面：报名表（续） -->
-          <div class="leaf__face leaf__face--back">
-            <article class="sheet sheet--paper sheet--form-b" aria-label="05 · 报名表（续）">
-              <header class="sheet__masthead">
-                <span class="sheet__masthead-id">05</span>
-                <h2 class="sheet__masthead-title">报名表 · 续 <i>APPLICATION</i></h2>
-                <span class="sheet__masthead-meta">PART II</span>
-              </header>
-
-              <form class="sheet__body sheet__body--form form-reg" id="mec-form-b" novalidate>
-                <div class="field">
-                  <span class="field__label">2 · 面试组别（可多选）*</span>
-                  <div class="checks checks--group">
-                    <label class="check"><input type="checkbox" name="group" value="结构组"> 结构组</label>
-                    <label class="check"><input type="checkbox" name="group" value="电控组"> 电控组</label>
-                    <label class="check"><input type="checkbox" name="group" value="视觉识别组"> 视觉识别组</label>
-                    <label class="check"><input type="checkbox" name="group" value="运营组"> 运营组</label>
-                  </div>
-                </div>
-
-                <div class="field">
-                  <span class="field__label">3 · 你学习过并初步掌握的软件或技能？<small>掌握请在括号打勾，没有则不用勾选</small></span>
-                  <div class="checks checks--grid">
-                    <label class="check"><input type="checkbox" name="skill" value="SolidWorks"> SolidWorks</label>
-                    <label class="check"><input type="checkbox" name="skill" value="AutoCAD"> AutoCAD</label>
-                    <label class="check"><input type="checkbox" name="skill" value="单片机"> 单片机</label>
-                    <label class="check"><input type="checkbox" name="skill" value="Office等办公软件"> Office 等办公软件</label>
-                    <label class="check"><input type="checkbox" name="skill" value="C语言"> C语言</label>
-                    <label class="check"><input type="checkbox" name="skill" value="Python"> Python</label>
-                    <label class="check"><input type="checkbox" name="skill" value="Premiere/会声会影"> Premiere / 会声会影</label>
-                    <label class="check"><input type="checkbox" name="skill" value="Photoshop"> Photoshop</label>
-                    <label class="check"><input type="checkbox" name="skill" value="演讲答辩/文稿撰写"> 演讲答辩 / 文稿撰写</label>
-                    <label class="check check--other"><input type="checkbox" name="skill" value="其他"> 其他技能 <input type="text" class="check-other-input" name="skill_other" placeholder="请填写" aria-label="其他技能说明"></label>
-                  </div>
-                </div>
-
-                <div class="field field--wide">
-                  <label for="f-purpose">4 · 你想进入机械创新团队做些什么或学到什么？（进入团队的目的）</label>
-                  <textarea id="f-purpose" name="purpose" rows="2"></textarea>
-                </div>
-                <div class="field field--wide">
-                  <label for="f-plan">5 · 请简述你的大学规划，谈谈你的理想。</label>
-                  <textarea id="f-plan" name="plan" rows="2"></textarea>
-                </div>
-                <div class="field field--wide">
-                  <label for="f-portfolio">6 · 技能 / 科技小创意展示 <small>没有上述技能或不便展示，可展示你想到的科技小创意，最好配图文（可另附一张纸说明）</small></label>
-                  <textarea id="f-portfolio" name="portfolio" rows="3"></textarea>
-                </div>
-
-                <div class="form-submit">
-                  <p class="form-submit__hint">信息将暂存在<b>本机浏览器</b>中，便于你核对后再发送邮件。正式提交后即作废，不会上传。</p>
-                  <button class="btn-submit" type="submit">暂存并生成邮件摘要</button>
-                  <p class="form-submit__status" id="formStatus" role="status" aria-live="polite"></p>
-                </div>
-              </form>
-
-              <footer class="sheet__footer">
-                <span>机械创新团队 · 2026 秋季招新</span>
-                <span class="sheet__folio">P.06</span>
-              </footer>
-            </article>
-          </div>
-        </section>
-
-        <!-- ====== Leaf 4 ====== -->
-        <!-- 正面：招新 CTA / 联系我们 -->
-        <section class="leaf" data-leaf="4">
-          <div class="leaf__face leaf__face--front">
-            <article class="sheet sheet--paper sheet--cta" aria-label="06 · 加入我们">
-              <header class="sheet__masthead">
-                <span class="sheet__masthead-id">06</span>
-                <h2 class="sheet__masthead-title">想加入我们？ <i>JOIN US</i></h2>
-                <span class="sheet__masthead-meta">THE FUTURE NEEDS YOU</span>
-              </header>
-
-              <div class="sheet__body sheet__body--cta">
-                <div class="cta__main">
-                  <img class="cta__logo" src="assets/logo.png" alt="机械创新团队队标" width="120" height="120">
-                  <h3 class="cta__slogan">下一个让全场惊呼的机器人，<br>或许就出自你的手。</h3>
-                  <p class="cta__text">不管你从零开始还是已有基础，只要愿意学习、敢于动手，机创都留好了你的位置。</p>
-                </div>
-                <div class="cta__contacts">
-                  <h4 class="cta__contacts-title">联系与关注</h4>
-                  <ul class="cta__list">
-                    <li><span class="cta__tag">报名邮箱</span><a class="link" href="mailto:3607199098@qq.com">3607199098@qq.com</a></li>
-                    <li><span class="cta__tag">招新群</span><span data-placeholder="群号占位，进群关注群公告">QQ 群：XXXX（占位）</span></li>
-                    <li><span class="cta__tag">公众号</span><span data-placeholder="公众号名占位">公众号：XXXX（占位）</span></li>
-                  </ul>
-                  <div class="qr" aria-hidden="true">
-                    <svg viewBox="0 0 21 21" class="qr__svg">
-                      <rect x="1" y="1" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.4"/>
-                      <rect x="12" y="1" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.4"/>
-                      <rect x="1" y="12" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.4"/>
-                      <g fill="currentColor">
-                        <rect x="3" y="3" width="2" height="2"/><rect x="7" y="3" width="2" height="2"/><rect x="3" y="7" width="2" height="2"/><rect x="7" y="7" width="2" height="2"/>
-                        <rect x="14" y="3" width="2" height="2"/><rect x="18" y="3" width="2" height="2"/><rect x="14" y="7" width="2" height="2"/><rect x="18" y="7" width="2" height="2"/>
-                        <rect x="3" y="14" width="2" height="2"/><rect x="7" y="14" width="2" height="2"/><rect x="3" y="18" width="2" height="2"/><rect x="7" y="18" width="2" height="2"/>
-                        <rect x="14" y="14" width="2" height="2"/><rect x="18" y="14" width="2" height="2"/><rect x="12" y="12" width="2" height="2"/><rect x="16" y="18" width="2" height="2"/>
+                <div class="sheet__col">
+                  <div class="blueprint" role="img" aria-label="机械蓝图风格装饰">
+                    <svg viewBox="0 0 180 180" aria-hidden="true">
+                      <g fill="none" stroke="currentColor">
+                        <circle cx="90" cy="90" r="62"/><circle cx="90" cy="90" r="46"/><circle cx="90" cy="90" r="30"/>
+                        <path d="M90 28 V90 M90 90 H152 M90 90 V152 M28 90 H90"/>
+                        <circle cx="90" cy="90" r="5" fill="currentColor"/>
+                        <path d="M90 152 l6 10 h-12 z" fill="currentColor"/>
                       </g>
                     </svg>
-                    <span class="qr__label">扫码占位<br>进群看公告</span>
+                    <span class="blueprint__tag">DESIGN / BUILD / RACE</span>
                   </div>
                 </div>
               </div>
 
-              <footer class="sheet__footer">
-                <span>机械创新团队 · 2026 秋季招新</span>
-                <span class="sheet__folio">P.07</span>
-              </footer>
-            </article>
-          </div>
+              <div class="motto">
+                <span class="motto__mark" aria-hidden="true">❝</span>
+                <p class="motto__text">精益 · 创新 · 协作 · 突破</p>
+                <span class="motto__en">PRECISION · INNOVATION · TEAMWORK · BREAKTHROUGH</span>
+              </div>
 
-          <!-- 背面：后封面 -->
-          <div class="leaf__face leaf__face--back">
-            <article class="sheet sheet--backcover" aria-label="后封面">
-              <div class="backcover__bg" aria-hidden="true">
-                <div class="cover__grid"></div>
-                <div class="cover__radial"></div>
-              </div>
-              <div class="backcover__content">
-                <img class="backcover__logo" src="assets/logo.png" alt="机械创新团队队标" width="150" height="150">
-                <p class="backcover__edition">机创日报 · CYBER 2026 · 秋季招新特刊</p>
-                <p class="backcover__end">END OF EDITION</p>
-                <p class="backcover__line">—— 期待你的加入 ——</p>
-                <p class="backcover__sub">机械创新团队 · 广东工业大学</p>
-              </div>
-            </article>
-          </div>
+              <ul class="facts">
+                <li class="facts__item"><b class="facts__num" data-placeholder="20XX">20XX</b><span class="facts__label">团队成立</span></li>
+                <li class="facts__item"><b class="facts__num" data-placeholder="30+">30+</b><span class="facts__label">在队成员</span></li>
+                <li class="facts__item"><b class="facts__num" data-placeholder="10+">10+</b><span class="facts__label">年度奖项</span></li>
+              </ul>
+            </div>
+
+            <footer class="sheet__footer">
+              <span>机械创新团队 · 2026 秋季招新</span>
+              <span class="sheet__folio">P.02</span>
+            </footer>
+          </article>
         </section>
 
-        <!-- 书页侧边堆叠装饰（模拟纸张厚度） -->
-        <div class="book__edge book__edge--left" aria-hidden="true"></div>
-        <div class="book__edge book__edge--right" aria-hidden="true"></div>
-      </div>
-    </section>
+        <!-- ③ 组别矩阵 -->
+        <section class="holo__panel" data-panel="3" aria-label="03 · 组别矩阵">
+          <article class="sheet sheet--paper">
+            <header class="sheet__masthead">
+              <span class="sheet__masthead-id">03</span>
+              <h2 class="sheet__masthead-title">组别矩阵 <i>DIVISIONS</i></h2>
+              <span class="sheet__masthead-meta">FOUR TEAMS · ONE MACHINE</span>
+            </header>
 
-    <!-- ============ 翻页控件 ============ -->
-    <nav class="book-nav" aria-label="翻页控件">
-      <button class="book-nav__btn" id="prevBtn" type="button" aria-label="上一版">‹</button>
-      <span class="book-nav__status" id="pageStatus" aria-live="polite">第 1 版 / 共 5 版</span>
-      <button class="book-nav__btn" id="nextBtn" type="button" aria-label="下一版">›</button>
+            <div class="sheet__body sheet__body--groups">
+              <p class="sheet__lead sheet__lead--small">四组各司其职、协同作战。你可以多选感兴趣的方向，正式分组在入队后再定。</p>
+              <div class="groups">
+                <div class="group">
+                  <span class="group__no">A</span>
+                  <h3 class="group__name">结构组 <i>MECH</i></h3>
+                  <p class="group__desc">负责机械结构设计与建模装配，把创意变成看得见的骨架。精研齿轮、连杆与机构学。</p>
+                  <p class="group__who">适合喜欢动手、痴迷机构、想精通 SolidWorks 与工程制图的你。</p>
+                  <ul class="group__tags"><li>SolidWorks</li><li>AutoCAD</li><li>机械制图</li></ul>
+                </div>
+                <div class="group">
+                  <span class="group__no">B</span>
+                  <h3 class="group__name">电控组 <i>EMBED</i></h3>
+                  <p class="group__desc">负责电路设计与单片机开发，给机器装上大脑。让电机听话、让传感器就位。</p>
+                  <p class="group__who">适合想玩转单片机、爱焊接调电路、能用 C 语言控制硬件的你。</p>
+                  <ul class="group__tags"><li>单片机</li><li>C语言</li><li>电路设计</li></ul>
+                </div>
+                <div class="group">
+                  <span class="group__no">C</span>
+                  <h3 class="group__name">视觉识别组 <i>VISION</i></h3>
+                  <p class="group__desc">负责图像处理与视觉算法，让机器「看见」并理解世界。从 OpenCV 到深度学习。</p>
+                  <p class="group__who">适合对 Python、图像与算法好奇、愿意啃论文和跑模型的你。</p>
+                  <ul class="group__tags"><li>Python</li><li>OpenCV</li><li>视觉算法</li></ul>
+                </div>
+                <div class="group">
+                  <span class="group__no">D</span>
+                  <h3 class="group__name">运营组 <i>MEDIA</i></h3>
+                  <p class="group__desc">负责团队品牌、宣传、策划与对外联络，让机创被更多人看见，也承接团队运转。</p>
+                  <p class="group__who">适合擅长写作、剪辑、设计或活动组织，想为团队扛起门面的你。</p>
+                  <ul class="group__tags"><li>Office</li><li>Premiere</li><li>Photoshop</li></ul>
+                </div>
+              </div>
+            </div>
+
+            <footer class="sheet__footer">
+              <span>机械创新团队 · 2026 秋季招新</span>
+              <span class="sheet__folio">P.03</span>
+            </footer>
+          </article>
+        </section>
+
+        <!-- ④ 战绩与日程 -->
+        <section class="holo__panel" data-panel="4" aria-label="04 · 战绩与日程">
+          <article class="sheet sheet--paper">
+            <header class="sheet__masthead">
+              <span class="sheet__masthead-id">04</span>
+              <h2 class="sheet__masthead-title">战绩与日程 <i>HONORS &amp; TIMELINE</i></h2>
+              <span class="sheet__masthead-meta">BUILT TO COMPETE</span>
+            </header>
+
+            <div class="sheet__body sheet__body--honors">
+              <p class="sheet__lead sheet__lead--small">我们用作品说话 —— 以下为占位数据，正式介绍将由团队核实后替换。</p>
+              <div class="trophies">
+                <div class="trophy">
+                  <span class="trophy__medal" aria-hidden="true">🏆</span>
+                  <div><b class="trophy__num">N×</b><p class="trophy__text">国家级赛事奖项<br><small data-placeholder="例：中国大学生工程实践与创新能力大赛">大赛名称占位</small></p></div>
+                </div>
+                <div class="trophy">
+                  <span class="trophy__medal" aria-hidden="true">🥇</span>
+                  <div><b class="trophy__num">N×</b><p class="trophy__text">省级赛事一等奖<br><small data-placeholder="省级竞赛列表">竞赛列表占位</small></p></div>
+                </div>
+                <div class="trophy">
+                  <span class="trophy__medal" aria-hidden="true">📄</span>
+                  <div><b class="trophy__num">N×</b><p class="trophy__text">专利 · 论文 · 大创项目<br><small data-placeholder="科研产出清单">产出清单占位</small></p></div>
+                </div>
+              </div>
+
+              <div class="timeline">
+                <h3 class="timeline__title">招新时间轴</h3>
+                <ol class="timeline__list">
+                  <li class="timeline__item"><b>报名开启</b><span>9 月上旬</span><small>填写本特刊第 05 版报名表</small></li>
+                  <li class="timeline__item"><b>报名截止</b><span class="tl-date" data-placeholder="9 月 X 日">9 月 X 日</span><small>截止时间请以群公告为准</small></li>
+                  <li class="timeline__item"><b>面试安排</b><span class="tl-date" data-placeholder="9 月中旬">9 月中旬</span><small>分方向面试 · 时间另行通知</small></li>
+                  <li class="timeline__item"><b>结果公布</b><span class="tl-date" data-placeholder="9 月底">9 月底</span><small>请关注招新群与公众号公告</small></li>
+                </ol>
+                <p class="timeline__note">⚠ 以上日期均为占位，正式日程以团队官方群公告为准。</p>
+              </div>
+            </div>
+
+            <footer class="sheet__footer">
+              <span>机械创新团队 · 2026 秋季招新</span>
+              <span class="sheet__folio">P.04</span>
+            </footer>
+          </article>
+        </section>
+
+        <!-- ⑤ 报名 -->
+        <section class="holo__panel" data-panel="5" aria-label="05 · 报名">
+          <article class="sheet sheet--paper sheet--apply">
+            <header class="sheet__masthead">
+              <span class="sheet__masthead-id">05</span>
+              <h2 class="sheet__masthead-title">报名 <i>APPLY</i></h2>
+              <span class="sheet__masthead-meta">APPLICATION FORM</span>
+            </header>
+
+            <div class="sheet__body sheet__body--apply">
+              <!-- 左栏：递交方式 -->
+              <aside class="form-side" aria-label="递交方式">
+                <h3 class="form-side__title">递交方式</h3>
+                <ol class="steps">
+                  <li class="steps__item"><span class="steps__n">1</span><p>填写右侧报名表（可在线填写或下载原版报名表）。</p></li>
+                  <li class="steps__item"><span class="steps__n">2</span><p>将电子版报名表发送至邮箱：<a class="link" href="mailto:3607199098@qq.com">3607199098@qq.com</a></p></li>
+                  <li class="steps__item"><span class="steps__n">3</span><p>文件命名：<b>年级 + 专业 + 名字 + 组别</b>（多组别都要写上）。</p></li>
+                  <li class="steps__item"><span class="steps__n">4</span><p>截止时间与面试通知，请关注招新群群公告。</p></li>
+                </ol>
+                <div class="download">
+                  <span class="download__icon" aria-hidden="true">⬇</span>
+                  <div>
+                    <p class="download__title">下载原版报名表</p>
+                    <p class="download__hint">适合线下填写后发送邮件</p>
+                    <a class="btn-download" href="assets/报名表原版.docx" download="2026机械创新团队报名表.docx">下载 DOCX</a>
+                  </div>
+                </div>
+                <div class="notice">
+                  <p class="notice__title">递交提醒</p>
+                  <ul class="notice__list">
+                    <li>邮件主题：<b>机械创新团队招新</b></li>
+                    <li>多组别报名，请在文件名中全部注明</li>
+                    <li>报名表第 6 题的作品展示可另附一张纸</li>
+                  </ul>
+                </div>
+              </aside>
+
+              <!-- 右栏：完整表单 -->
+              <div class="apply-form">
+                <form class="form-reg" id="mec-form" novalidate>
+                  <h3 class="form-reg__title">信息登记 <small>带 * 为必填</small></h3>
+                  <div class="apply-form__grid">
+                    <div class="field">
+                      <label for="f-name">姓名 *</label>
+                      <input type="text" id="f-name" name="name" autocomplete="name" required>
+                    </div>
+                    <div class="field">
+                      <label for="f-class">年级专业班级 *</label>
+                      <input type="text" id="f-class" name="class_grade" placeholder="例：2026 级机械工程 1 班" required>
+                    </div>
+                    <div class="field">
+                      <label for="f-college">学院 *</label>
+                      <input type="text" id="f-college" name="college" placeholder="例：机电工程学院" required>
+                    </div>
+                    <div class="field">
+                      <label for="f-email">邮箱 *</label>
+                      <input type="email" id="f-email" name="email" autocomplete="email" required>
+                    </div>
+                    <div class="field">
+                      <label for="f-phone">联系方式 *</label>
+                      <input type="tel" id="f-phone" name="phone" placeholder="手机 / QQ 号均可" autocomplete="tel" required>
+                    </div>
+                    <div class="field field--wide">
+                      <label for="f-intro">1 · 个人介绍 <small>性格特点 / 兴趣爱好 / 技能特长 / 是否有余面试组别相关的经历</small></label>
+                      <textarea id="f-intro" name="intro" rows="2"></textarea>
+                    </div>
+                  </div>
+                </form>
+
+                <form class="form-reg form-reg--b" id="mec-form-b" novalidate>
+                  <div class="field">
+                    <span class="field__label">2 · 面试组别（可多选）*</span>
+                    <div class="checks checks--group">
+                      <label class="check"><input type="checkbox" name="group" value="结构组"> 结构组</label>
+                      <label class="check"><input type="checkbox" name="group" value="电控组"> 电控组</label>
+                      <label class="check"><input type="checkbox" name="group" value="视觉识别组"> 视觉识别组</label>
+                      <label class="check"><input type="checkbox" name="group" value="运营组"> 运营组</label>
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <span class="field__label">3 · 你学习过并初步掌握的软件或技能？<small>掌握请在括号打勾，没有则不用勾选</small></span>
+                    <div class="checks checks--grid">
+                      <label class="check"><input type="checkbox" name="skill" value="SolidWorks"> SolidWorks</label>
+                      <label class="check"><input type="checkbox" name="skill" value="AutoCAD"> AutoCAD</label>
+                      <label class="check"><input type="checkbox" name="skill" value="单片机"> 单片机</label>
+                      <label class="check"><input type="checkbox" name="skill" value="Office等办公软件"> Office 等办公软件</label>
+                      <label class="check"><input type="checkbox" name="skill" value="C语言"> C语言</label>
+                      <label class="check"><input type="checkbox" name="skill" value="Python"> Python</label>
+                      <label class="check"><input type="checkbox" name="skill" value="Premiere/会声会影"> Premiere / 会声会影</label>
+                      <label class="check"><input type="checkbox" name="skill" value="Photoshop"> Photoshop</label>
+                      <label class="check"><input type="checkbox" name="skill" value="演讲答辩/文稿撰写"> 演讲答辩 / 文稿撰写</label>
+                      <label class="check check--other"><input type="checkbox" name="skill" value="其他"> 其他技能 <input type="text" class="check-other-input" name="skill_other" placeholder="请填写" aria-label="其他技能说明"></label>
+                    </div>
+                  </div>
+
+                  <div class="apply-form__grid">
+                    <div class="field field--wide">
+                      <label for="f-purpose">4 · 你想进入机械创新团队做些什么或学到什么？（进入团队的目的）</label>
+                      <textarea id="f-purpose" name="purpose" rows="2"></textarea>
+                    </div>
+                    <div class="field field--wide">
+                      <label for="f-plan">5 · 请简述你的大学规划，谈谈你的理想。</label>
+                      <textarea id="f-plan" name="plan" rows="2"></textarea>
+                    </div>
+                    <div class="field field--wide">
+                      <label for="f-portfolio">6 · 技能 / 科技小创意展示 <small>没有上述技能或不便展示，可展示你想到的科技小创意，最好配图文（可另附一张纸说明）</small></label>
+                      <textarea id="f-portfolio" name="portfolio" rows="2"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="form-submit">
+                    <p class="form-submit__hint">信息将暂存在<b>本机浏览器</b>中，便于你核对后再发送邮件。正式提交后即作废，不会上传。</p>
+                    <button class="btn-submit" type="submit">暂存并生成邮件摘要</button>
+                    <p class="form-submit__status" id="formStatus" role="status" aria-live="polite"></p>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <footer class="sheet__footer">
+              <span>机械创新团队 · 2026 秋季招新</span>
+              <span class="sheet__folio">P.05</span>
+            </footer>
+          </article>
+        </section>
+
+        <!-- ⑥ 加入我们 -->
+        <section class="holo__panel" data-panel="6" aria-label="06 · 加入我们">
+          <article class="sheet sheet--paper sheet--cta">
+            <header class="sheet__masthead">
+              <span class="sheet__masthead-id">06</span>
+              <h2 class="sheet__masthead-title">想加入我们？ <i>JOIN US</i></h2>
+              <span class="sheet__masthead-meta">THE FUTURE NEEDS YOU</span>
+            </header>
+
+            <div class="sheet__body sheet__body--cta">
+              <div class="cta__main">
+                <img class="cta__logo" src="assets/logo.png" alt="机械创新团队队标" width="120" height="120">
+                <h3 class="cta__slogan">下一个让全场惊呼的机器人，<br>或许就出自你的手。</h3>
+                <p class="cta__text">不管你从零开始还是已有基础，只要愿意学习、敢于动手，机创都留好了你的位置。</p>
+              </div>
+              <div class="cta__contacts">
+                <h4 class="cta__contacts-title">联系与关注</h4>
+                <ul class="cta__list">
+                  <li><span class="cta__tag">报名邮箱</span><a class="link" href="mailto:3607199098@qq.com">3607199098@qq.com</a></li>
+                  <li><span class="cta__tag">招新群</span><span data-placeholder="群号占位，进群关注群公告">QQ 群：XXXX（占位）</span></li>
+                  <li><span class="cta__tag">公众号</span><span data-placeholder="公众号名占位">公众号：XXXX（占位）</span></li>
+                </ul>
+                <div class="qr" aria-hidden="true">
+                  <svg viewBox="0 0 21 21" class="qr__svg">
+                    <rect x="1" y="1" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.4"/>
+                    <rect x="12" y="1" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.4"/>
+                    <rect x="1" y="12" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.4"/>
+                    <g fill="currentColor">
+                      <rect x="3" y="3" width="2" height="2"/><rect x="7" y="3" width="2" height="2"/><rect x="3" y="7" width="2" height="2"/><rect x="7" y="7" width="2" height="2"/>
+                      <rect x="14" y="3" width="2" height="2"/><rect x="18" y="3" width="2" height="2"/><rect x="14" y="7" width="2" height="2"/><rect x="18" y="7" width="2" height="2"/>
+                      <rect x="3" y="14" width="2" height="2"/><rect x="7" y="14" width="2" height="2"/><rect x="3" y="18" width="2" height="2"/><rect x="7" y="18" width="2" height="2"/>
+                      <rect x="14" y="14" width="2" height="2"/><rect x="18" y="14" width="2" height="2"/><rect x="12" y="12" width="2" height="2"/><rect x="16" y="18" width="2" height="2"/>
+                    </g>
+                  </svg>
+                  <span class="qr__label">扫码占位<br>进群看公告</span>
+                </div>
+              </div>
+            </div>
+
+            <footer class="sheet__footer sheet__footer--end">
+              <span>END OF EDITION · 期待你的加入</span>
+              <span class="sheet__folio">P.06</span>
+            </footer>
+          </article>
+        </section>
+
+      </div><!-- /holo__track -->
+    </section><!-- /holo -->
+
+    <!-- ============ 全息轨道导航 ============ -->
+    <nav class="holo__rail" aria-label="版面导航">
+      <button class="holo__rail-btn" id="prevBtn" type="button" aria-label="上一版面">‹</button>
+      <div class="holo__rail-chips" id="railChips" role="tablist" aria-label="版面跳转">
+        <button class="chip is-active" type="button" role="tab" aria-selected="true" data-go="1">01</button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="2">02</button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="3">03</button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="4">04</button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="5">05</button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="6">06</button>
+      </div>
+      <button class="holo__rail-btn" id="nextBtn" type="button" aria-label="下一版面">›</button>
     </nav>
 
-    <p class="book-foot">设计：虚拟报纸样式 · 科技感配色取自队标青 <code>#176388</code> · 占位文案可在 <code>index.html</code> 中直接替换</p>
+    <p class="book-foot">设计：全息虚拟报纸 · 配色取自队标青 <code>#176388</code> · 占位文案可在 <code>index.html</code> 中直接替换</p>
   </main>
 
   <script src="js/book.js"></script>

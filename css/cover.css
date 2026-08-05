@@ -1,23 +1,21 @@
 /* ============================================================
-   机创日报 CYBER 2026 · cover.css  v2（青色全息屏）
-   封面 + 后封面
+   机创日报 CYBER 2026 · cover.css  v3（浅色全息封面）
+   封面与全站统一冷浅色，靠光效与队标出层次
    ============================================================ */
 
-.sheet--cover,
-.sheet--backcover {
+.sheet--cover {
   position: relative;
   height: 100%;
-  color: #eafcff;
+  color: var(--title);
   background:
-    radial-gradient(120% 100% at 50% 0%, rgba(255, 255, 255, 0.10), transparent 55%),
-    radial-gradient(80% 55% at 82% 18%, rgba(111, 215, 232, 0.35), transparent 62%),
-    linear-gradient(140deg, #08384a 0%, #0c6479 46%, #1296aa 100%);
+    radial-gradient(90% 70% at 50% 0%, rgba(111, 215, 232, 0.28), transparent 55%),
+    radial-gradient(70% 55% at 90% 90%, rgba(162, 180, 212, 0.25), transparent 60%),
+    linear-gradient(165deg, #ffffff 0%, #f3fbfe 55%, #e7f4fb 100%);
   overflow: hidden;
 }
 
 /* —— 封面背景层 —— */
-.cover__bg,
-.backcover__bg {
+.cover__bg {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -26,8 +24,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(160, 235, 244, 0.10) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(160, 235, 244, 0.10) 1px, transparent 1px);
+    linear-gradient(rgba(23, 99, 136, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 99, 136, 0.09) 1px, transparent 1px);
   background-size: 38px 38px;
   -webkit-mask-image: radial-gradient(130% 95% at 50% 34%, #000 32%, transparent 88%);
   mask-image: radial-gradient(130% 95% at 50% 34%, #000 32%, transparent 88%);
@@ -35,21 +33,20 @@
 .cover__radial {
   position: absolute;
   inset: 0;
-  background: radial-gradient(62% 52% at 50% 44%, rgba(34, 179, 200, 0.38), transparent 72%);
+  background: radial-gradient(60% 50% at 50% 44%, rgba(34, 179, 200, 0.22), transparent 72%);
 }
 .cover__scan {
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
     0deg,
-    rgba(255, 255, 255, 0.03) 0 1px,
+    rgba(23, 99, 136, 0.025) 0 1px,
     transparent 1px 4px
   );
-  mix-blend-mode: overlay;
 }
 
-/* 齿轮 / 电路装饰 */
-.deco { position: absolute; color: #a8e8f2; opacity: 0.5; }
+/* 齿轮 / 电路装饰（浅底用深青） */
+.deco { position: absolute; color: var(--ink); opacity: 0.4; }
 .deco--gear-lg {
   width: 118px;
   top: 5%;
@@ -60,23 +57,23 @@
   width: 74px;
   bottom: 11%;
   right: 5%;
-  opacity: 0.4;
+  opacity: 0.35;
   animation: spin 18s linear infinite reverse;
 }
 .deco--circuit {
   width: 170px;
   bottom: 3.5%;
   left: 6%;
-  opacity: 0.35;
+  opacity: 0.3;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* —— HUD 状态条 —— */
 .cover__status {
   position: absolute;
-  top: 14px;
-  left: 22px;
-  right: 22px;
+  top: 16px;
+  left: 26px;
+  right: 26px;
   z-index: 3;
   display: flex;
   align-items: center;
@@ -84,14 +81,15 @@
   font-family: var(--font-en);
   font-size: 8px;
   letter-spacing: 2.5px;
-  color: rgba(180, 235, 244, 0.85);
+  color: var(--ink);
+  opacity: 0.8;
 }
 .cover__status .dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #7dffb8;
-  box-shadow: 0 0 8px #7dffb8;
+  background: #16a86a;
+  box-shadow: 0 0 8px #16a86a;
   animation: blink 2s ease-in-out infinite;
 }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
@@ -106,25 +104,25 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 20px 34px 84px;
+  padding: 20px 34px 78px;
 }
 
 .cover__est {
   font-family: var(--font-en);
   font-size: 8px;
   letter-spacing: 2.4px;
-  color: rgba(180, 235, 244, 0.85);
+  color: var(--mist);
   margin-bottom: 12px;
 }
 
 .cover__masthead { line-height: 1.1; }
 .cover__masthead-cn {
   display: block;
-  font-size: clamp(34px, 4.4vw, 44px);
+  font-size: clamp(34px, 4.4vw, 46px);
   font-weight: 900;
   letter-spacing: 10px;
-  color: #f6feff;
-  text-shadow: 0 0 24px rgba(111, 215, 232, 0.7);
+  color: var(--title);
+  text-shadow: 0 0 26px rgba(34, 179, 200, 0.45);
 }
 .cover__masthead-en {
   display: block;
@@ -132,7 +130,7 @@
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 5.5px;
-  color: #9fe6f2;
+  color: var(--ink);
   margin-top: 7px;
 }
 
@@ -142,22 +140,22 @@
   gap: 14px;
   margin: 13px 0 14px;
   width: min(78%, 340px);
-  color: #9fe6f2;
+  color: var(--ink);
 }
 .cover__rule::before,
 .cover__rule::after {
   content: "";
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(159, 230, 242, 0.7), transparent);
+  background: linear-gradient(90deg, transparent, rgba(23, 99, 136, 0.55), transparent);
 }
 .cover__rule-gem { font-size: 9px; }
 
 /* —— 队标 + 全息光环 —— */
 .cover__logo-wrap {
   position: relative;
-  width: 212px;
-  height: 212px;
+  width: 210px;
+  height: 210px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,8 +167,8 @@
   width: 168px;
   height: 168px;
   filter:
-    drop-shadow(0 0 16px rgba(111, 215, 232, 0.8))
-    drop-shadow(0 0 38px rgba(34, 179, 200, 0.55));
+    drop-shadow(0 0 14px rgba(34, 179, 200, 0.7))
+    drop-shadow(0 0 34px rgba(34, 179, 200, 0.4));
 }
 .cover__ring {
   position: absolute;
@@ -180,18 +178,18 @@
   pointer-events: none;
 }
 .cover__ring--1 {
-  width: 208px;
-  height: 208px;
-  margin: -104px 0 0 -104px;
-  border: 1px dashed rgba(159, 230, 242, 0.55);
+  width: 206px;
+  height: 206px;
+  margin: -103px 0 0 -103px;
+  border: 1px dashed rgba(23, 99, 136, 0.5);
   animation: spin 22s linear infinite;
 }
 .cover__ring--2 {
-  width: 150px;
-  height: 150px;
-  margin: -75px 0 0 -75px;
-  border: 1px solid rgba(159, 230, 242, 0.4);
-  border-top-color: #bff0f8;
+  width: 148px;
+  height: 148px;
+  margin: -74px 0 0 -74px;
+  border: 1px solid rgba(23, 99, 136, 0.35);
+  border-top-color: var(--cyan);
   animation: spin 14s linear infinite reverse;
 }
 .cover__beam {
@@ -201,8 +199,8 @@
   height: 2px;
   top: 0;
   z-index: 3;
-  background: linear-gradient(90deg, transparent, rgba(190, 244, 252, 0.95), transparent);
-  box-shadow: 0 0 14px 3px rgba(111, 215, 232, 0.6);
+  background: linear-gradient(90deg, transparent, rgba(34, 179, 200, 0.95), transparent);
+  box-shadow: 0 0 12px 3px rgba(34, 179, 200, 0.5);
   animation: beam-sweep 5.2s ease-in-out infinite;
   pointer-events: none;
 }
@@ -217,24 +215,24 @@
   font-family: var(--font-en);
   font-size: 9px;
   letter-spacing: 3px;
-  color: #9fe6f2;
+  color: var(--ink);
   margin-bottom: 11px;
 }
 .cover__headline {
-  font-size: clamp(19px, 2.5vw, 26px);
+  font-size: clamp(19px, 2.5vw, 27px);
   font-weight: 800;
   line-height: 1.5;
-  color: #f3feff;
+  color: var(--title);
 }
 .cover__headline em {
   font-style: normal;
-  color: #a8f0f8;
-  text-shadow: 0 0 18px rgba(111, 215, 232, 0.8);
+  color: var(--ink);
+  text-shadow: 0 0 16px rgba(34, 179, 200, 0.5);
 }
 .cover__sub {
   font-size: 12px;
   line-height: 1.8;
-  color: rgba(200, 242, 248, 0.9);
+  color: var(--mist);
   max-width: 40ch;
   margin-top: 11px;
 }
@@ -242,14 +240,14 @@
 .cover__meta {
   display: flex;
   gap: 22px;
-  margin-top: 16px;
+  margin-top: 15px;
   padding: 8px 0;
-  border-top: 1px solid rgba(159, 230, 242, 0.35);
-  border-bottom: 1px solid rgba(159, 230, 242, 0.35);
+  border-top: 1px solid var(--holo-line);
+  border-bottom: 1px solid var(--holo-line);
   font-family: var(--font-en);
   font-size: 8px;
   letter-spacing: 1.6px;
-  color: rgba(180, 235, 244, 0.9);
+  color: var(--ink);
 }
 
 /* —— 漂浮数据芯片 —— */
@@ -259,11 +257,11 @@
   font-family: var(--font-en);
   font-size: 7.5px;
   letter-spacing: 1.5px;
-  color: rgba(190, 242, 250, 0.75);
-  border: 1px solid rgba(159, 230, 242, 0.4);
+  color: var(--ink);
+  border: 1px solid var(--holo-border);
   border-radius: 999px;
   padding: 3px 9px;
-  background: rgba(8, 56, 74, 0.35);
+  background: rgba(255, 255, 255, 0.65);
   animation: chip-float 7s ease-in-out infinite;
 }
 .cover__chip--a { top: 27%; left: 6%; }
@@ -293,19 +291,18 @@
   gap: 12px;
   padding: 11px 26px;
   border-radius: 999px;
-  border: 1px solid rgba(190, 244, 252, 0.75);
-  background: rgba(255, 255, 255, 0.12);
-  color: #f4feff;
+  border: none;
+  background: linear-gradient(90deg, var(--ink), var(--ink-deep));
+  color: #fff;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 3px;
   cursor: pointer;
-  backdrop-filter: blur(4px);
-  transition: box-shadow 0.25s, background 0.25s, transform 0.15s;
+  box-shadow: 0 6px 18px rgba(23, 99, 136, 0.35);
+  transition: box-shadow 0.25s, transform 0.15s;
 }
 .cover__cta:hover {
-  background: rgba(255, 255, 255, 0.22);
-  box-shadow: 0 0 28px rgba(111, 215, 232, 0.6), inset 0 0 14px rgba(159, 230, 242, 0.25);
+  box-shadow: 0 8px 26px rgba(34, 179, 200, 0.55), inset 0 0 12px rgba(111, 215, 232, 0.3);
   transform: translateY(-1px);
 }
 .cover__cta-arrow { font-size: 16px; }
@@ -316,67 +313,12 @@
 }
 .cover__hint {
   font-size: 11px;
-  color: rgba(200, 242, 248, 0.75);
+  color: var(--mist);
   letter-spacing: 1px;
 }
 
-/* ============================================================
-   后封面（浅青全息屏收尾）
-   ============================================================ */
-.sheet--backcover {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background:
-    radial-gradient(120% 100% at 50% 0%, rgba(255, 255, 255, 0.10), transparent 55%),
-    linear-gradient(140deg, #0a4c61 0%, #0e7a92 50%, #12a0b3 100%);
-}
-.backcover__content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  padding: 30px;
-}
-.backcover__logo {
-  width: 150px;
-  height: 150px;
-  filter:
-    drop-shadow(0 0 16px rgba(111, 215, 232, 0.8))
-    drop-shadow(0 0 38px rgba(34, 179, 200, 0.55));
-}
-.backcover__edition {
-  font-family: var(--font-en);
-  font-size: 9px;
-  letter-spacing: 3px;
-  color: rgba(200, 242, 248, 0.85);
-}
-.backcover__end {
-  font-family: var(--font-en);
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: 8px;
-  color: #c8f4fa;
-  text-shadow: 0 0 20px rgba(111, 215, 232, 0.7);
-}
-.backcover__line {
-  font-size: 15px;
-  letter-spacing: 6px;
-  color: #f3feff;
-}
-.backcover__sub {
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: rgba(200, 242, 248, 0.85);
-}
-
-/* 移动端纵向排版 */
-@media (max-width: 899px) {
-  .sheet--cover { height: auto; min-height: 86vh; }
-  .sheet--backcover { height: auto; min-height: 66vh; }
-  .cover__footer { position: relative; padding: 8px 0 24px; }
-  .cover__content { padding: 30px 24px 28px; }
+/* 移动端 */
+@media (max-width: 767px) {
+  .cover__content { padding: 26px 22px 26px; }
+  .cover__footer { position: relative; padding: 8px 0 22px; }
 }

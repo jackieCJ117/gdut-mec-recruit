@@ -1,7 +1,7 @@
 /* ============================================================
-   机创日报 CYBER 2026 · base.css  v2（浅色全息风）
-   设计 tokens + 全局 + 书刊 3D 底座 + 响应式
-   配色母题：队标青 #176388，冷调浅色全息
+   机创日报 CYBER 2026 · base.css  v3（全息横滑大屏）
+   设计 tokens + 全局 + 横滑布局 + 全息轨道导航
+   配色母题：队标青 #176388，冷调浅色全息，全站统一
    ============================================================ */
 
 :root {
@@ -10,25 +10,23 @@
   --ink-deep: #0f4a66;
   --cyan: #22b3c8;           /* 全息高亮 */
   --cyan-soft: #6fd7e8;
-  --mist: #5f7d95;           /* 次级文字（浅底用） */
-  --holo-border: rgba(23, 99, 136, 0.30);
+  --mist: #5f7d95;           /* 次级文字 */
+  --holo-border: rgba(23, 99, 136, 0.32);
   --holo-line: rgba(23, 99, 136, 0.14);
 
-  --paper: #f4f9fd;          /* 页面：冷白偏蓝（与背景同色温） */
+  --paper: #f4f9fd;
   --paper-hi: #fbfdff;
   --paper-lo: #e5f0f8;
-  --text: #16333f;           /* 正文：深青墨色 */
+  --text: #16333f;           /* 正文深青墨 */
   --title: #0c2a38;
 
-  /* —— 字体 —— */
   --font-en: "Orbitron", "Consolas", "Courier New", monospace;
   --font-cn: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Hiragino Sans GB", sans-serif;
 
-  /* —— 书刊尺寸（随视口高度放大，填满屏幕） —— */
-  --page-h: min(calc(100vh - 172px), 920px);
-  --page-w: min(calc(var(--page-h) / 1.34), 660px);
-  --dur-flip: 0.9s;
-  --ease-flip: cubic-bezier(0.42, 0.12, 0.22, 1);
+  /* 面板高度预算：100vh - (顶栏+轨道+页脚+留白) */
+  --panel-h: calc(100vh - 176px);
+  --dur-slide: 0.7s;
+  --ease-slide: cubic-bezier(0.42, 0.12, 0.22, 1);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -142,7 +140,7 @@ body {
 }
 
 /* ============================================================
-   外层报头条（浅色全息）
+   外层布局
    ============================================================ */
 .book-wrap {
   position: relative;
@@ -151,32 +149,23 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 22px 22px;
+  padding: 10px 18px 18px;
 }
 
 .topbar {
   width: 100%;
-  max-width: 1380px;
+  max-width: 1500px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 6px 4px 10px;
+  padding: 4px 6px 8px;
   border-bottom: 1px solid rgba(23, 99, 136, 0.25);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 .topbar__brand { display: flex; align-items: center; gap: 10px; }
-.topbar__logo {
-  width: 32px;
-  height: 32px;
-  filter: drop-shadow(0 0 6px rgba(34, 179, 200, 0.6));
-}
-.topbar__title {
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: var(--title);
-}
+.topbar__logo { width: 30px; height: 30px; filter: drop-shadow(0 0 6px rgba(34, 179, 200, 0.6)); }
+.topbar__title { font-size: 14px; font-weight: 800; letter-spacing: 2px; color: var(--title); }
 .topbar__title i {
   font-family: var(--font-en);
   font-style: normal;
@@ -186,13 +175,8 @@ body {
   margin-left: 8px;
   font-weight: 500;
 }
-.topbar__meta { display: flex; gap: 16px; align-items: center; }
-.topbar__edition {
-  font-family: var(--font-en);
-  font-size: 9px;
-  letter-spacing: 2px;
-  color: var(--ink);
-}
+.topbar__meta { display: flex; gap: 14px; align-items: center; }
+.topbar__edition { font-family: var(--font-en); font-size: 9px; letter-spacing: 2px; color: var(--ink); }
 .topbar__edition--cn { font-family: var(--font-cn); color: var(--mist); }
 .topbar__live {
   display: inline-flex;
@@ -219,54 +203,45 @@ body {
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
 /* ============================================================
-   书刊容器 & 3D 翻页基座（全息显示面板）
+   全息横滑大屏
    ============================================================ */
-.book { perspective: 2800px; }
-
-.book__stage {
-  position: relative;
-  width: calc(var(--page-w) * 2);
-  height: var(--page-h);
-  filter: drop-shadow(0 22px 55px rgba(23, 99, 136, 0.22));
-}
-
-.leaf {
-  position: absolute;
-  top: 0;
-  left: var(--page-w);
-  width: var(--page-w);
-  height: var(--page-h);
-  transform-style: preserve-3d;
-  transform-origin: left center;
-  transition: transform var(--dur-flip) var(--ease-flip);
-}
-.leaf__face {
-  position: absolute;
-  inset: 0;
-  border-radius: 8px;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+.holo {
+  width: 100%;
+  max-width: 1500px;
   overflow: hidden;
+  touch-action: pan-y; /* 纵向滚动交给浏览器，横向拖拽交给 JS */
 }
-.leaf__face--back { transform: rotateY(180deg); }
+.holo__track {
+  display: flex;
+  transition: transform var(--dur-slide) var(--ease-slide);
+  will-change: transform;
+}
 
-/* 纸页书脊侧微阴影 */
-.leaf__face--front::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(15, 74, 102, 0.10), transparent 20%);
-  pointer-events: none;
+.holo__panel {
+  flex: 0 0 100%;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px clamp(12px, 3.5vw, 44px) 6px;
 }
-.leaf__face--back::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(270deg, rgba(15, 74, 102, 0.10), transparent 20%);
-  pointer-events: none;
+
+/* 每个版面的「全息屏」 */
+.holo__panel > .sheet {
+  position: relative;
+  width: 100%;
+  max-width: 1180px;
+  height: var(--panel-h);
+  min-height: 520px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 20px 55px rgba(23, 99, 136, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
 }
-/* 全息光斑掠过 */
-.leaf__face--front::before {
+
+/* 全息光斑掠过整块屏幕 */
+.holo__panel::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -282,71 +257,57 @@ body {
   80%, 100% { background-position: -30% -30%; }
 }
 
-/* 已翻到左侧的纸页：以书脊为轴旋转到位 */
-.leaf--flipped { transform: rotateY(-180deg); }
-/* 动画进行中的纸页置于最上（压过 JS 内联 z-index） */
-.leaf--turning { z-index: 99 !important; pointer-events: none; }
-.leaf--turning .leaf__face--front { box-shadow: -10px 0 22px rgba(15, 74, 102, 0.28); }
-
-/* 书页侧边堆叠厚度装饰 */
-.book__edge {
-  position: absolute;
-  top: 2px;
-  bottom: 2px;
-  width: 6px;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(23, 99, 136, 0.14) 0 1px,
-    rgba(255, 255, 255, 0.9) 1px 2px
-  );
-  border-radius: 2px;
-}
-.book__edge--left { left: -4px; }
-.book__edge--right { right: -4px; }
-
 /* ============================================================
-   翻页控件（浅色）
+   全息轨道导航
    ============================================================ */
-.book-nav {
+.holo__rail {
   display: flex;
   align-items: center;
-  gap: 18px;
-  margin-top: 18px;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 10px;
 }
-.book-nav__btn {
-  width: 46px;
-  height: 46px;
+.holo__rail-btn {
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   border: 1px solid rgba(23, 99, 136, 0.45);
   background: rgba(255, 255, 255, 0.6);
   color: var(--ink);
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1;
   cursor: pointer;
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
 }
-.book-nav__btn:hover {
+.holo__rail-btn:hover {
   background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 0 18px rgba(34, 179, 200, 0.45);
+  box-shadow: 0 0 16px rgba(34, 179, 200, 0.45);
   transform: translateY(-1px);
 }
-.book-nav__btn:disabled {
-  opacity: 0.3;
-  cursor: default;
-  transform: none;
-  box-shadow: none;
-}
-.book-nav__status {
+.holo__rail-btn:disabled { opacity: 0.3; cursor: default; transform: none; box-shadow: none; }
+.holo__rail-chips { display: flex; gap: 8px; }
+.chip {
   font-family: var(--font-en);
-  font-size: 12px;
-  letter-spacing: 3px;
-  color: var(--mist);
-  min-width: 150px;
-  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--ink);
+  border: 1px solid var(--holo-border);
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.chip:hover { background: rgba(255, 255, 255, 0.95); }
+.chip.is-active {
+  background: var(--ink);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(23, 99, 136, 0.5);
 }
 
 .book-foot {
-  margin-top: 10px;
+  margin-top: 8px;
   font-size: 11px;
   color: var(--mist);
   letter-spacing: 0.5px;
@@ -364,43 +325,20 @@ body {
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
-  .leaf { transition-duration: 0.01ms; }
+  .holo__track { transition-duration: 0.01ms; }
 }
 
 /* ============================================================
-   响应式：<900px 降级为纵向报纸
+   移动端
    ============================================================ */
-@media (max-width: 899px) {
-  .book-wrap { padding: 8px 12px 28px; }
-
-  .book__stage {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 26px;
-    align-items: stretch;
-    filter: none;
-  }
-  .leaf {
-    position: static;
-    width: 100%;
-    height: auto;
-    transform: none;
-    transform-style: flat;
-  }
-  .leaf--flipped { transform: none; }
-  .leaf--turning { z-index: auto; }
-  .leaf__face {
-    position: static;
-    overflow: visible;
-    border-radius: 6px;
-  }
-  .leaf__face--back { transform: none; }
-  .book__edge { display: none; }
-  .book-nav { display: none; }
-
+@media (max-width: 767px) {
+  .book-wrap { padding: 8px 10px 14px; }
+  :root { --panel-h: calc(100vh - 190px); }
   .topbar__edition--cn { display: none; }
   .topbar__title i { display: none; }
+  .topbar__edition { font-size: 8px; }
   .holo-bg__aurora--3 { display: none; }
+  .holo__panel > .sheet { min-height: 480px; }
+  .holo__rail { gap: 8px; }
+  .chip { padding: 5px 10px; font-size: 10px; }
 }
