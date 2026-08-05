@@ -1,0 +1,303 @@
+/* ============================================================
+   机创日报 CYBER 2026 · cover.css
+   封面（深黑霓虹）+ 后封面
+   ============================================================ */
+
+.sheet--cover,
+.sheet--backcover {
+  position: relative;
+  height: 100%;
+  color: #cfe6f0;
+  background:
+    radial-gradient(120% 90% at 50% 0%, var(--space-2) 0%, #060a10 62%);
+  overflow: hidden;
+}
+
+/* —— 封面背景层 —— */
+.cover__bg,
+.backcover__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.cover__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(53, 199, 216, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(53, 199, 216, 0.08) 1px, transparent 1px);
+  background-size: 36px 36px;
+  -webkit-mask-image: radial-gradient(130% 95% at 50% 30%, #000 35%, transparent 88%);
+  mask-image: radial-gradient(130% 95% at 50% 30%, #000 35%, transparent 88%);
+}
+.cover__radial {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(62% 52% at 50% 44%, rgba(23, 99, 136, 0.4), transparent 72%);
+}
+.cover__scan {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.025) 0 1px,
+    transparent 1px 4px
+  );
+  mix-blend-mode: overlay;
+}
+
+/* 齿轮 / 电路装饰 */
+.deco { position: absolute; color: var(--mist); opacity: 0.45; }
+.deco--gear-lg {
+  width: 118px;
+  top: 4.5%;
+  left: 4%;
+  animation: spin 26s linear infinite;
+}
+.deco--gear-sm {
+  width: 74px;
+  bottom: 11%;
+  right: 5%;
+  color: var(--cyan);
+  opacity: 0.35;
+  animation: spin 18s linear infinite reverse;
+}
+.deco--circuit {
+  width: 170px;
+  bottom: 3.5%;
+  left: 6%;
+  color: var(--cyan);
+  opacity: 0.3;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* —— 封面内容 —— */
+.cover__content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 18px 34px 84px;
+}
+
+.cover__est {
+  font-family: var(--font-en);
+  font-size: 8px;
+  letter-spacing: 2.4px;
+  color: var(--mist);
+  opacity: 0.85;
+  margin-bottom: 14px;
+}
+
+.cover__masthead { line-height: 1.1; }
+.cover__masthead-cn {
+  display: block;
+  font-size: clamp(34px, 4.4vw, 44px);
+  font-weight: 900;
+  letter-spacing: 10px;
+  color: #f2fbff;
+  text-shadow: 0 0 22px rgba(53, 199, 216, 0.55);
+}
+.cover__masthead-en {
+  display: block;
+  font-family: var(--font-en);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 5.5px;
+  color: var(--cyan);
+  margin-top: 7px;
+}
+
+.cover__rule {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 14px 0 16px;
+  width: min(78%, 340px);
+  color: var(--cyan);
+}
+.cover__rule::before,
+.cover__rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(53, 199, 216, 0.6), transparent);
+}
+.cover__rule-gem { font-size: 9px; }
+
+.cover__logo-wrap {
+  position: relative;
+  margin-bottom: 18px;
+}
+.cover__logo {
+  display: block;
+  width: 168px;
+  height: 168px;
+  filter:
+    drop-shadow(0 0 14px rgba(53, 199, 216, 0.55))
+    drop-shadow(0 0 34px rgba(23, 99, 136, 0.5));
+}
+.cover__beam {
+  position: absolute;
+  left: -14%;
+  right: -14%;
+  height: 2px;
+  top: 0;
+  background: linear-gradient(90deg, transparent, rgba(53, 199, 216, 0.9), transparent);
+  box-shadow: 0 0 12px 2px rgba(53, 199, 216, 0.55);
+  animation: beam-sweep 5.2s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes beam-sweep {
+  0%, 12% { top: -4%; opacity: 0; }
+  16%, 46% { opacity: 1; }
+  50%, 62% { top: 104%; opacity: 0; }
+  66%, 100% { opacity: 0; }
+}
+
+.cover__kicker {
+  font-family: var(--font-en);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--cyan-soft);
+  margin-bottom: 12px;
+}
+.cover__headline {
+  font-size: clamp(19px, 2.5vw, 26px);
+  font-weight: 800;
+  line-height: 1.5;
+  color: #eef9fd;
+}
+.cover__headline em {
+  font-style: normal;
+  color: var(--cyan);
+  text-shadow: 0 0 16px rgba(53, 199, 216, 0.7);
+}
+.cover__sub {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--mist);
+  max-width: 40ch;
+  margin-top: 12px;
+}
+
+.cover__meta {
+  display: flex;
+  gap: 22px;
+  margin-top: 18px;
+  padding: 9px 0;
+  border-top: 1px solid rgba(53, 199, 216, 0.22);
+  border-bottom: 1px solid rgba(53, 199, 216, 0.22);
+  font-family: var(--font-en);
+  font-size: 8px;
+  letter-spacing: 1.6px;
+  color: var(--mist);
+}
+
+/* —— 封面底栏 —— */
+.cover__footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 0 20px;
+}
+.cover__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(53, 199, 216, 0.65);
+  background: rgba(23, 99, 136, 0.22);
+  color: #eaf9ff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: box-shadow 0.25s, background 0.25s, transform 0.15s;
+}
+.cover__cta:hover {
+  background: rgba(53, 199, 216, 0.2);
+  box-shadow: 0 0 26px rgba(53, 199, 216, 0.5), inset 0 0 14px rgba(53, 199, 216, 0.18);
+  transform: translateY(-1px);
+}
+.cover__cta-arrow { font-size: 16px; }
+.cover__cta:hover .cover__cta-arrow { animation: nudge 0.9s ease-in-out infinite; }
+@keyframes nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+.cover__hint {
+  font-size: 11px;
+  color: rgba(162, 180, 212, 0.65);
+  letter-spacing: 1px;
+}
+
+/* ============================================================
+   后封面
+   ============================================================ */
+.sheet--backcover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.backcover__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 30px;
+}
+.backcover__logo {
+  width: 150px;
+  height: 150px;
+  filter:
+    drop-shadow(0 0 14px rgba(53, 199, 216, 0.55))
+    drop-shadow(0 0 34px rgba(23, 99, 136, 0.5));
+}
+.backcover__edition {
+  font-family: var(--font-en);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--mist);
+}
+.backcover__end {
+  font-family: var(--font-en);
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 8px;
+  color: var(--cyan);
+  text-shadow: 0 0 18px rgba(53, 199, 216, 0.6);
+}
+.backcover__line {
+  font-size: 15px;
+  letter-spacing: 6px;
+  color: #eef9fd;
+}
+.backcover__sub {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--mist);
+  opacity: 0.8;
+}
+
+/* 移动端纵向排版时封面高度自适应 */
+@media (max-width: 899px) {
+  .sheet--cover { height: auto; min-height: 88vh; }
+  .sheet--backcover { height: auto; min-height: 70vh; }
+  .cover__footer { position: relative; padding: 8px 0 26px; }
+  .cover__content { padding: 30px 26px 30px; }
+}

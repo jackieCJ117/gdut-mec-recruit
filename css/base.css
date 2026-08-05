@@ -1,0 +1,282 @@
+/* ============================================================
+   机创日报 CYBER 2026 · base.css
+   设计 tokens + 全局 + 书刊 3D 底座 + 响应式
+   配色母题：队标青 #176388
+   ============================================================ */
+
+:root {
+  /* —— 队标衍生色板 —— */
+  --ink: #176388;            /* 队标主青 */
+  --ink-deep: #0f4a66;
+  --cyan: #35c7d8;           /* 霓虹高亮 */
+  --cyan-soft: #2ad4d4;
+  --mist: #a2b4d4;           /* 浅蓝灰（队标辅色） */
+  --space-1: #0a0f16;        /* 深空黑 */
+  --space-2: #0d1420;
+  --paper: #f4f1ea;          /* 报纸纸面（带暖意） */
+  --paper-hi: #faf8f1;
+  --paper-lo: #eae6db;
+  --text: #232a33;           /* 内页正文 */
+  --title: #0f1b26;          /* 内页标题 */
+  --line: rgba(23, 99, 136, 0.20);
+  --line-soft: rgba(23, 99, 136, 0.10);
+
+  /* —— 字体 —— */
+  --font-en: "Orbitron", "Consolas", "Courier New", monospace;
+  --font-cn: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Hiragino Sans GB", sans-serif;
+
+  /* —— 书刊尺寸 —— */
+  --page-w: clamp(360px, 40vw, 500px);
+  --page-h: calc(var(--page-w) * 1.38);
+  --dur-flip: 0.9s;
+  --ease-flip: cubic-bezier(0.42, 0.12, 0.22, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-cn);
+  color: #cfe0ea;
+  background:
+    radial-gradient(90% 60% at 50% 0%, rgba(23, 99, 136, 0.18), transparent 60%),
+    radial-gradient(70% 50% at 85% 100%, rgba(23, 99, 136, 0.10), transparent 60%),
+    linear-gradient(180deg, var(--space-1), #070b12 70%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* —— 无障碍 —— */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--cyan);
+  color: #04131a;
+  padding: 8px 14px;
+  z-index: 200;
+  font-weight: 700;
+  border-radius: 0 0 6px 0;
+}
+.skip-link:focus { left: 0; }
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   外层报头条
+   ============================================================ */
+.book-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 16px 40px;
+}
+
+.topbar {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 6px 12px;
+  border-bottom: 1px solid rgba(53, 199, 216, 0.22);
+  margin-bottom: 18px;
+}
+.topbar__brand { display: flex; align-items: center; gap: 10px; }
+.topbar__logo { width: 34px; height: 34px; filter: drop-shadow(0 0 6px rgba(53, 199, 216, 0.5)); }
+.topbar__title { font-size: 15px; font-weight: 800; letter-spacing: 2px; color: #eaf6fb; }
+.topbar__title i {
+  font-family: var(--font-en);
+  font-style: normal;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--cyan);
+  margin-left: 8px;
+  font-weight: 500;
+}
+.topbar__meta { display: flex; gap: 16px; align-items: center; }
+.topbar__edition {
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--mist);
+}
+.topbar__edition--cn { font-family: var(--font-cn); color: rgba(162, 180, 212, 0.7); }
+
+/* ============================================================
+   书刊容器 & 3D 翻页基座
+   ============================================================ */
+.book { perspective: 2800px; }
+
+.book__stage {
+  position: relative;
+  width: calc(var(--page-w) * 2);
+  height: var(--page-h);
+}
+
+.leaf {
+  position: absolute;
+  top: 0;
+  left: var(--page-w);
+  width: var(--page-w);
+  height: var(--page-h);
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform var(--dur-flip) var(--ease-flip);
+}
+.leaf__face {
+  position: absolute;
+  inset: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+.leaf__face--back { transform: rotateY(180deg); }
+
+/* 纸页书脊侧微阴影，增强纸张厚度感 */
+.leaf__face--front::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.09), transparent 20%);
+  pointer-events: none;
+}
+.leaf__face--back::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0.09), transparent 20%);
+  pointer-events: none;
+}
+
+/* 已翻到左侧的纸页：以书脊为轴旋转到位 */
+.leaf--flipped { transform: rotateY(-180deg); }
+/* 动画进行中的纸页置于最上（压过 JS 内联 z-index） */
+.leaf--turning { z-index: 99 !important; pointer-events: none; }
+.leaf--turning .leaf__face--front { box-shadow: -10px 0 22px rgba(0, 0, 0, 0.28); }
+
+/* 书页侧边堆叠厚度装饰 */
+.book__edge {
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  width: 7px;
+  background: repeating-linear-gradient(
+    0deg,
+    var(--paper-lo) 0 1px,
+    var(--paper-hi) 1px 2px
+  );
+  border-radius: 2px;
+  opacity: 0.85;
+}
+.book__edge--left { left: -5px; box-shadow: inset -1px 0 2px rgba(0, 0, 0, 0.25); }
+.book__edge--right { right: -5px; box-shadow: inset 1px 0 2px rgba(0, 0, 0, 0.25); }
+
+/* ============================================================
+   翻页控件
+   ============================================================ */
+.book-nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 26px;
+}
+.book-nav__btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(53, 199, 216, 0.45);
+  background: rgba(23, 99, 136, 0.12);
+  color: var(--cyan);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.book-nav__btn:hover {
+  background: rgba(53, 199, 216, 0.18);
+  box-shadow: 0 0 18px rgba(53, 199, 216, 0.35);
+  transform: translateY(-1px);
+}
+.book-nav__btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+.book-nav__status {
+  font-family: var(--font-en);
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--mist);
+  min-width: 150px;
+  text-align: center;
+}
+
+.book-foot {
+  margin-top: 14px;
+  font-size: 12px;
+  color: rgba(162, 180, 212, 0.55);
+  letter-spacing: 0.5px;
+}
+.book-foot code {
+  font-family: var(--font-en);
+  color: rgba(53, 199, 216, 0.75);
+  background: rgba(23, 99, 136, 0.15);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+/* ============================================================
+   动效偏好降级
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+  .leaf { transition-duration: 0.01ms; }
+}
+
+/* ============================================================
+   响应式：<900px 降级为纵向报纸
+   ============================================================ */
+@media (max-width: 899px) {
+  .book-wrap { padding: 10px 12px 32px; }
+
+  .book__stage {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    align-items: stretch;
+  }
+  .leaf {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: none;
+    transform-style: flat;
+  }
+  .leaf--flipped { transform: none; }
+  .leaf--turning { z-index: auto; }
+  .leaf__face { position: static; overflow: visible; }
+  .leaf__face--back { transform: none; }
+  .book__edge { display: none; }
+  .book-nav { display: none; }
+
+  .topbar__edition--cn { display: none; }
+  .topbar__title i { display: none; }
+}
+
+/* 桌面窄屏（900-1180px）微调书页宽度 */
+@media (min-width: 900px) and (max-width: 1180px) {
+  :root { --page-w: clamp(360px, 40vw, 460px); }
+}
