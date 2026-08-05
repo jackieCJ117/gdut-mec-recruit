@@ -9,8 +9,8 @@
   var STORE_KEY = 'mec_application_2026';
   var CONTACT_EMAIL = '3607199098@qq.com';
 
-  var formA = document.getElementById('mec-form');     // 第 04 版：基础信息 + 第1题
-  var formB = document.getElementById('mec-form-b');   // 第 05 版：第2-6题 + 提交
+  var formA = document.getElementById('mec-form');     // 报名版：基础信息 + 第1题
+  var formB = document.getElementById('mec-form-b');   // 报名版：第2-6题 + 提交
   var statusEl = document.getElementById('formStatus');
 
   function qs(sel, root) { return (root || document).querySelector(sel); }
@@ -110,7 +110,7 @@
     if (errs.length) {
       if (statusEl) {
         statusEl.className = 'form-submit__status err';
-        statusEl.textContent = '请补充：' + errs.join('、') + '（基础信息在第 04 版，请翻回填写）';
+        statusEl.textContent = '请补充：' + errs.join('、') + '（请在本版上方表单内填写完整）';
       }
       return;
     }
@@ -133,6 +133,14 @@
           statusEl.textContent = '暂存失败：' + (err && err.message ? err.message : err);
         }
       });
+  });
+
+  /* —— 焦点滚动：输入聚焦时把字段滚入可视区（防 sticky 提交按钮遮挡/软键盘覆盖） —— */
+  document.addEventListener('focusin', function (e) {
+    var t = e.target;
+    if (t && typeof t.matches === 'function' && t.matches('input, textarea, select')) {
+      t.scrollIntoView({ block: 'nearest' });
+    }
   });
 
   /* —— 草稿自动保存（防丢失） —— */

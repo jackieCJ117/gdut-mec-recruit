@@ -13,6 +13,10 @@
   --mist: #5f7d95;           /* 次级文字 */
   --holo-border: rgba(23, 99, 136, 0.32);
   --holo-line: rgba(23, 99, 136, 0.14);
+  /* 边框/分隔线（此前从未定义，导致 paper.css 22 处引用全部失效：
+     时间轴竖线不可见、卡片描边丢失） */
+  --line: rgba(23, 99, 136, 0.18);
+  --line-soft: rgba(23, 99, 136, 0.11);
 
   --paper: #f4f9fd;
   --paper-hi: #fbfdff;
@@ -231,15 +235,18 @@ body {
 }
 .holo__panel.is-current { transform: scale(1); }
 
-/* 每个版面的「全息玻璃屏」 */
+/* 每个版面的「全息玻璃屏」。
+   注意：这里不再设 background 与 overflow——
+   此前 background: rgba(255,255,255,0.66) 特异性压死了 cover.css/paper.css
+   的装饰渐变（封面三层渐变、纸面竖纹全部不生效）；
+   overflow:hidden 则压死 paper.css 的 overflow-y:auto（内容被裁且无法滚动）。
+   现在背景/滚动行为由各 sheet 自身（cover.css / paper.css）声明。 */
 .holo__panel > .sheet {
   position: relative;
   width: 100%;
   height: var(--panel-h);
   min-height: 520px;
   border-radius: 16px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.66);
   -webkit-backdrop-filter: blur(16px) saturate(1.5);
   backdrop-filter: blur(16px) saturate(1.5);
   box-shadow:
@@ -247,17 +254,18 @@ body {
     inset 0 0 0 1px rgba(255, 255, 255, 0.6);
 }
 
-/* 全息光斑掠过整块屏幕 */
+/* 全息光斑掠过整块屏幕（透明度已压低，避免扫过内页文字时糊字；
+   z-index 层级重构见 holo.css 的 .sheet__sheen） */
 .holo__panel::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, 0.55) 46%, transparent 60%);
+  background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, 0.35) 46%, transparent 60%);
   background-size: 320% 320%;
-  opacity: 0.5;
-  animation: holo-sheen 9s ease-in-out infinite;
+  opacity: 0.16;
+  animation: holo-sheen 14s ease-in-out infinite;
 }
 @keyframes holo-sheen {
   0%, 55% { background-position: 130% 130%; }

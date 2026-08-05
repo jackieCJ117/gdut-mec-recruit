@@ -593,8 +593,18 @@
   margin-top: 2px;
 }
 
-/* 提交区 */
-.form-submit { display: flex; flex-direction: column; gap: 8px; }
+/* 提交区：sticky 固定在版面底部，长表单滚动时提交按钮常驻可视
+   （修复：桌面报名版内容超过面板高，按钮曾被裁出视口无法点击） */
+.form-submit {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: sticky;
+  bottom: 0;
+  z-index: 3;
+  padding: 10px 0 4px;
+  background: linear-gradient(180deg, transparent, rgba(244, 249, 253, 0.94) 30%);
+}
 .form-submit__hint {
   font-size: 9.5px;
   line-height: 1.55;
