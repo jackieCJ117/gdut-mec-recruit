@@ -1050,3 +1050,57 @@
   .holo-bar--grid { grid-template-columns: 1fr; }
   .blueprint { min-height: 180px; }
 }
+
+/* ============================================================
+   第三轮精修：关于页文字面板 + 加入屏队标放大
+   ============================================================ */
+/* 文字面板：HUD 角标 + 撑高，消除"字下面留空" */
+.about-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  height: 100%;
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel-hi);
+  box-shadow: inset 0 0 26px rgba(47, 196, 220, 0.06);
+}
+.about-panel::before,
+.about-panel::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+.about-panel::before {
+  top: 8px;
+  left: 8px;
+  border-top: 2px solid rgba(94, 200, 226, 0.6);
+  border-left: 2px solid rgba(94, 200, 226, 0.6);
+}
+.about-panel::after {
+  bottom: 8px;
+  right: 8px;
+  border-bottom: 2px solid rgba(94, 200, 226, 0.6);
+  border-right: 2px solid rgba(94, 200, 226, 0.6);
+}
+.about-panel .para {
+  font-size: 15px;
+  line-height: 1.95;
+  margin-bottom: 0;
+}
+.sheet__cols { gap: 12px; align-items: stretch; }
+
+/* 加入屏队标放大 + 发光 */
+.cta__logo {
+  width: 180px;
+  height: 180px;
+  filter:
+    drop-shadow(0 0 16px rgba(47, 196, 220, 0.75))
+    drop-shadow(0 0 40px rgba(47, 196, 220, 0.4));
+}
+.cta__slogan { font-size: 24px; }
