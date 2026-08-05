@@ -1,15 +1,17 @@
 /* ============================================================
-   机创日报 CYBER 2026 · cover.css
-   封面（深黑霓虹）+ 后封面
+   机创日报 CYBER 2026 · cover.css  v2（青色全息屏）
+   封面 + 后封面
    ============================================================ */
 
 .sheet--cover,
 .sheet--backcover {
   position: relative;
   height: 100%;
-  color: #cfe6f0;
+  color: #eafcff;
   background:
-    radial-gradient(120% 90% at 50% 0%, var(--space-2) 0%, #060a10 62%);
+    radial-gradient(120% 100% at 50% 0%, rgba(255, 255, 255, 0.10), transparent 55%),
+    radial-gradient(80% 55% at 82% 18%, rgba(111, 215, 232, 0.35), transparent 62%),
+    linear-gradient(140deg, #08384a 0%, #0c6479 46%, #1296aa 100%);
   overflow: hidden;
 }
 
@@ -24,33 +26,33 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(53, 199, 216, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(53, 199, 216, 0.08) 1px, transparent 1px);
-  background-size: 36px 36px;
-  -webkit-mask-image: radial-gradient(130% 95% at 50% 30%, #000 35%, transparent 88%);
-  mask-image: radial-gradient(130% 95% at 50% 30%, #000 35%, transparent 88%);
+    linear-gradient(rgba(160, 235, 244, 0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(160, 235, 244, 0.10) 1px, transparent 1px);
+  background-size: 38px 38px;
+  -webkit-mask-image: radial-gradient(130% 95% at 50% 34%, #000 32%, transparent 88%);
+  mask-image: radial-gradient(130% 95% at 50% 34%, #000 32%, transparent 88%);
 }
 .cover__radial {
   position: absolute;
   inset: 0;
-  background: radial-gradient(62% 52% at 50% 44%, rgba(23, 99, 136, 0.4), transparent 72%);
+  background: radial-gradient(62% 52% at 50% 44%, rgba(34, 179, 200, 0.38), transparent 72%);
 }
 .cover__scan {
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
     0deg,
-    rgba(255, 255, 255, 0.025) 0 1px,
+    rgba(255, 255, 255, 0.03) 0 1px,
     transparent 1px 4px
   );
   mix-blend-mode: overlay;
 }
 
 /* 齿轮 / 电路装饰 */
-.deco { position: absolute; color: var(--mist); opacity: 0.45; }
+.deco { position: absolute; color: #a8e8f2; opacity: 0.5; }
 .deco--gear-lg {
   width: 118px;
-  top: 4.5%;
+  top: 5%;
   left: 4%;
   animation: spin 26s linear infinite;
 }
@@ -58,18 +60,41 @@
   width: 74px;
   bottom: 11%;
   right: 5%;
-  color: var(--cyan);
-  opacity: 0.35;
+  opacity: 0.4;
   animation: spin 18s linear infinite reverse;
 }
 .deco--circuit {
   width: 170px;
   bottom: 3.5%;
   left: 6%;
-  color: var(--cyan);
-  opacity: 0.3;
+  opacity: 0.35;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* —— HUD 状态条 —— */
+.cover__status {
+  position: absolute;
+  top: 14px;
+  left: 22px;
+  right: 22px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-en);
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  color: rgba(180, 235, 244, 0.85);
+}
+.cover__status .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7dffb8;
+  box-shadow: 0 0 8px #7dffb8;
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
 
 /* —— 封面内容 —— */
 .cover__content {
@@ -81,16 +106,15 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 18px 34px 84px;
+  padding: 20px 34px 84px;
 }
 
 .cover__est {
   font-family: var(--font-en);
   font-size: 8px;
   letter-spacing: 2.4px;
-  color: var(--mist);
-  opacity: 0.85;
-  margin-bottom: 14px;
+  color: rgba(180, 235, 244, 0.85);
+  margin-bottom: 12px;
 }
 
 .cover__masthead { line-height: 1.1; }
@@ -99,8 +123,8 @@
   font-size: clamp(34px, 4.4vw, 44px);
   font-weight: 900;
   letter-spacing: 10px;
-  color: #f2fbff;
-  text-shadow: 0 0 22px rgba(53, 199, 216, 0.55);
+  color: #f6feff;
+  text-shadow: 0 0 24px rgba(111, 215, 232, 0.7);
 }
 .cover__masthead-en {
   display: block;
@@ -108,7 +132,7 @@
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 5.5px;
-  color: var(--cyan);
+  color: #9fe6f2;
   margin-top: 7px;
 }
 
@@ -116,30 +140,59 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  margin: 14px 0 16px;
+  margin: 13px 0 14px;
   width: min(78%, 340px);
-  color: var(--cyan);
+  color: #9fe6f2;
 }
 .cover__rule::before,
 .cover__rule::after {
   content: "";
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(53, 199, 216, 0.6), transparent);
+  background: linear-gradient(90deg, transparent, rgba(159, 230, 242, 0.7), transparent);
 }
 .cover__rule-gem { font-size: 9px; }
 
+/* —— 队标 + 全息光环 —— */
 .cover__logo-wrap {
   position: relative;
-  margin-bottom: 18px;
+  width: 212px;
+  height: 212px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
 }
 .cover__logo {
-  display: block;
+  position: relative;
+  z-index: 2;
   width: 168px;
   height: 168px;
   filter:
-    drop-shadow(0 0 14px rgba(53, 199, 216, 0.55))
-    drop-shadow(0 0 34px rgba(23, 99, 136, 0.5));
+    drop-shadow(0 0 16px rgba(111, 215, 232, 0.8))
+    drop-shadow(0 0 38px rgba(34, 179, 200, 0.55));
+}
+.cover__ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.cover__ring--1 {
+  width: 208px;
+  height: 208px;
+  margin: -104px 0 0 -104px;
+  border: 1px dashed rgba(159, 230, 242, 0.55);
+  animation: spin 22s linear infinite;
+}
+.cover__ring--2 {
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 1px solid rgba(159, 230, 242, 0.4);
+  border-top-color: #bff0f8;
+  animation: spin 14s linear infinite reverse;
 }
 .cover__beam {
   position: absolute;
@@ -147,8 +200,9 @@
   right: -14%;
   height: 2px;
   top: 0;
-  background: linear-gradient(90deg, transparent, rgba(53, 199, 216, 0.9), transparent);
-  box-shadow: 0 0 12px 2px rgba(53, 199, 216, 0.55);
+  z-index: 3;
+  background: linear-gradient(90deg, transparent, rgba(190, 244, 252, 0.95), transparent);
+  box-shadow: 0 0 14px 3px rgba(111, 215, 232, 0.6);
   animation: beam-sweep 5.2s ease-in-out infinite;
   pointer-events: none;
 }
@@ -163,39 +217,61 @@
   font-family: var(--font-en);
   font-size: 9px;
   letter-spacing: 3px;
-  color: var(--cyan-soft);
-  margin-bottom: 12px;
+  color: #9fe6f2;
+  margin-bottom: 11px;
 }
 .cover__headline {
   font-size: clamp(19px, 2.5vw, 26px);
   font-weight: 800;
   line-height: 1.5;
-  color: #eef9fd;
+  color: #f3feff;
 }
 .cover__headline em {
   font-style: normal;
-  color: var(--cyan);
-  text-shadow: 0 0 16px rgba(53, 199, 216, 0.7);
+  color: #a8f0f8;
+  text-shadow: 0 0 18px rgba(111, 215, 232, 0.8);
 }
 .cover__sub {
   font-size: 12px;
   line-height: 1.8;
-  color: var(--mist);
+  color: rgba(200, 242, 248, 0.9);
   max-width: 40ch;
-  margin-top: 12px;
+  margin-top: 11px;
 }
 
 .cover__meta {
   display: flex;
   gap: 22px;
-  margin-top: 18px;
-  padding: 9px 0;
-  border-top: 1px solid rgba(53, 199, 216, 0.22);
-  border-bottom: 1px solid rgba(53, 199, 216, 0.22);
+  margin-top: 16px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(159, 230, 242, 0.35);
+  border-bottom: 1px solid rgba(159, 230, 242, 0.35);
   font-family: var(--font-en);
   font-size: 8px;
   letter-spacing: 1.6px;
-  color: var(--mist);
+  color: rgba(180, 235, 244, 0.9);
+}
+
+/* —— 漂浮数据芯片 —— */
+.cover__chip {
+  position: absolute;
+  z-index: 3;
+  font-family: var(--font-en);
+  font-size: 7.5px;
+  letter-spacing: 1.5px;
+  color: rgba(190, 242, 250, 0.75);
+  border: 1px solid rgba(159, 230, 242, 0.4);
+  border-radius: 999px;
+  padding: 3px 9px;
+  background: rgba(8, 56, 74, 0.35);
+  animation: chip-float 7s ease-in-out infinite;
+}
+.cover__chip--a { top: 27%; left: 6%; }
+.cover__chip--b { top: 33%; right: 6%; animation-delay: -2.5s; }
+.cover__chip--c { bottom: 30%; left: 8%; animation-delay: -4.5s; }
+@keyframes chip-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 /* —— 封面底栏 —— */
@@ -209,7 +285,7 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  padding: 14px 0 20px;
+  padding: 12px 0 18px;
 }
 .cover__cta {
   display: inline-flex;
@@ -217,18 +293,19 @@
   gap: 12px;
   padding: 11px 26px;
   border-radius: 999px;
-  border: 1px solid rgba(53, 199, 216, 0.65);
-  background: rgba(23, 99, 136, 0.22);
-  color: #eaf9ff;
+  border: 1px solid rgba(190, 244, 252, 0.75);
+  background: rgba(255, 255, 255, 0.12);
+  color: #f4feff;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 3px;
   cursor: pointer;
+  backdrop-filter: blur(4px);
   transition: box-shadow 0.25s, background 0.25s, transform 0.15s;
 }
 .cover__cta:hover {
-  background: rgba(53, 199, 216, 0.2);
-  box-shadow: 0 0 26px rgba(53, 199, 216, 0.5), inset 0 0 14px rgba(53, 199, 216, 0.18);
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 0 28px rgba(111, 215, 232, 0.6), inset 0 0 14px rgba(159, 230, 242, 0.25);
   transform: translateY(-1px);
 }
 .cover__cta-arrow { font-size: 16px; }
@@ -239,18 +316,21 @@
 }
 .cover__hint {
   font-size: 11px;
-  color: rgba(162, 180, 212, 0.65);
+  color: rgba(200, 242, 248, 0.75);
   letter-spacing: 1px;
 }
 
 /* ============================================================
-   后封面
+   后封面（浅青全息屏收尾）
    ============================================================ */
 .sheet--backcover {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(255, 255, 255, 0.10), transparent 55%),
+    linear-gradient(140deg, #0a4c61 0%, #0e7a92 50%, #12a0b3 100%);
 }
 .backcover__content {
   position: relative;
@@ -258,46 +338,45 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 15px;
   padding: 30px;
 }
 .backcover__logo {
   width: 150px;
   height: 150px;
   filter:
-    drop-shadow(0 0 14px rgba(53, 199, 216, 0.55))
-    drop-shadow(0 0 34px rgba(23, 99, 136, 0.5));
+    drop-shadow(0 0 16px rgba(111, 215, 232, 0.8))
+    drop-shadow(0 0 38px rgba(34, 179, 200, 0.55));
 }
 .backcover__edition {
   font-family: var(--font-en);
   font-size: 9px;
   letter-spacing: 3px;
-  color: var(--mist);
+  color: rgba(200, 242, 248, 0.85);
 }
 .backcover__end {
   font-family: var(--font-en);
   font-size: 22px;
   font-weight: 900;
   letter-spacing: 8px;
-  color: var(--cyan);
-  text-shadow: 0 0 18px rgba(53, 199, 216, 0.6);
+  color: #c8f4fa;
+  text-shadow: 0 0 20px rgba(111, 215, 232, 0.7);
 }
 .backcover__line {
   font-size: 15px;
   letter-spacing: 6px;
-  color: #eef9fd;
+  color: #f3feff;
 }
 .backcover__sub {
   font-size: 10px;
   letter-spacing: 2px;
-  color: var(--mist);
-  opacity: 0.8;
+  color: rgba(200, 242, 248, 0.85);
 }
 
-/* 移动端纵向排版时封面高度自适应 */
+/* 移动端纵向排版 */
 @media (max-width: 899px) {
-  .sheet--cover { height: auto; min-height: 88vh; }
-  .sheet--backcover { height: auto; min-height: 70vh; }
-  .cover__footer { position: relative; padding: 8px 0 26px; }
-  .cover__content { padding: 30px 26px 30px; }
+  .sheet--cover { height: auto; min-height: 86vh; }
+  .sheet--backcover { height: auto; min-height: 66vh; }
+  .cover__footer { position: relative; padding: 8px 0 24px; }
+  .cover__content { padding: 30px 24px 28px; }
 }

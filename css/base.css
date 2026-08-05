@@ -1,33 +1,32 @@
 /* ============================================================
-   机创日报 CYBER 2026 · base.css
+   机创日报 CYBER 2026 · base.css  v2（浅色全息风）
    设计 tokens + 全局 + 书刊 3D 底座 + 响应式
-   配色母题：队标青 #176388
+   配色母题：队标青 #176388，冷调浅色全息
    ============================================================ */
 
 :root {
-  /* —— 队标衍生色板 —— */
+  /* —— 队标衍生色板（冷调浅色全息） —— */
   --ink: #176388;            /* 队标主青 */
   --ink-deep: #0f4a66;
-  --cyan: #35c7d8;           /* 霓虹高亮 */
-  --cyan-soft: #2ad4d4;
-  --mist: #a2b4d4;           /* 浅蓝灰（队标辅色） */
-  --space-1: #0a0f16;        /* 深空黑 */
-  --space-2: #0d1420;
-  --paper: #f4f1ea;          /* 报纸纸面（带暖意） */
-  --paper-hi: #faf8f1;
-  --paper-lo: #eae6db;
-  --text: #232a33;           /* 内页正文 */
-  --title: #0f1b26;          /* 内页标题 */
-  --line: rgba(23, 99, 136, 0.20);
-  --line-soft: rgba(23, 99, 136, 0.10);
+  --cyan: #22b3c8;           /* 全息高亮 */
+  --cyan-soft: #6fd7e8;
+  --mist: #5f7d95;           /* 次级文字（浅底用） */
+  --holo-border: rgba(23, 99, 136, 0.30);
+  --holo-line: rgba(23, 99, 136, 0.14);
+
+  --paper: #f4f9fd;          /* 页面：冷白偏蓝（与背景同色温） */
+  --paper-hi: #fbfdff;
+  --paper-lo: #e5f0f8;
+  --text: #16333f;           /* 正文：深青墨色 */
+  --title: #0c2a38;
 
   /* —— 字体 —— */
   --font-en: "Orbitron", "Consolas", "Courier New", monospace;
   --font-cn: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Hiragino Sans GB", sans-serif;
 
-  /* —— 书刊尺寸 —— */
-  --page-w: clamp(360px, 40vw, 500px);
-  --page-h: calc(var(--page-w) * 1.38);
+  /* —— 书刊尺寸（随视口高度放大，填满屏幕） —— */
+  --page-h: min(calc(100vh - 172px), 920px);
+  --page-w: min(calc(var(--page-h) / 1.34), 660px);
   --dur-flip: 0.9s;
   --ease-flip: cubic-bezier(0.42, 0.12, 0.22, 1);
 }
@@ -38,15 +37,88 @@ html { -webkit-text-size-adjust: 100%; }
 
 body {
   font-family: var(--font-cn);
-  color: #cfe0ea;
-  background:
-    radial-gradient(90% 60% at 50% 0%, rgba(23, 99, 136, 0.18), transparent 60%),
-    radial-gradient(70% 50% at 85% 100%, rgba(23, 99, 136, 0.10), transparent 60%),
-    linear-gradient(180deg, var(--space-1), #070b12 70%);
+  color: var(--text);
+  background: linear-gradient(180deg, #e3f1fa 0%, #d4e8f6 55%, #c4dff1 100%);
   background-attachment: fixed;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   全息背景层（网格 + 极光 + 漂浮粒子）
+   ============================================================ */
+.holo-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.holo-bg__grid {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(23, 99, 136, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 99, 136, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 40%, #000 30%, transparent 92%);
+  mask-image: radial-gradient(120% 100% at 50% 40%, #000 30%, transparent 92%);
+}
+.holo-bg__aurora {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.5;
+  animation: aurora-drift 22s ease-in-out infinite alternate;
+}
+.holo-bg__aurora--1 {
+  width: 520px;
+  height: 520px;
+  top: -140px;
+  left: -120px;
+  background: radial-gradient(circle, rgba(53, 199, 216, 0.65), transparent 70%);
+}
+.holo-bg__aurora--2 {
+  width: 600px;
+  height: 600px;
+  bottom: -180px;
+  right: -140px;
+  background: radial-gradient(circle, rgba(162, 180, 212, 0.7), transparent 70%);
+  animation-delay: -9s;
+}
+.holo-bg__aurora--3 {
+  width: 380px;
+  height: 380px;
+  top: 30%;
+  left: 62%;
+  background: radial-gradient(circle, rgba(111, 215, 232, 0.5), transparent 70%);
+  animation-delay: -15s;
+}
+@keyframes aurora-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(40px, -30px, 0) scale(1.12); }
+}
+.particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--cyan);
+  opacity: 0.55;
+  box-shadow: 0 0 8px var(--cyan);
+  animation: float-up 9s ease-in-out infinite;
+}
+.particle--p1 { top: 22%; left: 12%; animation-delay: 0s; }
+.particle--p2 { top: 68%; left: 8%; animation-delay: -2s; width: 4px; height: 4px; }
+.particle--p3 { top: 34%; right: 10%; animation-delay: -4s; }
+.particle--p4 { top: 74%; right: 16%; animation-delay: -6s; width: 3px; height: 3px; }
+.particle--p5 { top: 12%; right: 34%; animation-delay: -3s; width: 6px; height: 6px; }
+.particle--p6 { top: 84%; left: 30%; animation-delay: -7s; width: 4px; height: 4px; }
+@keyframes float-up {
+  0%, 100% { transform: translateY(0); opacity: 0.2; }
+  50% { transform: translateY(-26px); opacity: 0.7; }
 }
 
 /* —— 无障碍 —— */
@@ -54,8 +126,8 @@ body {
   position: absolute;
   left: -999px;
   top: 0;
-  background: var(--cyan);
-  color: #04131a;
+  background: var(--ink);
+  color: #fff;
   padding: 8px 14px;
   z-index: 200;
   font-weight: 700;
@@ -70,50 +142,84 @@ body {
 }
 
 /* ============================================================
-   外层报头条
+   外层报头条（浅色全息）
    ============================================================ */
 .book-wrap {
+  position: relative;
+  z-index: 1;
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 14px 16px 40px;
+  padding: 10px 22px 22px;
 }
 
 .topbar {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1380px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 8px 6px 12px;
-  border-bottom: 1px solid rgba(53, 199, 216, 0.22);
-  margin-bottom: 18px;
+  padding: 6px 4px 10px;
+  border-bottom: 1px solid rgba(23, 99, 136, 0.25);
+  margin-bottom: 10px;
 }
 .topbar__brand { display: flex; align-items: center; gap: 10px; }
-.topbar__logo { width: 34px; height: 34px; filter: drop-shadow(0 0 6px rgba(53, 199, 216, 0.5)); }
-.topbar__title { font-size: 15px; font-weight: 800; letter-spacing: 2px; color: #eaf6fb; }
+.topbar__logo {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 0 6px rgba(34, 179, 200, 0.6));
+}
+.topbar__title {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--title);
+}
 .topbar__title i {
   font-family: var(--font-en);
   font-style: normal;
   font-size: 9px;
   letter-spacing: 3px;
-  color: var(--cyan);
+  color: var(--ink);
   margin-left: 8px;
   font-weight: 500;
 }
 .topbar__meta { display: flex; gap: 16px; align-items: center; }
 .topbar__edition {
   font-family: var(--font-en);
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 2px;
-  color: var(--mist);
+  color: var(--ink);
 }
-.topbar__edition--cn { font-family: var(--font-cn); color: rgba(162, 180, 212, 0.7); }
+.topbar__edition--cn { font-family: var(--font-cn); color: var(--mist); }
+.topbar__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-en);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: var(--ink);
+  border: 1px solid var(--holo-border);
+  border-radius: 999px;
+  padding: 3px 10px;
+  background: rgba(255, 255, 255, 0.55);
+}
+.topbar__live::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #19b873;
+  box-shadow: 0 0 6px #19b873;
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
 /* ============================================================
-   书刊容器 & 3D 翻页基座
+   书刊容器 & 3D 翻页基座（全息显示面板）
    ============================================================ */
 .book { perspective: 2800px; }
 
@@ -121,6 +227,7 @@ body {
   position: relative;
   width: calc(var(--page-w) * 2);
   height: var(--page-h);
+  filter: drop-shadow(0 22px 55px rgba(23, 99, 136, 0.22));
 }
 
 .leaf {
@@ -136,79 +243,95 @@ body {
 .leaf__face {
   position: absolute;
   inset: 0;
+  border-radius: 8px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   overflow: hidden;
 }
 .leaf__face--back { transform: rotateY(180deg); }
 
-/* 纸页书脊侧微阴影，增强纸张厚度感 */
+/* 纸页书脊侧微阴影 */
 .leaf__face--front::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.09), transparent 20%);
+  background: linear-gradient(90deg, rgba(15, 74, 102, 0.10), transparent 20%);
   pointer-events: none;
 }
 .leaf__face--back::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(270deg, rgba(0, 0, 0, 0.09), transparent 20%);
+  background: linear-gradient(270deg, rgba(15, 74, 102, 0.10), transparent 20%);
   pointer-events: none;
+}
+/* 全息光斑掠过 */
+.leaf__face--front::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, 0.55) 46%, transparent 60%);
+  background-size: 320% 320%;
+  opacity: 0.5;
+  animation: holo-sheen 9s ease-in-out infinite;
+}
+@keyframes holo-sheen {
+  0%, 55% { background-position: 130% 130%; }
+  80%, 100% { background-position: -30% -30%; }
 }
 
 /* 已翻到左侧的纸页：以书脊为轴旋转到位 */
 .leaf--flipped { transform: rotateY(-180deg); }
 /* 动画进行中的纸页置于最上（压过 JS 内联 z-index） */
 .leaf--turning { z-index: 99 !important; pointer-events: none; }
-.leaf--turning .leaf__face--front { box-shadow: -10px 0 22px rgba(0, 0, 0, 0.28); }
+.leaf--turning .leaf__face--front { box-shadow: -10px 0 22px rgba(15, 74, 102, 0.28); }
 
 /* 书页侧边堆叠厚度装饰 */
 .book__edge {
   position: absolute;
-  top: 1px;
-  bottom: 1px;
-  width: 7px;
+  top: 2px;
+  bottom: 2px;
+  width: 6px;
   background: repeating-linear-gradient(
     0deg,
-    var(--paper-lo) 0 1px,
-    var(--paper-hi) 1px 2px
+    rgba(23, 99, 136, 0.14) 0 1px,
+    rgba(255, 255, 255, 0.9) 1px 2px
   );
   border-radius: 2px;
-  opacity: 0.85;
 }
-.book__edge--left { left: -5px; box-shadow: inset -1px 0 2px rgba(0, 0, 0, 0.25); }
-.book__edge--right { right: -5px; box-shadow: inset 1px 0 2px rgba(0, 0, 0, 0.25); }
+.book__edge--left { left: -4px; }
+.book__edge--right { right: -4px; }
 
 /* ============================================================
-   翻页控件
+   翻页控件（浅色）
    ============================================================ */
 .book-nav {
   display: flex;
   align-items: center;
   gap: 18px;
-  margin-top: 26px;
+  margin-top: 18px;
 }
 .book-nav__btn {
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  border: 1px solid rgba(53, 199, 216, 0.45);
-  background: rgba(23, 99, 136, 0.12);
-  color: var(--cyan);
+  border: 1px solid rgba(23, 99, 136, 0.45);
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--ink);
   font-size: 24px;
   line-height: 1;
   cursor: pointer;
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
 }
 .book-nav__btn:hover {
-  background: rgba(53, 199, 216, 0.18);
-  box-shadow: 0 0 18px rgba(53, 199, 216, 0.35);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 18px rgba(34, 179, 200, 0.45);
   transform: translateY(-1px);
 }
 .book-nav__btn:disabled {
-  opacity: 0.25;
+  opacity: 0.3;
   cursor: default;
   transform: none;
   box-shadow: none;
@@ -223,15 +346,15 @@ body {
 }
 
 .book-foot {
-  margin-top: 14px;
-  font-size: 12px;
-  color: rgba(162, 180, 212, 0.55);
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--mist);
   letter-spacing: 0.5px;
 }
 .book-foot code {
   font-family: var(--font-en);
-  color: rgba(53, 199, 216, 0.75);
-  background: rgba(23, 99, 136, 0.15);
+  color: var(--ink);
+  background: rgba(23, 99, 136, 0.1);
   padding: 1px 6px;
   border-radius: 3px;
 }
@@ -248,7 +371,7 @@ body {
    响应式：<900px 降级为纵向报纸
    ============================================================ */
 @media (max-width: 899px) {
-  .book-wrap { padding: 10px 12px 32px; }
+  .book-wrap { padding: 8px 12px 28px; }
 
   .book__stage {
     width: 100%;
@@ -257,6 +380,7 @@ body {
     flex-direction: column;
     gap: 26px;
     align-items: stretch;
+    filter: none;
   }
   .leaf {
     position: static;
@@ -267,16 +391,16 @@ body {
   }
   .leaf--flipped { transform: none; }
   .leaf--turning { z-index: auto; }
-  .leaf__face { position: static; overflow: visible; }
+  .leaf__face {
+    position: static;
+    overflow: visible;
+    border-radius: 6px;
+  }
   .leaf__face--back { transform: none; }
   .book__edge { display: none; }
   .book-nav { display: none; }
 
   .topbar__edition--cn { display: none; }
   .topbar__title i { display: none; }
-}
-
-/* 桌面窄屏（900-1180px）微调书页宽度 */
-@media (min-width: 900px) and (max-width: 1180px) {
-  :root { --page-w: clamp(360px, 40vw, 460px); }
+  .holo-bg__aurora--3 { display: none; }
 }

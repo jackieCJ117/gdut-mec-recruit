@@ -16,6 +16,20 @@
 <body>
   <a class="skip-link" href="#book">跳到报纸正文</a>
 
+  <!-- 全息背景层：网格 + 极光 + 漂浮粒子 -->
+  <div class="holo-bg" aria-hidden="true">
+    <div class="holo-bg__grid"></div>
+    <div class="holo-bg__aurora holo-bg__aurora--1"></div>
+    <div class="holo-bg__aurora holo-bg__aurora--2"></div>
+    <div class="holo-bg__aurora holo-bg__aurora--3"></div>
+    <span class="particle particle--p1"></span>
+    <span class="particle particle--p2"></span>
+    <span class="particle particle--p3"></span>
+    <span class="particle particle--p4"></span>
+    <span class="particle particle--p5"></span>
+    <span class="particle particle--p6"></span>
+  </div>
+
   <main class="book-wrap" id="top">
     <!-- ============ 报头条（浏览器顶部窄条） ============ -->
     <header class="topbar" role="banner">
@@ -26,6 +40,7 @@
       <div class="topbar__meta">
         <span class="topbar__edition">CYBER 2026 · 秋季招新特刊</span>
         <span class="topbar__edition topbar__edition--cn">第 001 期 · 免费赠阅</span>
+        <span class="topbar__live">ONLINE</span>
       </div>
     </header>
 
@@ -80,6 +95,15 @@
                 </svg>
               </div>
 
+              <div class="cover__status" aria-hidden="true">
+                <span>◤ JICHUANG DAILY // HOLO EDITION</span>
+                <span>SYNC <span class="dot"></span></span>
+              </div>
+
+              <span class="cover__chip cover__chip--a" aria-hidden="true">DATA.SYNC</span>
+              <span class="cover__chip cover__chip--b" aria-hidden="true">SCAN.NEXT</span>
+              <span class="cover__chip cover__chip--c" aria-hidden="true">CHANNEL.04</span>
+
               <div class="cover__content">
                 <p class="cover__est">EST. 20XX · 广东工业大学 GUANGDONG UNIVERSITY OF TECHNOLOGY</p>
                 <h1 class="cover__masthead">
@@ -89,6 +113,8 @@
                 <div class="cover__rule"><span class="cover__rule-gem" aria-hidden="true">◆</span></div>
 
                 <div class="cover__logo-wrap">
+                  <span class="cover__ring cover__ring--1" aria-hidden="true"></span>
+                  <span class="cover__ring cover__ring--2" aria-hidden="true"></span>
                   <img class="cover__logo" src="assets/logo.png" alt="机械创新团队队标：青色齿轮线条标识" width="180" height="180">
                   <div class="cover__beam" aria-hidden="true"></div>
                 </div>
