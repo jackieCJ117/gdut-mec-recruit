@@ -24,8 +24,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(23, 99, 136, 0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(23, 99, 136, 0.09) 1px, transparent 1px);
+    linear-gradient(rgba(16, 112, 144, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 112, 144, 0.09) 1px, transparent 1px);
   background-size: 38px 38px;
   -webkit-mask-image: radial-gradient(130% 95% at 50% 34%, #000 32%, transparent 88%);
   mask-image: radial-gradient(130% 95% at 50% 34%, #000 32%, transparent 88%);
@@ -40,7 +40,7 @@
   inset: 0;
   background: repeating-linear-gradient(
     0deg,
-    rgba(23, 99, 136, 0.025) 0 1px,
+    rgba(16, 112, 144, 0.025) 0 1px,
     transparent 1px 4px
   );
 }
@@ -147,7 +147,7 @@
   content: "";
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(23, 99, 136, 0.55), transparent);
+  background: linear-gradient(90deg, transparent, rgba(16, 112, 144, 0.55), transparent);
 }
 .cover__rule-gem { font-size: 9px; }
 
@@ -181,14 +181,14 @@
   width: 206px;
   height: 206px;
   margin: -103px 0 0 -103px;
-  border: 1px dashed rgba(23, 99, 136, 0.5);
+  border: 1px dashed rgba(16, 112, 144, 0.5);
   animation: spin 22s linear infinite;
 }
 .cover__ring--2 {
   width: 148px;
   height: 148px;
   margin: -74px 0 0 -74px;
-  border: 1px solid rgba(23, 99, 136, 0.35);
+  border: 1px solid rgba(16, 112, 144, 0.35);
   border-top-color: var(--cyan);
   animation: spin 14s linear infinite reverse;
 }
@@ -298,7 +298,7 @@
   font-weight: 700;
   letter-spacing: 3px;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(23, 99, 136, 0.35);
+  box-shadow: 0 6px 18px rgba(16, 112, 144, 0.35);
   transition: box-shadow 0.25s, transform 0.15s;
 }
 .cover__cta:hover {

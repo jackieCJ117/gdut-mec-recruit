@@ -10,14 +10,14 @@
   display: flex;
   flex-direction: column;
   background:
-    repeating-linear-gradient(90deg, rgba(23, 99, 136, 0.03) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(16, 112, 144, 0.03) 0 1px, transparent 1px 4px),
     linear-gradient(160deg, rgba(255, 255, 255, 0.62) 0%, rgba(232, 248, 253, 0.44) 100%);
-  border: 1px solid rgba(23, 99, 136, 0.42);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6), 0 10px 30px rgba(23, 99, 136, 0.16);
+  border: 1px solid rgba(16, 112, 144, 0.42);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6), 0 10px 30px rgba(16, 112, 144, 0.16);
   color: var(--text);
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(23, 99, 136, 0.35) transparent;
+  scrollbar-color: rgba(16, 112, 144, 0.35) transparent;
 }
 /* HUD 四角定位角标 */
 .sheet--paper::before,
@@ -32,17 +32,17 @@
 .sheet--paper::before {
   top: 7px;
   left: 7px;
-  border-top: 2px solid rgba(23, 99, 136, 0.45);
-  border-left: 2px solid rgba(23, 99, 136, 0.45);
+  border-top: 2px solid rgba(16, 112, 144, 0.45);
+  border-left: 2px solid rgba(16, 112, 144, 0.45);
 }
 .sheet--paper::after {
   bottom: 7px;
   right: 7px;
-  border-bottom: 2px solid rgba(23, 99, 136, 0.45);
-  border-right: 2px solid rgba(23, 99, 136, 0.45);
+  border-bottom: 2px solid rgba(16, 112, 144, 0.45);
+  border-right: 2px solid rgba(16, 112, 144, 0.45);
 }
 .sheet--paper::-webkit-scrollbar { width: 6px; }
-.sheet--paper::-webkit-scrollbar-thumb { background: rgba(23, 99, 136, 0.35); border-radius: 3px; }
+.sheet--paper::-webkit-scrollbar-thumb { background: rgba(16, 112, 144, 0.35); border-radius: 3px; }
 
 /* —— 报头 —— */
 .sheet__masthead {
@@ -52,7 +52,7 @@
   gap: 12px;
   padding: 13px 22px 9px;
   border-bottom: 3px double var(--ink);
-  background: linear-gradient(180deg, rgba(23, 99, 136, 0.05), transparent);
+  background: linear-gradient(180deg, rgba(16, 112, 144, 0.05), transparent);
 }
 .sheet__masthead-id {
   font-family: var(--font-en);
@@ -135,9 +135,9 @@
 .blueprint {
   border: 1px solid var(--line);
   background:
-    repeating-linear-gradient(0deg, rgba(23, 99, 136, 0.05) 0 1px, transparent 1px 22px),
-    repeating-linear-gradient(90deg, rgba(23, 99, 136, 0.05) 0 1px, transparent 1px 22px),
-    rgba(23, 99, 136, 0.03);
+    repeating-linear-gradient(0deg, rgba(16, 112, 144, 0.05) 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(90deg, rgba(16, 112, 144, 0.05) 0 1px, transparent 1px 22px),
+    rgba(16, 112, 144, 0.03);
   border-radius: 3px;
   display: flex;
   flex-direction: column;
@@ -163,7 +163,7 @@
   margin: 4px 0 12px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  background: linear-gradient(90deg, transparent, rgba(23, 99, 136, 0.05), transparent);
+  background: linear-gradient(90deg, transparent, rgba(16, 112, 144, 0.05), transparent);
 }
 .motto__mark {
   position: absolute;
@@ -232,7 +232,7 @@
   transition: box-shadow 0.2s, transform 0.15s;
 }
 .group:hover {
-  box-shadow: 0 4px 14px rgba(23, 99, 136, 0.14);
+  box-shadow: 0 4px 14px rgba(16, 112, 144, 0.14);
   transform: translateY(-2px);
 }
 .group::before {
@@ -252,7 +252,7 @@
   font-family: var(--font-en);
   font-size: 18px;
   font-weight: 900;
-  color: rgba(23, 99, 136, 0.16);
+  color: rgba(16, 112, 144, 0.16);
 }
 .group__name {
   font-size: 14.5px;
@@ -273,7 +273,7 @@
   font-size: 10.5px;
   line-height: 1.6;
   color: var(--ink-deep);
-  background: rgba(23, 99, 136, 0.05);
+  background: rgba(16, 112, 144, 0.05);
   border-radius: 3px;
   padding: 4px 7px;
   margin-bottom: 6px;
@@ -439,7 +439,7 @@
   border: 1px dashed var(--ink);
   border-radius: 5px;
   padding: 9px 11px;
-  background: rgba(23, 99, 136, 0.04);
+  background: rgba(16, 112, 144, 0.04);
 }
 .download__icon { font-size: 18px; color: var(--ink); }
 .download__title { font-size: 11.5px; font-weight: 800; color: var(--title); }
@@ -457,7 +457,7 @@
   text-decoration: none;
   transition: background 0.2s, box-shadow 0.2s;
 }
-.btn-download:hover { background: var(--ink-deep); box-shadow: 0 0 10px rgba(23, 99, 136, 0.4); }
+.btn-download:hover { background: var(--ink-deep); box-shadow: 0 0 10px rgba(16, 112, 144, 0.4); }
 
 .notice {
   border: 1px solid var(--line);
@@ -581,7 +581,7 @@
 .field textarea:focus {
   outline: none;
   border-color: var(--ink);
-  box-shadow: 0 0 0 2px rgba(23, 99, 136, 0.12);
+  box-shadow: 0 0 0 2px rgba(16, 112, 144, 0.12);
 }
 
 .form-reg__hint {
@@ -610,7 +610,7 @@
   line-height: 1.55;
   color: var(--text);
   opacity: 0.75;
-  background: rgba(23, 99, 136, 0.05);
+  background: rgba(16, 112, 144, 0.05);
   border-radius: 3px;
   padding: 6px 8px;
 }
@@ -627,7 +627,7 @@
   transition: box-shadow 0.2s, transform 0.15s;
 }
 .btn-submit:hover {
-  box-shadow: 0 0 16px rgba(23, 99, 136, 0.45);
+  box-shadow: 0 0 16px rgba(16, 112, 144, 0.45);
   transform: translateY(-1px);
 }
 .form-submit__status {
@@ -667,7 +667,7 @@
 .cta__logo {
   width: 118px;
   height: 118px;
-  filter: drop-shadow(0 4px 10px rgba(23, 99, 136, 0.35));
+  filter: drop-shadow(0 4px 10px rgba(16, 112, 144, 0.35));
 }
 .cta__slogan {
   font-size: 16px;
@@ -847,7 +847,7 @@
   font-size: 11px;
   letter-spacing: 1px;
   color: var(--ink);
-  border: 1px solid rgba(23, 99, 136, 0.22);
+  border: 1px solid rgba(16, 112, 144, 0.22);
   border-radius: 999px;
   padding: 5px 12px;
   background: rgba(255, 255, 255, 0.65);

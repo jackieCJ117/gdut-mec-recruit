@@ -1,0 +1,200 @@
+/* ============================================================
+   机创时报 CYBER 2026 · holo.css
+   浅色全息视觉语言全套（零依赖纯 CSS）：
+   彩虹箔 / 色差 / glitch 故障字 / 噪点 / 扫描线 / 深青发光+白晕 /
+   光斑层重构（.sheet__sheen 独立层，内容之下）
+   浅底演绎总原则：深青文字 + 白色光晕替代暗底霓虹；
+   全息箔用队标金属蓝灰（#B0B0D0→#9090B0→#707090）中等明度，
+   background-clip:text 出金属感，不靠发光。
+   ============================================================ */
+
+/* ============================================================
+   噪点颗粒（静态，动画 = 整屏每帧重绘，放弃）
+   ============================================================ */
+.holo-bg__noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   光斑层重构：独立 .sheet__sheen，背景之上、内容之下
+   （修复：旧 .holo__panel::before z-index:1 周期性扫过文字）
+   ============================================================ */
+.sheet__sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, 0.35) 46%, transparent 60%);
+  background-size: 320% 320%;
+  opacity: 0.16;
+  animation: holo-sheen 14s ease-in-out infinite;
+}
+@keyframes holo-sheen {
+  0%, 55% { background-position: 130% 130%; }
+  80%, 100% { background-position: -30% -30%; }
+}
+/* 内容层抬到光斑之上（封面已有 .cover__content z-index:2） */
+.sheet--paper > .sheet__masthead,
+.sheet--paper > .sheet__body,
+.sheet--paper > .sheet__footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================================
+   扫描线（低透明度，叠进 sheet 背景）
+   ============================================================ */
+.sheet--paper,
+.sheet--cover {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(16, 112, 144, 0.02) 0 1px, transparent 1px 3px),
+    var(--bg-stack, none);
+}
+/* 恢复各自的原背景（cover.css / paper.css 定义），扫描线叠加其上 */
+.sheet--cover {
+  --bg-stack:
+    radial-gradient(90% 70% at 50% 0%, rgba(111, 215, 232, 0.28), transparent 55%),
+    radial-gradient(70% 55% at 90% 90%, rgba(162, 180, 212, 0.25), transparent 60%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.66) 0%, rgba(228, 245, 252, 0.46) 100%);
+}
+.sheet--paper {
+  --bg-stack:
+    repeating-linear-gradient(90deg, rgba(16, 112, 144, 0.03) 0 1px, transparent 1px 4px),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.62) 0%, rgba(232, 248, 253, 0.44) 100%);
+}
+
+/* ============================================================
+   彩虹箔（全息箔）
+   ============================================================ */
+.foil-text {
+  background: var(--foil-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* 书脊：队标金属蓝灰竖版渐变 */
+.page__spine {
+  background: linear-gradient(90deg,
+    var(--foil-1) 0%, var(--foil-2) 12%, var(--foil-3) 38%,
+    #7c8cb4 50%, var(--foil-3) 62%, var(--foil-2) 88%, var(--foil-1) 100%);
+}
+/* 版式页脚页码 + 封面菱形分隔 → 金属箔 */
+.sheet__folio { background: var(--foil-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.cover__rule-gem { background: var(--foil-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+/* 封面双光环：--2 环改为金属箔渐变描边（conic 虹膜） */
+.cover__ring--2 {
+  border: none;
+  background:
+    conic-gradient(from 180deg, var(--foil-1), var(--foil-3), #7aa3c9, #6fb0c8, var(--foil-1));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+}
+
+/* ============================================================
+   色差（chromatic aberration）：静态双色偏移，浅底不刺眼
+   ============================================================ */
+.cover__masthead-en,
+.sheet__masthead-id,
+.trophy__num {
+  text-shadow: 2px 0 rgba(11, 90, 116, 0.5), -2px 0 rgba(122, 74, 158, 0.38);
+}
+
+/* ============================================================
+   glitch 故障字：::before/::after + attr(data-text) + clip-path 条切
+   故障帧占比 <8%（3.2s 周期内约 250ms），防晕
+   ============================================================ */
+.glitch {
+  position: relative;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+.glitch::before { color: var(--glitch-a); animation: glitch-a 3.2s infinite steps(1); }
+.glitch::after  { color: var(--glitch-b); animation: glitch-b 3.2s infinite steps(1); }
+@keyframes glitch-a {
+  0%, 86.5% { clip-path: inset(0 0 100% 0); transform: none; opacity: 0; }
+  87%   { clip-path: inset(18% 0 62% 0); transform: translate(-2px, 1px); opacity: 1; }
+  89%   { clip-path: inset(52% 0 24% 0); transform: translate(2px, -1px); opacity: 1; }
+  91%   { clip-path: inset(8% 0 74% 0);  transform: translate(-1px, 0);  opacity: 1; }
+  93%, 100% { opacity: 0; }
+}
+@keyframes glitch-b {
+  0%, 86.5% { clip-path: inset(0 0 100% 0); transform: none; opacity: 0; }
+  87.5% { clip-path: inset(64% 0 12% 0); transform: translate(2px, -1px); opacity: 1; }
+  90%   { clip-path: inset(30% 0 46% 0); transform: translate(-2px, 1px); opacity: 1; }
+  92%   { clip-path: inset(76% 0 6% 0);  transform: translate(1px, 0);    opacity: 1; }
+  94%, 100% { opacity: 0; }
+}
+/* 封面中文大标题 hover 时短暂故障 */
+.cover__masthead-cn:hover { animation: glitch-title 0.9s steps(1) 1; }
+@keyframes glitch-title {
+  0%   { transform: translate(0); }
+  20%  { transform: translate(-3px, 1px) skewX(3deg); }
+  40%  { transform: translate(3px, -1px); }
+  60%  { transform: translate(-2px, 0) skewX(-2deg); }
+  80%  { transform: translate(2px, 1px); }
+  100% { transform: translate(0); }
+}
+
+/* ============================================================
+   深青发光 + 白晕（浅底霓虹反转：光晕用白色）
+   ============================================================ */
+.glow-deep,
+.cover__masthead-cn {
+  text-shadow:
+    0 0 18px rgba(111, 215, 232, 0.65),
+    0 0 42px rgba(111, 215, 232, 0.4),
+    0 0 8px #fff;
+}
+.cover__headline em {
+  text-shadow: 0 0 16px rgba(111, 215, 232, 0.55), 0 0 4px #fff;
+}
+
+/* ============================================================
+   报头中文显示字体（得意黑）
+   ============================================================ */
+.cover__masthead-cn,
+.sheet__masthead-title,
+.topbar__title,
+.motto__text,
+.cta__slogan {
+  font-family: var(--font-head-cn);
+}
+
+/* ============================================================
+   中文字号下限 12px 收尾（8-11px 的英文族中文混排不可读）
+   ============================================================ */
+.topbar__edition--cn { font-size: 11px; }
+.cover__est { font-size: 10px; }
+.cover__meta { font-size: 10px; }
+.cover__hint { font-size: 12px; }
+.cover__sub { font-size: 13px; }
+.sheet__masthead-title i { font-size: 10px; }
+.sheet__masthead-meta { font-size: 10px; }
+.blueprint__tag { font-size: 10px; }
+.motto__en { font-size: 9px; }
+.group__tags li { font-size: 9px; }
+.timeline__item span { font-size: 11px; }
+.timeline__note { font-size: 11px; }
+.form-reg__title small { font-size: 11px; }
+.steps__item { font-size: 12.5px; }
+.notice__list { font-size: 11.5px; }
+.form-submit__hint { font-size: 11px; }
+.qr__label { font-size: 11px; }
+.book-foot { font-size: 12px; }
+
+/* 动效偏好降级：glitch/故障类动画一并关闭 */
+@media (prefers-reduced-motion: reduce) {
+  .glitch::before, .glitch::after { animation: none; opacity: 0; }
+  .cover__masthead-cn:hover { animation: none; }
+}

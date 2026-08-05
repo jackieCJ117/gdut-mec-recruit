@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>机创时报 CYBER 2026 · 机械创新团队秋季招新特刊</title>
   <meta name="description" content="广东工业大学机械创新团队 2026 秋季招新特刊 —— 全息虚拟 3D 书刊，翻页浏览团队与各组别，直达报名。">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23176388' stroke-width='10'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23176388'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23107090' stroke-width='10'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23107090'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
@@ -13,13 +13,15 @@
   <link rel="stylesheet" href="css/cover.css">
   <link rel="stylesheet" href="css/paper.css">
   <link rel="stylesheet" href="css/book3d.css">
+  <link rel="stylesheet" href="css/holo.css">
 </head>
 <body>
   <a class="skip-link" href="#viewport">跳到报纸正文</a>
 
-  <!-- 全息背景层：网格 + 极光 + 漂浮粒子 -->
+  <!-- 全息背景层：网格 + 极光 + 漂浮粒子 + 噪点 -->
   <div class="holo-bg" aria-hidden="true">
     <div class="holo-bg__grid"></div>
+    <div class="holo-bg__noise"></div>
     <div class="holo-bg__aurora holo-bg__aurora--1"></div>
     <div class="holo-bg__aurora holo-bg__aurora--2"></div>
     <div class="holo-bg__aurora holo-bg__aurora--3"></div>
@@ -53,6 +55,7 @@
         <!-- 跨页 1：封面 + 关于 -->
         <div class="page page--1 is-current" data-page="1">
           <article class="sheet sheet--cover leaf leaf--left" data-panel="1" aria-label="封面">
+            <span class="sheet__sheen" aria-hidden="true"></span>
             <div class="cover__bg" aria-hidden="true">
               <div class="cover__grid"></div>
               <div class="cover__scan"></div>
@@ -137,6 +140,7 @@
           </article>
           <span class="page__spine" aria-hidden="true"></span>
           <article class="sheet sheet--paper leaf leaf--right" data-panel="2" aria-label="02 · 关于团队">
+            <span class="sheet__sheen" aria-hidden="true"></span>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">02</span>
               <h2 class="sheet__masthead-title">关于机创 <i>ABOUT</i></h2>
@@ -195,6 +199,7 @@
         <!-- 跨页 2：组别 + 战绩 -->
         <div class="page page--2" data-page="2">
           <article class="sheet sheet--paper leaf leaf--left" data-panel="3" aria-label="03 · 组别矩阵">
+            <span class="sheet__sheen" aria-hidden="true"></span>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">03</span>
               <h2 class="sheet__masthead-title">组别矩阵 <i>DIVISIONS</i></h2>
@@ -242,6 +247,7 @@
           </article>
           <span class="page__spine" aria-hidden="true"></span>
           <article class="sheet sheet--paper leaf leaf--right" data-panel="4" aria-label="04 · 战绩与日程">
+            <span class="sheet__sheen" aria-hidden="true"></span>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">04</span>
               <h2 class="sheet__masthead-title">战绩与日程 <i>HONORS &amp; TIMELINE</i></h2>
@@ -291,6 +297,7 @@
         <!-- 跨页 3：报名 + 加入 -->
         <div class="page page--3" data-page="3">
           <article class="sheet sheet--paper sheet--apply leaf leaf--left" data-panel="5" aria-label="05 · 报名">
+            <span class="sheet__sheen" aria-hidden="true"></span>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">05</span>
               <h2 class="sheet__masthead-title">报名 <i>APPLY</i></h2>
@@ -415,6 +422,7 @@
           </article>
           <span class="page__spine" aria-hidden="true"></span>
           <article class="sheet sheet--paper sheet--cta leaf leaf--right" data-panel="6" aria-label="06 · 加入我们">
+            <span class="sheet__sheen" aria-hidden="true"></span>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">06</span>
               <h2 class="sheet__masthead-title">想加入我们？ <i>JOIN US</i></h2>
@@ -476,7 +484,7 @@
       <button class="holo__rail-btn" id="nextBtn" type="button" aria-label="下一版面">›</button>
     </nav>
 
-    <p class="book-foot">设计：全息虚拟报纸 · 配色取自队标青 <code>#176388</code> · 占位文案可在 <code>index.html</code> 中直接替换</p>
+    <p class="book-foot">设计：全息虚拟 3D 书刊 · 配色取自队标青 <code>#107090</code> · 占位文案可在 <code>index.html</code> 中直接替换</p>
   </main>
 
   <script src="js/book.js"></script>

@@ -5,18 +5,32 @@
    ============================================================ */
 
 :root {
-  /* —— 队标衍生色板（冷调浅色全息） —— */
-  --ink: #176388;            /* 队标主青 */
-  --ink-deep: #0f4a66;
+  /* —— 队标衍生色板（冷调浅色全息） ——
+     队标实际色块：深黑 #101010 32% / 队标青 #107090 13% / 金属蓝灰 24%。
+     浅色演绎：以队标青为基准色，金属蓝灰做全息箔。 */
+  --ink: #107090;            /* 队标主青（精确值，替代原 #176388） */
+  --ink-deep: #0b5a74;
   --cyan: #22b3c8;           /* 全息高亮 */
   --cyan-soft: #6fd7e8;
-  --mist: #5f7d95;           /* 次级文字 */
-  --holo-border: rgba(23, 99, 136, 0.32);
-  --holo-line: rgba(23, 99, 136, 0.14);
+  --mist: #3d5a6e;           /* 次级文字（加深至 ≥7:1 对比度） */
+  --holo-border: rgba(16, 112, 144, 0.32);
+  --holo-line: rgba(16, 112, 144, 0.14);
   /* 边框/分隔线（此前从未定义，导致 paper.css 22 处引用全部失效：
      时间轴竖线不可见、卡片描边丢失） */
-  --line: rgba(23, 99, 136, 0.18);
-  --line-soft: rgba(23, 99, 136, 0.11);
+  --line: rgba(16, 112, 144, 0.18);
+  --line-soft: rgba(16, 112, 144, 0.11);
+
+  /* —— 队标金属蓝灰 → 全息箔 —— */
+  --foil-1: #b0b0d0;
+  --foil-2: #9090b0;
+  --foil-3: #707090;
+  --foil-grad: linear-gradient(115deg,
+    #b0b0d0 0%, #9090b0 30%, #707090 48%,
+    #7aa3c9 60%, #6fb0c8 74%, #b0b0d0 88%);
+
+  /* —— glitch 故障双色（深青 + 深品红，浅底不刺眼） —— */
+  --glitch-a: rgba(11, 90, 116, 0.62);
+  --glitch-b: rgba(122, 74, 158, 0.45);
 
   --paper: #f4f9fd;
   --paper-hi: #fbfdff;
@@ -25,7 +39,8 @@
   --title: #0c2a38;
 
   --font-en: "Orbitron", "Consolas", "Courier New", monospace;
-  --font-cn: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Hiragino Sans GB", sans-serif;
+  --font-head-cn: "Smiley Sans", "PingFang SC", "Microsoft YaHei", sans-serif; /* 报头：得意黑 */
+  --font-cn: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Hiragino Sans GB", sans-serif; /* 正文：思源黑体 */
 
   /* 面板尺寸预算：收窄留缝让相邻版面两侧露出 */
   --panel-h: calc(100vh - 176px);
@@ -33,6 +48,15 @@
   --panel-gap: clamp(16px, 2vw, 30px);
   --dur-slide: 0.7s;
   --ease-slide: cubic-bezier(0.42, 0.12, 0.22, 1);
+}
+
+/* 报头中文显示字体：得意黑（自托管子集，GB2312 常用字 + 页面用字）。
+   注意：国内访问 Google Fonts 不稳定，中文显示字体必须自托管。 */
+@font-face {
+  font-family: "Smiley Sans";
+  src: url("../assets/fonts/smiley-sans.woff2") format("woff2");
+  font-weight: 400 900;
+  font-display: swap;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -64,8 +88,8 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(rgba(23, 99, 136, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(23, 99, 136, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(16, 112, 144, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 112, 144, 0.08) 1px, transparent 1px);
   background-size: 44px 44px;
   -webkit-mask-image: radial-gradient(120% 100% at 50% 40%, #000 30%, transparent 92%);
   mask-image: radial-gradient(120% 100% at 50% 40%, #000 30%, transparent 92%);
@@ -166,7 +190,7 @@ body {
   justify-content: space-between;
   gap: 12px;
   padding: 4px 6px 8px;
-  border-bottom: 1px solid rgba(23, 99, 136, 0.25);
+  border-bottom: 1px solid rgba(16, 112, 144, 0.25);
   margin-bottom: 8px;
 }
 .topbar__brand { display: flex; align-items: center; gap: 10px; }
@@ -240,7 +264,7 @@ body {
   -webkit-backdrop-filter: blur(16px) saturate(1.5);
   backdrop-filter: blur(16px) saturate(1.5);
   box-shadow:
-    0 20px 55px rgba(23, 99, 136, 0.22),
+    0 20px 55px rgba(16, 112, 144, 0.22),
     inset 0 0 0 1px rgba(255, 255, 255, 0.6);
 }
 
@@ -258,7 +282,7 @@ body {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1px solid rgba(23, 99, 136, 0.45);
+  border: 1px solid rgba(16, 112, 144, 0.45);
   background: rgba(255, 255, 255, 0.6);
   color: var(--ink);
   font-size: 22px;
@@ -290,7 +314,7 @@ body {
 .chip.is-active {
   background: var(--ink);
   color: #fff;
-  box-shadow: 0 0 14px rgba(23, 99, 136, 0.5);
+  box-shadow: 0 0 14px rgba(16, 112, 144, 0.5);
 }
 
 .book-foot {
@@ -302,7 +326,7 @@ body {
 .book-foot code {
   font-family: var(--font-en);
   color: var(--ink);
-  background: rgba(23, 99, 136, 0.1);
+  background: rgba(16, 112, 144, 0.1);
   padding: 1px 6px;
   border-radius: 3px;
 }
