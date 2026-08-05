@@ -1,0 +1,154 @@
+/* ============================================================
+   机创时报 CYBER 2026 · book3d.css
+   3D 双开书刊形态：perspective 舞台 + 跨页双叶 + 书脊 + 翻页姿态
+   6 版面重组为 3 个跨页（page）：
+     P1 = 封面 + 关于（认识）
+     P2 = 组别 + 战绩（信任）
+     P3 = 报名 + 加入（行动）
+   手机端（<900px）降级为纵向流式（见文末媒体查询）
+   ============================================================ */
+
+/* —— 3D 舞台：给整本书一个透视空间 —— */
+.holo__stage {
+  perspective: 2400px;
+  perspective-origin: 50% 42%;
+}
+
+/* —— 跨页：两叶 + 书脊 —— */
+.page {
+  position: relative;
+  flex: 0 0 var(--page-w, min(80vw, 1180px));
+  margin: 0 var(--panel-gap);
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1fr 16px 1fr; /* 左叶 | 书脊 | 右叶 */
+  transform-style: preserve-3d;
+  transition: transform var(--dur-slide) var(--ease-slide);
+  will-change: transform;
+}
+
+/* —— 书脊：竖版渐变模拟书脊立体 —— */
+.page__spine {
+  border-radius: 3px;
+  background: linear-gradient(90deg,
+    #c9d8e8 0%, #aebfd4 12%, #8f9fc0 38%,
+    #7c8cb4 50%, #8f9fc0 62%, #aebfd4 88%, #c9d8e8 100%);
+  box-shadow:
+    inset 0 0 6px rgba(16, 112, 144, 0.25),
+    1px 0 8px rgba(16, 112, 144, 0.18);
+}
+
+/* —— 纸叠厚度：中缝两侧的纸张层叠 —— */
+.page::before,
+.page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 7px;
+  pointer-events: none;
+}
+.page::before {
+  right: calc(50% - 0px);
+  background: linear-gradient(270deg, #e8f2f9, #d7e6f2);
+  border-radius: 3px 0 0 3px;
+  box-shadow: -3px 0 8px rgba(16, 112, 144, 0.12);
+}
+.page::after {
+  left: calc(50% - 0px);
+  background: linear-gradient(90deg, #d7e6f2, #c9dceb);
+  border-radius: 0 3px 3px 0;
+  box-shadow: 3px 0 8px rgba(16, 112, 144, 0.10);
+}
+
+/* —— 叶：3D 基础 —— */
+.leaf {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: transform 0.6s cubic-bezier(0.45, 0.05, 0.3, 1);
+}
+.leaf--left  { transform-origin: 100% 50%; }  /* 绕书脊（右缘）转 */
+.leaf--right { transform-origin: 0% 50%; }    /* 绕书脊（左缘）转 */
+
+/* —— 三种静态姿态 ——
+   is-current：平摊居中（rotateY(0)，无 transform）
+   is-prev / is-next：两侧 3D 侧立露出（保留 iOS 切换器手感 + 透视进深）。
+   页自身 transform（translateX 像素 + rotateY + scale）由 book.js 的
+   applyPose() 按实测布局注入（不同屏宽需要的位移不同，CSS 百分比做不到）；
+   这里只保留叶子的堆叠微调。 */
+.page.is-prev .leaf--left  { transform: rotateY(5deg); }   /* 朝书心微转，堆叠层次 */
+.page.is-prev .leaf--right { transform: rotateY(-16deg); } /* 露出端向后藏 */
+.page.is-next .leaf--left  { transform: rotateY(16deg); }
+.page.is-next .leaf--right { transform: rotateY(-5deg); }
+
+/* —— 翻页表演态：旧页左右叶向书脊合拢 —— */
+.page.is-folding .leaf--left  { transform: rotateY(26deg); }
+.page.is-folding .leaf--right { transform: rotateY(-26deg); }
+
+/* 非当前跨页关闭 backdrop-filter：3D + 高斯模糊叠加很吃合成层，
+   浅色底玻璃感弱，非当前页纯背景渐变即可 */
+.page:not(.is-current) .leaf {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* —— 点击两侧露出区翻页的命中层（页级委托，见 book.js） —— */
+.page.is-prev,
+.page.is-next {
+  cursor: pointer;
+}
+
+/* ============================================================
+   双开窄叶适配：报名版 / 关于双栏 / 加入双栏 在叶宽（约 592-632px）下单栏
+   ============================================================ */
+.sheet__body--apply { grid-template-columns: 1fr; }   /* 左指南栏堆到表单上方 */
+.sheet__cols        { grid-template-columns: 1fr; }   /* 关于：文本 + 蓝图竖排 */
+.sheet__body--cta   { grid-template-columns: 1fr; }   /* 加入：标语 + 联系方式竖排 */
+.sheet__body--cta   { text-align: center; }
+.cta__contacts      { text-align: left; max-width: 460px; margin: 0 auto; }
+.blueprint          { min-height: 150px; }
+
+/* ============================================================
+   手机端（<900px）：纵向流式降级
+   3D 双开在手机上不可用（叶宽仅 ~180px），改为文档流纵向排列、
+   页面整体滚动 —— 内容决定高度，彻底消除裁切问题。
+   ============================================================ */
+@media (max-width: 899px) {
+  .holo__stage { perspective: none; }
+  .holo__track {
+    display: block;
+    transform: none !important;
+    transition: none;
+  }
+  .page {
+    display: block;
+    margin: 0 0 20px;
+    transform: none !important;
+    transition: none;
+  }
+  .page .leaf {
+    height: auto;         /* 覆盖 base.css 的 var(--panel-h) */
+    min-height: 0;
+    overflow: visible;    /* 内容自适应，不再裁切 */
+    transform: none !important;
+    backface-visibility: visible;
+    border-radius: 14px;
+  }
+  .page__spine { display: none; }
+  .page::before,
+  .page::after { display: none; }
+
+  /* 单栏堆叠（激活原 paper.css 死代码 + 双开窄叶适配） */
+  .sheet__body--apply,
+  .apply-form__grid,
+  .sheet__cols,
+  .sheet__body--cta,
+  .groups { grid-template-columns: 1fr; }
+
+  /* 流式下提交按钮 sticky 到视口底部，滚动时始终可点 */
+  .form-submit {
+    position: sticky;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent, rgba(244, 249, 253, 0.95) 30%);
+  }
+}

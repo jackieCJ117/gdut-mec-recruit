@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>机创时报 CYBER 2026 · 机械创新团队秋季招新特刊</title>
-  <meta name="description" content="广东工业大学机械创新团队 2026 秋季招新特刊 —— 全息虚拟报纸，横滑浏览团队与各组别，直达报名。">
+  <meta name="description" content="广东工业大学机械创新团队 2026 秋季招新特刊 —— 全息虚拟 3D 书刊，翻页浏览团队与各组别，直达报名。">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23176388' stroke-width='10'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23176388'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/cover.css">
   <link rel="stylesheet" href="css/paper.css">
+  <link rel="stylesheet" href="css/book3d.css">
 </head>
 <body>
   <a class="skip-link" href="#viewport">跳到报纸正文</a>
@@ -44,13 +45,14 @@
       </div>
     </header>
 
-    <!-- ============ 全息横滑大屏 ============ -->
-    <section class="holo" id="viewport" aria-label="机创时报：全息虚拟报纸，横滑浏览六个版面">
-      <div class="holo__track" id="track">
+    <!-- ============ 全息 3D 书刊 ============ -->
+    <section class="holo" id="viewport" aria-label="机创时报：全息虚拟 3D 书刊，可翻页浏览六个版面">
+      <div class="holo__stage">
+        <div class="holo__track" id="track">
 
-        <!-- ① 封面 -->
-        <section class="holo__panel is-current" data-panel="1" aria-label="封面">
-          <article class="sheet sheet--cover">
+        <!-- 跨页 1：封面 + 关于 -->
+        <div class="page page--1 is-current" data-page="1">
+          <article class="sheet sheet--cover leaf leaf--left" data-panel="1" aria-label="封面">
             <div class="cover__bg" aria-hidden="true">
               <div class="cover__grid"></div>
               <div class="cover__scan"></div>
@@ -133,11 +135,8 @@
               <p class="cover__hint">← 横滑 / 拖动 / 键盘方向键 → 浏览版面</p>
             </div>
           </article>
-        </section>
-
-        <!-- ② 关于团队 -->
-        <section class="holo__panel" data-panel="2" aria-label="02 · 关于团队">
-          <article class="sheet sheet--paper">
+          <span class="page__spine" aria-hidden="true"></span>
+          <article class="sheet sheet--paper leaf leaf--right" data-panel="2" aria-label="02 · 关于团队">
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">02</span>
               <h2 class="sheet__masthead-title">关于机创 <i>ABOUT</i></h2>
@@ -191,11 +190,11 @@
               <span class="sheet__folio">P.02</span>
             </footer>
           </article>
-        </section>
+        </div><!-- /page 1 -->
 
-        <!-- ③ 组别矩阵 -->
-        <section class="holo__panel" data-panel="3" aria-label="03 · 组别矩阵">
-          <article class="sheet sheet--paper">
+        <!-- 跨页 2：组别 + 战绩 -->
+        <div class="page page--2" data-page="2">
+          <article class="sheet sheet--paper leaf leaf--left" data-panel="3" aria-label="03 · 组别矩阵">
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">03</span>
               <h2 class="sheet__masthead-title">组别矩阵 <i>DIVISIONS</i></h2>
@@ -241,11 +240,8 @@
               <span class="sheet__folio">P.03</span>
             </footer>
           </article>
-        </section>
-
-        <!-- ④ 战绩与日程 -->
-        <section class="holo__panel" data-panel="4" aria-label="04 · 战绩与日程">
-          <article class="sheet sheet--paper">
+          <span class="page__spine" aria-hidden="true"></span>
+          <article class="sheet sheet--paper leaf leaf--right" data-panel="4" aria-label="04 · 战绩与日程">
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">04</span>
               <h2 class="sheet__masthead-title">战绩与日程 <i>HONORS &amp; TIMELINE</i></h2>
@@ -290,11 +286,11 @@
               <span class="sheet__folio">P.04</span>
             </footer>
           </article>
-        </section>
+        </div><!-- /page 2 -->
 
-        <!-- ⑤ 报名 -->
-        <section class="holo__panel" data-panel="5" aria-label="05 · 报名">
-          <article class="sheet sheet--paper sheet--apply">
+        <!-- 跨页 3：报名 + 加入 -->
+        <div class="page page--3" data-page="3">
+          <article class="sheet sheet--paper sheet--apply leaf leaf--left" data-panel="5" aria-label="05 · 报名">
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">05</span>
               <h2 class="sheet__masthead-title">报名 <i>APPLY</i></h2>
@@ -417,11 +413,8 @@
               <span class="sheet__folio">P.05</span>
             </footer>
           </article>
-        </section>
-
-        <!-- ⑥ 加入我们 -->
-        <section class="holo__panel" data-panel="6" aria-label="06 · 加入我们">
-          <article class="sheet sheet--paper sheet--cta">
+          <span class="page__spine" aria-hidden="true"></span>
+          <article class="sheet sheet--paper sheet--cta leaf leaf--right" data-panel="6" aria-label="06 · 加入我们">
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">06</span>
               <h2 class="sheet__masthead-title">想加入我们？ <i>JOIN US</i></h2>
@@ -463,9 +456,10 @@
               <span class="sheet__folio">P.06</span>
             </footer>
           </article>
-        </section>
+        </div><!-- /page 3 -->
 
-      </div><!-- /holo__track -->
+        </div><!-- /holo__track -->
+      </div><!-- /holo__stage -->
     </section><!-- /holo -->
 
     <!-- ============ 全息轨道导航 ============ -->

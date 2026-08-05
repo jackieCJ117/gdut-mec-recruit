@@ -221,27 +221,17 @@ body {
   display: flex;
   transition: transform var(--dur-slide) var(--ease-slide);
   will-change: transform;
+  transform-style: preserve-3d; /* 让页内 3D 姿态在轨道内成立 */
 }
-
-.holo__panel {
-  flex: 0 0 var(--panel-w);
-  margin: 0 var(--panel-gap);
-  min-width: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform: scale(0.9);
-  transition: transform var(--dur-slide) var(--ease-slide);
-}
-.holo__panel.is-current { transform: scale(1); }
 
 /* 每个版面的「全息玻璃屏」。
    注意：这里不再设 background 与 overflow——
    此前 background: rgba(255,255,255,0.66) 特异性压死了 cover.css/paper.css
    的装饰渐变（封面三层渐变、纸面竖纹全部不生效）；
    overflow:hidden 则压死 paper.css 的 overflow-y:auto（内容被裁且无法滚动）。
-   现在背景/滚动行为由各 sheet 自身（cover.css / paper.css）声明。 */
-.holo__panel > .sheet {
+   现在背景/滚动行为由各 sheet 自身（cover.css / paper.css）声明。
+   .leaf 的 3D 姿态见 book3d.css。 */
+.holo .leaf {
   position: relative;
   width: 100%;
   height: var(--panel-h);
@@ -252,24 +242,6 @@ body {
   box-shadow:
     0 20px 55px rgba(23, 99, 136, 0.22),
     inset 0 0 0 1px rgba(255, 255, 255, 0.6);
-}
-
-/* 全息光斑掠过整块屏幕（透明度已压低，避免扫过内页文字时糊字；
-   z-index 层级重构见 holo.css 的 .sheet__sheen） */
-.holo__panel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, 0.35) 46%, transparent 60%);
-  background-size: 320% 320%;
-  opacity: 0.16;
-  animation: holo-sheen 14s ease-in-out infinite;
-}
-@keyframes holo-sheen {
-  0%, 55% { background-position: 130% 130%; }
-  80%, 100% { background-position: -30% -30%; }
 }
 
 /* ============================================================
@@ -353,7 +325,7 @@ body {
   .topbar__title i { display: none; }
   .topbar__edition { font-size: 8px; }
   .holo-bg__aurora--3 { display: none; }
-  .holo__panel > .sheet { min-height: 480px; }
+  .holo .leaf { min-height: 480px; }
   .holo__rail { gap: 8px; }
   .chip { padding: 5px 10px; font-size: 10px; }
   :root { --panel-w: 72vw; }
