@@ -151,24 +151,24 @@
 }
 .cover__rule-gem { font-size: 9px; }
 
-/* —— 队标 + 全息光环 —— */
+/* —— 队标 + 全息光环（放大：让队标图内文字清晰可读） —— */
 .cover__logo-wrap {
   position: relative;
-  width: 210px;
-  height: 210px;
+  width: 272px;
+  height: 272px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 .cover__logo {
   position: relative;
   z-index: 2;
-  width: 168px;
-  height: 168px;
+  width: 240px;
+  height: 240px;
   filter:
-    drop-shadow(0 0 14px rgba(34, 179, 200, 0.7))
-    drop-shadow(0 0 34px rgba(34, 179, 200, 0.4));
+    drop-shadow(0 0 18px rgba(47, 196, 220, 0.8))
+    drop-shadow(0 0 46px rgba(47, 196, 220, 0.45));
 }
 .cover__ring {
   position: absolute;
@@ -178,41 +178,19 @@
   pointer-events: none;
 }
 .cover__ring--1 {
-  width: 206px;
-  height: 206px;
-  margin: -103px 0 0 -103px;
+  width: 266px;
+  height: 266px;
+  margin: -133px 0 0 -133px;
   border: 1px dashed rgba(94, 200, 226, 0.5);
   animation: spin 22s linear infinite;
 }
 .cover__ring--2 {
-  width: 148px;
-  height: 148px;
-  margin: -74px 0 0 -74px;
+  width: 202px;
+  height: 202px;
+  margin: -101px 0 0 -101px;
   border: 1px solid rgba(94, 200, 226, 0.35);
   border-top-color: var(--cyan);
   animation: spin 14s linear infinite reverse;
-}
-/* —— 队标下清晰队名（不依赖队标图内文字） —— */
-.cover__teamname {
-  text-align: center;
-  margin: -4px 0 14px;
-}
-.cover__teamname-cn {
-  display: block;
-  font-family: var(--font-head-cn);
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: 6px;
-  color: var(--title);
-  text-shadow: 0 0 14px rgba(47, 196, 220, 0.55);
-}
-.cover__teamname-en {
-  display: block;
-  font-family: var(--font-en);
-  font-size: 8px;
-  letter-spacing: 2.5px;
-  color: var(--mist);
-  margin-top: 4px;
 }
 
 .cover__beam {

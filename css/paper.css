@@ -859,25 +859,72 @@
 .group-screen__main {
   display: grid;
   grid-template-columns: 1.45fr 1fr;
-  gap: 22px;
-  align-items: stretch;
-  margin-top: 6px;
+  gap: 26px;
+  align-items: center;
+  margin-top: 8px;
 }
-.group-screen__desc { display: flex; flex-direction: column; justify-content: center; gap: 12px; }
-.group-screen__desc .para { font-size: 15px; line-height: 1.9; }
+.group-screen__desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  max-width: 560px;
+  margin: 0 auto;               /* 视觉重心居中 */
+}
+.group-screen .sheet__lead {
+  font-family: var(--font-head-cn);   /* 得意黑：科技感斜体黑 */
+  font-size: 24px;
+  line-height: 1.55;
+  letter-spacing: 2px;
+  text-align: center;                  /* lead 居中 */
+  border-left: none;
+  padding-left: 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--holo-line);
+  margin-bottom: 6px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.group-screen__desc .para {
+  font-size: 18px;
+  line-height: 2;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  text-align: center;                  /* 正文居中 */
+  color: var(--text);
+}
+.group-screen__desc .group__who {
+  font-size: 15px;
+  line-height: 1.8;
+  padding: 10px 16px;
+  text-align: center;
+}
 .group__tags--lg {
-  gap: 8px;
+  gap: 10px;
+  justify-content: center;   /* 标签居中 */
 }
 .group__tags--lg li {
-  font-size: 11px;
-  letter-spacing: 1px;
-  padding: 5px 14px;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  padding: 7px 18px;
   border-color: var(--holo-border);
   background: var(--panel-hi);
-  box-shadow: 0 0 8px rgba(47, 196, 220, 0.15);
+  box-shadow: 0 0 10px rgba(47, 196, 220, 0.2);
+  color: var(--cyan-soft);
+  font-weight: 600;
 }
 
 /* 组别装饰面板（专属 SVG + 扫描氛围） */
+.group-screen .sheet__masthead-title {
+  font-family: var(--font-head-cn);
+  font-size: 26px;
+  letter-spacing: 3px;
+}
+.group-screen .sheet__masthead-title i {
+  font-size: 12px;
+  letter-spacing: 3px;
+}
 .group-screen__art {
   position: relative;
   display: flex;
@@ -938,4 +985,68 @@
   .group-screen__main { grid-template-columns: 1fr; }
   .group-screen__art { min-height: 180px; }
   .group-screen__svg { width: 110px; height: 110px; }
+}
+
+/* ============================================================
+   关于页充实（精修 3）：铺满 + 优势网格 + 数据卡加大
+   ============================================================ */
+.sheet__body--about {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;   /* 内容纵向铺满，无底部空挡 */
+}
+.facts {
+  gap: 16px;
+}
+.facts__item {
+  padding: 22px 8px 18px;
+  border-top-width: 3px;
+  box-shadow: inset 0 0 24px rgba(47, 196, 220, 0.07);
+}
+.facts__num { font-size: 42px; letter-spacing: 1px; text-shadow: 0 0 18px rgba(47, 196, 220, 0.5); }
+.facts__label { font-size: 13px; letter-spacing: 2px; }
+.blueprint { min-height: 230px; }
+
+/* 优势网格面板（2×2，撑满底部） */
+.holo-bar--grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 14px;
+  border: 1px solid var(--holo-border);
+  border-radius: 12px;
+  background: rgba(94, 200, 226, 0.04);
+}
+.holo-bar--grid .holo-bar__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 16px 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--panel-hi);
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+.holo-bar--grid .holo-bar__cell:hover {
+  box-shadow: 0 0 18px rgba(47, 196, 220, 0.25);
+  transform: translateY(-2px);
+}
+.holo-bar--grid .holo-bar__ico { font-size: 17px; color: var(--cyan); text-shadow: 0 0 10px rgba(47, 196, 220, 0.8); }
+.holo-bar--grid b {
+  font-family: var(--font-head-cn);
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--cyan-soft);
+  border: none;
+  background: none;
+  padding: 0;
+}
+.holo-bar--grid small { font-size: 11px; letter-spacing: 1px; color: var(--mist); }
+
+@media (max-width: 899px) {
+  .holo-bar--grid { grid-template-columns: 1fr; }
+  .blueprint { min-height: 180px; }
 }
