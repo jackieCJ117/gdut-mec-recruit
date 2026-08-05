@@ -11,7 +11,7 @@
   flex-direction: column;
   background:
     repeating-linear-gradient(90deg, rgba(23, 99, 136, 0.03) 0 1px, transparent 1px 4px),
-    linear-gradient(160deg, #ffffff 0%, #f5fbfe 55%, #ecf6fc 100%);
+    linear-gradient(160deg, rgba(255, 255, 255, 0.62) 0%, rgba(232, 248, 253, 0.44) 100%);
   border: 1px solid rgba(23, 99, 136, 0.42);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6), 0 10px 30px rgba(23, 99, 136, 0.16);
   color: var(--text);
@@ -770,3 +770,76 @@
   .groups { grid-template-columns: 1fr; }
   .sheet__footer { padding: 8px 16px 12px; }
 }
+
+/* ============================================================
+   v4 内容放大填满（覆盖基础字号，让版面更饱满）
+   ============================================================ */
+.sheet__masthead { padding: 16px 26px 11px; }
+.sheet__masthead-id { font-size: 27px; }
+.sheet__masthead-title { font-size: 21px; }
+.sheet__masthead-title i { font-size: 10px; }
+.sheet__masthead-meta { font-size: 9px; }
+.sheet__body { padding: 18px 26px 14px; }
+.sheet__lead { font-size: 19px; }
+.sheet__lead--small { font-size: 14px; }
+.para { font-size: 14.5px; }
+.motto__text { font-size: 20px; }
+.motto__en { font-size: 8.5px; }
+.facts__num { font-size: 32px; }
+.facts__label { font-size: 12px; }
+.facts__item { padding: 14px 8px 12px; }
+
+.group { padding: 15px 16px 14px 20px; }
+.group__name { font-size: 17px; }
+.group__desc { font-size: 13px; }
+.group__who { font-size: 12px; padding: 6px 9px; }
+.group__tags li { font-size: 9px; padding: 2px 9px; }
+.groups { gap: 14px; }
+
+.trophy { padding: 12px 16px; }
+.trophy__num { font-size: 24px; }
+.trophy__text { font-size: 14px; }
+.trophy__text small { font-size: 11px; }
+.trophies { gap: 10px; margin-bottom: 18px; }
+.timeline__title { font-size: 16px; }
+.timeline__item { font-size: 13px; padding-bottom: 10px; }
+.timeline__note { font-size: 11px; }
+
+.form-side__title, .form-reg__title { font-size: 16px; }
+.steps__item { font-size: 13px; }
+.notice__list { font-size: 11.5px; }
+.field > label, .field__label { font-size: 12.5px; }
+.field input[type="text"], .field input[type="email"], .field input[type="tel"] { font-size: 14.5px; }
+.field textarea { font-size: 13.5px; }
+.check { font-size: 12.5px; }
+.checks--grid { gap: 5px 12px; }
+.form-reg { gap: 12px; }
+
+.cta__slogan { font-size: 20px; }
+.cta__text { font-size: 14px; }
+.cta__list { font-size: 13px; }
+.sheet__footer { font-size: 11px; padding: 10px 26px 14px; }
+
+/* 全息填充条：填满版面剩余横向空间 */
+.holo-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--holo-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.4);
+}
+.holo-bar span,
+.holo-bar b {
+  font-family: var(--font-en);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--ink);
+  border: 1px solid rgba(23, 99, 136, 0.22);
+  border-radius: 999px;
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.65);
+}
+.holo-bar b { color: #fff; background: var(--ink); border-color: var(--ink); }

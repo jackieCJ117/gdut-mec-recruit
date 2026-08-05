@@ -23,8 +23,10 @@
   --font-en: "Orbitron", "Consolas", "Courier New", monospace;
   --font-cn: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Hiragino Sans GB", sans-serif;
 
-  /* 面板高度预算：100vh - (顶栏+轨道+页脚+留白) */
+  /* 面板尺寸预算：收窄留缝让相邻版面两侧露出 */
   --panel-h: calc(100vh - 176px);
+  --panel-w: min(76vw, 1080px);
+  --panel-gap: clamp(16px, 2vw, 30px);
   --dur-slide: 0.7s;
   --ease-slide: cubic-bezier(0.42, 0.12, 0.22, 1);
 }
@@ -218,23 +220,28 @@ body {
 }
 
 .holo__panel {
-  flex: 0 0 100%;
+  flex: 0 0 var(--panel-w);
+  margin: 0 var(--panel-gap);
   min-width: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px clamp(12px, 3.5vw, 44px) 6px;
+  transform: scale(0.9);
+  transition: transform var(--dur-slide) var(--ease-slide);
 }
+.holo__panel.is-current { transform: scale(1); }
 
-/* 每个版面的「全息屏」 */
+/* 每个版面的「全息玻璃屏」 */
 .holo__panel > .sheet {
   position: relative;
   width: 100%;
-  max-width: 1180px;
   height: var(--panel-h);
   min-height: 520px;
   border-radius: 16px;
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.66);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
   box-shadow:
     0 20px 55px rgba(23, 99, 136, 0.22),
     inset 0 0 0 1px rgba(255, 255, 255, 0.6);
@@ -341,4 +348,5 @@ body {
   .holo__panel > .sheet { min-height: 480px; }
   .holo__rail { gap: 8px; }
   .chip { padding: 5px 10px; font-size: 10px; }
+  :root { --panel-w: 72vw; }
 }

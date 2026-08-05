@@ -1,21 +1,27 @@
 /* ============================================================
-   机创日报 CYBER 2026 · book.js  v3（全息横滑大屏）
-   横滑分页器：轨道 translateX 滑动 / 箭头 / 键盘 / 拖拽 / 轨道芯片
+   机创时报 CYBER 2026 · book.js  v4（玻璃全息切换器）
+   横滑分页：像素步长 + 居中偏移 + 相邻版面两侧露出微缩
+   像 iOS 后台应用切换器：当前版居中最大，前后版面在两侧露出
    ============================================================ */
 (function () {
   'use strict';
 
   var track = document.getElementById('track');
   var viewport = document.getElementById('viewport');
+  var panels = Array.prototype.slice.call(track.children);
   var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
   var prevBtn = document.getElementById('prevBtn');
   var nextBtn = document.getElementById('nextBtn');
   var coverStart = document.getElementById('coverStart');
 
-  var N = track.children.length;
+  var N = panels.length;
   var current = 0;
   var busy = false;
   var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var step = 0;      // 相邻面板中心距
+  var base = 0;      // 首面板左边距
+  var centerShift = 0; // 使当前版居中的偏移
 
   function setUI() {
     chips.forEach(function (chip, i) {
@@ -27,13 +33,31 @@
     if (nextBtn) nextBtn.disabled = current === N - 1;
   }
 
+  function applyTransform() {
+    var x = -step * current + (centerShift - base);
+    track.style.transform = 'translateX(' + x + 'px)';
+    panels.forEach(function (p, i) {
+      p.classList.toggle('is-current', i === current);
+    });
+  }
+
+  function measure() {
+    if (!panels[0] || !panels[1]) return;
+    var firstW = panels[0].getBoundingClientRect().width;
+    step = panels[1].offsetLeft - panels[0].offsetLeft;
+    base = panels[0].offsetLeft;
+    var vw = viewport.getBoundingClientRect().width;
+    centerShift = (vw - firstW) / 2;
+    applyTransform();
+  }
+
   function goTo(target) {
     target = Math.max(0, Math.min(N - 1, target));
     if (target === current) return;
     if (busy) return;
     busy = true;
     current = target;
-    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    applyTransform();
 
     var settled = false;
     function finish() {
@@ -84,5 +108,12 @@
     goTo(dx < 0 ? current + 1 : current - 1);
   }, { passive: true });
 
+  /* —— 尺寸变化重排 —— */
+  window.addEventListener('resize', measure);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(measure);
+  }
+
+  measure();
   setUI();
 })();
