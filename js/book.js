@@ -17,6 +17,7 @@
   var current = 0;
   var busy = false;
   var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var FLOW = window.matchMedia('(max-width: 899px)');   // 手机长页模式
   var DUR = REDUCED ? 30 : 500;    // 切换过渡兜底时长
 
   /* —— UI 同步：chips 高亮 + 首尾禁用 —— */
@@ -46,7 +47,24 @@
   /* —— 控件 —— */
   if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
   if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
-  if (coverStart) coverStart.addEventListener('click', function () { goTo(1); });
+  if (coverStart) coverStart.addEventListener('click', function () {
+    if (FLOW.matches) {
+      /* 手机长页模式：滚动进入内容 */
+      screens[1].scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' });
+      return;
+    }
+    goTo(1);
+  });
+
+  /* —— 手机端浮动报名按钮：一键滑到报名模块 —— */
+  var mobileApply = document.getElementById('mobileApply');
+  if (mobileApply) {
+    mobileApply.addEventListener('click', function (e) {
+      e.preventDefault();
+      var target = document.getElementById('apply-module') || screens[7];
+      target.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' });
+    });
+  }
   chips.forEach(function (chip) {
     chip.addEventListener('click', function () {
       goTo(Number(chip.getAttribute('data-go')) - 1);

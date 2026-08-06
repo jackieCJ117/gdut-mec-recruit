@@ -364,3 +364,40 @@
   .cover__datastrip { gap: 8px; padding: 6px 10px; font-size: 7px; letter-spacing: 1px; }
   .cover__cta { padding: 10px 22px; font-size: 13px; }
 }
+
+/* ============================================================
+   手机端：启动屏压缩为长页头部
+   ============================================================ */
+@media (max-width: 899px) {
+  /* 隐藏噪音元素：状态条/漂浮芯片/meta/数据条/机械装饰 */
+  .cover__status,
+  .cover__chip,
+  .cover__meta,
+  .cover__datastrip,
+  .deco { display: none; }
+
+  /* 头图：紧凑排布（非全屏居中），一屏内放下 */
+  .sheet--cover {
+    border-radius: 16px;
+    background:
+      radial-gradient(80% 60% at 50% 0%, rgba(47, 196, 220, 0.14), transparent 60%),
+      linear-gradient(160deg, rgba(9, 24, 40, 0.6), rgba(6, 16, 27, 0.5));
+  }
+  .cover__content {
+    padding: 26px 18px 22px;
+    gap: 4px;
+  }
+  .cover__est { margin-bottom: 8px; }
+  .cover__logo-wrap { margin-bottom: 8px; }
+  .cover__rule { margin: 10px 0 12px; }
+  .cover__headline { font-size: 21px; }
+  .cover__sub { margin-top: 8px; }
+
+  /* 开始浏览按钮 + 提示 */
+  .cover__footer {
+    position: static;
+    padding: 10px 0 4px;
+    gap: 6px;
+  }
+  .cover__hint { font-size: 11px; }
+}

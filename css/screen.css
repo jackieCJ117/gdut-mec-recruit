@@ -33,3 +33,33 @@
 /* 滚动条（深色细条） */
 .screen::-webkit-scrollbar { width: 6px; }
 .screen::-webkit-scrollbar-thumb { background: rgba(94, 200, 226, 0.3); border-radius: 3px; }
+
+/* ============================================================
+   手机端重构：纵向长页流式（<900px）
+   放弃"分屏淡入"，9 个模块纵向排列成一条长页，
+   像公众号文章一样上下滑动阅读——内容自适应高度、无小窗滚动。
+   ============================================================ */
+@media (max-width: 899px) {
+  .holo {
+    height: auto !important;      /* 容器自适应内容高度 */
+    overflow: visible;
+  }
+  /* 用 .holo .screen 提高特异性，压过 base.css 的绝对叠放规则 */
+  .holo .screen {
+    position: static !important;  /* 取消绝对叠放 */
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    height: auto !important;
+    margin: 0 0 18px !important;  /* 模块卡片间距 */
+    border-radius: 16px;
+    transition: none;
+  }
+  .holo .screen .sheet {
+    height: auto !important;      /* 取消固定高 + 内部滚动 */
+    overflow: visible;
+  }
+  .holo__rail { display: none; }  /* 9 chips 分屏导航隐藏（长页无需） */
+  .book-wrap { padding-bottom: 84px; }  /* 给底部浮动按钮让位 */
+}

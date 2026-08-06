@@ -493,7 +493,7 @@
       </article>
 
       <!-- 05 报名 -->
-      <article class="screen sheet--paper sheet--apply" data-screen="8" aria-label="08 · 报名">
+      <article class="screen sheet--paper sheet--apply" data-screen="8" id="apply-module" aria-label="08 · 报名">
         <span class="sheet__sheen" aria-hidden="true"></span>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">08</span>
@@ -689,8 +689,11 @@
     <p class="book-foot">设计：机创全息终端 · 队标青 <code>#107090</code> · 占位文案在 <code>index.html</code> 中替换</p>
   </main>
 
-  <script src="js/book.js?v=7"></script>
-  <script src="js/form.js?v=7"></script>
-  <script src="js/fx.js?v=7"></script>
+  <script src="js/book.js?v=8"></script>
+  <script src="js/form.js?v=8"></script>
+  <script src="js/fx.js?v=8"></script>
+
+  <!-- 手机端底部浮动报名按钮（长页常驻，一键滑到报名模块） -->
+  <a class="mobile-cta" id="mobileApply" href="#apply-module" aria-label="立即报名">⚡ 立即报名</a>
 </body>
 </html>

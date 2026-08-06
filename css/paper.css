@@ -1169,3 +1169,32 @@
   padding: 0 2px;
 }
 .upload-item__del:hover { color: #ff8a80; }
+
+/* ============================================================
+   手机端底部浮动报名按钮（长页常驻，一键到报名）
+   ============================================================ */
+.mobile-cta {
+  display: none;
+  position: fixed;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 13px 34px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--cyan), #0e8ba6);
+  color: var(--bg);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-decoration: none;
+  box-shadow:
+    0 0 24px rgba(47, 196, 220, 0.55),
+    0 6px 18px rgba(0, 0, 0, 0.5);
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+.mobile-cta:active { transform: translateX(-50%) scale(0.96); }
+
+@media (max-width: 899px) {
+  .mobile-cta { display: inline-block; }
+}
