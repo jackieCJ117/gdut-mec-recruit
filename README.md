@@ -50,10 +50,10 @@ python -m http.server 8080
 |---|---|
 | 01 启动屏 | 「EST. 20XX」成立年份（`<span class="glitch" data-text="20XX">`，换真值后删 glitch 类）、大标语「下一台改变世界的机器，等你来造」 |
 | 02 关于 | 团队简介两段文字、队训、三个数字（`data-count` 属性换成真实值） |
-| 03 组别矩阵 | 四组职责与技能标签 |
-| 04 战绩与日程 | 成就卡 `N×`（flick-target）、`LOADING DATA` 标签、招新时间轴三个 `tbd` 日期 |
-| 05 报名 | 群号/截止时间等（`data-placeholder` 处）；报名邮箱在 `js/form.js` 的 `CONTACT_EMAIL` |
-| 06 加入我们 | QQ 群号/公众号（`connect-anim`，换真值后删该类）、二维码（`qr--holo` 占位图形换真实图片） |
+| 03-06 四个组别 | 各组职责/「适合谁」/技能标签 + 各屏 `CONTENT SLOT` 内容补充区 |
+| 07 战绩与日程 | 成就卡 `N×`（flick-target）、`LOADING DATA` 标签、招新时间轴三个 `tbd` 日期 |
+| 08 报名 | 群号/截止时间等（`data-placeholder` 处）；Supabase 配置在 `js/form.js` 顶部常量 |
+| 09 加入我们 | QQ 群号/公众号（`connect-anim`，换真值后删该类）、二维码（`qr--holo` 占位图形换真实图片） |
 
 - **占位动效自动停用规则**：文本仍含 `X / 占位 / N× / 20XX` 时 fx.js 才启用动效；替换为真实文本（并清理 `data-count`、`glitch`/`connect-anim`/`tbd` 等标记）即停用。
 - **配图**：内容区配图目前是青色系几何占位（SVG），可用真实照片/作品图替换；队标直接替换 `assets/logo.png` 同名文件即可。
