@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="css/paper.css">
   <link rel="stylesheet" href="css/screen.css">
   <link rel="stylesheet" href="css/holo.css">
+  <link rel="stylesheet" href="css/holo-tip.css">
+  <link rel="stylesheet" href="css/holo-term.css">
+  <link rel="stylesheet" href="css/logo-fusion.css">
 </head>
 <body>
   <a class="skip-link" href="#viewport">跳到终端主界面</a>
@@ -695,5 +698,50 @@
 
   <!-- 手机端底部浮动报名按钮（长页常驻，一键滑到报名模块） -->
   <a class="mobile-cta" id="mobileApply" href="#apply-module" aria-label="立即报名">⚡ 立即报名</a>
+
+  <!-- ============ 全息小知识悬浮窗 ============ -->
+  <!-- 角落触发按钮（弹窗本体由 js/holo-tip.js 按屏渲染） -->
+  <button class="holo-tip__fab" id="tipFab" type="button" aria-label="打开有趣小知识">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+      <path d="M12 2.8v2.6M12 18.6v2.6M2.8 12h2.6M18.6 12h2.6M5.5 5.5l1.9 1.9M16.6 16.6l1.9 1.9M18.5 5.5l-1.9 1.9M7.4 16.6l-1.9 1.9"/>
+      <circle cx="12" cy="12" r="3.4"/>
+    </svg>
+  </button>
+
+  <script src="js/holo-tip.js"></script>
+
+  <!-- ============ JARVIS 队标核心终端（右下角队标，点击散开终端面板） ============ -->
+  <!-- 队标核心 -->
+  <div class="holo-term" id="holoTerm">
+    <button class="holo-term__core" id="termCore" type="button" aria-expanded="false" aria-label="展开机创终端">
+      <span class="holo-term__ring holo-term__ring--1" aria-hidden="true"></span>
+      <span class="holo-term__ring holo-term__ring--2" aria-hidden="true"></span>
+      <img class="holo-term__core-img" src="assets/term-core.png" alt="终端图标">
+      <span class="holo-term__led" aria-hidden="true"></span>
+    </button>
+  </div>
+  <!-- 展开态终端面板 -->
+  <aside class="holo-term__panel" id="termPanel" aria-label="机创全息终端" hidden>
+    <span class="holo-term__anchor holo-term__anchor--tl" aria-hidden="true"></span>
+    <span class="holo-term__anchor holo-term__anchor--tr" aria-hidden="true"></span>
+    <span class="holo-term__anchor holo-term__anchor--bl" aria-hidden="true"></span>
+    <span class="holo-term__anchor holo-term__anchor--br" aria-hidden="true"></span>
+    <header class="holo-term__head">
+      <img class="holo-term__logo" src="assets/logo.png" alt="机创队标">
+      <div class="holo-term__titles">
+        <div class="holo-term__title">小机</div>
+        <div class="holo-term__sub">XIAOJI TERMINAL · v2026.08</div>
+      </div>
+      <span class="holo-term__sync">SYNC</span>
+      <button class="holo-term__close" id="termClose" type="button" aria-label="收起终端">−</button>
+    </header>
+    <div class="holo-term__screen" id="termScreen" aria-live="polite"></div>
+    <div class="holo-term__input" aria-hidden="true"><span class="prompt">&gt;</span><span class="holo-term__cursor"></span></div>
+    <footer class="holo-term__foot">
+      <span>SYS.ONLINE</span><span>09 MODULES</span><span>04 GROUPS</span>
+    </footer>
+  </aside>
+
+  <script src="js/holo-term.js"></script>
 </body>
 </html>

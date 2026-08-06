@@ -1,0 +1,280 @@
+/* ============================================================
+   机创全息终端 CYBER 2026 · holo-term.css
+   JARVIS 队标核心终端：右下角队标核心 + 点击散开终端面板
+   队标为中心，命令行从中心向外展开（全息投影式）
+   ============================================================ */
+
+/* —— 队标核心（右下角常驻） —— */
+.holo-term {
+  position: fixed;
+  right: 22px; bottom: 26px;
+  z-index: 93;
+}
+.holo-term__core {
+  position: relative;
+  width: 93px; height: 93px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(8, 22, 36, 0.8);
+  border: 1px solid rgba(94, 200, 226, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    0 0 20px rgba(47, 196, 220, 0.35),
+    inset 0 0 16px rgba(47, 196, 220, 0.18);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.holo-term__core:hover {
+  transform: scale(1.06);
+  box-shadow:
+    0 0 30px rgba(47, 196, 220, 0.55),
+    inset 0 0 22px rgba(47, 196, 220, 0.28);
+}
+.holo-term__core-img {
+  width: 72px; height: 72px; border-radius: 50%;
+  box-shadow: 0 0 12px rgba(47, 196, 220, 0.6);
+  transition: transform 0.3s ease;
+}
+/* 展开时图标放大 */
+.holo-term__core.is-on .holo-term__core-img { transform: scale(1.12); }
+
+/* 外环：旋转虚线环（常驻缓慢旋转，展开加速） */
+.holo-term__ring--1 {
+  position: absolute; inset: -9px;
+  border-radius: 50%;
+  border: 1px dashed rgba(127, 216, 232, 0.45);
+  animation: holo-term-spin 14s linear infinite;
+  pointer-events: none;
+}
+/* 扫描环（局部弧线，带发光） */
+.holo-term__ring--2 {
+  position: absolute; inset: -18px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  border-top-color: rgba(47, 196, 220, 0.7);
+  border-right-color: rgba(47, 196, 220, 0.25);
+  animation: holo-term-spin 3.2s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(47, 196, 220, 0.5));
+  pointer-events: none;
+}
+@keyframes holo-term-spin { to { transform: rotate(360deg); } }
+/* 展开时加速 + 高亮 */
+.holo-term__core.is-on .holo-term__ring--1 { animation-duration: 4s; border-color: rgba(127, 216, 232, 0.7); }
+.holo-term__core.is-on .holo-term__ring--2 { animation-duration: 1.4s; border-top-color: rgba(47, 196, 220, 0.95); }
+
+/* 波纹扩散（点击展开时一圈光波从队标散开） */
+.holo-term__core::after {
+  content: ""; position: absolute; inset: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(47, 196, 220, 0.5);
+  opacity: 0;
+  pointer-events: none;
+}
+.holo-term__core.is-on::after {
+  animation: holo-term-wave 1.1s ease-out 2;
+}
+@keyframes holo-term-wave {
+  0%   { transform: scale(0.9); opacity: 0.9; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* 状态灯 */
+.holo-term__led {
+  position: absolute; top: 2px; right: 2px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--cyan, #2fc4dc);
+  box-shadow: 0 0 8px var(--cyan, #2fc4dc);
+  animation: holo-term-blink 1.8s ease-in-out infinite;
+}
+@keyframes holo-term-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+/* —— 终端面板（展开态：从队标位置散开生长） —— */
+.holo-term__panel {
+  position: fixed;
+  right: 22px; bottom: 100px;
+  z-index: 93;
+  width: 400px;
+  max-height: 72vh;
+  display: flex; flex-direction: column;
+  background: rgba(6, 16, 27, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(94, 200, 226, 0.4);
+  border-radius: 10px;
+  box-shadow:
+    0 0 30px rgba(47, 196, 220, 0.22),
+    0 0 70px rgba(47, 196, 220, 0.1),
+    inset 0 0 40px rgba(47, 196, 220, 0.05);
+  color: var(--text, #cfe4f0);
+  overflow: hidden;
+  /* 从队标（右下）散开生长 */
+  transform-origin: 100% 100%;
+  transform: scale(0.35) translateY(24px);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.26s ease, visibility 0s linear 0.32s;
+}
+.holo-term__panel.is-open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.26s ease;
+}
+/* 散开瞬间全息故障帧 */
+.holo-term__panel.is-opening { animation: holo-term-in 0.42s ease-out; }
+@keyframes holo-term-in {
+  0%   { transform: scale(0.35) translateY(24px); filter: none; opacity: 0; }
+  10%  { transform: scale(0.5) translateY(14px); filter: hue-rotate(30deg); opacity: 1; }
+  14%  { transform: scale(0.5) translateY(14px) skewX(-1deg); filter: hue-rotate(-20deg); }
+  100% { transform: scale(1) translateY(0); filter: none; opacity: 1; }
+}
+/* 关闭动画 */
+.holo-term__panel.is-closing {
+  transform: scale(0.3) translateY(26px);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.26s ease-in, opacity 0.22s ease, visibility 0s linear 0.26s;
+}
+
+/* 内部网格 + 扫描线 */
+.holo-term__panel::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(94, 200, 226, 0.05) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(94, 200, 226, 0.035) 0 1px, transparent 1px 4px);
+}
+/* 顶部光带 */
+.holo-term__panel::after {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(127, 216, 232, 0.9), transparent);
+}
+
+/* 四角锚点 */
+.holo-term__anchor {
+  position: absolute; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--cyan, #2fc4dc);
+  box-shadow: 0 0 8px var(--cyan, #2fc4dc);
+  z-index: 3; pointer-events: none;
+}
+.holo-term__anchor--tl { top: 5px; left: 5px; }
+.holo-term__anchor--tr { top: 5px; right: 5px; }
+.holo-term__anchor--bl { bottom: 5px; left: 5px; }
+.holo-term__anchor--br { bottom: 5px; right: 5px; }
+
+/* —— 标题栏 —— */
+.holo-term__head {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 14px;
+  border-bottom: 1px solid rgba(94, 200, 226, 0.16);
+  background: linear-gradient(180deg, rgba(47, 196, 220, 0.1), transparent);
+}
+.holo-term__logo {
+  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(47, 196, 220, 0.5);
+}
+.holo-term__titles { flex: 1; min-width: 0; }
+.holo-term__title {
+  font-size: 13px; font-weight: 700; color: var(--title, #eef8fd);
+  letter-spacing: 0.14em;
+  text-shadow: 1px 0 rgba(47, 196, 220, 0.5), -1px 0 rgba(255, 95, 174, 0.3);
+}
+.holo-term__sub {
+  font-family: var(--font-en, "Orbitron", sans-serif);
+  font-size: 8px; letter-spacing: 0.28em;
+  color: var(--cyan, #2fc4dc); opacity: 0.85; margin-top: 2px;
+}
+.holo-term__sync {
+  font-family: var(--font-en, "Orbitron", sans-serif);
+  font-size: 8px; letter-spacing: 0.2em;
+  color: var(--cyan-soft, #7fd8e8);
+  border: 1px solid rgba(94, 200, 226, 0.35);
+  border-radius: 999px; padding: 3px 8px;
+  animation: holo-term-blink 2.4s ease-in-out infinite;
+}
+.holo-term__close {
+  flex-shrink: 0; width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent; border: 1px solid rgba(94, 200, 226, 0.3);
+  border-radius: 5px; color: var(--mist, #8fb4c9);
+  font-size: 12px; cursor: pointer;
+  transition: all 0.18s ease;
+}
+.holo-term__close:hover {
+  color: var(--title, #eef8fd); border-color: var(--cyan, #2fc4dc);
+  box-shadow: 0 0 10px rgba(47, 196, 220, 0.5);
+}
+
+/* —— 终端屏幕（输出区） —— */
+.holo-term__screen {
+  position: relative; z-index: 2;
+  flex: 1;
+  min-height: 220px; max-height: 420px;
+  padding: 12px 14px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  font-family: "Cascadia Mono", "Consolas", "Courier New", monospace;
+  font-size: 11.5px; line-height: 1.9;
+  color: var(--cyan-soft, #7fd8e8);
+  text-shadow: 0 0 6px rgba(47, 196, 220, 0.3);
+  scrollbar-width: thin;
+}
+.holo-term__screen::-webkit-scrollbar { width: 4px; }
+.holo-term__screen::-webkit-scrollbar-thumb { background: rgba(47, 196, 220, 0.4); border-radius: 2px; }
+.holo-term__screen::-webkit-scrollbar-track { background: transparent; }
+.holo-term__line { white-space: pre-wrap; word-break: break-all; }
+.holo-term__line--dim { opacity: 0.55; }
+.holo-term__line--cyan { color: var(--cyan, #2fc4dc); text-shadow: 0 0 8px rgba(47, 196, 220, 0.6); }
+.holo-term__line--warn { color: #ffc46a; text-shadow: 0 0 8px rgba(255, 196, 106, 0.4); }
+.holo-term__line--ok { color: #6af0a8; text-shadow: 0 0 8px rgba(106, 240, 168, 0.4); }
+.holo-term__line--cn { color: var(--text, #cfe4f0); }
+.holo-term__line b { color: var(--cyan, #2fc4dc); font-weight: 700; }
+
+/* —— 输入行（装饰光标） —— */
+.holo-term__input {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 14px;
+  border-top: 1px solid rgba(94, 200, 226, 0.12);
+  font-family: "Cascadia Mono", "Consolas", "Courier New", monospace;
+  font-size: 11.5px;
+  color: var(--cyan, #2fc4dc);
+}
+.holo-term__input .prompt { opacity: 0.8; }
+.holo-term__cursor {
+  display: inline-block; width: 7px; height: 14px;
+  background: var(--cyan, #2fc4dc);
+  box-shadow: 0 0 8px var(--cyan, #2fc4dc);
+  animation: holo-term-cursor 1s steps(1) infinite;
+}
+@keyframes holo-term-cursor { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+/* —— 底部状态条 —— */
+.holo-term__foot {
+  position: relative; z-index: 2;
+  display: flex; justify-content: space-between;
+  padding: 6px 14px;
+  border-top: 1px solid rgba(94, 200, 226, 0.12);
+  font-family: var(--font-en, "Orbitron", sans-serif);
+  font-size: 7.5px; letter-spacing: 0.22em;
+  color: var(--mist, #8fb4c9); opacity: 0.8;
+}
+
+/* ============================================================
+   响应式：手机端队标缩小、面板全宽从下散开
+   ============================================================ */
+@media (max-width: 767px) {
+  .holo-term { right: 16px; bottom: 84px; } /* 报名条上方 */
+  .holo-term__core { width: 80px; height: 80px; }
+  .holo-term__core-img { width: 62px; height: 62px; }
+  .holo-term__ring--1 { inset: -8px; }
+  .holo-term__ring--2 { inset: -15px; }
+  .holo-term__panel {
+    right: 14px; bottom: 148px;
+    width: 90vw;
+    max-height: 62vh;
+    transform-origin: 100% 100%;
+  }
+  .holo-term__screen { min-height: 150px; max-height: 300px; }
+}

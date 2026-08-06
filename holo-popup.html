@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全息弹窗组件演示 · 机创 CYBER 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   机创全息终端 CYBER 2026 · 全息弹窗组件（演示页）
+   独立自包含：不依赖主站文件，改完内容后可直接整体搬入 index.html
+   ============================================================ */
+:root {
+  /* —— 与主站 base.css 同源的设计 tokens —— */
+  --ink: #107090;
+  --cyan: #2fc4dc;
+  --cyan-soft: #7fd8e8;
+  --mist: #8fb4c9;
+  --holo-border: rgba(94, 200, 226, 0.38);
+  --holo-line: rgba(94, 200, 226, 0.16);
+  --bg-deep: #040b13;
+  --bg: #07121e;
+  --panel: rgba(8, 22, 36, 0.72);
+  --panel-hi: rgba(13, 34, 52, 0.85);
+  --text: #cfe4f0;
+  --title: #eef8fd;
+  --magenta: #ff5fae;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  background: var(--bg-deep);
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* ============================================================
+   演示页舞台（模拟主站深空底 + 网格 + 极光，仅演示用）
+   ============================================================ */
+.stage {
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(90% 70% at 50% 0%, rgba(47, 196, 220, 0.14), transparent 55%),
+    radial-gradient(70% 55% at 90% 90%, rgba(122, 74, 158, 0.13), transparent 60%),
+    linear-gradient(160deg, #040b13 0%, #07121e 100%);
+}
+.stage::before { /* 网格 */
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(94, 200, 226, 0.05) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(94, 200, 226, 0.05) 0 1px, transparent 1px 3px);
+  mask-image: radial-gradient(75% 75% at 50% 50%, #000 30%, transparent 100%);
+}
+.stage::after { /* 噪点 */
+  content: ""; position: absolute; inset: 0; opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* —— 演示页顶栏 —— */
+.topbar {
+  position: relative; z-index: 5;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--holo-border);
+  background: rgba(6, 16, 27, 0.5);
+}
+.topbar__brand { display: flex; align-items: center; gap: 10px; }
+.topbar__logo {
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 1px solid var(--holo-border);
+  box-shadow: 0 0 12px rgba(47, 196, 220, 0.45), inset 0 0 8px rgba(47, 196, 220, 0.35);
+}
+.topbar__title {
+  font-family: "Orbitron", sans-serif; font-weight: 700;
+  font-size: 13px; letter-spacing: 0.18em; color: var(--title);
+}
+.topbar__title i {
+  font-style: normal; font-size: 9px; font-weight: 500;
+  color: var(--cyan); opacity: 0.7; letter-spacing: 0.3em; margin-left: 8px;
+}
+.topbar__live {
+  font-family: "Orbitron", sans-serif; font-size: 9px; letter-spacing: 0.25em;
+  color: var(--cyan); padding: 4px 10px;
+  border: 1px solid rgba(47, 196, 220, 0.4);
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(47, 196, 220, 0.35), inset 0 0 8px rgba(47, 196, 220, 0.2);
+  animation: blink 2.4s ease-in-out infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+/* —— 演示内容区：触发按钮 —— */
+.demo {
+  position: relative; z-index: 5;
+  height: calc(100% - 60px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 26px; padding: 24px;
+  overflow: auto;
+}
+.demo__hint {
+  font-family: "Orbitron", sans-serif; font-size: 10px; letter-spacing: 0.3em;
+  color: var(--mist); text-align: center;
+}
+.demo__hint b { color: var(--cyan-soft); font-weight: 700; }
+.demo__row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+/* 触发卡：组别四卡 */
+.trigger {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  width: 168px; padding: 18px 14px 14px;
+  background: var(--panel);
+  border: 1px solid var(--holo-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  overflow: hidden;
+}
+.trigger:hover {
+  transform: translateY(-3px);
+  border-color: var(--c, var(--cyan));
+  box-shadow: 0 0 18px rgba(47, 196, 220, 0.25), 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.trigger::after { /* 顶部霓虹条 */
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--c, var(--cyan)), transparent);
+  opacity: 0.7;
+}
+.trigger svg { width: 34px; height: 34px; color: var(--c, var(--cyan)); filter: drop-shadow(0 0 6px currentColor); }
+.trigger__cn { font-size: 15px; font-weight: 700; color: var(--title); letter-spacing: 0.15em; }
+.trigger__en {
+  font-family: "Orbitron", sans-serif; font-size: 9px; font-weight: 700;
+  letter-spacing: 0.3em; color: var(--c, var(--cyan)); opacity: 0.85;
+}
+.trigger--mech    { --c: #2fc4dc; }
+.trigger--embed   { --c: #b07ae8; }
+.trigger--vision  { --c: #ffc46a; }
+.trigger--media   { --c: #ff5fae; }
+
+/* 次要触发按钮（内容页示例） */
+.trigger--minor {
+  flex-direction: row; width: auto; padding: 10px 16px; gap: 10px;
+  border-radius: 6px;
+}
+.trigger--minor .trigger__cn { font-size: 13px; }
+.trigger--minor .trigger__en { font-size: 8px; }
+
+/* ============================================================
+   ★ 全息弹窗组件本体（以下为可搬入主站的组件代码）
+   ============================================================ */
+
+/* —— 遮罩：深色模糊 + 网格 —— */
+.holo-popup__backdrop {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  padding: 5vh 16px;
+  background: rgba(2, 8, 14, 0.62);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+.holo-popup__backdrop::before { /* 遮罩网格 */
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(94, 200, 226, 0.05) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(94, 200, 226, 0.05) 0 1px, transparent 1px 3px);
+  pointer-events: none;
+}
+.holo-popup__backdrop.is-open {
+  opacity: 1; visibility: visible;
+  transition: opacity 0.25s ease;
+}
+
+/* —— 弹窗本体：深色玻璃 + 霓虹描边 + 外发光 —— */
+.holo-popup {
+  position: relative;
+  width: min(460px, 94vw);
+  max-height: 88vh;
+  display: flex; flex-direction: column;
+  background: linear-gradient(165deg, rgba(13, 34, 52, 0.92) 0%, rgba(7, 19, 31, 0.95) 100%);
+  border: 1px solid var(--holo-border);
+  border-radius: 10px;
+  box-shadow:
+    0 0 24px rgba(47, 196, 220, 0.22),
+    0 0 60px rgba(47, 196, 220, 0.1),
+    inset 0 0 40px rgba(47, 196, 220, 0.06);
+  color: var(--text);
+  overflow: hidden;
+  /* 开启动画状态（由 JS 控制） */
+  opacity: 0; visibility: hidden;
+  transform: scale(0.92) translateY(12px);
+  transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.28s;
+}
+.holo-popup__backdrop.is-open .holo-popup {
+  opacity: 1; visibility: visible;
+  transform: scale(1) translateY(0);
+  transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: holo-slice-in 0.34s ease-out; /* 全息切片投影 */
+}
+/* 全息切片故障帧：打开瞬间跳 2 帧 */
+@keyframes holo-slice-in {
+  0%   { transform: scale(0.92) translateY(14px); filter: none; }
+  12%  { transform: scale(0.95) translateY(6px) translateX(-2px); filter: hue-rotate(40deg); }
+  16%  { transform: scale(0.95) translateY(6px) translateX(2px);  filter: hue-rotate(-30deg); }
+  22%  { transform: scale(0.98) translateY(2px); filter: none; }
+  100% { transform: scale(1) translateY(0); }
+}
+/* 关闭动画 */
+.holo-popup.is-closing { animation: holo-slice-out 0.24s ease-in forwards; }
+@keyframes holo-slice-out {
+  0%   { opacity: 1; transform: scale(1) translateY(0); }
+  60%  { opacity: 1; transform: scale(1.02) translateY(4px) skewX(-1deg); filter: saturate(1.6); }
+  100% { opacity: 0; transform: scale(0.94) translateY(10px); }
+}
+
+/* —— 内部层：扫描线 + 光带 + 网格（内容之下） —— */
+.holo-popup__scan,
+.holo-popup__sheen {
+  position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+}
+.holo-popup__scan {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(94, 200, 226, 0.05) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(94, 200, 226, 0.035) 0 1px, transparent 1px 4px);
+}
+.holo-popup__sheen {
+  background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, 0.14) 46%, transparent 60%);
+  background-size: 300% 300%;
+  animation: holo-sheen 8s ease-in-out infinite;
+}
+@keyframes holo-sheen {
+  0%, 55% { background-position: 130% 130%; }
+  80%, 100% { background-position: -30% -30%; }
+}
+
+/* —— 四角 HUD 括号 —— */
+.holo-popup__corner { position: absolute; width: 14px; height: 14px; pointer-events: none; z-index: 3; filter: drop-shadow(0 0 4px rgba(47, 196, 220, 0.8)); }
+.holo-popup__corner--tl { top: -1px; left: -1px; border-top: 2px solid var(--cyan); border-left: 2px solid var(--cyan); border-top-left-radius: 8px; }
+.holo-popup__corner--tr { top: -1px; right: -1px; border-top: 2px solid var(--cyan); border-right: 2px solid var(--cyan); border-top-right-radius: 8px; }
+.holo-popup__corner--bl { bottom: -1px; left: -1px; border-bottom: 2px solid var(--cyan); border-left: 2px solid var(--cyan); border-bottom-left-radius: 8px; }
+.holo-popup__corner--br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--cyan); border-right: 2px solid var(--cyan); border-bottom-right-radius: 8px; }
+
+/* —— 标题栏 —— */
+.holo-popup__head {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--holo-line);
+  cursor: grab;
+  user-select: none;
+  background: linear-gradient(180deg, rgba(47, 196, 220, 0.08), transparent);
+}
+.holo-popup__head:active { cursor: grabbing; }
+.holo-popup__led {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+  animation: blink 1.6s ease-in-out infinite;
+}
+.holo-popup__titles { flex: 1; min-width: 0; }
+.holo-popup__title {
+  font-size: 15px; font-weight: 700; color: var(--title);
+  letter-spacing: 0.12em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  text-shadow: 1px 0 rgba(47, 196, 220, 0.55), -1px 0 rgba(255, 95, 174, 0.35);
+}
+.holo-popup__sub {
+  font-family: "Orbitron", sans-serif; font-size: 8px; font-weight: 500;
+  letter-spacing: 0.3em; color: var(--accent, var(--cyan)); opacity: 0.85;
+  margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.holo-popup__close {
+  flex-shrink: 0; width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent; border: 1px solid rgba(94, 200, 226, 0.3);
+  border-radius: 5px; color: var(--mist);
+  font-size: 13px; line-height: 1; cursor: pointer;
+  transition: all 0.18s ease;
+}
+.holo-popup__close:hover {
+  color: var(--title); border-color: var(--cyan);
+  box-shadow: 0 0 10px rgba(47, 196, 220, 0.5), inset 0 0 6px rgba(47, 196, 220, 0.3);
+}
+.holo-popup__drag-tip {
+  position: absolute; right: 48px; top: 13px;
+  font-family: "Orbitron", sans-serif; font-size: 7px; letter-spacing: 0.2em;
+  color: var(--mist); opacity: 0.55; pointer-events: none;
+  animation: blink 3s ease-in-out infinite;
+}
+
+/* —— 内容区 —— */
+.holo-popup__body {
+  position: relative; z-index: 2;
+  padding: 16px 18px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.holo-popup__body::-webkit-scrollbar { width: 4px; }
+.holo-popup__body::-webkit-scrollbar-thumb { background: rgba(47, 196, 220, 0.4); border-radius: 2px; }
+.holo-popup__body::-webkit-scrollbar-track { background: transparent; }
+
+/* 组别图标（徽章） */
+.holo-popup__badge {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+}
+.holo-popup__badge svg {
+  width: 30px; height: 30px; color: var(--accent, var(--cyan));
+  filter: drop-shadow(0 0 6px currentColor);
+}
+.holo-popup__badge-name {
+  font-family: "Orbitron", sans-serif; font-size: 11px; font-weight: 900;
+  letter-spacing: 0.35em; color: var(--accent, var(--cyan));
+  text-shadow: 0 0 12px rgba(47, 196, 220, 0.6);
+}
+.holo-popup__badge-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--accent, var(--cyan)), transparent); opacity: 0.5; }
+
+.holo-popup__text { font-size: 13px; line-height: 1.85; color: var(--text); }
+.holo-popup__text em {
+  font-style: normal; color: var(--cyan-soft);
+  text-shadow: 0 0 8px rgba(47, 196, 220, 0.4);
+}
+
+/* 特色条目列表 */
+.holo-popup__list { list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.holo-popup__list li {
+  display: flex; gap: 8px; align-items: baseline;
+  font-size: 12.5px; line-height: 1.7;
+  padding-left: 2px;
+}
+.holo-popup__list li::before {
+  content: "▸"; color: var(--accent, var(--cyan)); font-size: 11px; flex-shrink: 0;
+  text-shadow: 0 0 6px currentColor;
+}
+
+/* 技能标签 chips */
+.holo-popup__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.holo-popup__tag {
+  font-size: 11px; padding: 3px 10px;
+  color: var(--accent, var(--cyan));
+  border: 1px solid rgba(94, 200, 226, 0.45);
+  border-radius: 999px;
+  letter-spacing: 0.06em;
+  background: rgba(47, 196, 220, 0.08);
+}
+
+/* 数据行（内容页适配：战绩/统计） */
+.holo-popup__stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+.holo-popup__stat {
+  padding: 10px 6px; text-align: center;
+  border: 1px solid rgba(94, 200, 226, 0.22); border-radius: 6px;
+  background: rgba(8, 22, 36, 0.6);
+}
+.holo-popup__stat-num {
+  font-family: "Orbitron", sans-serif; font-size: 20px; font-weight: 900;
+  color: var(--title);
+  text-shadow: 0 0 14px rgba(47, 196, 220, 0.55);
+}
+.holo-popup__stat-num small { font-size: 12px; color: var(--accent, var(--cyan)); }
+.holo-popup__stat-label {
+  font-size: 10px; color: var(--mist); letter-spacing: 0.1em; margin-top: 3px;
+}
+
+/* 数据行：等宽终端行（适配内容页） */
+.holo-popup__kv { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.holo-popup__kv-row {
+  display: flex; justify-content: space-between; gap: 12px;
+  font-family: "Orbitron", "Microsoft YaHei", sans-serif;
+  font-size: 11px; letter-spacing: 0.08em;
+  padding: 5px 8px;
+  border-left: 2px solid var(--accent, var(--cyan));
+  background: rgba(8, 22, 36, 0.5);
+}
+.holo-popup__kv-row span:first-child { color: var(--mist); flex-shrink: 0; }
+.holo-popup__kv-row span:last-child { color: var(--cyan-soft); text-align: right; }
+
+/* 底部按钮区 */
+.holo-popup__foot {
+  position: relative; z-index: 2;
+  display: flex; gap: 10px; padding: 12px 18px 14px;
+  border-top: 1px solid rgba(94, 200, 226, 0.14);
+}
+.holo-popup__btn {
+  flex: 1; padding: 9px 12px;
+  font-size: 13px; letter-spacing: 0.2em;
+  background: transparent; border: 1px solid rgba(94, 200, 226, 0.45);
+  color: var(--cyan-soft); border-radius: 5px; cursor: pointer;
+  transition: all 0.18s ease;
+}
+.holo-popup__btn:hover {
+  background: rgba(47, 196, 220, 0.12);
+  box-shadow: 0 0 14px rgba(47, 196, 220, 0.35), inset 0 0 10px rgba(47, 196, 220, 0.15);
+  color: var(--title);
+}
+.holo-popup__btn--primary {
+  background: rgba(47, 196, 220, 0.16);
+  border-color: var(--cyan);
+  color: var(--title);
+  box-shadow: 0 0 14px rgba(47, 196, 220, 0.25), inset 0 0 12px rgba(47, 196, 220, 0.2);
+}
+.holo-popup__btn--primary:hover { background: rgba(47, 196, 220, 0.28); }
+
+/* 占位标注（替换内容后删除） */
+.holo-popup__placeholder-note {
+  position: absolute; z-index: 4; top: 6px; left: 50%; transform: translateX(-50%);
+  font-family: "Orbitron", sans-serif; font-size: 8px; letter-spacing: 0.25em;
+  color: #ffc46a; opacity: 0.7; pointer-events: none;
+  background: rgba(0, 0, 0, 0.45); padding: 2px 8px; border-radius: 999px;
+  border: 1px dashed rgba(255, 196, 106, 0.5);
+}
+
+/* 组别 accent 变量（体现各组特色） */
+.popup--mech   { --accent: #2fc4dc; }
+.popup--embed  { --accent: #b07ae8; }
+.popup--vision { --accent: #ffc46a; }
+.popup--media  { --accent: #ff5fae; }
+
+/* ============================================================
+   响应式：手机端全宽、禁拖动、面板内滚动
+   ============================================================ */
+@media (max-width: 767px) {
+  .demo__row { gap: 10px; }
+  .trigger { width: 42vw; max-width: 168px; }
+  .holo-popup {
+    width: 94vw; max-height: 82vh;
+  }
+  .holo-popup__drag-tip { display: none; }
+  .holo-popup__head { cursor: default; }
+  .holo-popup__head:active { cursor: default; }
+}
+</style>
+</head>
+<body>
+
+<!-- 演示舞台 -->
+<div class="stage" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar__brand">
+    <span class="topbar__logo" aria-hidden="true"></span>
+    <span class="topbar__title">机创全息终端 <i>HOLO POPUP DEMO</i></span>
+  </div>
+  <span class="topbar__live">POPUP COMPONENT</span>
+</header>
+
+<main class="demo">
+  <p class="demo__hint">点击触发 <b>全息弹窗</b> · 拖动标题栏可移动窗口 · <b>ESC / 点遮罩</b> 关闭</p>
+
+  <!-- 组别特色弹窗 × 4 -->
+  <div class="demo__row" aria-label="组别特色弹窗示例">
+    <button class="trigger trigger--mech"   data-popup="popup-mech"   aria-haspopup="dialog">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3.2M12 18.3v3.2M2.5 12h3.2M18.3 12h3.2M5 5l2.3 2.3M16.7 16.7 19 19M19 5l-2.3 2.3M7.3 16.7 5 19"/></svg>
+      <span class="trigger__cn">结构组</span><span class="trigger__en">MECH</span>
+    </button>
+    <button class="trigger trigger--embed"  data-popup="popup-embed"  aria-haspopup="dialog">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12L13 2z"/></svg>
+      <span class="trigger__cn">电控组</span><span class="trigger__en">EMBED</span>
+    </button>
+    <button class="trigger trigger--vision" data-popup="popup-vision" aria-haspopup="dialog">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3.4"/><path d="M12 2.8v2.6M12 18.6v2.6M2.8 12h2.6M18.6 12h2.6M5.5 5.5l1.9 1.9M16.6 16.6l1.9 1.9M18.5 5.5l-1.9 1.9M7.4 16.6l-1.9 1.9"/></svg>
+      <span class="trigger__cn">视觉识别组</span><span class="trigger__en">VISION</span>
+    </button>
+    <button class="trigger trigger--media"  data-popup="popup-media"  aria-haspopup="dialog">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2.6"/><path d="M12 5.4V2.8M12 21.2v-2.6M5.4 12H2.8M21.2 12h-2.6M7 7l1.8 1.8M15.2 15.2 17 17M17 7l-1.8 1.8M8.8 15.2 7 17"/></svg>
+      <span class="trigger__cn">运营组</span><span class="trigger__en">MEDIA</span>
+    </button>
+  </div>
+
+  <p class="demo__hint">—— 内容页适配示例（02 关于 / 07 战绩）——</p>
+  <div class="demo__row">
+    <button class="trigger trigger--minor" data-popup="popup-about" aria-haspopup="dialog">
+      <span class="trigger__en">02</span><span class="trigger__cn">关于 · 团队档案</span>
+    </button>
+    <button class="trigger trigger--minor" data-popup="popup-trophy" aria-haspopup="dialog">
+      <span class="trigger__en">07</span><span class="trigger__cn">战绩 · 成就详情</span>
+    </button>
+  </div>
+</main>
+
+<!-- ============================================================
+     全息弹窗本体（组件模板）
+     用法：复制任意一个 .holo-popup__backdrop 到主站 <body> 末尾，
+     改标题栏与 .holo-popup__body 内内容即可；JS 为通用代码（组件底部）。
+     ============================================================ -->
+
+<!-- ▓ 组别 · 结构组 MECH ▓ -->
+<div class="holo-popup__backdrop" id="popup-mech" role="dialog" aria-modal="true" aria-label="结构组详情" hidden>
+  <div class="holo-popup popup--mech" data-drag>
+    <span class="holo-popup__placeholder-note">CONTENT SLOT · 内容占位待替换</span>
+    <span class="holo-popup__scan" aria-hidden="true"></span>
+    <span class="holo-popup__sheen" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--tl" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--tr" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--bl" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--br" aria-hidden="true"></span>
+    <header class="holo-popup__head" data-drag-handle>
+      <span class="holo-popup__led" aria-hidden="true"></span>
+      <div class="holo-popup__titles">
+        <div class="holo-popup__title">结构组</div>
+        <div class="holo-popup__sub">GROUP 03 · MECH</div>
+      </div>
+      <span class="holo-popup__drag-tip" aria-hidden="true">DRAG</span>
+      <button class="holo-popup__close" data-close aria-label="关闭弹窗">✕</button>
+    </header>
+    <div class="holo-popup__body">
+      <div class="holo-popup__badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3.2M12 18.3v3.2M2.5 12h3.2M18.3 12h3.2M5 5l2.3 2.3M16.7 16.7 19 19M19 5l-2.3 2.3M7.3 16.7 5 19"/></svg>
+        <span class="holo-popup__badge-name">MECH</span>
+        <span class="holo-popup__badge-line"></span>
+      </div>
+      <p class="holo-popup__text">【占位·待替换】一句话介绍结构组职责，例如：<em>负责机器人的骨架与躯干，让每一个奇思妙想拥有坚固的载体。</em></p>
+      <ul class="holo-popup__list">
+        <li>【占位】特色条目一：从图纸到实物，全流程的机械设计历练</li>
+        <li>【占位】特色条目二：组内日常 / 作品亮点一句话</li>
+        <li>【占位】特色条目三：招新问答一句</li>
+      </ul>
+      <div class="holo-popup__tags">
+        <span class="holo-popup__tag">机械设计</span>
+        <span class="holo-popup__tag">三维建模</span>
+        <span class="holo-popup__tag">3D 打印</span>
+        <span class="holo-popup__tag">仿真分析</span>
+      </div>
+    </div>
+    <footer class="holo-popup__foot">
+      <button class="holo-popup__btn holo-popup__btn--primary" data-close>了解详情</button>
+      <button class="holo-popup__btn" data-close>先逛逛</button>
+    </footer>
+  </div>
+</div>
+
+<!-- ▓ 组别 · 电控组 EMBED ▓ -->
+<div class="holo-popup__backdrop" id="popup-embed" role="dialog" aria-modal="true" aria-label="电控组详情" hidden>
+  <div class="holo-popup popup--embed" data-drag>
+    <span class="holo-popup__placeholder-note">CONTENT SLOT · 内容占位待替换</span>
+    <span class="holo-popup__scan" aria-hidden="true"></span>
+    <span class="holo-popup__sheen" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--tl" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--tr" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--bl" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--br" aria-hidden="true"></span>
+    <header class="holo-popup__head" data-drag-handle>
+      <span class="holo-popup__led" aria-hidden="true"></span>
+      <div class="holo-popup__titles">
+        <div class="holo-popup__title">电控组</div>
+        <div class="holo-popup__sub">GROUP 04 · EMBED</div>
+      </div>
+      <span class="holo-popup__drag-tip" aria-hidden="true">DRAG</span>
+      <button class="holo-popup__close" data-close aria-label="关闭弹窗">✕</button>
+    </header>
+    <div class="holo-popup__body">
+      <div class="holo-popup__badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12L13 2z"/></svg>
+        <span class="holo-popup__badge-name">EMBED</span>
+        <span class="holo-popup__badge-line"></span>
+      </div>
+      <p class="holo-popup__text">【占位·待替换】一句话介绍电控组职责，例如：<em>机器人的神经与脉搏，让每一行代码都变成电机的精确律动。</em></p>
+      <ul class="holo-popup__list">
+        <li>【占位】特色条目一：从焊板到整机，嵌入式开发实战</li>
+        <li>【占位】特色条目二：组内日常 / 作品亮点一句话</li>
+        <li>【占位】特色条目三：招新问答一句</li>
+      </ul>
+      <div class="holo-popup__tags">
+        <span class="holo-popup__tag">单片机</span>
+        <span class="holo-popup__tag">PCB 设计</span>
+        <span class="holo-popup__tag">电机驱动</span>
+        <span class="holo-popup__tag">控制算法</span>
+      </div>
+    </div>
+    <footer class="holo-popup__foot">
+      <button class="holo-popup__btn holo-popup__btn--primary" data-close>了解详情</button>
+      <button class="holo-popup__btn" data-close>先逛逛</button>
+    </footer>
+  </div>
+</div>
+
+<!-- ▓ 组别 · 视觉识别组 VISION ▓ -->
+<div class="holo-popup__backdrop" id="popup-vision" role="dialog" aria-modal="true" aria-label="视觉识别组详情" hidden>
+  <div class="holo-popup popup--vision" data-drag>
+    <span class="holo-popup__placeholder-note">CONTENT SLOT · 内容占位待替换</span>
+    <span class="holo-popup__scan" aria-hidden="true"></span>
+    <span class="holo-popup__sheen" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--tl" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--tr" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--bl" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--br" aria-hidden="true"></span>
+    <header class="holo-popup__head" data-drag-handle>
+      <span class="holo-popup__led" aria-hidden="true"></span>
+      <div class="holo-popup__titles">
+        <div class="holo-popup__title">视觉识别组</div>
+        <div class="holo-popup__sub">GROUP 05 · VISION</div>
+      </div>
+      <span class="holo-popup__drag-tip" aria-hidden="true">DRAG</span>
+      <button class="holo-popup__close" data-close aria-label="关闭弹窗">✕</button>
+    </header>
+    <div class="holo-popup__body">
+      <div class="holo-popup__badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3.4"/><path d="M12 2.8v2.6M12 18.6v2.6M2.8 12h2.6M18.6 12h2.6M5.5 5.5l1.9 1.9M16.6 16.6l1.9 1.9M18.5 5.5l-1.9 1.9M7.4 16.6l-1.9 1.9"/></svg>
+        <span class="holo-popup__badge-name">VISION</span>
+        <span class="holo-popup__badge-line"></span>
+      </div>
+      <p class="holo-popup__text">【占位·待替换】一句话介绍视觉识别组职责，例如：<em>机器人的眼睛与大脑，教它在像素与算法中认出这个世界。</em></p>
+      <ul class="holo-popup__list">
+        <li>【占位】特色条目一：从图像处理到目标识别，算法落地实战</li>
+        <li>【占位】特色条目二：组内日常 / 作品亮点一句话</li>
+        <li>【占位】特色条目三：招新问答一句</li>
+      </ul>
+      <div class="holo-popup__tags">
+        <span class="holo-popup__tag">OpenCV</span>
+        <span class="holo-popup__tag">深度学习</span>
+        <span class="holo-popup__tag">目标检测</span>
+        <span class="holo-popup__tag">相机标定</span>
+      </div>
+    </div>
+    <footer class="holo-popup__foot">
+      <button class="holo-popup__btn holo-popup__btn--primary" data-close>了解详情</button>
+      <button class="holo-popup__btn" data-close>先逛逛</button>
+    </footer>
+  </div>
+</div>
+
+<!-- ▓ 组别 · 运营组 MEDIA ▓ -->
+<div class="holo-popup__backdrop" id="popup-media" role="dialog" aria-modal="true" aria-label="运营组详情" hidden>
+  <div class="holo-popup popup--media" data-drag>
+    <span class="holo-popup__placeholder-note">CONTENT SLOT · 内容占位待替换</span>
+    <span class="holo-popup__scan" aria-hidden="true"></span>
+    <span class="holo-popup__sheen" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--tl" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--tr" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--bl" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--br" aria-hidden="true"></span>
+    <header class="holo-popup__head" data-drag-handle>
+      <span class="holo-popup__led" aria-hidden="true"></span>
+      <div class="holo-popup__titles">
+        <div class="holo-popup__title">运营组</div>
+        <div class="holo-popup__sub">GROUP 06 · MEDIA</div>
+      </div>
+      <span class="holo-popup__drag-tip" aria-hidden="true">DRAG</span>
+      <button class="holo-popup__close" data-close aria-label="关闭弹窗">✕</button>
+    </header>
+    <div class="holo-popup__body">
+      <div class="holo-popup__badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2.6"/><path d="M12 5.4V2.8M12 21.2v-2.6M5.4 12H2.8M21.2 12h-2.6M7 7l1.8 1.8M15.2 15.2 17 17M17 7l-1.8 1.8M8.8 15.2 7 17"/></svg>
+        <span class="holo-popup__badge-name">MEDIA</span>
+        <span class="holo-popup__badge-line"></span>
+      </div>
+      <p class="holo-popup__text">【占位·待替换】一句话介绍运营组职责，例如：<em>团队的声量与门面，让机创被更多人看见。</em></p>
+      <ul class="holo-popup__list">
+        <li>【占位】特色条目一：从文案到视觉，团队品牌的塑造者</li>
+        <li>【占位】特色条目二：组内日常 / 作品亮点一句话</li>
+        <li>【占位】特色条目三：招新问答一句</li>
+      </ul>
+      <div class="holo-popup__tags">
+        <span class="holo-popup__tag">文案策划</span>
+        <span class="holo-popup__tag">平面设计</span>
+        <span class="holo-popup__tag">视频剪辑</span>
+        <span class="holo-popup__tag">社群运营</span>
+      </div>
+    </div>
+    <footer class="holo-popup__foot">
+      <button class="holo-popup__btn holo-popup__btn--primary" data-close>了解详情</button>
+      <button class="holo-popup__btn" data-close>先逛逛</button>
+    </footer>
+  </div>
+</div>
+
+<!-- ▓ 内容页适配示例 · 02 关于·团队档案（kv 行演示） ▓ -->
+<div class="holo-popup__backdrop" id="popup-about" role="dialog" aria-modal="true" aria-label="团队档案" hidden>
+  <div class="holo-popup" data-drag>
+    <span class="holo-popup__placeholder-note">CONTENT SLOT · 内容占位待替换</span>
+    <span class="holo-popup__scan" aria-hidden="true"></span>
+    <span class="holo-popup__sheen" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--tl" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--tr" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--bl" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--br" aria-hidden="true"></span>
+    <header class="holo-popup__head" data-drag-handle>
+      <span class="holo-popup__led" aria-hidden="true"></span>
+      <div class="holo-popup__titles">
+        <div class="holo-popup__title">团队档案</div>
+        <div class="holo-popup__sub">MODULE 02 · ABOUT</div>
+      </div>
+      <span class="holo-popup__drag-tip" aria-hidden="true">DRAG</span>
+      <button class="holo-popup__close" data-close aria-label="关闭弹窗">✕</button>
+    </header>
+    <div class="holo-popup__body">
+      <div class="holo-popup__stats">
+        <div class="holo-popup__stat"><div class="holo-popup__stat-num"><small>EST</small> 20XX</div><div class="holo-popup__stat-label">成立年份</div></div>
+        <div class="holo-popup__stat"><div class="holo-popup__stat-num"><small>×</small>0</div><div class="holo-popup__stat-label">国奖数量</div></div>
+        <div class="holo-popup__stat"><div class="holo-popup__stat-num"><small>×</small>0</div><div class="holo-popup__stat-label">省奖数量</div></div>
+      </div>
+      <p class="holo-popup__text" style="margin-top:12px">【占位·待替换】团队简介可放进弹窗作为补充信息。</p>
+      <div class="holo-popup__kv">
+        <div class="holo-popup__kv-row"><span>队训</span><span>【占位·待替换】</span></div>
+        <div class="holo-popup__kv-row"><span>驻点</span><span>【占位·待替换】</span></div>
+        <div class="holo-popup__kv-row"><span>招新群号</span><span>【占位·待替换】</span></div>
+      </div>
+    </div>
+    <footer class="holo-popup__foot">
+      <button class="holo-popup__btn holo-popup__btn--primary" data-close>收到</button>
+    </footer>
+  </div>
+</div>
+
+<!-- ▓ 内容页适配示例 · 07 战绩·成就详情（数据窗格演示） ▓ -->
+<div class="holo-popup__backdrop" id="popup-trophy" role="dialog" aria-modal="true" aria-label="成就详情" hidden>
+  <div class="holo-popup" data-drag>
+    <span class="holo-popup__placeholder-note">CONTENT SLOT · 内容占位待替换</span>
+    <span class="holo-popup__scan" aria-hidden="true"></span>
+    <span class="holo-popup__sheen" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--tl" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--tr" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--bl" aria-hidden="true"></span>
+    <span class="holo-popup__corner holo-popup__corner--br" aria-hidden="true"></span>
+    <header class="holo-popup__head" data-drag-handle>
+      <span class="holo-popup__led" aria-hidden="true"></span>
+      <div class="holo-popup__titles">
+        <div class="holo-popup__title">战绩 · 成就详情</div>
+        <div class="holo-popup__sub">MODULE 07 · TROPHY</div>
+      </div>
+      <span class="holo-popup__drag-tip" aria-hidden="true">DRAG</span>
+      <button class="holo-popup__close" data-close aria-label="关闭弹窗">✕</button>
+    </header>
+    <div class="holo-popup__body">
+      <p class="holo-popup__text">【占位·待替换】某赛事奖项的详细介绍，可包含：<em>赛项名称、获奖等级、参赛年份、成员构成。</em></p>
+      <div class="holo-popup__stats">
+        <div class="holo-popup__stat"><div class="holo-popup__stat-num">N×</div><div class="holo-popup__stat-label">国赛奖项</div></div>
+        <div class="holo-popup__stat"><div class="holo-popup__stat-num">N×</div><div class="holo-popup__stat-label">省赛奖项</div></div>
+        <div class="holo-popup__stat"><div class="holo-popup__stat-num">N×</div><div class="holo-popup__stat-label">专利软著</div></div>
+      </div>
+      <div class="holo-popup__kv">
+        <div class="holo-popup__kv-row"><span>最近赛事</span><span>【占位·待替换】</span></div>
+        <div class="holo-popup__kv-row"><span>备赛时间</span><span>【占位·待替换】</span></div>
+        <div class="holo-popup__kv-row"><span>荣誉记录</span><span>【占位·待替换】</span></div>
+      </div>
+    </div>
+    <footer class="holo-popup__foot">
+      <button class="holo-popup__btn holo-popup__btn--primary" data-close>收到</button>
+    </footer>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   全息弹窗组件 JS（通用，搬入主站时整段拷贝即可）
+   功能：打开/关闭 / 遮罩与 ESC 关闭 / 标题栏拖动 / 焦点管理
+   ============================================================ */
+(function () {
+  "use strict";
+
+  /* —— 打开 / 关闭 —— */
+  function openPopup(backdrop) {
+    backdrop.hidden = false;
+    requestAnimationFrame(function () {
+      backdrop.classList.add("is-open");
+    });
+    // 焦点移入弹窗
+    var closeBtn = backdrop.querySelector("[data-close]");
+    if (closeBtn) closeBtn.focus({ preventScroll: true });
+  }
+
+  function closePopup(backdrop) {
+    var popup = backdrop.querySelector(".holo-popup");
+    if (!backdrop.classList.contains("is-open")) return;
+    if (popup) popup.classList.add("is-closing");
+    backdrop.classList.remove("is-open");
+    window.setTimeout(function () {
+      popup && popup.classList.remove("is-closing");
+      backdrop.hidden = true;
+    }, 260);
+    // 焦点还给触发者
+    var opener = backdrop._opener;
+    if (opener) opener.focus({ preventScroll: true });
+  }
+
+  /* —— 触发：data-popup 指向 backdrop id —— */
+  document.querySelectorAll("[data-popup]").forEach(function (trigger) {
+    trigger.addEventListener("click", function () {
+      var backdrop = document.getElementById(trigger.getAttribute("data-popup"));
+      if (!backdrop) return;
+      backdrop._opener = trigger;
+      openPopup(backdrop);
+    });
+  });
+
+  /* —— 关闭按钮 / 遮罩 —— */
+  document.querySelectorAll(".holo-popup__backdrop").forEach(function (backdrop) {
+    backdrop.querySelectorAll("[data-close]").forEach(function (btn) {
+      btn.addEventListener("click", function () { closePopup(backdrop); });
+    });
+    backdrop.addEventListener("click", function (e) {
+      if (e.target === backdrop) closePopup(backdrop);
+    });
+  });
+
+  /* —— ESC 关闭最上层弹窗 —— */
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    var open = document.querySelectorAll(".holo-popup__backdrop.is-open");
+    var top = open[open.length - 1];
+    if (top) closePopup(top);
+  });
+
+  /* —— 标题栏拖动（仅桌面端精确指针） —— */
+  if (!window.matchMedia("(pointer: coarse)").matches) {
+    document.querySelectorAll(".holo-popup").forEach(function (popup) {
+      var handle = popup.querySelector("[data-drag-handle]");
+      if (!handle) return;
+      var dragX = 0, dragY = 0, dragging = false;
+      handle.addEventListener("pointerdown", function (e) {
+        if (e.target.closest("[data-close]")) return;
+        dragging = true;
+        dragX = e.clientX - popup.offsetLeft;
+        dragY = e.clientY - popup.offsetTop;
+        handle.setPointerCapture(e.pointerId);
+      });
+      handle.addEventListener("pointermove", function (e) {
+        if (!dragging) return;
+        var x = e.clientX - dragX;
+        var y = e.clientY - dragY;
+        var vw = window.innerWidth, vh = window.innerHeight;
+        x = Math.min(Math.max(x, -popup.offsetWidth + 80), vw - 80);
+        y = Math.min(Math.max(y, 0), vh - 60);
+        popup.style.left = x + "px";
+        popup.style.top = y + "px";
+        popup.style.margin = "0";
+        popup.style.transform = "scale(1)";
+      });
+      handle.addEventListener("pointerup", function () { dragging = false; });
+    });
+  }
+})();
+</script>
+</body>
+</html>

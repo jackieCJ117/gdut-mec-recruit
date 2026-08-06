@@ -1,0 +1,359 @@
+/* ============================================================
+   机创全息终端 CYBER 2026 · holo-tip.css
+   全息小知识悬浮窗（参考概念图效果，配色沿用主站 tokens）：
+   半透明深色玻璃 + 霓虹青渐变发光边框 + 四角发光锚点 +
+   标题栏发光 ✕ + 右下角悬浮 + 全息展开动画
+   ============================================================ */
+
+/* —— 角落触发按钮（全息灯泡） —— */
+.holo-tip__fab {
+  position: fixed;
+  right: 22px; bottom: 155px; /* 上移让出右下角给放大的队标终端核心 */
+  z-index: 95;
+  width: 46px; height: 46px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: rgba(8, 22, 36, 0.78);
+  border: 1px solid rgba(94, 200, 226, 0.5);
+  color: var(--cyan, #2fc4dc);
+  font-size: 19px;
+  cursor: pointer;
+  box-shadow:
+    0 0 16px rgba(47, 196, 220, 0.3),
+    inset 0 0 12px rgba(47, 196, 220, 0.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.holo-tip__fab:hover {
+  transform: scale(1.08);
+  border-color: var(--cyan, #2fc4dc);
+  box-shadow:
+    0 0 22px rgba(47, 196, 220, 0.5),
+    inset 0 0 16px rgba(47, 196, 220, 0.28);
+}
+.holo-tip__fab:active { transform: scale(0.95); }
+.holo-tip__fab svg {
+  width: 22px; height: 22px;
+  filter: drop-shadow(0 0 5px currentColor);
+}
+/* 呼吸提示环 */
+.holo-tip__fab::after {
+  content: ""; position: absolute; inset: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(47, 196, 220, 0.35);
+  animation: holo-tip-pulse 2.6s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes holo-tip-pulse {
+  0%   { transform: scale(0.92); opacity: 0.9; }
+  70%  { transform: scale(1.25); opacity: 0; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+
+/* ============================================================
+   定位容器（fixed + 位置类），本体在容器内做开合动画
+   ============================================================ */
+.holo-tip__wrap {
+  position: fixed;
+  z-index: 96;
+}
+.holo-tip__wrap[hidden] { display: none; }
+
+/* 位置预设 */
+.holo-tip__wrap.pos--tl { top: 88px;  left: 22px; }
+.holo-tip__wrap.pos--tr { top: 88px;  right: 22px; }
+.holo-tip__wrap.pos--bl { bottom: 88px; left: 22px; }
+.holo-tip__wrap.pos--br { bottom: 88px; right: 22px; }
+.holo-tip__wrap.pos--ml { top: 50%;  left: 22px; transform: translateY(-50%); }
+.holo-tip__wrap.pos--mr { top: 50%;  right: 22px; transform: translateY(-50%); }
+.holo-tip__wrap.pos--mt { top: 88px; left: 50%; transform: translateX(-50%); }
+/* 自由坐标：任意位置（JS 设置 --tip-x / --tip-y，相对视口） */
+.holo-tip__wrap.pos--xy {
+  top: var(--tip-y, 20%);
+  left: var(--tip-x, 50%);
+  transform: translate(-50%, -50%);
+}
+
+/* 大小预设（加在弹窗本体上，横纵两维分档：宽 + 高度上下限） */
+.holo-tip.size--sm { width: 300px; min-height: 170px; max-height: 260px; }
+.holo-tip.size--md { width: 420px; min-height: 260px; max-height: 370px; }
+.holo-tip.size--lg { width: 560px; min-height: 360px; max-height: 500px; }
+
+/* —— 悬浮窗本体：半透明玻璃 + 霓虹渐变发光边 —— */
+.holo-tip {
+  position: relative;
+  width: 330px;
+  max-height: 78vh;
+  display: flex; flex-direction: column;
+  background: rgba(7, 19, 31, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(94, 200, 226, 0.4);
+  border-radius: 10px;
+  color: var(--text, #cfe4f0);
+  overflow: hidden;
+  box-shadow:
+    0 0 22px rgba(47, 196, 220, 0.22),
+    0 0 55px rgba(47, 196, 220, 0.1),
+    inset 0 0 30px rgba(47, 196, 220, 0.05);
+  /* 隐藏状态（由 JS 控制） */
+  opacity: 0; visibility: hidden;
+  transform: translateY(14px) scale(0.96);
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0.28s;
+}
+/* 顶部渐变光带（概念图：边框渐变光晕感） */
+.holo-tip::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(127, 216, 232, 0.9), transparent);
+  z-index: 3;
+}
+/* 打开状态 + 全息展开动画 */
+.holo-tip.is-open {
+  opacity: 1; visibility: visible;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: holo-tip-crt 0.72s ease-out; /* CRT 电视倒放：横线 → 闪烁展开 */
+}
+/* CRT 展开：先出现一条横线，然后上下展开 + 闪烁（电视开机倒放感） */
+@keyframes holo-tip-crt {
+  0%   { clip-path: inset(49.5% 0 49.5% 0); opacity: 0; }
+  4%   { clip-path: inset(49.5% 0 49.5% 0); opacity: 1; }              /* 横线亮起 */
+  12%  { clip-path: inset(42% 0 42% 0);  opacity: 0.35; }              /* 开始展开 + 第一闪 */
+  20%  { clip-path: inset(34% 0 34% 0);  opacity: 1; transform: translateY(2px); }
+  28%  { clip-path: inset(27% 0 27% 0);  opacity: 0.45; }              /* 闪 */
+  36%  { clip-path: inset(20% 0 20% 0);  opacity: 1; transform: translateY(-1px); }
+  46%  { clip-path: inset(13% 0 13% 0);  opacity: 0.6; }               /* 闪 */
+  56%  { clip-path: inset(8% 0 8% 0);    opacity: 1; transform: translateY(1px); }
+  68%  { clip-path: inset(4% 0 4% 0);    opacity: 0.75; }
+  80%  { clip-path: inset(1.5% 0 1.5% 0); opacity: 1; }
+  100% { clip-path: inset(0 0 0 0);      opacity: 1; transform: translateY(0); }
+}
+.holo-tip.is-closing { animation: holo-tip-out 0.22s ease-in forwards; }
+@keyframes holo-tip-out {
+  0%   { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(10px) scale(0.95); filter: saturate(1.4); }
+}
+
+/* ============================================================
+   全息投影建立序列（钢铁侠式"弹出"）：
+   ① 边框描边绘制（左上起沿四边画出）
+   ② 投影闪光（径向光晕爆闪）
+   ③ 内容从上到下构建扫描（clip-path 揭示 + 扫描光带）
+   ============================================================ */
+
+/* ① 边框分段描边：四段从左上角起沿顺时针依次展开（transform 动画，全渲染器兼容） */
+.holo-tip__frame {
+  position: absolute; inset: 1px; z-index: 5;
+  pointer-events: none;
+}
+.holo-tip__frame .seg {
+  position: absolute;
+  background: linear-gradient(90deg, rgba(127, 216, 232, 0.95), rgba(47, 196, 220, 0.75));
+  box-shadow: 0 0 6px rgba(47, 196, 220, 0.85);
+  opacity: 0;
+}
+.holo-tip__frame .seg-t { top: 0; left: 0; height: 2px; width: 100%; transform-origin: left center; transform: scaleX(0); }
+.holo-tip__frame .seg-r { top: 0; right: 0; width: 2px; height: 100%; transform-origin: top center;    transform: scaleY(0); }
+.holo-tip__frame .seg-b { bottom: 0; left: 0; height: 2px; width: 100%; transform-origin: right center; transform: scaleX(0); }
+.holo-tip__frame .seg-l { top: 0; left: 0; width: 2px; height: 100%; transform-origin: bottom center;  transform: scaleY(0); }
+/* 描边在 CRT 展开尾段开始（随画面展开画完边框） */
+.holo-tip.is-open .holo-tip__frame .seg-t { animation: holo-tip-seg-x 0.16s ease-out 0.44s forwards; }
+.holo-tip.is-open .holo-tip__frame .seg-r { animation: holo-tip-seg-y 0.16s ease-out 0.6s forwards; }
+.holo-tip.is-open .holo-tip__frame .seg-b { animation: holo-tip-seg-x 0.16s ease-out 0.76s forwards; }
+.holo-tip.is-open .holo-tip__frame .seg-l { animation: holo-tip-seg-y 0.16s ease-out 0.92s forwards; }
+@keyframes holo-tip-seg-x {
+  0%   { opacity: 0; transform: scaleX(0); }
+  100% { opacity: 1; transform: scaleX(1); }
+}
+@keyframes holo-tip-seg-y {
+  0%   { opacity: 0; transform: scaleY(0); }
+  100% { opacity: 1; transform: scaleY(1); }
+}
+
+/* ② 投影闪光（CRT 展开内已含闪烁，闪光层保留作为初始光晕点缀） */
+.holo-tip__flash {
+  position: absolute; inset: 0; z-index: 4;
+  pointer-events: none;
+  background: radial-gradient(60% 60% at 50% 50%,
+    rgba(127, 216, 232, 0.4),
+    rgba(47, 196, 220, 0.12) 55%,
+    transparent 75%);
+  opacity: 0;
+}
+.holo-tip.is-open .holo-tip__flash {
+  animation: holo-tip-flash 0.6s ease-out 0.05s;
+}
+@keyframes holo-tip-flash {
+  0%   { opacity: 0; }
+  10%  { opacity: 0.7; }
+  30%  { opacity: 0.2; }
+  50%  { opacity: 0.5; }
+  100% { opacity: 0; }
+}
+
+/* 内部扫描线层 */
+.holo-tip__scan {
+  position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(94, 200, 226, 0.045) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(94, 200, 226, 0.03) 0 1px, transparent 1px 4px);
+}
+
+/* 四角发光锚点（概念图特征） */
+.holo-tip__anchor {
+  position: absolute; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--cyan, #2fc4dc);
+  box-shadow: 0 0 8px var(--cyan, #2fc4dc), 0 0 3px rgba(127, 216, 232, 0.9);
+  z-index: 3; pointer-events: none;
+  animation: holo-tip-blink 3s ease-in-out infinite;
+}
+.holo-tip__anchor--tl { top: 5px; left: 5px; }
+.holo-tip__anchor--tr { top: 5px; right: 5px; animation-delay: 0.4s; }
+.holo-tip__anchor--bl { bottom: 5px; left: 5px; animation-delay: 0.8s; }
+.holo-tip__anchor--br { bottom: 5px; right: 5px; animation-delay: 1.2s; }
+@keyframes holo-tip-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+/* —— 标题栏 —— */
+.holo-tip__head {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(94, 200, 226, 0.14);
+  cursor: grab;
+  user-select: none;
+  background: linear-gradient(180deg, rgba(47, 196, 220, 0.09), transparent);
+}
+.holo-tip__head:active { cursor: grabbing; }
+.holo-tip__head svg {
+  width: 16px; height: 16px; flex-shrink: 0;
+  color: var(--cyan, #2fc4dc);
+  filter: drop-shadow(0 0 4px currentColor);
+}
+.holo-tip__title {
+  flex: 1; min-width: 0;
+  font-size: 13px; font-weight: 700; color: var(--title, #eef8fd);
+  letter-spacing: 0.12em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  text-shadow: 1px 0 rgba(47, 196, 220, 0.5), -1px 0 rgba(255, 95, 174, 0.3);
+}
+.holo-tip__close {
+  flex-shrink: 0; width: 22px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent; border: 1px solid rgba(94, 200, 226, 0.35);
+  border-radius: 5px;
+  color: var(--cyan-soft, #7fd8e8);
+  font-size: 11px; line-height: 1; cursor: pointer;
+  transition: all 0.18s ease;
+}
+.holo-tip__close:hover {
+  color: var(--title, #eef8fd); border-color: var(--cyan, #2fc4dc);
+  box-shadow: 0 0 10px rgba(47, 196, 220, 0.5), inset 0 0 6px rgba(47, 196, 220, 0.25);
+}
+
+/* —— 内容区 —— */
+.holo-tip__body {
+  position: relative; z-index: 2;
+  padding: 12px 14px 14px;
+  font-size: 12.5px; line-height: 1.85;
+  color: var(--text, #cfe4f0);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.holo-tip__body::-webkit-scrollbar { width: 4px; }
+.holo-tip__body::-webkit-scrollbar-thumb { background: rgba(47, 196, 220, 0.4); border-radius: 2px; }
+.holo-tip__body::-webkit-scrollbar-track { background: transparent; }
+.holo-tip__body em {
+  font-style: normal; color: var(--cyan-soft, #7fd8e8);
+  text-shadow: 0 0 8px rgba(47, 196, 220, 0.35);
+}
+
+/* 条目列表（大窗内容） */
+.holo-tip__list {
+  list-style: none; margin-top: 10px;
+  display: flex; flex-direction: column; gap: 7px;
+}
+.holo-tip__list li {
+  display: flex; gap: 8px; align-items: baseline;
+  font-size: 12px; line-height: 1.7;
+}
+.holo-tip__list li::before {
+  content: "▸"; color: var(--cyan, #2fc4dc); font-size: 10px; flex-shrink: 0;
+  text-shadow: 0 0 6px currentColor;
+}
+.holo-tip__list b { color: var(--cyan-soft, #7fd8e8); font-weight: 700; }
+
+/* 技能标签 chips（大窗内容） */
+.holo-tip__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.holo-tip__tag {
+  font-size: 11px; padding: 3px 10px;
+  color: var(--cyan-soft, #7fd8e8);
+  border: 1px solid rgba(94, 200, 226, 0.45);
+  border-radius: 999px;
+  background: rgba(47, 196, 220, 0.08);
+}
+
+/* 占位标注 */
+.holo-tip__placeholder-note {
+  font-family: var(--font-en, "Orbitron", sans-serif);
+  font-size: 8px; letter-spacing: 0.25em;
+  color: #ffc46a; opacity: 0.7;
+  background: rgba(0, 0, 0, 0.45); padding: 2px 8px; border-radius: 999px;
+  border: 1px dashed rgba(255, 196, 106, 0.5);
+  display: inline-block; margin-bottom: 8px;
+}
+
+/* —— 底部按钮区 —— */
+.holo-tip__foot {
+  position: relative; z-index: 2;
+  display: flex; gap: 8px;
+  padding: 10px 12px 12px;
+  border-top: 1px solid rgba(94, 200, 226, 0.12);
+}
+.holo-tip__btn {
+  flex: 1; padding: 7px 10px;
+  font-size: 12px; letter-spacing: 0.18em;
+  background: transparent; border: 1px solid rgba(94, 200, 226, 0.4);
+  color: var(--cyan-soft, #7fd8e8); border-radius: 5px; cursor: pointer;
+  transition: all 0.18s ease;
+}
+.holo-tip__btn:hover {
+  background: rgba(47, 196, 220, 0.12);
+  box-shadow: 0 0 12px rgba(47, 196, 220, 0.35), inset 0 0 8px rgba(47, 196, 220, 0.15);
+  color: var(--title, #eef8fd);
+}
+.holo-tip__btn--primary {
+  background: rgba(47, 196, 220, 0.15);
+  border-color: var(--cyan, #2fc4dc);
+  color: var(--title, #eef8fd);
+  box-shadow: 0 0 12px rgba(47, 196, 220, 0.22), inset 0 0 10px rgba(47, 196, 220, 0.18);
+}
+.holo-tip__btn--primary:hover { background: rgba(47, 196, 220, 0.26); }
+
+/* ============================================================
+   响应式：手机端统一底部悬浮（位置/大小归一，保证不挡内容）
+   ============================================================ */
+@media (max-width: 767px) {
+  .holo-tip__wrap,
+  .holo-tip__wrap.pos--tl, .holo-tip__wrap.pos--tr,
+  .holo-tip__wrap.pos--bl, .holo-tip__wrap.pos--br,
+  .holo-tip__wrap.pos--ml, .holo-tip__wrap.pos--mr,
+  .holo-tip__wrap.pos--mt, .holo-tip__wrap.pos--xy {
+    top: auto; bottom: 78px; left: 14px; right: 14px;
+    transform: none;
+  }
+  .holo-tip.size--sm,
+  .holo-tip.size--md,
+  .holo-tip.size--lg {
+    width: 100%;
+    max-height: 62vh;
+  }
+  .holo-tip__head { cursor: default; }
+  .holo-tip__head:active { cursor: default; }
+  .holo-tip__fab {
+    right: 16px; bottom: 178px; /* 报名条上方 + 让出放大的队标终端核心 */
+  }
+}
