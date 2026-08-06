@@ -346,3 +346,21 @@
 @media (max-width: 767px) {
   .cover__datastrip { gap: 10px; padding: 6px 10px; font-size: 7px; flex-wrap: wrap; justify-content: center; }
 }
+
+/* ============================================================
+   启动屏小屏适配（手机）
+   ============================================================ */
+@media (max-width: 767px) {
+  .cover__logo-wrap { width: 210px; height: 210px; margin-bottom: 8px; }
+  .cover__logo { width: 182px; height: 182px; }
+  .cover__ring--1 { width: 204px; height: 204px; margin: -102px 0 0 -102px; }
+  .cover__ring--2 { width: 152px; height: 152px; margin: -76px 0 0 -76px; }
+  .cover__masthead-cn { font-size: clamp(26px, 8vw, 36px); letter-spacing: 6px; }
+  .cover__masthead-en { font-size: 8px; letter-spacing: 3.5px; }
+  .cover__content { padding: 14px 16px 72px; }
+  .cover__est { font-size: 8px; letter-spacing: 1.5px; }
+  .cover__headline { font-size: 20px; }
+  .cover__sub { font-size: 12px; }
+  .cover__datastrip { gap: 8px; padding: 6px 10px; font-size: 7px; letter-spacing: 1px; }
+  .cover__cta { padding: 10px 22px; font-size: 13px; }
+}

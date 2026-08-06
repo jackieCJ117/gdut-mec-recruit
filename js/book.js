@@ -61,5 +61,25 @@
     else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goTo(current - 1); }
   });
 
+  /* —— 横滑切换（手机/触屏主力手势；纵向滚动交给面板，横向滑动手势切模块） —— */
+  var viewport = document.getElementById('viewport');
+  var startX = 0;
+  var startY = 0;
+  var dragging = false;
+  viewport.addEventListener('pointerdown', function (e) {
+    if (e.target.closest('input, textarea, select, a, button, .chip, .upload-btn')) return;
+    startX = e.clientX;
+    startY = e.clientY;
+    dragging = true;
+  }, { passive: true });
+  viewport.addEventListener('pointerup', function (e) {
+    if (!dragging) return;
+    dragging = false;
+    var dx = e.clientX - startX;
+    var dy = e.clientY - startY;
+    if (Math.abs(dx) < 60 || Math.abs(dx) <= Math.abs(dy)) return;
+    goTo(dx < 0 ? current + 1 : current - 1);
+  }, { passive: true });
+
   setUI();
 })();

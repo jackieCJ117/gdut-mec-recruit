@@ -354,3 +354,23 @@ body {
   .holo__rail-chips { gap: 5px; }
   .chip { padding: 4px 8px; font-size: 9px; }
 }
+
+/* ============================================================
+   手机端体验优化（触屏主力）
+   ============================================================ */
+@media (max-width: 767px) {
+  /* 顶栏精简：只留 队标 + 标题 + ONLINE，隐藏次要状态 */
+  .topbar__edition { display: none; }
+  .topbar__live { display: none; }
+  .topbar { border-bottom-color: transparent; margin-bottom: 6px; }
+  .topbar__title { font-size: 13px; letter-spacing: 1.5px; }
+
+  /* 导航触控放大：9 个编号一行排下，点击目标更大 */
+  .holo__rail { gap: 8px; margin-top: 8px; }
+  .holo__rail-btn { width: 38px; height: 38px; font-size: 20px; }
+  .holo__rail-chips { gap: 5px; }
+  .chip { padding: 6px 9px; font-size: 10px; min-width: 30px; text-align: center; }
+
+  /* 开发提示（占位说明）手机上隐藏，避免影响正式展示 */
+  .book-foot { display: none; }
+}
