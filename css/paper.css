@@ -951,8 +951,21 @@
 .group-screen__svg {
   width: 150px;
   height: 150px;
-  filter: drop-shadow(0 0 12px rgba(47, 196, 220, 0.45));
-  animation: spin 24s linear infinite;
+  /* 全息闪烁：发光强度 + 透明度不规则脉动（像全息投影信号不稳定），
+     替代旋转动画——组别标志保持静止，靠光线"呼吸"出全息感 */
+  animation: holo-flicker 3.6s ease-in-out infinite;
+}
+@keyframes holo-flicker {
+  0%, 100% { opacity: 1;    filter: drop-shadow(0 0 10px rgba(47, 196, 220, 0.45)); }
+  10%      { opacity: 0.9;  filter: drop-shadow(0 0 18px rgba(47, 196, 220, 0.7)); }
+  16%      { opacity: 1;    filter: drop-shadow(0 0 10px rgba(47, 196, 220, 0.45)); }
+  30%      { opacity: 0.86; filter: drop-shadow(0 0 22px rgba(47, 196, 220, 0.8)); }
+  36%      { opacity: 0.98; filter: drop-shadow(0 0 8px rgba(47, 196, 220, 0.35)); }
+  52%      { opacity: 1;    filter: drop-shadow(0 0 14px rgba(47, 196, 220, 0.55)); }
+  58%      { opacity: 0.8;  filter: drop-shadow(0 0 24px rgba(47, 196, 220, 0.85)); }
+  64%      { opacity: 0.95; filter: drop-shadow(0 0 10px rgba(47, 196, 220, 0.45)); }
+  78%      { opacity: 1;    filter: drop-shadow(0 0 16px rgba(47, 196, 220, 0.6)); }
+  88%      { opacity: 0.92; filter: drop-shadow(0 0 12px rgba(47, 196, 220, 0.5)); }
 }
 .group-screen__art-tag {
   font-family: var(--font-en);
