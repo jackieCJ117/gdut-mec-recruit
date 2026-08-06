@@ -1117,3 +1117,55 @@
     drop-shadow(0 0 40px rgba(47, 196, 220, 0.4));
 }
 .cta__slogan { font-size: 24px; }
+
+/* ============================================================
+   作品图片上传控件（Supabase Storage）
+   ============================================================ */
+.upload-zone {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+.upload-btn {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--cyan);
+  border: 1px dashed var(--holo-border);
+  border-radius: 6px;
+  padding: 7px 14px;
+  background: rgba(94, 200, 226, 0.06);
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.upload-btn:hover {
+  background: rgba(94, 200, 226, 0.12);
+  box-shadow: 0 0 12px rgba(47, 196, 220, 0.3);
+}
+.upload-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.upload-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--mist);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: var(--panel-hi);
+}
+.upload-item__del {
+  border: none;
+  background: none;
+  color: var(--mist);
+  font-size: 11px;
+  cursor: pointer;
+  padding: 0 2px;
+}
+.upload-item__del:hover { color: #ff8a80; }

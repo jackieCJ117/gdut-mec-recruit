@@ -61,9 +61,11 @@ python -m http.server 8080
 
 ## 四、报名数据说明
 
-- 报名表单**前端校验** → 写入浏览器 `localStorage`（键 `mec_application_2026`），支持草稿自动保存、刷新回填。
-- 提交后生成「报名摘要」可一键复制，发邮件 `3607199098@qq.com` 完成报名（与原报名表流程一致）。
-- **接后端**：在页面加载后定义 `window.MEC_SUBMIT_HOOK`（接收报名数据对象，返回 Promise），提交时自动调用；当前为空。
+- 报名表单**前端校验** → **直接写入 Supabase 数据库**（`applications` 表），无需发邮件。
+- **安全**：Supabase RLS 已配置——匿名仅可 INSERT（提交报名），SELECT/UPDATE/DELETE 全部拒绝（数据不可被读取/篡改/删除）。已验证：匿名读取返回空、删除/更新影响 0 行。
+- **作品图片**（第 6 题选填）：canvas 压缩（最长边 1600px、JPEG 0.8）→ 上传 Supabase Storage（桶 `application-files`，需在控制台创建并设为 Public）→ 公开 URL 存 `portfolio_img` 列。
+- **失败兜底**：提交带 20s 超时 + 自动重试一次；失败时数据保留在 localStorage 草稿（`mec_application_2026`），提示用户重试。
+- **配置位置**：Supabase URL / anon key / 桶名在 `js/form.js` 顶部常量（`SUPABASE_URL` / `SUPABASE_KEY` / `SUPABASE_BUCKET`）。
 
 ## 五、部署 / 更新
 

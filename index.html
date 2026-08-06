@@ -503,28 +503,28 @@
 
             <div class="sheet__body sheet__body--apply">
               <!-- 左栏：递交方式 -->
-              <aside class="form-side" aria-label="递交方式">
-                <h3 class="form-side__title">递交方式</h3>
+              <aside class="form-side" aria-label="报名流程">
+                <h3 class="form-side__title">报名流程</h3>
                 <ol class="steps">
-                  <li class="steps__item"><span class="steps__n">1</span><p>填写右侧报名表（可在线填写或下载原版报名表）。</p></li>
-                  <li class="steps__item"><span class="steps__n">2</span><p>将电子版报名表发送至邮箱：<a class="link" href="mailto:3607199098@qq.com">3607199098@qq.com</a></p></li>
-                  <li class="steps__item"><span class="steps__n">3</span><p>文件命名：<b>年级 + 专业 + 名字 + 组别</b>（多组别都要写上）。</p></li>
-                  <li class="steps__item"><span class="steps__n">4</span><p>截止时间与面试通知，请关注招新群群公告。</p></li>
+                  <li class="steps__item"><span class="steps__n">1</span><p>填写右侧报名表（带 * 为必填，作品图片选填）。</p></li>
+                  <li class="steps__item"><span class="steps__n">2</span><p>点击「提交报名」——信息直接进入团队数据库，无需发邮件。</p></li>
+                  <li class="steps__item"><span class="steps__n">3</span><p>提交成功后，面试与结果通知通过<b>招新群 / 公众号</b>发布。</p></li>
+                  <li class="steps__item"><span class="steps__n">4</span><p>截止时间请以群公告为准。</p></li>
                 </ol>
                 <div class="download">
                   <span class="download__icon" aria-hidden="true">⬇</span>
                   <div>
                     <p class="download__title">下载原版报名表</p>
-                    <p class="download__hint">适合线下填写后发送邮件</p>
+                    <p class="download__hint">线下填写备用（提交方式同线上）</p>
                     <a class="btn-download" href="assets/报名表原版.docx" download="2026机械创新团队报名表.docx">下载 DOCX</a>
                   </div>
                 </div>
                 <div class="notice">
                   <p class="notice__title">递交提醒</p>
                   <ul class="notice__list">
-                    <li>邮件主题：<b>机械创新团队招新</b></li>
-                    <li>多组别报名，请在文件名中全部注明</li>
-                    <li>报名表第 6 题的作品展示可另附一张纸</li>
+                    <li>多组别报名，全部勾选即可</li>
+                    <li>作品图片最多 3 张，jpg/png/webp</li>
+                    <li>提交成功后有「✓」提示，请勿重复提交</li>
                   </ul>
                 </div>
               </aside>
@@ -598,14 +598,19 @@
                       <textarea id="f-plan" name="plan" rows="2"></textarea>
                     </div>
                     <div class="field field--wide">
-                      <label for="f-portfolio">6 · 技能 / 科技小创意展示 <small>没有上述技能或不便展示，可展示你想到的科技小创意，最好配图文（可另附一张纸说明）</small></label>
+                      <label for="f-portfolio">6 · 技能 / 科技小创意展示 <small>可上传作品图片（最多 3 张，jpg/png/webp，每张 ≤5MB，选填）</small></label>
                       <textarea id="f-portfolio" name="portfolio" rows="2"></textarea>
+                      <div class="upload-zone">
+                        <input type="file" id="f-portfolio-files" accept="image/jpeg,image/png,image/webp" multiple hidden>
+                        <button type="button" class="upload-btn" id="uploadBtn">＋ 添加图片</button>
+                        <ul class="upload-list" id="uploadList" aria-label="已选图片"></ul>
+                      </div>
                     </div>
                   </div>
 
                   <div class="form-submit">
-                    <p class="form-submit__hint">信息将暂存在<b>本机浏览器</b>中，便于你核对后再发送邮件。正式提交后即作废，不会上传。</p>
-                    <button class="btn-submit" type="submit">暂存并生成邮件摘要</button>
+                    <p class="form-submit__hint">提交后信息直接进入<b>团队数据库</b>（本机也会暂存草稿防丢失）。面试通知通过招新群 / 公众号发布。</p>
+                    <button class="btn-submit" type="submit">提交报名</button>
                     <p class="form-submit__status" id="formStatus" role="status" aria-live="polite"></p>
                   </div>
                 </form>
