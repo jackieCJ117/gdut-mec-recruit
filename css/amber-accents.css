@@ -1,0 +1,261 @@
+/* ============================================================
+   机创全息终端 CYBER 2026 · amber-accents.css（v5）
+   琥珀橙 20% 暖色点缀：纯配色覆盖，不新增任何装饰元素
+   设计依据：琥珀橙 #ffb46b 是霓虹青 #2fc4dc 的柔和补色，
+   暖色只给强调层级元素（CTA/关键数字/强调句/状态信号），
+   一律用发光形式避免实体面积堆积 → 视觉占比 ≈20% 无疲劳感
+   独立文件，删除即整体回退
+   ============================================================ */
+
+/* ============ 启动屏（约 3/14 元素 ≈ 21%） ============ */
+
+/* CTA 按钮：纯色琥珀填充 + 白色加粗字样 + 圆角胶囊 */
+.cover__cta {
+  background: linear-gradient(135deg, #ffd9a8 0%, #ffb46b 40%, #e8933a 100%) !important;
+  color: #fff !important;
+  font-weight: 800 !important;
+  border: 1px solid rgba(255, 224, 163, 0.7) !important;
+  border-radius: 999px !important;
+  box-shadow:
+    0 0 18px rgba(255, 180, 107, 0.4),
+    inset 0 0 12px rgba(255, 255, 255, 0.12);
+  text-shadow: 0 1px 2px rgba(20, 10, 0, 0.3) !important;
+  font-size: 16px;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+}
+.cover__cta:hover {
+  background: linear-gradient(135deg, #ffe3b8 0%, #ffc47e 45%, #f0a04b 100%) !important;
+  box-shadow:
+    0 0 26px rgba(255, 180, 107, 0.65),
+    inset 0 0 16px rgba(255, 255, 255, 0.18);
+}
+.cover__cta .cover__cta-arrow {
+  color: #fff !important;
+}
+
+/* 数据条数字（30+ / N× / 10+）：琥珀 */
+.cover__datastrip b {
+  color: var(--amber, #ffb46b);
+  text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.45));
+}
+
+/* 状态点：琥珀 */
+.cover__status .dot {
+  background: var(--amber, #ffb46b);
+  box-shadow: 0 0 8px var(--amber, #ffb46b);
+}
+
+/* ============ 内容屏（每屏 2-3 个 ≈ 20%） ============ */
+
+/* 屏编号（02/03…）：琥珀发光 */
+.sheet__masthead-id {
+  color: var(--amber, #ffb46b) !important;
+  text-shadow: 0 0 12px var(--amber-glow, rgba(255, 180, 107, 0.45)) !important;
+}
+
+/* 标题英文代号（ABOUT / MECH…）：琥珀 soft（元信息回退青色，减少密度） */
+.sheet__masthead-title i {
+  color: var(--amber-soft, #ffd9a8) !important;
+  text-shadow: 0 0 8px var(--amber-glow, rgba(255, 180, 107, 0.35)) !important;
+}
+
+/* 页脚模块编号（MOD.02…）：琥珀箔 */
+.sheet__folio {
+  color: var(--amber, #ffb46b) !important;
+  text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.4)) !important;
+}
+
+/* 组别艺术标签（MECH · 齿轮组…）：琥珀 */
+.group-screen__art-tag {
+  color: var(--amber-soft, #ffd9a8) !important;
+  text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.5)) !important;
+}
+
+/* 卖点卡标题（零基础也能来…）：琥珀（时间轴标题走交替，不整组覆盖） */
+.holo-bar__cell b {
+  color: var(--amber, #ffb46b) !important;
+  text-shadow: 0 0 8px var(--amber-glow, rgba(255, 180, 107, 0.35)) !important;
+}
+
+/* 02 屏团队数据数字：琥珀（核心数据） */
+.facts__num {
+  color: var(--amber, #ffb46b) !important;
+  text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.4)) !important;
+}
+/* 07 屏（战绩）暖色：第一张成就卡（国家级）+ 时间轴「结果公布」节点，
+   其余保持青色——两个关键节点琥珀（最重荣誉 + 招新结果），主次分明 */
+.trophy:first-child .trophy__num,
+.timeline__item:nth-child(4) b {
+  color: var(--amber, #ffb46b) !important;
+  text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.4)) !important;
+}
+
+/* 强调句："适合…的你" 柔和琥珀 */
+.group__who {
+  color: var(--amber-soft, #ffd9a8) !important;
+  text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.35)) !important;
+}
+
+/* 提交按钮：纯色琥珀填充 + 白色加粗字样（与封面 CTA 同款） */
+.btn-submit {
+  background: linear-gradient(135deg, #ffd9a8 0%, #ffb46b 40%, #e8933a 100%) !important;
+  color: #fff !important;
+  font-weight: 800 !important;
+  border: 1px solid rgba(255, 224, 163, 0.7) !important;
+  border-radius: 999px !important;
+  box-shadow:
+    0 0 18px rgba(255, 180, 107, 0.4),
+    inset 0 0 12px rgba(255, 255, 255, 0.12);
+  text-shadow: 0 1px 2px rgba(20, 10, 0, 0.3) !important;
+  letter-spacing: 0.3em !important;
+}
+.btn-submit:hover {
+  background: linear-gradient(135deg, #ffe3b8 0%, #ffc47e 45%, #f0a04b 100%) !important;
+  box-shadow:
+    0 0 26px rgba(255, 180, 107, 0.65),
+    inset 0 0 16px rgba(255, 255, 255, 0.18);
+}
+/* 下载按钮：琥珀描边 + 琥珀字 + 透明底（次要 CTA，去除原青色背景） */
+.btn-download {
+  color: var(--amber, #ffb46b) !important;
+  background: rgba(255, 180, 107, 0.08) !important;
+  border-color: rgba(255, 180, 107, 0.55) !important;
+  box-shadow: 0 0 12px var(--amber-glow, rgba(255, 180, 107, 0.3)) !important;
+}
+
+/* 08 屏表单主标题「信息登记」：琥珀 soft（科幻感标题） */
+.form-reg__title {
+  color: var(--amber-soft, #ffd9a8) !important;
+  text-shadow: 0 0 12px var(--amber-glow, rgba(255, 180, 107, 0.4)) !important;
+}
+
+/* ============ 组件（暖色融入，功能不动） ============ */
+
+/* 小机终端：扫描环顶部弧 → 琥珀渐变 */
+.holo-term__ring--2 {
+  border-top-color: var(--amber, #ffb46b) !important;
+  border-bottom-color: rgba(255, 180, 107, 0.35) !important;
+  filter: drop-shadow(0 0 6px var(--amber-glow, rgba(255, 180, 107, 0.5))) !important;
+}
+/* SYNC 标签：琥珀 */
+.holo-term__sync {
+  color: var(--amber-soft, #ffd9a8) !important;
+  border-color: rgba(255, 180, 107, 0.4) !important;
+  box-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.25)) !important;
+}
+/* 终端核心状态灯：琥珀 */
+.holo-term__led {
+  background: var(--amber, #ffb46b) !important;
+  box-shadow: 0 0 8px var(--amber, #ffb46b) !important;
+}
+/* 终端核心图标辉光：琥珀 */
+.holo-term__core-img {
+  box-shadow: 0 0 14px var(--amber-glow, rgba(255, 180, 107, 0.5)) !important;
+}
+/* 顶栏 ONLINE 标签点：琥珀 */
+.topbar__live::before {
+  background: var(--amber, #ffb46b) !important;
+  box-shadow: 0 0 6px var(--amber, #ffb46b) !important;
+}
+
+/* 知识弹窗：标题栏灯 → 琥珀 */
+.holo-tip__led {
+  background: var(--amber, #ffb46b) !important;
+  box-shadow: 0 0 8px var(--amber, #ffb46b) !important;
+}
+/* 知识弹窗主按钮：琥珀描边 */
+.holo-tip__btn--primary {
+  border-color: var(--amber, #ffb46b) !important;
+  color: var(--amber-soft, #ffd9a8) !important;
+  box-shadow:
+    0 0 12px var(--amber-glow, rgba(255, 180, 107, 0.35)),
+    inset 0 0 10px rgba(255, 180, 107, 0.12) !important;
+}
+
+/* 队标融合层：玻璃底盘中心掺 8% 琥珀 */
+.cover__logo-wrap::before {
+  background: radial-gradient(circle,
+    rgba(255, 180, 107, 0.08) 0%,
+    rgba(47, 196, 220, 0.17) 40%,
+    rgba(47, 196, 220, 0.07) 68%,
+    transparent 75%);
+}
+
+/* ============================================================
+   09 页背景：与 01 启动屏首尾呼应
+   （网格 + 径向光晕 + 扫描线，去除齿轮/电路等杂图案）
+   ============================================================ */
+.sheet--cta {
+  --bg-stack:
+    radial-gradient(90% 70% at 50% 0%, rgba(47, 196, 220, 0.13), transparent 55%),
+    radial-gradient(70% 55% at 90% 90%, rgba(122, 74, 158, 0.11), transparent 60%),
+    linear-gradient(160deg, rgba(9, 24, 40, 0.55) 0%, rgba(6, 16, 27, 0.45) 100%);
+}
+.cta-bg {
+  position: absolute; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.cta-bg::before { /* 网格（同 cover__grid，径向淡出） */
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(94, 200, 226, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 200, 226, 0.08) 1px, transparent 1px);
+  background-size: 38px 38px;
+  -webkit-mask-image: radial-gradient(130% 95% at 50% 34%, #000 32%, transparent 88%);
+  mask-image: radial-gradient(130% 95% at 50% 34%, #000 32%, transparent 88%);
+}
+.cta-bg::after { /* 径向光晕（同 cover__radial） */
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(60% 50% at 50% 44%, rgba(47, 196, 220, 0.22), transparent 72%);
+}
+
+/* ============ v6 内容屏增量（16% → 25%，每屏 +2 个） ============ */
+
+/* 正文关键词（<b> 强调词）：琥珀 */
+.para b {
+  color: var(--amber, #ffb46b) !important;
+  text-shadow: 0 0 8px var(--amber-glow, rgba(255, 180, 107, 0.35)) !important;
+}
+
+/* 08 报名屏重新设计（按设计判断）：
+   暖色只留核心动作——提交按钮/下载按钮/必填提示；
+   步骤序号与勾选框回退青色（流程控件是中性信息，暖色影响交互认知） */
+
+/* 导航 chips：当前屏琥珀 */
+.chip.is-active {
+  border-color: var(--amber, #ffb46b) !important;
+  color: var(--amber-soft, #ffd9a8) !important;
+  box-shadow: 0 0 12px var(--amber-glow, rgba(255, 180, 107, 0.3)) !important;
+}
+
+/* 更多数字/标记 */
+.timeline__note {
+  color: var(--amber-soft, #ffd9a8) !important;
+}
+.download__title {
+  color: var(--amber, #ffb46b) !important;
+}
+.notice__list li::before {
+  color: var(--amber, #ffb46b) !important;
+}
+
+/* —— v6 保留增量（24% → 18-19%，只留高权重强调） —— */
+
+/* 报名提示高亮词（08 屏）：琥珀 */
+.form-submit__hint b,
+.form-reg__title small {
+  color: var(--amber, #ffb46b) !important;
+}
+
+/* 少量高权重强调：琥珀（队训 + 二维码提示） */
+.motto__text {
+  color: var(--amber-soft, #ffd9a8) !important;
+  text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.35)) !important;
+}
+.qr__label {
+  color: var(--amber, #ffb46b) !important;
+}

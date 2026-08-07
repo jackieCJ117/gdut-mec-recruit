@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="css/holo-tip.css">
   <link rel="stylesheet" href="css/holo-term.css">
   <link rel="stylesheet" href="css/logo-fusion.css">
+  <link rel="stylesheet" href="css/amber-accents.css">
 </head>
 <body>
   <a class="skip-link" href="#viewport">跳到终端主界面</a>
@@ -629,6 +630,8 @@
       <!-- 06 加入我们 -->
       <article class="screen sheet--paper sheet--cta" data-screen="9" aria-label="09 · 加入我们">
         <span class="sheet__sheen" aria-hidden="true"></span>
+        <!-- 09 页背景层：与 01 启动屏呼应（网格 + 径向 + 扫描线，去除齿轮/电路杂图案） -->
+        <span class="cta-bg" aria-hidden="true"></span>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">09</span>
               <h2 class="sheet__masthead-title">想加入我们？ <i>JOIN US</i></h2>
@@ -736,12 +739,17 @@
       <button class="holo-term__close" id="termClose" type="button" aria-label="收起终端">−</button>
     </header>
     <div class="holo-term__screen" id="termScreen" aria-live="polite"></div>
-    <div class="holo-term__input" aria-hidden="true"><span class="prompt">&gt;</span><span class="holo-term__cursor"></span></div>
+    <div class="holo-term__input">
+      <span class="prompt" aria-hidden="true">&gt;</span>
+      <input id="termCmdInput" type="text" placeholder="输入命令… (help)" autocomplete="off" aria-label="终端命令输入">
+      <span class="holo-term__cursor" aria-hidden="true"></span>
+    </div>
     <footer class="holo-term__foot">
       <span>SYS.ONLINE</span><span>09 MODULES</span><span>04 GROUPS</span>
     </footer>
   </aside>
 
   <script src="js/holo-term.js"></script>
+  <script src="js/holo-cmd.js"></script>
 </body>
 </html>

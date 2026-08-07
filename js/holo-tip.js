@@ -19,12 +19,7 @@
      纵向对比技巧：大窗给 list+tags（内容多自然高），小窗只给 text（紧凑）
      ============================================================ */
   var TIP_SCREENS = {
-    1: [
-      { title: "机创冷知识 01", pos: "br", size: "lg",
-        text: "【占位】有趣小知识一：<em>例如机创的冷知识、团队趣闻、比赛轶事。</em>",
-        list: ["【占位】小知识延伸要点一", "【占位】小知识延伸要点二", "【占位】小知识延伸要点三"],
-        tags: ["趣味", "冷知识", "机创"] }
-    ],
+    /* 1 启动屏：不配置弹窗（用户指定取消） */
     2: [
       { title: "机创冷知识 02", pos: "tl", size: "sm", mode: "all",
         text: "【占位】有趣小知识二：<em>关于机创团队的冷知识。</em>" },
@@ -36,35 +31,45 @@
         list: ["【占位】历程要点一", "【占位】历程要点二", "【占位】历程要点三"],
         tags: ["历史", "赛场", "机创"] }
     ],
-    3: [
+    3: [ /* 结构组：3 条逐个弹出（顺序：主介绍 → 技能 → 问答） */
       { title: "结构组冷知识", pos: "bl", size: "lg",
-        text: "【占位】结构组相关小知识：<em>例如零件命名、图纸上的小讲究。</em>",
+        text: "【占位】结构组主介绍：<em>例如零件命名、图纸上的小讲究。</em>",
         list: ["【占位】结构细节一", "【占位】结构细节二", "【占位】结构细节三"],
-        tags: ["SolidWorks", "机构", "3D 打印"] }
+        tags: ["SolidWorks", "机构", "3D 打印"] },
+      { title: "结构组 · 技能图谱", pos: "tr", size: "md",
+        text: "【占位】SolidWorks / AutoCAD / 机械制图 / 3D 打印 的组内用法。",
+        list: ["【占位】建模练习", "【占位】工程制图规范"] },
+      { title: "结构组 · 招新问答", pos: "tl", size: "sm",
+        text: "【占位】零基础可以来吗？需要什么装备？" }
     ],
-    4: [
-      { title: "电控组冷知识 01", pos: "tl", size: "sm", mode: "all",
-        text: "【占位】电控组相关小知识一。" },
-      { title: "电控组冷知识 02", pos: "tr", size: "md", mode: "all",
+    4: [ /* 电控组：3 条逐个弹出（顺序：主介绍 → 细节 → 小知识） */
+      { title: "电控组冷知识 03", pos: "bl", size: "lg",
+        text: "【占位】电控组主介绍：<em>从点亮灯珠到驱动整机。</em>",
+        list: ["【占位】开发要点一", "【占位】开发要点二", "【占位】开发要点三"],
+        tags: ["单片机", "C 语言", "电路"] },
+      { title: "电控组冷知识 02", pos: "tr", size: "md",
         text: "【占位】电控组相关小知识二。",
         list: ["【占位】电控细节一", "【占位】电控细节二"] },
-      { title: "电控组冷知识 03", pos: "bl", size: "lg", mode: "all",
-        text: "【占位】电控组相关小知识三：<em>从点亮灯珠到驱动整机。</em>",
-        list: ["【占位】开发要点一", "【占位】开发要点二", "【占位】开发要点三"],
-        tags: ["单片机", "C 语言", "电路"] }
+      { title: "电控组冷知识 01", pos: "tl", size: "sm",
+        text: "【占位】电控组相关小知识一。" }
     ],
-    5: [
+    5: [ /* 视觉组：3 条逐个弹出（顺序：主介绍 → 趣事 → 问答） */
       { title: "视觉组冷知识", pos: "tr", size: "lg",
-        text: "【占位】视觉识别组相关小知识：<em>例如训练模型时的趣事。</em>",
+        text: "【占位】视觉识别组主介绍：<em>例如训练模型时的趣事。</em>",
         list: ["【占位】算法趣事一", "【占位】算法趣事二", "【占位】算法趣事三"],
-        tags: ["OpenCV", "深度学习", "YOLO"] }
+        tags: ["OpenCV", "深度学习", "YOLO"] },
+      { title: "视觉组 · 算法趣事", pos: "bl", size: "md",
+        text: "【占位】训练模型/数据集标注的组内日常。",
+        list: ["【占位】数据集趣事", "【占位】推理速度调优"] },
+      { title: "视觉组 · 招新问答", pos: "tl", size: "sm",
+        text: "【占位】数学不好能学视觉吗？需要什么配置的电脑？" }
     ],
-    6: [
-      { title: "运营组冷知识 01", pos: "tl", size: "sm", mode: "all",
-        text: "【占位】运营组相关小知识一。" },
-      { title: "运营组冷知识 02", pos: "br", size: "md", mode: "all",
+    6: [ /* 运营组：2 条逐个弹出（顺序：主窗 → 小知识） */
+      { title: "运营组冷知识 02", pos: "br", size: "md",
         text: "【占位】运营组相关小知识二。",
-        list: ["【占位】运营细节一", "【占位】运营细节二"] }
+        list: ["【占位】运营细节一", "【占位】运营细节二"] },
+      { title: "运营组冷知识 01", pos: "tl", size: "sm",
+        text: "【占位】运营组相关小知识一。" }
     ],
     7: [
       { title: "备赛冷知识", pos: "tr", size: "md",
@@ -74,18 +79,8 @@
     8: [
       { title: "报名小提示", pos: "br", size: "sm",
         text: "【占位】报名相关的小提示/冷知识。" }
-    ],
-    9: [
-      { title: "加入冷知识 01", pos: "tl", size: "sm", mode: "all",
-        text: "【占位】加入我们相关小知识一。" },
-      { title: "加入冷知识 02", pos: "tr", size: "md", mode: "all",
-        text: "【占位】加入我们相关小知识二。",
-        list: ["【占位】加入细节一", "【占位】加入细节二"] },
-      { title: "加入冷知识 03", pos: "bl", size: "lg", mode: "all",
-        text: "【占位】加入我们相关小知识三：<em>从零基础到赛场。</em>",
-        list: ["【占位】成长路径一", "【占位】成长路径二", "【占位】成长路径三"],
-        tags: ["零基础", "传帮带", "参赛"] }
     ]
+    /* 9 加入我们：不配置弹窗（用户指定取消） */
   };
 
   /* ============================================================
@@ -226,25 +221,46 @@
     });
   }
 
-  /* 隐藏：open 的走关闭动画，未 open 但可见的直接藏 */
+  /* 隐藏：open 的走关闭动画，未 open 但可见的直接藏
+     用快照锁定发起时刻的窗口，延迟回调不会误伤之后新显示的窗口 */
   function hideAll(skipAnim) {
-    allTips.forEach(function (wrap) {
+    var closing = allTips.filter(function (wrap) {
       var tip = tipEl(wrap);
-      if (!tip || wrap.hidden) return;
-      if (tip.classList.contains("is-open")) {
-        tip.classList.add("is-closing");
-        tip.classList.remove("is-open");
-        window.setTimeout(function () {
-          tip.classList.remove("is-closing");
-          wrap.hidden = true;
-        }, skipAnim ? 0 : 240);
-      } else {
+      return tip && !wrap.hidden && tip.classList.contains("is-open");
+    });
+    closing.forEach(function (wrap) {
+      var tip = tipEl(wrap);
+      tip.classList.add("is-closing");
+      tip.classList.remove("is-open");
+      window.setTimeout(function () {
+        tip.classList.remove("is-closing");
+        wrap.hidden = true;
+      }, skipAnim ? 0 : 240);
+    });
+    allTips.forEach(function (wrap) {
+      if (wrap.hidden) return;
+      var tip = tipEl(wrap);
+      if (tip && !tip.classList.contains("is-open") && !tip.classList.contains("is-closing")) {
         wrap.hidden = true;
       }
     });
   }
 
-  /* —— 激活某屏（翻屏瞬间切换，旧窗同步消失） —— */
+  /* —— 追加显示（逐个弹出用：不隐藏已弹的窗口） —— */
+  function showTipAppend(wrap) {
+    wrap.hidden = false;
+    requestAnimationFrame(function () {
+      var tip = tipEl(wrap);
+      if (tip) tip.classList.add("is-open");
+    });
+  }
+
+  /* —— 激活某屏：旧窗立即清场，新窗 8s 后开始弹出 ——
+     02(all)/07/08(单条)：8s 一次弹出；
+     03/04/05/06(多条)：8s 弹第 1 条 → 之后每 3s 弹下一条（追加显示） */
+  var autoTimer = null;
+  var autoStepTimers = [];
+
   function activateScreen(screenId) {
     if (screenId === currentScreen) return;
     currentScreen = screenId;
@@ -252,12 +268,32 @@
     hideAll(true);
     var list = tipsByScreen[screenId];
     if (!list || !list.length) return;
-    if (list[0]._cfg && list[0]._cfg.mode === "all") {
-      showBatch(list);        /* 批量屏：全部同显 */
-    } else {
-      currentIdx = 0;
-      showTip(list[0]);       /* 单条屏：显示第一条 */
-    }
+    /* 清掉旧屏的逐条定时器 */
+    autoStepTimers.forEach(function (t) { window.clearTimeout(t); });
+    autoStepTimers = [];
+    window.clearTimeout(autoTimer);
+    /* 8s 后开始弹该屏弹窗；8s 内翻走则取消 */
+    autoTimer = window.setTimeout(function () {
+      if (currentScreen !== screenId) return;   /* 已翻走，不弹 */
+      var isAll = list[0]._cfg && list[0]._cfg.mode === "all";
+      if (isAll || list.length <= 1) {
+        if (isAll) {
+          showBatch(list);        /* 02 等：一起弹出 */
+        } else {
+          currentIdx = 0;
+          showTip(list[0]);       /* 07/08 单条 */
+        }
+        return;
+      }
+      /* 多条屏：逐个弹出，间隔 3s（先大后小，按配置顺序） */
+      list.forEach(function (w, i) {
+        autoStepTimers.push(window.setTimeout(function () {
+          if (currentScreen !== screenId) return;
+          if (i === 0) currentIdx = 0;
+          showTipAppend(w);       /* 追加显示，不覆盖前面的窗 */
+        }, i * 3000));
+      });
+    }, 8000);
   }
 
   /* —— 下一条 —— */
@@ -304,12 +340,25 @@
     attributeFilter: ["class"]
   });
 
-  /* —— 启动：自动弹出当前屏第一条（进入后 4 秒） —— */
+  /* —— 启动：加载 8s 后自动弹出（桌面弹当前屏；手机长页逐个弹全局知识） —— */
   window.setTimeout(function () {
+    if (isMobile()) {
+      /* 手机长页：全局知识 8s 起每 3s 切换一条（小屏逐个叠窗会乱，用切换） */
+      if (!flatAll.length) return;
+      flatAll.slice(0, 3).forEach(function (cfg, i) {
+        window.setTimeout(function () {
+          var s = screenOf(cfg);
+          if (s && !tipsByScreen[s]) ensureScreen(s);
+          var wrap = (tipsByScreen[s] || []).filter(function (w) { return w._cfg === cfg; })[0];
+          if (wrap) showTip(wrap);
+        }, 8000 + i * 3000);
+      });
+      return;
+    }
     var id = activeScreen();
     if (id) ensureScreen(id);
     activateScreen(id || 1, true);
-  }, 4000);
+  }, 8000);
 
   /* ============================================================
      交互绑定（事件委托）
