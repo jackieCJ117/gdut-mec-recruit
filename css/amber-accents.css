@@ -284,3 +284,87 @@
 .qr__label {
   color: var(--amber, #ffb46b) !important;
 }
+
+/* ============ v7 组别培养内容模块（group-cv）暖色点缀 ============
+   三轮定稿：
+   v7a 全位置琥珀 → 用户嫌"喧宾夺主 + 单数字染色奇怪"；
+   v7b 砍到只留标题 + hover → 用户嫌"寡淡"；
+   v7c 当前版（平衡）：琥珀走"发光小元素"路线——数字全琥珀
+   （02 屏 facts 同屏多数字全琥珀先例，01-04 全一致避免"单染色"）、
+   卡片头分隔线琥珀柔线（结构性暖光）、图位菱形图标琥珀（占位"待激活"感）；
+   知识点名/SHOT 标签保持青色，暖色以光点细线形式存在不抢文字 */
+
+/* 区块标题 + en 小标：琥珀 soft */
+.group-cv__title {
+  color: var(--amber-soft, #ffd9a8) !important;
+  text-shadow: 0 0 14px var(--amber-glow, rgba(255, 180, 107, 0.45)) !important;
+}
+.group-cv__en {
+  color: var(--amber-soft, #ffd9a8) !important;
+  text-shadow: 0 0 8px var(--amber-glow, rgba(255, 180, 107, 0.35)) !important;
+}
+
+/* 卡片编号 01-04：全部琥珀（全一致，发光数字 = 终端读数感） */
+.group-cv__no {
+  color: var(--amber, #ffb46b) !important;
+  text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.45)) !important;
+}
+
+/* 卡片头分隔线：琥珀柔线（结构性暖光，低强度） */
+.group-cv__card-head {
+  border-bottom-color: rgba(255, 180, 107, 0.3) !important;
+}
+
+/* 图位菱形图标：琥珀弱发光（占位"待激活"光点） */
+.group-cv__shot::before {
+  border-color: var(--amber, #ffb46b) !important;
+  box-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.3)) !important;
+}
+.group-cv__shot:hover::before {
+  border-color: var(--amber, #ffb46b) !important;
+  box-shadow: 0 0 14px var(--amber-glow, rgba(255, 180, 107, 0.55)) !important;
+}
+
+/* 卡片 hover 辉光：琥珀（inset 微光 + 外发光；transform 保持） */
+.group-cv__card:hover {
+  box-shadow:
+    inset 0 0 26px rgba(255, 180, 107, 0.1),
+    0 0 18px var(--amber-glow, rgba(255, 180, 107, 0.3)) !important;
+}
+
+/* ============ v8 指导老师区（02 页右栏卡片）暖色点缀 ============
+   荣誉行琥珀 soft（强调句，呼应 group__who）、
+   成果关键数字琥珀（呼应正文强调词 .para b）、
+   照片框琥珀辉光、数据条数字琥珀（呼应 facts 数字）、
+   方向标签琥珀描边（呼应 holo-tip 按钮描边）；
+   姓名/职务/正文保持青色与白色 */
+
+.mentor__honors {
+  color: var(--amber-soft, #ffd9a8) !important;
+  text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.35)) !important;
+}
+.mentor__result b {
+  color: var(--amber, #ffb46b) !important;
+  text-shadow: 0 0 8px var(--amber-glow, rgba(255, 180, 107, 0.35)) !important;
+}
+.mentor__photo {
+  border-color: var(--amber, #ffb46b) !important;
+  box-shadow:
+    0 0 14px var(--amber-glow, rgba(255, 180, 107, 0.3)),
+    inset 0 0 12px rgba(255, 180, 107, 0.1) !important;
+}
+.mentor__stat b {
+  color: var(--amber, #ffb46b) !important;
+  text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.45)) !important;
+}
+.mentor__tags li {
+  border-color: var(--amber, #ffb46b) !important;
+  color: var(--amber-soft, #ffd9a8) !important;
+  box-shadow: 0 0 8px var(--amber-glow, rgba(255, 180, 107, 0.2)) !important;
+}
+
+/* 成长路径序号（02 页左栏 01-04）：琥珀（与卡片编号/数据数字同语言） */
+.path__no {
+  color: var(--amber, #ffb46b) !important;
+  text-shadow: 0 0 8px var(--amber-glow, rgba(255, 180, 107, 0.5)) !important;
+}

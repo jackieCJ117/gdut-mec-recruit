@@ -1,0 +1,194 @@
+/* ============================================================
+   组别培养内容模块（「各组别要求.docx」→ 全息卡片网格）
+   填充 03/04/05 屏 CONTENT SLOT；06 运营组未提供内容保持原占位
+   视觉语言复用 paper.css：panel-hi 卡片 / holo-bar--grid hover /
+   about-panel inset 微光 / group-screen__extra 虚线图位
+   ============================================================ */
+
+/* —— 填充态：覆盖原占位虚线框（仅 .group-screen__extra--filled 生效，06 屏不受影响） */
+.group-screen__extra--filled {
+  display: block;
+  align-items: initial;
+  justify-content: initial;
+  min-height: 0;
+  margin-top: 22px;
+  padding: 18px 2px 6px;
+  border: none;
+  background: none;
+}
+
+/* —— 区块头 */
+.group-cv__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.group-cv__en {
+  font-family: var(--font-en);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--mist);
+}
+.group-cv__title {
+  font-family: var(--font-head-cn);
+  font-size: 21px;
+  letter-spacing: 3px;
+  color: var(--cyan-soft);
+  text-shadow: 0 0 14px rgba(47, 196, 220, 0.5);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--holo-line);
+  text-align: center;
+}
+
+/* —— 板块卡片网格 */
+.group-cv__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.group-cv__card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel-hi);
+  box-shadow: inset 0 0 26px rgba(47, 196, 220, 0.06);
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+.group-cv__card:hover {
+  box-shadow:
+    inset 0 0 26px rgba(47, 196, 220, 0.06),
+    0 0 18px rgba(47, 196, 220, 0.22);
+  transform: translateY(-2px);
+}
+/* 奇数张卡时最后一张跨整行（视觉组 3 卡：2+1 → 2+1 横跨） */
+.group-cv__card--wide {
+  grid-column: 1 / -1;
+}
+.group-cv__card-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--holo-line);
+}
+.group-cv__no {
+  font-family: var(--font-en);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--cyan);
+  text-shadow: 0 0 10px rgba(47, 196, 220, 0.8);
+  line-height: 1;
+}
+.group-cv__card-title {
+  font-family: var(--font-head-cn);
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: var(--cyan-soft);
+  font-weight: 600;
+}
+
+/* —— 条目列表 */
+.group-cv__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.group-cv__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.group-cv__item-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--cyan-soft);
+}
+.group-cv__item-name::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  flex-shrink: 0;
+  background: var(--cyan);
+  box-shadow: 0 0 8px rgba(47, 196, 220, 0.9);
+  transform: rotate(45deg);
+}
+.group-cv__item-desc {
+  font-size: 13.5px;
+  line-height: 1.85;
+  letter-spacing: 0.4px;
+  color: var(--text);
+}
+
+/* —— 图片占位区（配图后补，替换为 <img> 即可） */
+.group-cv__shots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+.group-cv__shot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  aspect-ratio: 16 / 10;
+  border: 1px dashed var(--holo-border);
+  border-radius: 10px;
+  background:
+    radial-gradient(70% 70% at 50% 40%, rgba(47, 196, 220, 0.08), transparent 70%),
+    rgba(94, 200, 226, 0.03);
+  color: var(--cyan);
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.group-cv__shot::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  border: 1.5px solid var(--holo-border);
+  box-shadow: 0 0 12px rgba(47, 196, 220, 0.25);
+  transform: rotate(45deg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.group-cv__shot:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 16px rgba(47, 196, 220, 0.25);
+}
+.group-cv__shot:hover::before {
+  border-color: var(--cyan);
+  box-shadow: 0 0 14px rgba(47, 196, 220, 0.6);
+}
+.group-cv__shot-tag {
+  font-family: var(--font-en);
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: var(--mist);
+}
+.group-cv__shot-note {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--mist);
+  opacity: 0.85;
+}
+
+/* —— 窄屏（与全站 899px 断点一致：单列堆叠） */
+@media (max-width: 899px) {
+  .group-cv__grid { grid-template-columns: 1fr; }
+  .group-cv__shots { grid-template-columns: 1fr; }
+  .group-cv__shot { aspect-ratio: 16 / 8; min-height: 140px; }
+}
