@@ -1,0 +1,188 @@
+/* ============================================================
+   机创全息终端 CYBER 2026 · cover-boot.css
+   封面启动动画（一次性开机序列，约 3s）：
+   暗场亮起 → 双环能量脉冲 + 扫描弧 → boot 文字逐行 →
+   进度条加载 → 全息闪光 → 封面内容入场
+   播完覆盖层透明不挡交互；刷新重播、切屏返回不重播
+   独立文件，删除即回退
+   ============================================================ */
+
+/* —— 覆盖层：初始全屏深色，动画期间拦截点击 —— */
+.cover-boot {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: auto;
+  background: #040b13;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  opacity: 1;
+  animation: cover-boot-fade 3.3s ease-in-out forwards;
+}
+/* 播完后：透明、不挡交互 */
+@keyframes cover-boot-fade {
+  0%, 78%   { opacity: 1; pointer-events: auto; }
+  82%       { opacity: 0.85; }
+  92%, 100% { opacity: 0; pointer-events: none; }
+}
+
+/* —— 中央能量核心（双环 + 扫描弧 + 脉冲） —— */
+.cover-boot__core {
+  position: relative;
+  width: 130px; height: 130px;
+}
+/* 外环：青色细环，从中心扩展 */
+.cover-boot__ring--1 {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(47, 196, 220, 0.6);
+  box-shadow: 0 0 18px rgba(47, 196, 220, 0.3), inset 0 0 18px rgba(47, 196, 220, 0.12);
+  animation: cover-boot-ring1 1.1s ease-out infinite;
+}
+@keyframes cover-boot-ring1 {
+  0%   { transform: scale(0.3); opacity: 0; }
+  25%  { opacity: 0.9; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+/* 内环：金色环，反向脉冲 */
+.cover-boot__ring--2 {
+  position: absolute; inset: 26px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 180, 107, 0.55);
+  box-shadow: 0 0 12px rgba(255, 180, 107, 0.25);
+  animation: cover-boot-ring2 1.1s ease-out infinite;
+}
+@keyframes cover-boot-ring2 {
+  0%   { transform: scale(1.15); opacity: 0; }
+  30%  { opacity: 0.85; }
+  100% { transform: scale(0.75); opacity: 0; }
+}
+/* 扫描弧：旋转的青色扇区 */
+.cover-boot__scan {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg,
+    rgba(47, 196, 220, 0.35) 0deg,
+    rgba(47, 196, 220, 0.06) 50deg,
+    transparent 95deg);
+  animation: cover-boot-scan 1.3s linear infinite;
+}
+@keyframes cover-boot-scan { to { transform: rotate(360deg); } }
+/* 中心脉冲点（琥珀） */
+.cover-boot__pulse {
+  position: absolute; inset: 56px;
+  border-radius: 50%;
+  background: var(--amber, #ffb46b);
+  box-shadow: 0 0 16px var(--amber, #ffb46b), 0 0 40px rgba(255, 180, 107, 0.4);
+  animation: cover-boot-pulse 0.9s ease-in-out infinite;
+}
+@keyframes cover-boot-pulse {
+  0%, 100% { transform: scale(0.85); opacity: 0.8; }
+  50%      { transform: scale(1.15); opacity: 1; }
+}
+
+/* —— boot 文字（等宽终端风，逐行浮现） —— */
+.cover-boot__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-family: "Cascadia Mono", "Consolas", "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--cyan-soft, #7fd8e8);
+  text-shadow: 0 0 8px rgba(47, 196, 220, 0.5);
+}
+.cover-boot__line {
+  opacity: 0;
+  animation: cover-boot-line 0.35s steps(1) forwards;
+}
+.cover-boot__line--1 { animation-delay: 0.5s; }
+.cover-boot__line--2 { animation-delay: 1.0s; color: rgba(143, 180, 201, 0.85); }
+.cover-boot__line--3 { animation-delay: 1.5s; color: rgba(143, 180, 201, 0.85); }
+.cover-boot__line--4 { animation-delay: 2.0s; color: var(--amber-soft, #ffd9a8); text-shadow: 0 0 10px rgba(255, 180, 107, 0.5); }
+@keyframes cover-boot-line {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* —— 进度条（线性加载，琥珀到青色渐变） —— */
+.cover-boot__bar {
+  width: 220px; height: 3px;
+  background: rgba(94, 200, 226, 0.15);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.cover-boot__bar i {
+  display: block;
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--amber, #ffb46b), var(--cyan, #2fc4dc));
+  box-shadow: 0 0 10px rgba(255, 180, 107, 0.5);
+  animation: cover-boot-bar 2.4s cubic-bezier(0.3, 0.6, 0.4, 1) 0.4s forwards;
+}
+@keyframes cover-boot-bar { to { width: 100%; } }
+
+/* —— 收尾全息闪光 —— */
+.cover-boot__flash {
+  position: absolute; inset: 0;
+  background: radial-gradient(55% 55% at 50% 50%,
+    rgba(255, 224, 163, 0.65),
+    rgba(47, 196, 220, 0.3) 55%,
+    transparent 80%);
+  opacity: 0;
+  animation: cover-boot-flash 0.6s ease-out 2.55s forwards;
+}
+@keyframes cover-boot-flash {
+  0%   { opacity: 0; }
+  35%  { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+
+/* —— 封面内容分层入场（全息浮现：队标先点亮 → 标题 → 正文 → 数据 → CTA） —— */
+.screen--boot .cover__content > *,
+.screen--boot .cover__footer {
+  opacity: 0;
+  animation: cover-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes cover-reveal {
+  from { opacity: 0; transform: translateY(10px); filter: blur(5px); }
+  to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+/* 队标：最先投影点亮（缩放 + 聚焦，全息核心先显） */
+.screen--boot .cover__logo-wrap {
+  animation-name: cover-logo-in;
+  animation-delay: 2.5s;
+}
+@keyframes cover-logo-in {
+  from { opacity: 0; transform: scale(0.88); filter: blur(5px); }
+  55%  { opacity: 1; }
+  to   { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+/* 其余元素依次浮现（每层间隔 ~0.15-0.2s） */
+.screen--boot .cover__est          { animation-delay: 2.75s; }
+.screen--boot .cover__masthead     { animation-delay: 2.9s; }
+.screen--boot .cover__kicker,
+.screen--boot .cover__headline     { animation-delay: 3.05s; }
+.screen--boot .cover__rule,
+.screen--boot .cover__sub          { animation-delay: 3.2s; }
+.screen--boot .cover__meta,
+.screen--boot .cover__datastrip    { animation-delay: 3.35s; }
+.screen--boot .cover__footer       { animation-delay: 3.55s; }
+
+/* ============================================================
+   响应式：手机端简化（核心缩小、文字少行）
+   ============================================================ */
+@media (max-width: 767px) {
+  .cover-boot__core { width: 96px; height: 96px; }
+  .cover-boot__ring--2 { inset: 19px; }
+  .cover-boot__pulse { inset: 42px; }
+  .cover-boot__text { font-size: 9px; }
+  .cover-boot__line--2,
+  .cover-boot__line--3 { display: none; }
+  .cover-boot__bar { width: 160px; }
+}

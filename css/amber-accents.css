@@ -225,11 +225,36 @@
    暖色只留核心动作——提交按钮/下载按钮/必填提示；
    步骤序号与勾选框回退青色（流程控件是中性信息，暖色影响交互认知） */
 
-/* 导航 chips：当前屏琥珀 */
+/* 导航 chips：数字 + 中文代号（两行全息胶囊） */
+.chip {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.25;
+  padding: 5px 13px 4px;
+  gap: 1px;
+}
+.chip b { font-size: 11px; letter-spacing: 1px; line-height: 1.2; }
+.chip i {
+  font-style: normal;
+  font-family: var(--font-cn, "PingFang SC", "Microsoft YaHei", sans-serif);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  opacity: 0.7;
+  line-height: 1.2;
+}
+/* 当前屏琥珀（数字亮、文字琥珀） */
 .chip.is-active {
   border-color: var(--amber, #ffb46b) !important;
   color: var(--amber-soft, #ffd9a8) !important;
   box-shadow: 0 0 12px var(--amber-glow, rgba(255, 180, 107, 0.3)) !important;
+}
+.chip.is-active i { opacity: 1; }
+
+/* 手机端：只留数字防挤 */
+@media (max-width: 767px) {
+  .chip i { display: none; }
+  .chip { padding: 5px 10px; }
 }
 
 /* 更多数字/标记 */

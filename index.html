@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="css/holo-term.css">
   <link rel="stylesheet" href="css/logo-fusion.css">
   <link rel="stylesheet" href="css/amber-accents.css">
+  <link rel="stylesheet" href="css/cover-boot.css">
 </head>
 <body>
   <a class="skip-link" href="#viewport">跳到终端主界面</a>
@@ -56,6 +57,23 @@
       <!-- 01 启动屏 -->
       <article class="screen sheet--cover screen--boot is-active" data-screen="1" aria-label="01 · 启动屏">
         <span class="sheet__sheen" aria-hidden="true"></span>
+        <!-- 封面启动动画层（一次性开机动画，播完透明不挡交互） -->
+        <div class="cover-boot" aria-hidden="true">
+          <div class="cover-boot__core">
+            <span class="cover-boot__ring cover-boot__ring--1"></span>
+            <span class="cover-boot__ring cover-boot__ring--2"></span>
+            <span class="cover-boot__scan"></span>
+            <span class="cover-boot__pulse"></span>
+          </div>
+          <div class="cover-boot__text">
+            <span class="cover-boot__line cover-boot__line--1">JICHUANG HOLO SYSTEM</span>
+            <span class="cover-boot__line cover-boot__line--2">BOOT SEQUENCE INITIATED</span>
+            <span class="cover-boot__line cover-boot__line--3">LOADING MODULES 09/09</span>
+            <span class="cover-boot__line cover-boot__line--4">SYNC COMPLETE</span>
+          </div>
+          <div class="cover-boot__bar"><i></i></div>
+          <span class="cover-boot__flash"></span>
+        </div>
             <div class="cover__bg" aria-hidden="true" data-depth="12">
               <div class="cover__grid"></div>
               <div class="cover__scan"></div>
@@ -679,15 +697,15 @@
     <nav class="holo__rail" aria-label="版面导航">
       <button class="holo__rail-btn" id="prevBtn" type="button" aria-label="上一版面">‹</button>
       <div class="holo__rail-chips" id="railChips" role="tablist" aria-label="版面跳转">
-        <button class="chip is-active" type="button" role="tab" aria-selected="true" data-go="1">01</button>
-        <button class="chip" type="button" role="tab" aria-selected="false" data-go="2">02</button>
-        <button class="chip" type="button" role="tab" aria-selected="false" data-go="3">03</button>
-        <button class="chip" type="button" role="tab" aria-selected="false" data-go="4">04</button>
-        <button class="chip" type="button" role="tab" aria-selected="false" data-go="5">05</button>
-        <button class="chip" type="button" role="tab" aria-selected="false" data-go="6">06</button>
-        <button class="chip" type="button" role="tab" aria-selected="false" data-go="7">07</button>
-        <button class="chip" type="button" role="tab" aria-selected="false" data-go="8">08</button>
-        <button class="chip" type="button" role="tab" aria-selected="false" data-go="9">09</button>
+        <button class="chip is-active" type="button" role="tab" aria-selected="true" data-go="1"><b>01</b><i>启动</i></button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="2"><b>02</b><i>关于</i></button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="3"><b>03</b><i>结构</i></button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="4"><b>04</b><i>电控</i></button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="5"><b>05</b><i>视觉</i></button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="6"><b>06</b><i>运营</i></button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="7"><b>07</b><i>战绩</i></button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="8"><b>08</b><i>报名</i></button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="9"><b>09</b><i>加入</i></button>
       </div>
       <button class="holo__rail-btn" id="nextBtn" type="button" aria-label="下一版面">›</button>
     </nav>
