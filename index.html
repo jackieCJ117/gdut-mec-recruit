@@ -1035,14 +1035,21 @@
   <script src="js/holo-term.js"></script>
   <script src="js/holo-cmd.js"></script>
   <script>
-    // 封面内容等待字体完全就绪再显示（防 FOUT 导致首屏布局与最终形态不一致）
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(function () {
-        document.body.classList.add('fonts-ready');
-      });
-    } else {
-      document.body.classList.add('fonts-ready');
-    }
+    // 封面内容等待字体成功加载再显示（防 FOUT 导致首屏布局与最终形态不一致）。
+    // 成功路径：得意黑 + Orbitron 加载完成即显示（本地 <1s / 线上 1-3s）；
+    // 失败/超时兜底：catch + 5s 定时器强制显示，绝不白屏。
+    (function () {
+      function fontsDone() { document.body.classList.add('fonts-ready'); }
+      if (document.fonts && document.fonts.load) {
+        Promise.all([
+          document.fonts.load('1em "Smiley Sans"', '机械创新团队'),
+          document.fonts.load('1em "Orbitron"', '0123456789')
+        ]).then(fontsDone).catch(fontsDone);
+        setTimeout(fontsDone, 5000);
+      } else {
+        fontsDone();
+      }
+    })();
   </script>
 </body>
 </html>
