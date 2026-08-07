@@ -6,9 +6,8 @@
   <title>机创全息终端 CYBER 2026 · 机械创新团队招新通道</title>
   <meta name="description" content="广东工业大学机械创新团队 2026 秋季招新 —— 全息终端界面，一次一屏浏览团队、组别与报名通道。">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23107090' stroke-width='10'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23107090'/%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/smiley-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/orbitron.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/cover.css">
   <link rel="stylesheet" href="css/paper.css">
@@ -1035,5 +1034,15 @@
 
   <script src="js/holo-term.js"></script>
   <script src="js/holo-cmd.js"></script>
+  <script>
+    // 封面内容等待字体完全就绪再显示（防 FOUT 导致首屏布局与最终形态不一致）
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () {
+        document.body.classList.add('fonts-ready');
+      });
+    } else {
+      document.body.classList.add('fonts-ready');
+    }
+  </script>
 </body>
 </html>

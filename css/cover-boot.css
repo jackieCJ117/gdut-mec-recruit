@@ -186,3 +186,20 @@
   .cover-boot__line--3 { display: none; }
   .cover-boot__bar { width: 160px; }
 }
+
+/* ============================================================
+   字体就绪前封面内容隐藏（防 FOUT 布局跳变）
+   body.fonts-ready 由 index.html 的 document.fonts.ready 添加；
+   就绪前封面只显示 boot 开机序列（背景 + 核心 + 进度条），
+   字体就绪后才播放分层入场 —— 保证用户首屏看到的布局
+   与字体完全加载后的最终形态一致（本地/线上效果一致）
+   ============================================================ */
+body:not(.fonts-ready) .screen--boot .cover__content > *,
+body:not(.fonts-ready) .screen--boot .cover__footer {
+  opacity: 0;
+  animation: none;
+}
+body.fonts-ready .screen--boot .cover__content > *,
+body.fonts-ready .screen--boot .cover__footer {
+  animation: cover-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}

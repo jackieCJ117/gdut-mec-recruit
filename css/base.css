@@ -64,6 +64,14 @@
   font-weight: 400 900;
   font-display: swap;
 }
+/* 英文数字字体：Orbitron（自托管可变字体，替代 Google Fonts 外链——
+   避免国内访问 Google Fonts 失败时回退 Consolas 导致的布局尺寸变化） */
+@font-face {
+  font-family: "Orbitron";
+  src: url("../assets/fonts/orbitron.woff2") format("woff2");
+  font-weight: 400 900;
+  font-display: swap;
+}
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
