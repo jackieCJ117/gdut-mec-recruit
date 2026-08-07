@@ -401,3 +401,18 @@
   }
   .cover__hint { font-size: 11px; }
 }
+
+/* ============================================================
+   矮视口（桌面/平板高度不足）：隐藏数据条 + 紧凑布局
+   修复：封面内容 755px 超出面板高（视口-176），数据条与 CTA 重叠
+   数据条为氛围装饰（aria-hidden），隐藏后内容降至面板内
+   ============================================================ */
+@media (min-width: 768px) and (max-height: 930px) {
+  .cover__datastrip { display: none; }
+  .cover__logo-wrap { width: 220px; height: 220px; }
+  .cover__logo { width: 194px; height: 194px; }
+  .cover__content { padding: 16px 34px 62px; }
+  .cover__masthead-cn { font-size: clamp(26px, 3vw, 36px); letter-spacing: 6px; }
+  .cover__rule { margin: 9px 0 10px; }
+  .cover__est { margin-bottom: 8px; }
+}
