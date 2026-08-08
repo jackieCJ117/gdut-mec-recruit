@@ -230,6 +230,13 @@
   animation: blink 1.8s ease-in-out infinite;
   color: var(--cyan);
 }
+/* 报头 meta 打字机光标（fx.js 逐字打出期间显示） */
+.sheet__masthead-meta.typewriter::after {
+  content: "▍";
+  margin-left: 3px;
+  color: var(--cyan);
+  animation: blink 1s steps(1) infinite;
+}
 /* 群号/公众号字符流收敛后的定格态（fx.js 控制） */
 .connect-anim.is-connected {
   color: var(--cyan-soft);
@@ -258,4 +265,9 @@
   .glitch::before, .glitch::after { animation: none; opacity: 0; }
   .cover__masthead-cn:hover { animation: none; }
   .tbd::after, .qr--holo .qr__svg, .data-pending { animation: none; }
+  /* 07 页新增动画一并降级 */
+  .console-tl__status, .console-tl__titlebar span::after,
+  .honors-dust, .honors-beam, .holo-bar, .holo-bar__pulse,
+  .award-node__body::after,
+  .power__pulse-dot, .power__headlight { animation: none; }
 }

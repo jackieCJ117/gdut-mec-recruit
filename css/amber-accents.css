@@ -72,10 +72,14 @@
   text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.5)) !important;
 }
 
-/* 卖点卡标题（零基础也能来…）：琥珀（时间轴标题走交替，不整组覆盖） */
+/* 卖点卡标题（零基础也能来…）：琥珀字 + 艺术字（无圆槽背景） */
 .holo-bar__cell b {
   color: var(--amber, #ffb46b) !important;
   text-shadow: 0 0 8px var(--amber-glow, rgba(255, 180, 107, 0.35)) !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  font-family: var(--font-head-cn) !important;
 }
 
 /* 02 屏团队数据数字：琥珀（核心数据） */
@@ -83,12 +87,21 @@
   color: var(--amber, #ffb46b) !important;
   text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.4)) !important;
 }
-/* 07 屏（战绩）暖色：第一张成就卡（国家级）+ 时间轴「结果公布」节点，
-   其余保持青色——两个关键节点琥珀（最重荣誉 + 招新结果），主次分明 */
-.trophy:first-child .trophy__num,
+/* 07 屏（战绩终端）暖色：数字为主 + 高权重点睛（对齐 02 屏 facts/stats 数字全琥珀结构）——
+   三个终端面板数字全琥珀（6×/9×/2×）、战绩条数字琥珀渐变（对齐数据条数字）、
+   项目名琥珀 soft（对齐 mentor 荣誉行）、时间轴「结果公布」节点；
+   面板标题/分点标签保持青色发光（不对整组染色） */
+.console__panel-num,
 .timeline__item:nth-child(4) b {
   color: var(--amber, #ffb46b) !important;
   text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.4)) !important;
+}
+/* 07 页战绩条数字：琥珀渐变胶囊（仅 .console 内，不穿透 02 页卖点卡） */
+.console .holo-bar b {
+  color: var(--bg) !important;
+  background: linear-gradient(135deg, #ffd9a8 0%, #ffb46b 40%, #e8933a 100%) !important;
+  border-color: var(--amber, #ffb46b) !important;
+  box-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.35)) !important;
 }
 
 /* 强调句："适合…的你" 柔和琥珀 */
@@ -144,10 +157,9 @@
   border-color: rgba(255, 180, 107, 0.4) !important;
   box-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.25)) !important;
 }
-/* 终端核心状态灯：琥珀 */
+/* 终端核心状态灯：琥珀（2026-08 去掉右上角琥珀点，保留结构） */
 .holo-term__led {
-  background: var(--amber, #ffb46b) !important;
-  box-shadow: 0 0 8px var(--amber, #ffb46b) !important;
+  display: none !important;
 }
 /* 终端核心图标辉光：琥珀 */
 .holo-term__core-img {
@@ -283,6 +295,23 @@
 }
 .qr__label {
   color: var(--amber, #ffb46b) !important;
+}
+
+/* 09 页收尾按钮：与封面 CTA / 提交按钮同款琥珀填充（招新漏斗的最后一个动作） */
+.cta__action {
+  background: linear-gradient(135deg, #ffd9a8 0%, #ffb46b 40%, #e8933a 100%) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 224, 163, 0.7) !important;
+  box-shadow:
+    0 0 18px rgba(255, 180, 107, 0.4),
+    inset 0 0 12px rgba(255, 255, 255, 0.12) !important;
+  text-shadow: 0 1px 2px rgba(20, 10, 0, 0.3) !important;
+}
+.cta__action:hover {
+  background: linear-gradient(135deg, #ffe3b8 0%, #ffc47e 45%, #f0a04b 100%) !important;
+  box-shadow:
+    0 0 28px rgba(255, 180, 107, 0.65),
+    inset 0 0 16px rgba(255, 255, 255, 0.18) !important;
 }
 
 /* ============ v7 组别培养内容模块（group-cv）暖色点缀 ============

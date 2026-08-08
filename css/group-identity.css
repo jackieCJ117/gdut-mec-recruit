@@ -1,0 +1,159 @@
+/* ============================================================
+   机创全息终端 CYBER 2026 · group-identity.css
+   组别视觉身份：给 03-06 四个组别屏各自的纹理语言
+
+   问题：03/04/05/06 结构完全同构（标题→简介→适合的你→技能胶囊→
+   右侧图标框→核心培养内容卡片网格），只有图标和文案在变，
+   四个组的性格没有被表达 → 模板感的根源。
+
+   方案：不动布局（布局同构便于横向比较，本身是对的），
+   只给每组一套专属纹理，让四页一眼可辨：
+     03 结构 MECH   → 工程制图 45° 剖面线（机械制图语言）
+     04 电控 EMBED  → PCB 焊盘点阵 + 板边金手指（板卡语言）
+     05 视觉 VISION → 逐行扫描栅格 + 取景框角（成像语言）
+     06 运营 MEDIA  → 同心广播波纹（信号发射语言）
+
+   纹理挂在 .group-screen__art::before（原本是统一扫描线，此处按组覆盖），
+   角标挂 ::after（paper.css 未占用该伪元素）。
+   独立文件，删除即整体回退到统一扫描线
+   ============================================================ */
+
+/* ============ 03 结构组：工程制图剖面线 ============
+   45° 等距斜线 = 机械剖视图的剖面填充；叠细网格 = 图纸底格 */
+.screen[data-screen="3"] .group-screen__art::before {
+  background:
+    repeating-linear-gradient(45deg,
+      rgba(94, 200, 226, 0.11) 0 1px,
+      transparent 1px 9px),
+    repeating-linear-gradient(0deg,
+      rgba(94, 200, 226, 0.05) 0 1px,
+      transparent 1px 22px),
+    repeating-linear-gradient(90deg,
+      rgba(94, 200, 226, 0.05) 0 1px,
+      transparent 1px 22px);
+}
+/* 制图角标三角 */
+.screen[data-screen="3"] .group-screen__art::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-bottom: 16px solid rgba(94, 200, 226, 0.22);
+  pointer-events: none;
+}
+
+/* ============ 04 电控组：PCB 焊盘点阵 ============
+   径向点阵 = 万用板过孔；叠 45° 走线 = PCB 高速线（呼应 07 页导线） */
+.screen[data-screen="4"] .group-screen__art::before {
+  background:
+    radial-gradient(circle at center,
+      rgba(94, 200, 226, 0.3) 0 1.3px,
+      transparent 1.6px),
+    repeating-linear-gradient(45deg,
+      rgba(47, 196, 220, 0.055) 0 2px,
+      transparent 2px 16px);
+  background-size: 16px 16px, auto;
+}
+/* 板边金手指 */
+.screen[data-screen="4"] .group-screen__art::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 9px;
+  background: repeating-linear-gradient(90deg,
+    rgba(255, 180, 107, 0.3) 0 6px,
+    transparent 6px 12px);
+  pointer-events: none;
+}
+
+/* ============ 05 视觉组：传感器扫描栅格 ============
+   密横线 = 逐行扫描；竖带 = 像素列；整体像 CMOS 读出 */
+.screen[data-screen="5"] .group-screen__art::before {
+  background:
+    repeating-linear-gradient(0deg,
+      rgba(94, 200, 226, 0.1) 0 1px,
+      transparent 1px 4px),
+    repeating-linear-gradient(90deg,
+      rgba(94, 200, 226, 0.06) 0 2px,
+      transparent 2px 10px);
+}
+/* 取景框四角 */
+.screen[data-screen="5"] .group-screen__art::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  background:
+    linear-gradient(var(--cyan), var(--cyan)) left  top    / 14px 1px no-repeat,
+    linear-gradient(var(--cyan), var(--cyan)) left  top    / 1px 14px no-repeat,
+    linear-gradient(var(--cyan), var(--cyan)) right top    / 14px 1px no-repeat,
+    linear-gradient(var(--cyan), var(--cyan)) right top    / 1px 14px no-repeat,
+    linear-gradient(var(--cyan), var(--cyan)) left  bottom / 14px 1px no-repeat,
+    linear-gradient(var(--cyan), var(--cyan)) left  bottom / 1px 14px no-repeat,
+    linear-gradient(var(--cyan), var(--cyan)) right bottom / 14px 1px no-repeat,
+    linear-gradient(var(--cyan), var(--cyan)) right bottom / 1px 14px no-repeat;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* ============ 06 运营组：同心广播波纹 ============
+   等距同心圆 = 信号外发；无直线纹理，与前三组形成「软/硬」对比 */
+.screen[data-screen="6"] .group-screen__art::before {
+  background:
+    repeating-radial-gradient(circle at 50% 50%,
+      rgba(94, 200, 226, 0.09) 0 1px,
+      transparent 1px 15px),
+    radial-gradient(circle at 50% 50%,
+      rgba(47, 196, 220, 0.07),
+      transparent 68%);
+}
+/* 发射弧标记 */
+.screen[data-screen="6"] .group-screen__art::after {
+  content: "";
+  position: absolute;
+  right: -18px;
+  top: -18px;
+  width: 56px;
+  height: 56px;
+  border: 1px solid rgba(255, 180, 107, 0.32);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 8px rgba(255, 180, 107, 0.06),
+    inset 0 0 12px rgba(255, 180, 107, 0.1);
+  pointer-events: none;
+}
+
+/* ============ 边框语言区分（呼应各组纹理） ============
+   03 虚线（图纸未定稿）/ 04 直角（板卡）/
+   05 圆角（镜头）/ 06 大圆角（波形） */
+.screen[data-screen="3"] .group-screen__art {
+  border-style: dashed;
+}
+.screen[data-screen="4"] .group-screen__art {
+  border-style: solid;
+  border-radius: 4px;
+  border-color: rgba(94, 200, 226, 0.45);
+}
+.screen[data-screen="5"] .group-screen__art {
+  border-style: solid;
+  border-radius: 18px;
+  border-color: rgba(94, 200, 226, 0.42);
+}
+.screen[data-screen="6"] .group-screen__art {
+  border-style: solid;
+  border-radius: 26px;
+  border-color: rgba(255, 180, 107, 0.3);
+}
+
+/* 窄屏：纹理保留（是身份不是装饰），仅收角标避免挤压 */
+@media (max-width: 899px) {
+  .screen[data-screen="3"] .group-screen__art::after,
+  .screen[data-screen="4"] .group-screen__art::after,
+  .screen[data-screen="6"] .group-screen__art::after {
+    display: none;
+  }
+}

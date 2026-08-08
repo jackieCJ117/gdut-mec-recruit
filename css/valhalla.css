@@ -1,0 +1,466 @@
+/* ============================================================
+   机创全息终端 CYBER 2026 · valhalla.css
+   08 英灵殿：横滑档案卡（手机后台卡片范式）
+   每张卡 = 一位师兄的全息档案碑（玻璃面板 + 光柱 + 剪影 +
+   铭牌 + 荣誉 + 寄语）。卡片横向排布，scroll-snap 拖拽吸附；
+   JS 按滚动位置计算透视：居中卡正面、两侧缩放/变暗/微旋转，
+   切换进中心时 glitch 闪帧 + 寄语打字机重播。
+   占位内容在 index.html 的 .vcard 中替换（每卡自带完整档案）。
+   ============================================================ */
+
+/* 剪影 symbol 容器：同 power-gear 模式，display:none 中定义供 use 引用 */
+.valhalla__sym { display: none; }
+
+/* —— 内容层抬起 —— */
+.sheet--valhalla .sheet__masthead,
+.sheet--valhalla .sheet__body,
+.sheet--valhalla .sheet__footer { position: relative; z-index: 1; }
+
+/* —— 头部提示行 —— */
+.valhalla__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 0 20px 8px;
+}
+.valhalla__hint {
+  font-family: var(--font-en);
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: var(--mist);
+  opacity: 0.85;
+  animation: hint-blink 3.4s ease-in-out infinite;
+}
+@keyframes hint-blink {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+.valhalla__count {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-en);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--mist);
+  border: 1px solid var(--holo-line);
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: rgba(8, 22, 36, 0.5);
+}
+.valhalla__count b {
+  font-size: 12px;
+  color: var(--cyan);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 8px rgba(47, 196, 220, 0.5);
+}
+
+/* ============================================================
+   横滑轨道（scroll-snap 吸附；JS 驱动透视）
+   ============================================================ */
+.sheet__body--valhalla {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.valhalla__carousel {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+/* —— TRON 光轨地面：透视网格向地平线延伸，缓慢前滚（卡片之下） —— */
+.valhalla__carousel::before {
+  content: "";
+  position: absolute;
+  left: -8%;
+  right: -8%;
+  bottom: -4px;
+  height: 52%;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(47, 196, 220, 0.4) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(47, 196, 220, 0.4) 1.5px, transparent 1.5px);
+  background-size: 44px 44px;
+  transform: perspective(420px) rotateX(62deg);
+  transform-origin: top center;
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 80%);
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 80%);
+  animation: floor-flow 2.6s linear infinite;
+}
+@keyframes floor-flow {
+  to { background-position: 0 44px, 0 44px; }
+}
+.valhalla__track {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  /* 首尾留白 = 卡宽一半（300/2），首尾卡精确居中可吸附 */
+  padding: 6px calc(50% - 150px) 14px;
+  perspective: 1300px;
+  scrollbar-width: none;
+  touch-action: pan-y;   /* 横向滚动交给轨道，纵向留给页面 */
+  cursor: grab;
+  user-select: none;     /* 拖拽时不选中卡内文字 */
+}
+.valhalla__track::-webkit-scrollbar { display: none; }
+.valhalla__track.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+/* —— 全息扫描线：CRT 逐行暗线固定在可视区，缓慢下滚（卡片之上） —— */
+.valhalla__track::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg,
+    rgba(0, 0, 0, 0.16) 0 2px, transparent 2px 4px);
+  opacity: 0.55;
+  animation: scan-drift 7s linear infinite;
+}
+@keyframes scan-drift {
+  to { background-position: 0 64px; }
+}
+
+/* ============================================================
+   档案卡（每卡一位英灵）
+   ============================================================ */
+.vcard {
+  position: relative;
+  flex-shrink: 0;
+  width: 300px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 26px 20px 16px;
+  scroll-snap-align: center;
+  border: 1px solid var(--holo-line);
+  border-radius: 14px;
+  background: linear-gradient(170deg, rgba(21, 44, 66, 0.55), rgba(8, 22, 36, 0.6));
+  -webkit-backdrop-filter: blur(8px) saturate(1.15);
+  backdrop-filter: blur(8px) saturate(1.15);
+  box-shadow:
+    inset 0 1px 0 rgba(190, 235, 250, 0.15),
+    inset 0 0 30px rgba(47, 196, 220, 0.05),
+    0 10px 30px rgba(0, 0, 0, 0.35);
+  /* transform/opacity 由 JS 逐帧驱动，不做 transition（否则拖拽拖尾）；
+     只有边框/阴影走过渡 */
+  transition: border-color 0.25s, box-shadow 0.25s;
+  transform-style: preserve-3d;
+}
+.vcard.is-active {
+  border-color: rgba(94, 200, 226, 0.55);
+  /* 霓虹辉光体系：多层同色辉光（inset 高光随视角变量偏移 = 全息反光） */
+  box-shadow:
+    inset calc(var(--vx, 0) * 12px) calc(var(--vy, 0) * 12px) 30px rgba(190, 235, 250, 0.14),
+    inset 0 0 30px rgba(47, 196, 220, 0.08),
+    0 0 12px rgba(47, 196, 220, 0.4),
+    0 0 32px rgba(47, 196, 220, 0.26),
+    0 0 64px rgba(47, 196, 220, 0.12),
+    0 14px 36px rgba(0, 0, 0, 0.4);
+  animation: card-pulse 3.4s ease-in-out infinite;
+}
+@keyframes card-pulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.12); }
+}
+/* 取景框角标 */
+.vcard::before,
+.vcard::after {
+  content: "";
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  pointer-events: none;
+}
+.vcard::before { top: -1px; left: -1px; border-top: 1px solid rgba(190, 235, 250, 0.55); border-left: 1px solid rgba(190, 235, 250, 0.55); }
+.vcard::after { bottom: -1px; right: -1px; border-bottom: 1px solid rgba(190, 235, 250, 0.4); border-right: 1px solid rgba(190, 235, 250, 0.4); }
+
+/* 卡片光柱：居中卡点亮 */
+.vcard__beam {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  width: 2.5px;
+  height: 42px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, rgba(190, 235, 250, 0.95), rgba(47, 196, 220, 0.5), transparent);
+  box-shadow: 0 0 10px rgba(47, 196, 220, 0.85);
+  opacity: 0.45;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.vcard__beam::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: var(--cyan-soft);
+  box-shadow: 0 0 10px rgba(190, 235, 250, 0.95);
+}
+.vcard.is-active .vcard__beam { opacity: 1; animation: vcard-beam 3s ease-in-out infinite; }
+@keyframes vcard-beam {
+  0%, 100% { filter: brightness(0.9); }
+  50% { filter: brightness(1.25); }
+}
+
+/* 页码角标 */
+.vcard__idx {
+  position: absolute;
+  top: 9px;
+  right: 12px;
+  font-family: var(--font-en);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: var(--mist);
+  opacity: 0.7;
+}
+
+/* 剪影 */
+.vcard__portrait {
+  margin: 0 0 8px;
+  width: 78px;
+  height: 94px;
+  color: var(--cyan-soft);
+  filter: drop-shadow(0 0 14px rgba(47, 196, 220, 0.65));
+  transition: transform 0.25s;
+}
+.vcard.is-active .vcard__portrait { transform: translateY(-2px); }
+.vcard__silhouette { width: 100%; height: 100%; display: block; }
+
+/* 铭牌 */
+.vcard__id {
+  font-family: var(--font-en);
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--mist);
+  opacity: 0.85;
+}
+.vcard__name {
+  display: inline-block;
+  margin-top: 3px;
+  font-family: var(--font-head-cn);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: var(--title);
+  text-shadow:
+    0 0 6px rgba(190, 235, 250, 0.9),
+    0 0 16px rgba(47, 196, 220, 0.7),
+    0 0 36px rgba(47, 196, 220, 0.4);
+}
+.vcard.is-active .vcard__portrait {
+  filter: drop-shadow(calc(var(--vx, 0) * 8px) calc(var(--vy, 0) * 8px) 18px rgba(47, 196, 220, 0.85));
+}
+.vcard__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.vcard__tag {
+  font-family: var(--font-en);
+  font-size: 8.5px;
+  letter-spacing: 1.5px;
+  color: var(--cyan);
+  border: 1px solid var(--holo-line);
+  border-radius: 999px;
+  padding: 2px 9px;
+}
+.vcard__dest {
+  font-family: var(--font-head-cn);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--amber);
+  border: 1px solid rgba(255, 180, 107, 0.5);
+  border-radius: 999px;
+  padding: 2px 10px;
+  text-shadow: 0 0 10px var(--amber-glow);
+}
+
+/* 荣誉 */
+.vcard__honors {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+.vcard__honors li {
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--text);
+  padding-left: 13px;
+  position: relative;
+}
+.vcard__honors li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 4px;
+  height: 4px;
+  background: var(--amber);
+  box-shadow: 0 0 6px rgba(255, 180, 107, 0.8);
+  transform: rotate(45deg);
+}
+
+/* 寄语（打字机） */
+.vcard__quote {
+  margin: auto 0 0;
+  padding-top: 10px;
+  width: 100%;
+  border-top: 1px dashed rgba(94, 200, 226, 0.22);
+  font-family: var(--font-head-cn);
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--cyan-soft);
+  text-shadow: 0 0 8px rgba(47, 196, 220, 0.25);
+  opacity: 0.95;
+  min-height: 2.2em;
+  text-align: left;
+}
+.vcard__quote.typing::after {
+  content: "▍";
+  margin-left: 3px;
+  color: var(--cyan);
+  animation: blink 1s steps(1) infinite;
+}
+
+/* 切换闪帧（JS 在进中心时打一拍）。
+   特异性 ≥ 入场动画规则；transform/opacity 归 JS 管，闪帧只动 opacity */
+.sheet--valhalla .vcard.is-flashing { animation: vcard-flick 0.22s steps(2) 1; }
+@keyframes vcard-flick {
+  0% { opacity: 1; }
+  50% { opacity: 0.35; }
+  100% { opacity: 1; }
+}
+
+/* ============================================================
+   桌面箭头（移动端隐藏，拖拽为主）
+   ============================================================ */
+.valhalla__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(94, 200, 226, 0.35);
+  background: rgba(8, 22, 36, 0.65);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  color: var(--cyan);
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 3;
+  transition: border-color 0.15s, box-shadow 0.15s, color 0.15s;
+}
+.valhalla__arrow:hover {
+  border-color: var(--cyan);
+  color: var(--cyan-soft);
+  box-shadow: 0 0 14px rgba(47, 196, 220, 0.35);
+}
+.valhalla__arrow--prev { left: 6px; }
+.valhalla__arrow--next { right: 6px; }
+
+/* ============================================================
+   入场：切到本屏时轨道整体淡入（卡片透视由 JS 逐卡控制，
+   若逐卡 animation 会以 fill both 覆盖 JS 的 transform/opacity）
+   ============================================================ */
+.sheet--valhalla.is-active .valhalla__track {
+  animation: track-enter 0.4s ease both;
+}
+@keyframes track-enter {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ============================================================
+   断点适配
+   ============================================================ */
+/* 移动端：卡宽 ~56vw（相邻卡边缘露出 ~35px 的横滑感）；
+   scroll-snap 中心对齐让首尾卡天然居中，无需横向留白；
+   轨道改相对定位 + 显式高度（absolute 在流式长页里高度塌陷为 0） */
+@media (max-width: 699px) {
+  .valhalla__head { padding: 0 14px 6px; }
+  .valhalla__track {
+    position: relative;
+    height: 500px;
+    /* 对称留白 = 50% - 卡宽一半（卡 56vw），首尾卡天然居中 */
+    padding: 4px calc(50% - 28vw) 12px;
+    gap: 10px;
+  }
+  .vcard { width: 56vw; padding: 22px 18px 14px; }
+  .vcard__portrait { width: 64px; height: 78px; }
+  .vcard__name { font-size: 18px; }
+  .valhalla__arrow { display: none; }
+}
+/* 中屏（700-1099）：轨道保持流式（FLOW 长页模式下 absolute 会塌陷为 0 高） */
+@media (min-width: 700px) and (max-width: 1099px) {
+  .valhalla__track {
+    position: relative;
+    height: auto;
+    /* 留白 = 卡宽一半（280/2），首尾卡精确居中 */
+    padding: 6px calc(50% - 140px) 14px;
+  }
+  .vcard { width: 280px; }
+}
+/* 矮视口压缩（桌面） */
+@media (min-width: 900px) and (max-height: 780px) {
+  .vcard { padding: 20px 18px 12px; }
+  .vcard__portrait { width: 60px; height: 74px; }
+  .vcard__name { font-size: 18px; }
+  .vcard__honors li { font-size: 10.5px; }
+  .vcard__quote { font-size: 11.5px; min-height: 2em; }
+}
+
+/* —— 青色数据雨：竖直字符列下落（JS 生成 .data-col，替换浮尘） —— */
+.data-rain {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.data-col {
+  position: absolute;
+  top: -45%;
+  font-family: var(--font-en);
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 2px;
+  writing-mode: vertical-rl;
+  white-space: nowrap;
+  color: rgba(47, 196, 220, 0.4);
+  text-shadow: 0 0 8px rgba(47, 196, 220, 0.6);
+  animation: data-fall linear infinite;
+}
+@keyframes data-fall {
+  to { transform: translateY(330%); }
+}
+
+/* 动效偏好降级 */
+@media (prefers-reduced-motion: reduce) {
+  .vcard__beam, .vcard.is-flashing,
+  .sheet--valhalla.is-active .valhalla__track,
+  .valhalla__hint,
+  .valhalla__carousel::before,
+  .valhalla__track::after,
+  .vcard.is-active,
+  .data-col { animation: none; }
+}

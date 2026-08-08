@@ -271,44 +271,824 @@
   background: var(--panel-hi);
 }
 
-/* —— 战绩 —— */
-.trophies {
-  display: grid;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-.trophy {
+/* —— 战绩：全息终端面板（holo-term 骨架语言：标题栏/扫描线/光带/led/状态条） —— */
+.console { display: flex; flex-direction: column; gap: 14px; }
+
+/* 终端标题栏 */
+.console__head {
   display: flex;
   align-items: center;
-  gap: 12px;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 8px 12px;
-  background: var(--panel-hi);
+  gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid var(--holo-border);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(47, 196, 220, 0.12), rgba(8, 22, 36, 0.55));
+  box-shadow: inset 0 0 22px rgba(47, 196, 220, 0.05);
 }
-.trophy__medal { font-size: 20px; line-height: 1; }
-.trophy__num {
+.console__head-ico {
+  width: 22px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(94, 200, 226, 0.45);
+  color: var(--cyan);
+  font-size: 11px;
+  box-shadow: 0 0 10px rgba(47, 196, 220, 0.35), inset 0 0 8px rgba(47, 196, 220, 0.15);
+  flex-shrink: 0;
+}
+.console__head-titles { flex: 1; min-width: 0; }
+.console__head-title {
+  display: block;
   font-family: var(--font-en);
-  font-size: 17px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  color: var(--cyan-soft);
+  text-shadow: 1px 0 rgba(47, 196, 220, 0.5), -1px 0 rgba(255, 95, 174, 0.3);
+}
+.console__head-sub {
+  display: block;
+  font-size: 10.5px;
+  letter-spacing: 1.5px;
+  color: var(--mist);
+  margin-top: 2px;
+  opacity: 0.8;
+}
+.console__head-sync {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-en);
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--cyan);
+  border: 1px solid rgba(94, 200, 226, 0.35);
+  border-radius: 999px;
+  padding: 3px 9px;
+  flex-shrink: 0;
+}
+.console__head-sync i {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+  animation: holo-term-blink 1.8s ease-in-out infinite;
+}
+
+/* 终端面板（奖项：动力轴三列容器，中轨为轴，加宽容纳长导线） */
+.console__awards {
+  --power-track: 176px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr var(--power-track) 1fr;
+  row-gap: 10px;
+  padding-bottom: 34px;
+}
+
+/* 终端面板块：扫描线底 + 顶部光带 + 四角锚点 */
+.console__panel {
+  position: relative;
+  border: 1px solid var(--holo-border);
+  border-radius: 10px;
+  background: rgba(8, 22, 36, 0.5);
+  box-shadow: inset 0 0 26px rgba(47, 196, 220, 0.06);
+  overflow: hidden;
+}
+.console__panel::before { /* 扫描线网格 */
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(94, 200, 226, 0.045) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(94, 200, 226, 0.03) 0 1px, transparent 1px 4px);
+}
+.console__panel::after { /* 顶部光带 */
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(127, 216, 232, 0.9), transparent);
+  pointer-events: none;
+}
+
+/* 面板头：led + 标题 + 数字 */
+.console__panel-head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px 9px;
+  border-bottom: 1px solid rgba(94, 200, 226, 0.16);
+  background: linear-gradient(180deg, rgba(47, 196, 220, 0.1), transparent);
+}
+.console__led {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+  animation: holo-term-blink 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.console__panel-title {
+  flex: 1;
+  font-family: var(--font-head-cn);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--amber-soft, #ffd9a8);
+  text-shadow: 0 0 12px var(--amber-glow, rgba(255, 180, 107, 0.4));
+}
+.console__panel-num {
+  font-family: var(--font-en);
+  font-size: 24px;
   font-weight: 900;
   color: var(--cyan);
-  margin-right: 8px;
+  text-shadow:
+    2px 0 rgba(47, 196, 220, 0.75),
+    -2px 0 rgba(255, 82, 190, 0.5),
+    0 0 16px rgba(111, 215, 232, 0.6),
+    0 0 36px rgba(111, 215, 232, 0.35);
+  flex-shrink: 0;
 }
-.trophy__text { font-size: 11.5px; font-weight: 700; color: var(--title); line-height: 1.4; }
-.trophy__text small { display: block; font-size: 9.5px; font-weight: 400; color: var(--text); opacity: 0.65; }
 
-/* —— 时间线 —— */
+/* 终端数据行（> 前缀，hover 高亮） */
+.console__list {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  margin: 0;
+  padding: 10px 16px 12px;
+  display: flex;
+  flex-direction: column;
+}
+.console__list li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text);
+  transition: background 0.15s, box-shadow 0.15s;
+}
+.console__list li:hover {
+  background: rgba(47, 196, 220, 0.07);
+  box-shadow: inset 2px 0 0 var(--cyan);
+}
+.console__list li > i {
+  font-family: var(--font-en);
+  font-style: normal;
+  font-weight: 700;
+  color: var(--cyan);
+  text-shadow: 0 0 8px rgba(47, 196, 220, 0.6);
+  flex-shrink: 0;
+  width: 14px;
+}
+.console__list li > span { flex: 1; min-width: 0; }
+.console__list li > b {
+  flex-shrink: 0;
+  font-family: var(--font-head-cn);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--cyan);
+  text-shadow: 0 0 10px rgba(47, 196, 220, 0.5);
+  white-space: nowrap;
+}
+/* 国家级面板首行「特等奖」：最重荣誉琥珀点睛（对齐 6× 数字） */
+.console__panel:first-child .console__list li:first-child > b {
+  color: var(--amber, #ffb46b);
+  text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.35));
+}
+
+/* 在研项目：全宽终端面板 */
+.console__panel--projects { grid-column: 1 / -1; }
+.console__projects {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 14px 16px 16px;
+}
+.console__project {
+  position: relative;
+  padding: 14px 16px 16px;
+  border: 1px solid var(--holo-line);
+  border-radius: 8px;
+  background: linear-gradient(165deg, rgba(21, 44, 66, 0.42), rgba(8, 22, 36, 0.5));
+  -webkit-backdrop-filter: blur(6px) saturate(1.15);
+  backdrop-filter: blur(6px) saturate(1.15);
+  box-shadow:
+    inset 0 1px 0 rgba(190, 235, 250, 0.14),
+    inset 0 0 24px rgba(47, 196, 220, 0.04);
+}
+/* 取景框角标：左上 / 右下 L 角，全息取景感 */
+.console__project::before,
+.console__project::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+.console__project::before {
+  top: -1px; left: -1px;
+  border-top: 1px solid rgba(190, 235, 250, 0.55);
+  border-left: 1px solid rgba(190, 235, 250, 0.55);
+}
+.console__project::after {
+  bottom: -1px; right: -1px;
+  border-bottom: 1px solid rgba(190, 235, 250, 0.4);
+  border-right: 1px solid rgba(190, 235, 250, 0.4);
+}
+.console__project-name {
+  display: block;
+  font-family: var(--font-head-cn);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--cyan-soft);
+  text-shadow: 0 0 14px rgba(47, 196, 220, 0.45);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(94, 200, 226, 0.25);
+}
+.console__project-desc {
+  margin: 10px 0 0;
+  font-family: var(--font-head-cn);
+  font-size: 13.5px;
+  line-height: 1.75;
+  letter-spacing: 0.5px;
+  color: var(--cyan-soft);
+  text-shadow: 0 0 8px rgba(47, 196, 220, 0.25);
+  opacity: 0.92;
+}
+.console__points {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.console__points li {
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--text);
+}
+.console__points li > span { min-width: 0; }
+.console__points b {
+  font-family: var(--font-head-cn);
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--amber-soft, #ffd9a8);
+  text-shadow: 0 0 8px var(--amber-glow, rgba(255, 180, 107, 0.3));
+  white-space: nowrap;
+}
+.console__points b::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 7px;
+  vertical-align: 1px;
+  background: var(--amber, #ffb46b);
+  box-shadow: 0 0 8px rgba(255, 180, 107, 0.8);
+  transform: rotate(45deg);
+}
+.console__point--honor b {
+  color: var(--amber);
+  text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.4));
+}
+
+/* 终端底部状态条 */
+.console__foot {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border: 1px solid var(--holo-border);
+  border-radius: 10px;
+  background: rgba(8, 22, 36, 0.5);
+  font-family: var(--font-en);
+  font-size: 8.5px;
+  letter-spacing: 2.5px;
+  color: var(--mist);
+  opacity: 0.85;
+}
+
+/* ============================================================
+   07 页「动力轴」：机械传动轴 + 电控总线融合
+   中央粗传动轴（金属渐变+轴套环+螺纹）+ 实心齿轮节点 + PCB 走线
+   ============================================================ */
+.power__gear-sym { display: none; }
+.power__zone { position: relative; }
+
+/* —— 中央传动轴：金属渐变轴体 + 轴套环分段 + 螺纹纹路 —— */
+.power__spine {
+  position: absolute;
+  /* 轴端起于大齿轮轮毂中心（齿轮 top:0 + 半径 32），轴顶藏进轮毂不外露 */
+  left: 50%; top: 32px; bottom: 0;
+  width: 16px;
+  transform: translateX(-50%);
+  z-index: 0;
+  pointer-events: none;
+  /* 顶端渐隐：从轮毂里自然长出来，不留硬切口 */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 18px);
+  mask-image: linear-gradient(180deg, transparent 0, #000 18px);
+  /* 金属渐变轴体（机械质感）+ 青色能量透出（电控质感） */
+  background:
+    repeating-linear-gradient(180deg,
+      rgba(255, 255, 255, 0.12) 0 2px, transparent 2px 5px),
+    linear-gradient(90deg,
+      rgba(120, 160, 190, 0.35) 0%, rgba(94, 200, 226, 0.75) 30%,
+      rgba(190, 235, 250, 0.9) 50%, rgba(94, 200, 226, 0.75) 70%,
+      rgba(120, 160, 190, 0.35) 100%);
+  box-shadow:
+    0 0 16px rgba(47, 196, 220, 0.6),
+    0 0 40px rgba(47, 196, 220, 0.3),
+    inset 0 0 8px rgba(255, 255, 255, 0.15);
+}
+/* 轴套环：每隔一段一个金属环箍 */
+.power__spine::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(180deg,
+      transparent 0 46px,
+      rgba(180, 215, 235, 0.9) 46px 50px,
+      rgba(70, 130, 160, 0.6) 50px 54px,
+      transparent 54px 92px);
+}
+/* 键槽：两侧纵向亮线（车削加工细节，机械感） */
+.power__spine {
+  background:
+    repeating-linear-gradient(180deg,
+      rgba(255, 255, 255, 0.12) 0 2px, transparent 2px 5px),
+    linear-gradient(90deg,
+      transparent 2px, rgba(255, 255, 255, 0.35) 2px 3px,
+      transparent 3px 13px, rgba(255, 255, 255, 0.22) 13px 14px,
+      transparent 14px),
+    linear-gradient(90deg,
+      rgba(120, 160, 190, 0.35) 0%, rgba(94, 200, 226, 0.75) 30%,
+      rgba(190, 235, 250, 0.9) 50%, rgba(94, 200, 226, 0.75) 70%,
+      rgba(120, 160, 190, 0.35) 100%);
+}
+/* 螺纹：细密斜纹（机械车削纹） */
+.power__spine::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg,
+    transparent 0 3px, rgba(20, 60, 85, 0.4) 3px 4px);
+  opacity: 0.6;
+  animation: power-pulse 4.6s ease-in-out infinite;
+  background-blend-mode: screen;
+}
+@keyframes power-pulse {
+  0%, 8%   { opacity: 0.15; }
+  14%, 86% { opacity: 0.75; }
+  92%, 100% { opacity: 0.15; }
+}
+
+/* —— 顶部双齿轮组（机械啮合驱动，能量下传电路轴；不越过 masthead 蓝线） —— */
+.power__drive {
+  position: absolute;
+  /* 齿轮组居中：主轴正好从两齿轮啮合处穿下，轴顶藏在齿间不外露 */
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-start;
+  z-index: 3;
+  pointer-events: none;
+}
+/* 齿轮组占位：zone 顶部留出齿轮空间，避免盖住奖项 */
+.power__zone { padding-top: 70px; }
+.power__drivegear svg {
+  display: block;
+  color: var(--cyan);
+  filter: drop-shadow(0 0 8px rgba(47, 196, 220, 0.7));
+}
+.power__drivegear--lg svg {
+  width: 64px; height: 64px;
+  animation: spin 12s linear infinite;
+}
+.power__drivegear--sm svg {
+  width: 40px; height: 40px;
+  margin-left: -8px; margin-top: 10px;
+  animation: spin 12s linear infinite reverse;
+  opacity: 0.95;
+}
+
+/* —— 电路轴能量流动层（45° 斜纹上移，仅通电时可见） —— */
+.power__spine-energy {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg,
+    transparent 0 4px,
+    rgba(127, 216, 232, 0.85) 4px 5px,
+    transparent 5px 17px);
+  background-size: 24px 24px;
+  opacity: 0;
+  z-index: 1;
+}
+.power__zone.is-powered .power__spine-energy {
+  opacity: 1;
+  animation: spine-flow 1.2s linear infinite;
+}
+@keyframes spine-flow { to { background-position: 0 24px; } }
+
+/* —— 战绩刻度：轴体量规线（战功碑刻度） —— */
+.power__scale {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(180deg,
+    transparent 0 21px,
+    rgba(190, 235, 250, 0.26) 21px 22px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* —— 顶部总战绩灯：能量中枢，联动时点亮 —— */
+.power__headlight {
+  position: absolute;
+  left: 50%;
+  top: -7px;
+  width: 22px;
+  height: 22px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95), var(--cyan) 55%, transparent);
+  box-shadow: 0 0 18px rgba(47, 196, 220, 0.9);
+  z-index: 3;
+  opacity: 0.55;
+  transition: opacity 0.3s, box-shadow 0.3s;
+  animation: headlight-breathe 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+.power__headlight.is-lit {
+  opacity: 1;
+  box-shadow: 0 0 30px rgba(47, 196, 220, 1), 0 0 60px rgba(47, 196, 220, 0.5);
+}
+@keyframes headlight-breathe {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 0.75; }
+}
+
+/* —— 底部基座：轴落地（主轴箱底） —— */
+.power__foot {
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  width: 34px;
+  height: 15px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, rgba(120, 160, 190, 0.5), rgba(40, 70, 90, 0.85));
+  border-radius: 3px;
+  box-shadow:
+    0 0 10px rgba(47, 196, 220, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* —— 能量光珠：常态沿轴泵送；悬停奖项时 JS 定位到该节点（能量送达） —— */
+.power__pulse-dot {
+  position: absolute;
+  left: 50%;
+  top: 88%;
+  width: 13px;
+  height: 13px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.98), var(--cyan-soft) 55%, transparent 78%);
+  box-shadow:
+    0 0 14px rgba(190, 235, 250, 0.95),
+    0 0 32px rgba(47, 196, 220, 0.7);
+  z-index: 3;
+  opacity: 0;
+  animation: pulse-rise 3s ease-in-out infinite;
+  animation-delay: 0.45s;   /* 与线圈错峰：光珠经过线圈时线圈点亮 */
+  pointer-events: none;
+}
+@keyframes pulse-rise {
+  0% { top: 90%; opacity: 0; }
+  10% { opacity: 1; }
+  48% { top: 42%; opacity: 1; }   /* 经过联轴器能量核 */
+  85% { top: 6%; opacity: 1; }    /* 到达顶部齿轮 */
+  95%, 100% { top: 2%; opacity: 0; }
+}
+
+/* —— 奖项节点（左右交替挂载） —— */
+.award-node {
+  position: relative;
+  display: flex;
+  z-index: 1;
+  grid-column: 1 / 2;      /* 显式占左右列，避免落入中轨 */
+}
+/* 卡片贴主轴侧（左卡贴列右缘、右卡贴列左缘），焊盘直接在卡片边缘 */
+.award-node--l { justify-content: flex-end; }
+.award-node--r { grid-column: 3 / 4; justify-content: flex-start; }
+/* 等级 chip 靠主轴侧：左卡主轴在右（默认最后）、右卡主轴在左（order 提前） */
+.award-node--r .award-node__level { order: -1; }
+
+/* 导线长短不一 + 卡片错落：卡片向主轴移动（off 0/20/40/60 → 走线 88/68/48/28） */
+.award-node[data-off="20"] { --off: 20px; }
+.award-node[data-off="40"] { --off: 40px; }
+.award-node[data-off="60"] { --off: 60px; }
+.award-node { --off: 0px; }
+/* 卡片向主轴平移（左卡 flex-end 贴右缘 + margin-right 负值右移；右卡对称） */
+.award-node--l .award-node__body { margin-right: calc(0px - var(--off)); }
+.award-node--r .award-node__body { margin-left: calc(0px - var(--off)); }
+/* 走线从卡片边缘伸出到主轴：左端 = 列右缘+off（卡片边缘），右端 = 主轴（列右缘+88） */
+/* translateY(-50%) 必须一起写：只写 translateX 会覆盖基础规则的垂直居中，
+   导致走线/焊盘比卡片中线低半个 svg 高（约 20px） */
+.award-node--l .award-node__trace { left: 100%; transform: translate(var(--off, 0px), -50%); width: calc(88px - var(--off, 0px)); }
+.award-node--r .award-node__trace { right: 100%; transform: translate(calc(-1 * var(--off, 0px)), -50%); width: calc(88px - var(--off, 0px)); }
+
+/* 琥珀线：4 根荣誉奖项线 + 2 项目线（机械能量聚焦） */
+.award-node--amber .award-node__trace { color: var(--amber, #ffb46b); }
+.award-node--amber .award-node__trace-line { stroke: rgba(255, 180, 107, 0.8); }
+.award-node--amber .award-node__trace-flow { stroke: rgba(255, 217, 168, 0.95); }
+.power__project--amber .power__project-trace { color: var(--amber, #ffb46b); }
+.power__project--amber .award-node__trace-line { stroke: rgba(255, 180, 107, 0.8); }
+.power__project--amber .award-node__trace-flow { stroke: rgba(255, 217, 168, 0.95); }
+
+/* 焊盘三环（外环 + 内环 + 中心过孔，currentColor 吃线色） */
+.award-node__pad { filter: drop-shadow(0 0 3px currentColor); }
+/* 走线数据包：圆点沿 trace 路径流动（JS 注入 animateMotion，跟随真实路径） */
+.award-node__packet {
+  fill: var(--cyan-soft);
+  opacity: 0.8;
+  filter: drop-shadow(0 0 3px rgba(127, 216, 232, 0.95));
+}
+.award-node--amber .award-node__packet {
+  fill: var(--amber-soft);
+  filter: drop-shadow(0 0 3px rgba(255, 180, 107, 0.95));
+}
+.power__project-trace .award-node__packet {
+  r: 2.4;
+  opacity: 0.9;
+}
+.award-node:hover .award-node__packet { opacity: 1; }
+.award-node__pad circle:nth-child(1) { fill: rgba(8, 22, 36, 0.9); stroke: currentColor; stroke-width: 1.2; }
+.award-node__pad circle:nth-child(2) { fill: none; stroke: currentColor; stroke-width: 0.8; opacity: 0.55; }
+.award-node__pad circle:nth-child(3) { fill: currentColor; stroke: none; opacity: 0.95; }
+
+/* 通电浮现：默认线隐藏（dashoffset=1 断点归零），通电后 draw-on */
+.award-node__trace-line,
+.power__project-trace .award-node__trace-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.award-node__trace-flow { opacity: 0; }
+/* 逐条通电：--i 是节点自上而下的序号（HTML 内联），
+   每条线比上一条晚 --step，焊盘/卡片各自跟在自己那条线画完之后浮现 */
+.power__zone { --step: 0.09s; --draw: 0.55s; }
+.award-node, .power__project { --lit: calc(var(--i, 0) * var(--step)); }
+
+.power__zone.is-powered .award-node__trace-line,
+.power__zone.is-powered .power__project-trace .award-node__trace-line {
+  animation: draw-on var(--draw) ease-out forwards;
+  animation-delay: var(--lit);
+}
+/* 缩放入场放容器（.award-node 无 hover transform 冲突）；
+   body 只淡入——fill both 的 scale(1) 会永久压制 hover 的 translateX 位移 */
+.power__zone.is-powered .award-node {
+  animation: node-scale 0.4s ease both;
+  animation-delay: calc(var(--lit) + var(--draw) * 0.55);
+}
+.power__zone.is-powered .award-node__pad {
+  animation: node-fade 0.4s ease both;
+  animation-delay: calc(var(--lit) + var(--draw) * 0.55);
+}
+.power__zone.is-powered .award-node__body {
+  animation: node-fade 0.4s ease both;
+  animation-delay: calc(var(--lit) + var(--draw));
+}
+/* 项目卡只淡入不缩放：导线 svg 就在卡片内部，scale 会把线端拽离主轴 */
+.power__zone.is-powered .power__project {
+  animation: node-rise 0.5s ease both;
+  animation-delay: calc(var(--lit) + var(--draw));
+}
+.power__zone.is-powered .award-node__trace-flow {
+  opacity: 1;
+  animation: trace-flow 1.8s linear infinite;
+  animation-delay: var(--lit);
+}
+@keyframes draw-on { to { stroke-dashoffset: 0; } }
+@keyframes node-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes node-scale {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes node-rise {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* 走线（SVG 45° 折线，三档长度 44/40/32，宽度随 viewBox 自适应） */
+.award-node__trace {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  height: 44px;
+  width: auto;
+  overflow: visible;
+  color: var(--cyan);
+  z-index: 1;
+}
+.award-node--l .award-node__trace { left: 100%; }
+.award-node--r .award-node__trace { right: 100%; }
+.award-node__trace-line {
+  fill: none;
+  stroke: rgba(47, 196, 220, 0.8);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+  opacity: 0.9;
+}
+.award-node__trace-flow {
+  fill: none;
+  stroke: rgba(127, 216, 232, 0.95);
+  stroke-width: 2.85;
+  stroke-linecap: round;
+  stroke-dasharray: 3 12;
+  animation: trace-flow 1.8s linear infinite;
+}
+.award-node:nth-child(3n) .award-node__trace-flow   { animation-duration: 2.6s; }
+.award-node:nth-child(3n+1) .award-node__trace-flow { animation-duration: 1.3s; }
+@keyframes trace-flow { to { stroke-dashoffset: -12px; } }
+.award-node:hover .award-node__trace-line { opacity: 1; stroke: var(--cyan-soft); }
+
+/* 奖项卡（单行省略保证 15 行等高） */
+.award-node__body {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 13px;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid var(--holo-border);
+  border-radius: 8px;
+  background: linear-gradient(165deg, rgba(21, 44, 66, 0.5), rgba(8, 22, 36, 0.55));
+  -webkit-backdrop-filter: blur(5px) saturate(1.15);
+  backdrop-filter: blur(5px) saturate(1.15);
+  box-shadow:
+    inset 0 1px 0 rgba(190, 235, 250, 0.16),
+    inset 0 0 18px rgba(47, 196, 220, 0.05);
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+.award-node:hover .award-node__body {
+  border-color: var(--cyan);
+  box-shadow: inset 0 0 18px rgba(47, 196, 220, 0.12), 0 0 14px rgba(47, 196, 220, 0.25);
+}
+/* 取景框角标：左上 L 角 */
+.award-node__body::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: -1px;
+  width: 10px; height: 10px;
+  border-top: 1px solid rgba(190, 235, 250, 0.55);
+  border-left: 1px solid rgba(190, 235, 250, 0.55);
+  pointer-events: none;
+}
+/* hover 扫描线：光条从左到右掠过 */
+.award-node:hover .award-node__body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 32%, rgba(190, 235, 250, 0.3) 50%, transparent 68%);
+  transform: translateX(-130%);
+  animation: card-scan 0.5s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes card-scan {
+  to { transform: translateX(130%); }
+}
+.award-node--l:hover .award-node__body { transform: translateX(2px); }
+.award-node--r:hover .award-node__body { transform: translateX(-2px); }
+.award-node__tier {
+  font-family: var(--font-en);
+  font-size: 7px;
+  letter-spacing: 2px;
+  color: var(--mist);
+  opacity: 0.85;
+  border: 1px solid var(--holo-line);
+  border-radius: 999px;
+  padding: 2px 6px;
+  flex-shrink: 0;
+}
+.award-node__name {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.award-node__level {
+  flex-shrink: 0;
+  font-family: var(--font-head-cn);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(47, 196, 220, 0.45);
+  color: var(--cyan);
+  text-shadow: 0 0 8px rgba(47, 196, 220, 0.5);
+}
+.award-node__level--gold {
+  color: var(--amber);
+  border-color: rgba(255, 180, 107, 0.55);
+  text-shadow: 0 0 10px var(--amber-glow);
+}
+.award-node__level--dim {
+  color: var(--mist);
+  border-color: var(--holo-line);
+  text-shadow: none;
+}
+
+/* —— 项目模组（独立卡，从主轴引出粗导线，右卡错落） —— */
+.power__projects { grid-column: 1 / -1; overflow: visible !important; position: relative; --power-track: 176px; }
+.power__projects .console__projects {
+  display: grid;
+  grid-template-columns: 1fr var(--power-track) 1fr;
+  gap: 14px 0;
+  padding: 0 16px 16px;
+}
+.power__project { position: relative; }
+.power__project--l { grid-column: 1; }
+.power__project--r { grid-column: 3; margin-top: 40px; }
+.power__project-trace {
+  position: absolute;
+  top: 8px;
+  height: 44px;
+  width: auto;
+  overflow: visible;
+  color: var(--cyan);
+  z-index: 1;
+}
+.power__project--l .power__project-trace { left: 100%; }
+.power__project--r .power__project-trace { right: 100%; }
+/* 项目导线更粗（能量更足，比奖项粗 150%） */
+.power__project-trace .award-node__trace-line { stroke-width: 4.5; }
+.power__project-trace .award-node__trace-flow { stroke-width: 3.9; }
+
+/* 规律波浪错落：右列节点逐行 +16/+32 交错 */
+.award-node--r:nth-child(4n+2) { margin-top: 16px; }
+.award-node--r:nth-child(4n+4) { margin-top: 32px; }
+
+
+/* —— 时间线（终端日志面板） —— */
 .timeline {
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 10px 14px;
-  background: var(--panel-hi);
+  position: relative;
+  border: 1px solid var(--holo-border);
+  border-radius: 8px;
+  padding: 0 14px 12px;
+  background: linear-gradient(165deg, rgba(21, 44, 66, 0.42), rgba(8, 22, 36, 0.52));
+  -webkit-backdrop-filter: blur(6px) saturate(1.15);
+  backdrop-filter: blur(6px) saturate(1.15);
+  box-shadow: inset 0 1px 0 rgba(190, 235, 250, 0.12);
+}
+/* 终端标题栏：三色灯 + 会话名 */
+.console-tl__titlebar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 0 6px;
+  border-bottom: 1px solid var(--holo-line);
+  font-family: var(--font-en);
+  font-size: 8.5px;
+  letter-spacing: 2px;
+  color: var(--mist);
+}
+.console-tl__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(94, 200, 226, 0.45);
+}
+.console-tl__dot:nth-child(2) { background: rgba(255, 180, 107, 0.45); }
+.console-tl__dot:nth-child(3) { background: rgba(255, 82, 190, 0.4); }
+.console-tl__titlebar span { margin-left: 6px; }
+.console-tl__titlebar span::after {
+  content: " ▍";
+  color: var(--cyan);
+  animation: blink 1.2s steps(1) infinite;
 }
 .timeline__title {
   font-size: 13px;
   font-weight: 800;
   color: var(--title);
-  margin-bottom: 8px;
+  margin: 8px 0;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -317,41 +1097,78 @@
   content: "";
   flex: 1;
   height: 1px;
-  background: var(--line);
+  background: linear-gradient(90deg, var(--line), transparent);
 }
 .timeline__list {
   list-style: none;
   position: relative;
-  padding-left: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  padding: 0;
 }
 .timeline__list::before {
   content: "";
   position: absolute;
-  left: 4px;
-  top: 4px;
-  bottom: 4px;
-  width: 2px;
-  background: linear-gradient(180deg, var(--ink), var(--mist));
+  left: 0;
+  right: 0;
+  top: 9px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ink), var(--mist), transparent);
+  box-shadow: 0 0 8px rgba(47, 196, 220, 0.4);
 }
 .timeline__item {
   position: relative;
-  padding: 0 0 8px 6px;
-  font-size: 11px;
+  padding: 22px 4px 0;
+  font-size: 13px;
 }
-.timeline__item::before {
-  content: "";
+/* 原节点圆圈由终端状态灯取代 */
+.timeline.console-tl .timeline__item::before { display: none; }
+/* 状态灯：open 青呼吸 / queued 琥珀 / pending 暗 */
+.console-tl__status {
   position: absolute;
-  left: -16px;
-  top: 4px;
+  left: 4px; top: 5px;
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--panel-hi);
-  border: 2px solid var(--ink);
+  background: var(--cyan);
+  box-shadow: 0 0 8px rgba(47, 196, 220, 0.85);
+  animation: tl-status 2.2s ease-in-out infinite;
 }
-.timeline__item b { color: var(--title); margin-right: 8px; }
-.timeline__item span { font-family: var(--font-en); font-size: 10px; font-weight: 700; color: var(--cyan); }
-.timeline__item small { display: block; color: var(--text); opacity: 0.7; margin-top: 1px; }
+.console-tl__status--queued {
+  background: var(--amber);
+  box-shadow: 0 0 8px var(--amber-glow);
+  animation-duration: 3.2s;
+}
+.console-tl__status--pending {
+  background: #3a5568;
+  box-shadow: none;
+  animation: none;
+}
+@keyframes tl-status {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.timeline__item b { display: block; color: var(--title); margin: 0 0 2px; font-size: 14px; }
+.timeline__item span { font-family: var(--font-en); font-size: 12px; font-weight: 700; color: var(--cyan); text-shadow: 0 0 8px rgba(47, 196, 220, 0.35); }
+.timeline__item small { display: block; color: var(--text); opacity: 0.7; margin-top: 2px; font-size: 10.5px; line-height: 1.6; }
+/* 进度条：进程推进感 */
+.console-tl__gauge {
+  display: block;
+  margin-top: 7px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(94, 200, 226, 0.1);
+  overflow: hidden;
+}
+.console-tl__gauge i {
+  display: block;
+  height: 100%;
+  width: var(--w, 0%);
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--ink-deep), var(--cyan));
+  box-shadow: 0 0 8px rgba(47, 196, 220, 0.6);
+}
 .timeline__note {
   font-size: 9.5px;
   color: #ffb26b;
@@ -780,14 +1597,64 @@
 .group__tags li { font-size: 9px; padding: 2px 9px; }
 .groups { gap: 14px; }
 
-.trophy { padding: 12px 16px; }
-.trophy__num { font-size: 24px; }
-.trophy__text { font-size: 14px; }
-.trophy__text small { font-size: 11px; }
-.trophies { gap: 10px; margin-bottom: 18px; }
+/* 07 终端 v4 放大（基础样式在「战绩」段，这里覆盖字号） */
+.console { gap: 16px; }
+.console__panel-title { font-size: 17px; }
+.console__panel-num { font-size: 26px; }
+.console__list li { font-size: 16px; }
+.console__list li > b { font-size: 16px; }
+.console__project-name { font-size: 17px; }
+.console__project-desc { font-size: 14px; }
+.console__points li { font-size: 14px; }
+.console__head-title { font-size: 14px; }
 .timeline__title { font-size: 16px; }
-.timeline__item { font-size: 13px; padding-bottom: 10px; }
+.timeline__item { font-size: 13px; }
 .timeline__note { font-size: 11px; }
+
+/* 07 页窄屏回退：奖项/项目单列，时间轴恢复纵向（与全站 899px 断点一致） */
+@media (max-width: 899px) {
+  .console__awards { grid-template-columns: 1fr; row-gap: 8px; }
+  .console__projects { grid-template-columns: 1fr; }
+  .console__points li { grid-template-columns: 68px 1fr; gap: 8px; }
+  /* 动力轴线层整体消失（齿轮组/能量层/走线/焊盘），节点单列直排 */
+  .power__spine, .power__drive, .power__spine-energy,
+  .award-node__trace, .award-node__pad,
+  .power__project-trace { display: none; }
+  .award-node, .award-node--r { grid-column: auto; justify-self: stretch; margin-top: 0; }
+  /* 波浪错落只在双列有意义，单列下必须清零（nth-child 规则特异性更高） */
+  .award-node--r:nth-child(4n+2),
+  .award-node--r:nth-child(4n+4) { margin-top: 0; }
+  .power__project--r { margin-top: 0; }
+  .award-node__body { width: 100%; }
+  /* 移动端隐藏走线后 --off 负 margin 不再适用，清零防止卡片错位溢出 */
+  .award-node--l .award-node__body, .award-node--r .award-node__body { margin: 0; }
+  .award-node__name { white-space: normal; overflow: visible; text-overflow: clip; }
+  /* 中轨归零 + 单列：否则两个项目挤在 1fr/1fr 的窄列里（~110px） */
+  .power__projects { --power-track: 0px; }
+  .power__projects .console__projects { grid-template-columns: 1fr; padding: 0 16px; }
+  .power__project--l, .power__project--r { grid-column: 1; }
+
+  .timeline__list {
+    display: flex;
+    flex-direction: column;
+    padding-left: 16px;
+  }
+  /* 状态灯重定位：item padding-box 左缘在 list 内容区（x=16px），
+     left:-16px 使圆心回到轨道（x=4px），不再盖住首行文字 */
+  .console-tl__status { left: -16px; }
+  .timeline__list::before {
+    left: 4px;
+    right: auto;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(180deg, var(--ink), var(--mist));
+  }
+  .timeline__item { padding: 0 0 10px 6px; }
+  .timeline__item::before { left: -16px; top: 4px; }
+  .timeline__item b { display: inline; margin-right: 8px; }
+}
 
 .form-side__title, .form-reg__title { font-size: 16px; }
 .steps__item { font-size: 13px; }
@@ -808,12 +1675,18 @@
 .holo-bar {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
   margin-top: 14px;
   padding: 10px 14px;
   border: 1px solid var(--holo-border);
   border-radius: 10px;
   background: rgba(8, 22, 36, 0.5);
+  animation: holo-bar-breathe 4.5s ease-in-out infinite;
+}
+@keyframes holo-bar-breathe {
+  0%, 100% { box-shadow: inset 0 0 18px rgba(47, 196, 220, 0.05), 0 0 0 rgba(47, 196, 220, 0); }
+  50%      { box-shadow: inset 0 0 18px rgba(47, 196, 220, 0.11), 0 0 16px rgba(47, 196, 220, 0.22); }
 }
 .holo-bar span,
 .holo-bar b {
@@ -827,6 +1700,25 @@
   background: rgba(8, 22, 36, 0.65);
 }
 .holo-bar b { color: var(--bg); background: var(--cyan); border-color: var(--cyan); }
+/* 统计数字：滚动时等宽不抖动 */
+.holo-bar__num { font-variant-numeric: tabular-nums; }
+/* SYNC 状态：圆点脉冲，数据链路在线的暗示 */
+.holo-bar__sync {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  opacity: 0.85;
+  font-size: 9px;
+}
+.holo-bar__pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px rgba(47, 196, 220, 0.9);
+  animation: blink 1.6s ease-in-out infinite;
+}
 
 /* ============================================================
    组别整屏（每组一个模块的大版式）
@@ -1431,3 +2323,400 @@
 @media (max-width: 899px) {
   .mobile-cta { display: inline-block; }
 }
+
+/* ============================================================
+   滚动提示（A3）—— 面板还有内容时的可见信号
+   背景：桌面切屏模式下面板高仅 723px（1440×900），而 07 页动力轴区
+   单块就 985px，靠压缩不可能全部放进一屏。此前页面没有任何"下面还有"
+   的提示，内容被静默吞掉 —— 这是全站最严重的问题。
+   实现：sticky bottom + 负 margin，钉在滚动视口底部且不占据布局高度。
+   .sheet--paper 的 ::before/::after 已被 HUD 角标占用，故用独立元素。
+   ============================================================ */
+.sheet__more {
+  position: sticky;
+  bottom: 0;
+  z-index: 6;
+  flex: none;
+  height: 64px;
+  margin-top: -64px;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.35s ease;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(7, 18, 30, 0.62) 42%,
+    rgba(6, 16, 27, 0.95) 100%);
+}
+/* 提示胶囊：文字 + 双箭头，做成终端读数的样子而非裸箭头 */
+.sheet__more::before {
+  content: "继续浏览 ▾";
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  padding: 4px 14px;
+  border: 1px solid rgba(94, 200, 226, 0.5);
+  border-radius: 999px;
+  background: rgba(8, 22, 36, 0.85);
+  font-family: var(--font-head-cn);
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--cyan);
+  text-shadow: 0 0 8px rgba(47, 196, 220, 0.7);
+  box-shadow:
+    0 0 14px rgba(47, 196, 220, 0.3),
+    inset 0 0 10px rgba(47, 196, 220, 0.1);
+  white-space: nowrap;
+  animation: more-bob 1.9s ease-in-out infinite;
+}
+@keyframes more-bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(3px); }
+}
+/* 滚到底（或本来就没有溢出）→ 淡出，由 book.js 切类 */
+.sheet--paper.is-end .sheet__more { opacity: 0; }
+
+/* ============================================================
+   矮视口压缩（桌面切屏模式专用，A2）
+   背景：桌面是一屏一模块的切屏引擎，面板高 = 100vh - 176px。
+   实测 1366×768 下 7 屏装不下自己的内容，最多藏了 826px，
+   而页面此前没有任何"下面还有"的提示 —— 内容被静默吞掉。
+   这里按视口高度分两档收紧，配合 .sheet__more 滚动提示（A3）。
+   仅 min-width:900px 生效：899px 以下是手机长页流，本来就自然滚动。
+   ============================================================ */
+
+/* —— 第一档：温和压缩（约 1440×860 及以下） —— */
+@media (min-width: 900px) and (max-height: 860px) {
+  .sheet__masthead { padding: 11px 26px 8px; }
+  .sheet__masthead-id { font-size: 23px; }
+  .sheet__masthead-title { font-size: 19px; }
+  .sheet__body { padding: 13px 24px 10px; }
+  .sheet__footer { padding: 7px 26px 9px; font-size: 10px; }
+
+  /* 02：右栏导师卡是最高子块（.sheet__cols 实测 778px） */
+  .sheet__cols { gap: 18px; }
+  .mentor__photo { max-width: 190px; }
+  .facts__item { padding: 10px 8px 9px; }
+  .facts__num { font-size: 27px; }
+  .motto { padding: 8px 12px; }
+
+  /* 03-06：培养内容卡是最高子块（.group-screen__extra 实测 844px） */
+  .group-screen__main { gap: 16px; }
+  .group-screen__art { min-height: 150px; }
+  .group-cv__card { padding: 12px 14px 11px; }
+  .group-cv__item { margin-bottom: 7px; }
+
+  /* 07：动力轴区是最高子块（.power__zone 实测 985px） */
+  .console { gap: 12px; }
+  .console__awards { row-gap: 7px; padding-bottom: 26px; }
+  .award-node__body { padding: 7px 12px; }
+  .power__zone { padding-top: 60px; }
+  .timeline { padding: 8px 14px; }
+
+  /* 08：表单是最高子块（.apply-form 实测 950px） */
+  .apply-form { gap: 11px; }
+  .form-reg { gap: 9px; }
+  .field textarea { min-height: 52px; }
+}
+
+/* —— 第二档：强压缩（1366×768 / 1280×720 等主流笔记本） —— */
+@media (min-width: 900px) and (max-height: 780px) {
+  .sheet__masthead { padding: 8px 24px 6px; }
+  .sheet__masthead-id { font-size: 20px; }
+  .sheet__masthead-title { font-size: 17px; }
+  .sheet__masthead-title i { font-size: 9px; }
+  .sheet__body { padding: 10px 22px 8px; }
+  .sheet__footer { padding: 5px 24px 7px; font-size: 9.5px; }
+  .sheet__lead { font-size: 16px; margin-bottom: 9px; padding-left: 10px; }
+  .para { font-size: 13px; }
+
+  /* 02 */
+  .sheet__cols { gap: 14px; }
+  .mentor__photo { max-width: 155px; }
+  .mentor__stat b { font-size: 20px; }
+  .facts__item { padding: 8px 6px 7px; }
+  .facts__num { font-size: 23px; }
+  .facts__label { font-size: 11px; }
+  .path__item { margin-bottom: 7px; }
+
+  /* 03-06 */
+  .group-screen__main { gap: 13px; }
+  .group-screen__art { min-height: 122px; }
+  .group-screen__svg { width: 92px; height: 92px; }
+  .group__who { font-size: 11.5px; padding: 5px 8px; }
+  .group-cv__card { padding: 10px 12px 9px; }
+  .group-cv__item { margin-bottom: 5px; }
+  .group-cv__item-name { font-size: 12.5px; }
+  .group-cv__item-desc { font-size: 11.5px; }
+  .group-cv__shot { min-height: 92px; }
+
+  /* 07 */
+  .console { gap: 9px; }
+  .console__awards { row-gap: 5px; padding-bottom: 20px; }
+  .award-node__body { padding: 5px 11px; gap: 8px; }
+  .award-node__name { font-size: 12px; }
+  .award-node__level { font-size: 11px; padding: 1px 8px; }
+  .power__zone { padding-top: 52px; }
+  .console__points li { font-size: 12.5px; }
+  .console__project-desc { font-size: 12.5px; }
+  .timeline { padding: 6px 12px; }
+  .timeline__item { font-size: 12px; }
+  .timeline__item small { font-size: 10px; }
+
+  /* 08 */
+  .apply-form { gap: 9px; }
+  .form-reg { gap: 7px; }
+  .field textarea { min-height: 44px; }
+  .steps__item { font-size: 12px; }
+  .notice__list { font-size: 11px; }
+}
+
+/* ============================================================
+   09 页收尾强化（C）
+   问题：纵向只填满 58%，上下各约 200px 死空；全屏 box-shadow 元素 0 个；
+   唯一一条 hover 规则是 no-op（把已是 --cyan 的 .link 再设成 --cyan）。
+   这是招新漏斗的最后一步，却是全站最弱的一屏。
+   方案：撑满纵向 + 补层次 + 补真实交互反馈。联系方式内容留占位，
+   但改成体面说法（原「XXXX（占位）」是开发者视角的措辞）。
+   ============================================================ */
+.sheet__body--cta {
+  align-items: stretch;          /* 原 center：内容悬在中间，上下留死空 */
+  align-content: center;
+  padding-top: 22px;
+  padding-bottom: 18px;
+  gap: 28px;
+}
+/* 左栏：队标 + 口号纵向居中并拉开呼吸 */
+.cta__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.cta__logo {
+  width: 150px;
+  height: 150px;
+  filter:
+    drop-shadow(0 0 22px rgba(47, 196, 220, 0.5))
+    drop-shadow(0 6px 16px rgba(0, 0, 0, 0.45));
+}
+.cta__slogan {
+  font-family: var(--font-head-cn);
+  font-size: 27px;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 18px rgba(47, 196, 220, 0.35);
+  margin: 16px 0 10px;
+}
+.cta__text { font-size: 14.5px; max-width: 30ch; }
+
+/* 右栏：联系卡做成终端面板（补 HUD 角标 + 层次阴影） */
+.cta__contacts {
+  position: relative;
+  align-self: center;
+  width: 100%;
+  padding: 20px 22px;
+  border: 1px solid var(--holo-border);
+  border-radius: 10px;
+  background:
+    repeating-linear-gradient(0deg, rgba(94, 200, 226, 0.03) 0 1px, transparent 1px 5px),
+    var(--panel-hi);
+  box-shadow:
+    inset 0 0 30px rgba(47, 196, 220, 0.06),
+    0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.cta__contacts::before,
+.cta__contacts::after {
+  content: "";
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  pointer-events: none;
+}
+.cta__contacts::before {
+  top: 7px; left: 7px;
+  border-top: 2px solid rgba(94, 200, 226, 0.5);
+  border-left: 2px solid rgba(94, 200, 226, 0.5);
+}
+.cta__contacts::after {
+  bottom: 7px; right: 7px;
+  border-bottom: 2px solid rgba(94, 200, 226, 0.5);
+  border-right: 2px solid rgba(94, 200, 226, 0.5);
+}
+.cta__contacts-title {
+  font-family: var(--font-head-cn);
+  font-size: 16px;
+  letter-spacing: 2px;
+  border-bottom-color: var(--holo-border);
+  padding-bottom: 9px;
+  margin-bottom: 14px;
+}
+.cta__list { gap: 13px; font-size: 13px; }
+.cta__list li {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 10px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: rgba(8, 22, 36, 0.5);
+  transition: border-color 0.18s, background 0.18s, transform 0.18s;
+}
+/* 补交互反馈：整行响应（此前全屏只有一条 no-op hover） */
+.cta__list li:hover {
+  border-color: rgba(94, 200, 226, 0.45);
+  background: rgba(13, 34, 52, 0.85);
+  transform: translateX(3px);
+}
+.cta__tag { flex: none; }
+/* 邮箱链接：真实可点，给足反馈 */
+.sheet--cta .link {
+  color: var(--cyan-soft);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(94, 200, 226, 0.45);
+  transition: color 0.18s, border-color 0.18s, text-shadow 0.18s;
+}
+.sheet--cta .link:hover,
+.sheet--cta .link:focus-visible {
+  color: var(--amber, #ffb46b);
+  border-bottom-color: var(--amber, #ffb46b);
+  text-shadow: 0 0 10px var(--amber-glow, rgba(255, 180, 107, 0.5));
+}
+/* 二维码位：保持「待激活」全息处理，加容器让它像终端插槽 */
+.qr {
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px dashed var(--holo-line);
+  border-radius: 8px;
+  background: rgba(8, 22, 36, 0.4);
+}
+.qr__svg { width: 74px; height: 74px; }
+
+/* 矮视口：09 页本来就不滚动，压缩幅度小于其它屏即可 */
+@media (min-width: 900px) and (max-height: 780px) {
+  .cta__logo { width: 112px; height: 112px; }
+  .cta__slogan { font-size: 21px; margin: 10px 0 7px; }
+  .cta__text { font-size: 13px; }
+  .cta__contacts { padding: 14px 16px; }
+  .cta__list { gap: 9px; font-size: 12px; }
+  .qr__svg { width: 60px; height: 60px; }
+}
+
+/* —— 09 页收尾动作：回到报名登记（招新漏斗闭环） ——
+   09 原本只有联系方式，没有任何回到 08 报名表的入口；
+   结构与青色底稿在此，琥珀填充在 amber-accents.css（保持该层可整体回退） */
+.cta__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 22px;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--cyan), #0e8ba6);
+  color: var(--bg);
+  font-family: var(--font-head-cn);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-indent: 2.5px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(47, 196, 220, 0.4);
+  transition: box-shadow 0.25s, transform 0.15s;
+}
+.cta__action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 32px rgba(47, 196, 220, 0.68);
+}
+.cta__action-arrow { font-size: 16px; }
+.cta__action:hover .cta__action-arrow { animation: nudge 0.9s ease-in-out infinite; }
+@media (min-width: 900px) and (max-height: 780px) {
+  .cta__action { margin-top: 14px; padding: 10px 24px; font-size: 13.5px; }
+}
+
+/* ============================================================
+   07 页氛围层（D）—— 唯一零氛围层的屏
+   实测：01 有 4 层（网格/扫描线/光晕/扫掠光束），02-06、08 靠 sheet 自带
+   扫描线，09 有 .cta-bg（网格+光晕），只有 07 一层都没有 ——
+   所以这一页看着比别的页「平」，发光只存在于元素描边而非空间里。
+   复用 09 页 .cta-bg 的「一元素 + 两伪元素」范式（.sheet--paper 的
+   ::before/::after 已被 HUD 角标占用，必须走独立元素）。
+   光晕锚在主轴顶部（齿轮组位置），呼应能量自上而下传导的叙事。
+   ============================================================ */
+.honors-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.honors-bg::before {   /* 网格：同 cover__grid，径向淡出 */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(94, 200, 226, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 200, 226, 0.06) 1px, transparent 1px);
+  background-size: 38px 38px;
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 12%, #000 30%, transparent 86%);
+  mask-image: radial-gradient(120% 90% at 50% 12%, #000 30%, transparent 86%);
+}
+.honors-bg::after {    /* 光晕：锚在齿轮组/主轴顶端，能量从这里下传 */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(46% 34% at 50% 10%, rgba(47, 196, 220, 0.17), transparent 70%);
+}
+/* 07 页氛围增强：噪点 + 斜扫光束 + 浮尘粒子（独立层，内容之下） */
+.honors-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.honors-beam {
+  position: absolute;
+  top: -18%;
+  bottom: -18%;
+  left: 50%;
+  width: 190px;
+  background: linear-gradient(90deg,
+    transparent, rgba(127, 216, 232, 0.08) 42%,
+    rgba(190, 235, 250, 0.15) 50%,
+    rgba(127, 216, 232, 0.08) 58%, transparent);
+  animation: honors-beam 9s ease-in-out infinite;
+}
+@keyframes honors-beam {
+  0%, 58% {
+    transform: translateX(calc(-50% - 40vw)) rotate(14deg);
+    opacity: 0;
+  }
+  66% { opacity: 1; }
+  84%, 100% {
+    transform: translateX(calc(-50% + 40vw)) rotate(14deg);
+    opacity: 0;
+  }
+}
+.honors-dust {
+  position: absolute;
+  left: var(--x, 50%);
+  top: var(--y, 50%);
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: var(--cyan-soft);
+  box-shadow: 0 0 6px rgba(127, 216, 232, 0.9);
+  opacity: 0;
+  animation: honors-dust 9s linear infinite;
+  animation-delay: var(--d, 0s);
+}
+@keyframes honors-dust {
+  0%   { opacity: 0; transform: translateY(0) scale(0.6); }
+  16%  { opacity: calc(var(--s, 1) * 0.85); }
+  80%  { opacity: calc(var(--s, 1) * 0.5); }
+  100% { opacity: 0; transform: translateY(-58px) scale(1.2); }
+}
+/* 内容层压在氛围层之上（.power__zone 等默认 z-index auto，需显式抬起） */
+.sheet--honors .sheet__masthead,
+.sheet--honors .sheet__body,
+.sheet--honors .sheet__footer { position: relative; z-index: 1; }

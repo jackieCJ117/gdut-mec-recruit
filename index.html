@@ -8,16 +8,18 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23107090' stroke-width='10'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23107090'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/smiley-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/orbitron.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/base.css?v=2">
   <link rel="stylesheet" href="css/cover.css">
-  <link rel="stylesheet" href="css/paper.css">
+  <link rel="stylesheet" href="css/paper.css?v=14">
   <link rel="stylesheet" href="css/screen.css">
-  <link rel="stylesheet" href="css/holo.css">
+  <link rel="stylesheet" href="css/holo.css?v=6">
   <link rel="stylesheet" href="css/holo-tip.css">
   <link rel="stylesheet" href="css/holo-term.css">
   <link rel="stylesheet" href="css/logo-fusion.css">
-  <link rel="stylesheet" href="css/amber-accents.css">
+  <link rel="stylesheet" href="css/amber-accents.css?v=3">
   <link rel="stylesheet" href="css/group-cv.css">
+  <link rel="stylesheet" href="css/valhalla.css?v=15">
+  <link rel="stylesheet" href="css/group-identity.css">
   <link rel="stylesheet" href="css/cover-boot.css">
 </head>
 <body>
@@ -53,7 +55,7 @@
     </header>
 
     <!-- ============ 全息终端大屏（一次一屏，淡入切换） ============ -->
-    <section class="holo" id="viewport" aria-label="机创全息终端：一次浏览一个模块，共九个模块">
+    <section class="holo" id="viewport" aria-label="机创全息终端：一次浏览一个模块，共十个模块">
       <!-- 01 启动屏 -->
       <article class="screen sheet--cover screen--boot is-active" data-screen="1" aria-label="01 · 启动屏">
         <span class="sheet__sheen" aria-hidden="true"></span>
@@ -68,7 +70,7 @@
           <div class="cover-boot__text">
             <span class="cover-boot__line cover-boot__line--1">JICHUANG HOLO SYSTEM</span>
             <span class="cover-boot__line cover-boot__line--2">BOOT SEQUENCE INITIATED</span>
-            <span class="cover-boot__line cover-boot__line--3">LOADING MODULES 09/09</span>
+            <span class="cover-boot__line cover-boot__line--3">LOADING MODULES 10/10</span>
             <span class="cover-boot__line cover-boot__line--4">SYNC COMPLETE</span>
           </div>
           <div class="cover-boot__bar"><i></i></div>
@@ -193,7 +195,7 @@
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">02</span>
               <h2 class="sheet__masthead-title">关于机创 <i>ABOUT</i></h2>
-              <span class="sheet__masthead-meta">MODULE 02/09 · DATA.SYNC</span>
+              <span class="sheet__masthead-meta">MODULE 02/10 · DATA.SYNC</span>
             </header>
 
             <div class="sheet__body sheet__body--about">
@@ -284,6 +286,7 @@
               <span>机械创新团队 · 2026 秋季招新</span>
               <span class="sheet__folio">MOD.02</span>
             </footer>
+        <span class="sheet__more" aria-hidden="true"></span>
       </article>
 
       <!-- 03 结构组 -->
@@ -292,7 +295,7 @@
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">03</span>
               <h2 class="sheet__masthead-title">结构组 <i>MECH</i></h2>
-              <span class="sheet__masthead-meta">MODULE 03/09 · TEAM.A</span>
+              <span class="sheet__masthead-meta">MODULE 03/10 · TEAM.A</span>
             </header>
 
             <div class="sheet__body group-screen">
@@ -423,17 +426,20 @@
                     </section>
                   </div>
                   <div class="group-cv__shots">
-                    <div class="group-cv__shot" data-placeholder="替换为结构组作品照片（16:10）">
-                      <span class="group-cv__shot-tag">SHOT 01 · 作品照片</span>
-                      <span class="group-cv__shot-note">SolidWorks 建模 / 3D 打印实物</span>
+                    <div class="group-cv__shot">
+                      <img src="assets/images/jiegou-1.webp" alt="结构组齿轮传动装置作品" loading="lazy">
+                      <span class="group-cv__shot-tag">SHOT 01 · 作品实物</span>
+                      <span class="group-cv__shot-note">齿轮传动装置 / 实物作品</span>
                     </div>
-                    <div class="group-cv__shot" data-placeholder="替换为结构组组内日常照片">
-                      <span class="group-cv__shot-tag">SHOT 02 · 组内日常</span>
-                      <span class="group-cv__shot-note">装配现场 / 调试协作</span>
+                    <div class="group-cv__shot">
+                      <img src="assets/images/jiegou-2.webp" alt="结构组装配设备三维设计" loading="lazy">
+                      <span class="group-cv__shot-tag">SHOT 02 · 三维设计</span>
+                      <span class="group-cv__shot-note">装配设备建模 / SolidWorks 设计</span>
                     </div>
-                    <div class="group-cv__shot" data-placeholder="替换为结构组招新问答图">
-                      <span class="group-cv__shot-tag">SHOT 03 · 招新问答</span>
-                      <span class="group-cv__shot-note">学长学姐答疑</span>
+                    <div class="group-cv__shot">
+                      <img src="assets/images/jiegou-3.webp" alt="结构组组内调试机器人" loading="lazy">
+                      <span class="group-cv__shot-tag">SHOT 03 · 组内调试</span>
+                      <span class="group-cv__shot-note">装配调试 / 机器人协作</span>
                     </div>
                   </div>
                 </div>
@@ -444,6 +450,7 @@
               <span>机械创新团队 · 2026 秋季招新</span>
               <span class="sheet__folio">MOD.03</span>
             </footer>
+        <span class="sheet__more" aria-hidden="true"></span>
       </article>
 
       <!-- 04 电控组 -->
@@ -452,7 +459,7 @@
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">04</span>
               <h2 class="sheet__masthead-title">电控组 <i>EMBED</i></h2>
-              <span class="sheet__masthead-meta">MODULE 04/09 · TEAM.B</span>
+              <span class="sheet__masthead-meta">MODULE 04/10 · TEAM.B</span>
             </header>
 
             <div class="sheet__body group-screen">
@@ -552,17 +559,20 @@
                     </section>
                   </div>
                   <div class="group-cv__shots">
-                    <div class="group-cv__shot" data-placeholder="替换为电控组作品照片（16:10）">
-                      <span class="group-cv__shot-tag">SHOT 01 · 作品照片</span>
-                      <span class="group-cv__shot-note">PCB 设计 / 小车实物</span>
+                    <div class="group-cv__shot">
+                      <img src="assets/images/diankong-1.webp" alt="电控组代码与PID调参" loading="lazy">
+                      <span class="group-cv__shot-tag">SHOT 01 · 代码调试</span>
+                      <span class="group-cv__shot-note">C 语言编程 / PID 调参</span>
                     </div>
-                    <div class="group-cv__shot" data-placeholder="替换为电控组组内日常照片">
-                      <span class="group-cv__shot-tag">SHOT 02 · 组内日常</span>
-                      <span class="group-cv__shot-note">焊接 / 调试现场</span>
+                    <div class="group-cv__shot">
+                      <img src="assets/images/diankong-2.webp" alt="电控组电路板作品" loading="lazy">
+                      <span class="group-cv__shot-tag">SHOT 02 · 硬件作品</span>
+                      <span class="group-cv__shot-note">电路板焊接 / 硬件制作</span>
                     </div>
-                    <div class="group-cv__shot" data-placeholder="替换为电控组招新问答图">
-                      <span class="group-cv__shot-tag">SHOT 03 · 招新问答</span>
-                      <span class="group-cv__shot-note">学长学姐答疑</span>
+                    <div class="group-cv__shot">
+                      <img src="assets/images/diankong-3.webp" alt="电控组围桌调试机器人" loading="lazy">
+                      <span class="group-cv__shot-tag">SHOT 03 · 组内调试</span>
+                      <span class="group-cv__shot-note">围坐调试 / 编程协作</span>
                     </div>
                   </div>
                 </div>
@@ -573,6 +583,7 @@
               <span>机械创新团队 · 2026 秋季招新</span>
               <span class="sheet__folio">MOD.04</span>
             </footer>
+        <span class="sheet__more" aria-hidden="true"></span>
       </article>
 
       <!-- 05 视觉识别组 -->
@@ -581,7 +592,7 @@
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">05</span>
               <h2 class="sheet__masthead-title">视觉识别组 <i>VISION</i></h2>
-              <span class="sheet__masthead-meta">MODULE 05/09 · TEAM.C</span>
+              <span class="sheet__masthead-meta">MODULE 05/10 · TEAM.C</span>
             </header>
 
             <div class="sheet__body group-screen">
@@ -664,17 +675,20 @@
                     </section>
                   </div>
                   <div class="group-cv__shots">
-                    <div class="group-cv__shot" data-placeholder="替换为视觉组作品照片（16:10）">
-                      <span class="group-cv__shot-tag">SHOT 01 · 作品照片</span>
-                      <span class="group-cv__shot-note">识别效果演示</span>
+                    <div class="group-cv__shot">
+                      <img src="assets/images/shijue-1.webp" alt="视觉组YOLO识别效果" loading="lazy">
+                      <span class="group-cv__shot-tag">SHOT 01 · 识别效果</span>
+                      <span class="group-cv__shot-note">YOLO 目标检测 / 实时识别</span>
                     </div>
-                    <div class="group-cv__shot" data-placeholder="替换为视觉组组内日常照片">
-                      <span class="group-cv__shot-tag">SHOT 02 · 组内日常</span>
-                      <span class="group-cv__shot-note">跑模型 / 调参现场</span>
+                    <div class="group-cv__shot">
+                      <img src="assets/images/shijue-2.webp" alt="视觉组GPU模型训练" loading="lazy">
+                      <span class="group-cv__shot-tag">SHOT 02 · 模型训练</span>
+                      <span class="group-cv__shot-note">GPU 监控 / 训练调参</span>
                     </div>
-                    <div class="group-cv__shot" data-placeholder="替换为视觉组招新问答图">
-                      <span class="group-cv__shot-tag">SHOT 03 · 招新问答</span>
-                      <span class="group-cv__shot-note">学长学姐答疑</span>
+                    <div class="group-cv__shot">
+                      <img src="assets/images/shijue-3.webp" alt="视觉组组内日常" loading="lazy">
+                      <span class="group-cv__shot-tag">SHOT 03 · 组内日常</span>
+                      <span class="group-cv__shot-note">项目调试 / 学习时光</span>
                     </div>
                   </div>
                 </div>
@@ -685,6 +699,7 @@
               <span>机械创新团队 · 2026 秋季招新</span>
               <span class="sheet__folio">MOD.05</span>
             </footer>
+        <span class="sheet__more" aria-hidden="true"></span>
       </article>
 
       <!-- 06 运营组 -->
@@ -693,7 +708,7 @@
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">06</span>
               <h2 class="sheet__masthead-title">运营组 <i>MEDIA</i></h2>
-              <span class="sheet__masthead-meta">MODULE 06/09 · TEAM.D</span>
+              <span class="sheet__masthead-meta">MODULE 06/10 · TEAM.D</span>
             </header>
 
             <div class="sheet__body group-screen">
@@ -720,8 +735,79 @@
                   <span class="group-screen__art-tag">MEDIA · 广播单元</span>
                 </div>
               </div>
-              <div class="group-screen__extra" data-placeholder="运营组补充内容：作品照片 / 组内日常 / 招新问答">
-                <span class="group-screen__extra-hint">CONTENT SLOT · 运营组内容补充区</span>
+              <div class="group-screen__extra group-screen__extra--filled">
+                <div class="group-cv">
+                  <header class="group-cv__head">
+                    <span class="group-cv__en">CORE CURRICULUM</span>
+                    <h3 class="group-cv__title">核心培养内容</h3>
+                  </header>
+                  <div class="group-cv__grid">
+                    <section class="group-cv__card">
+                      <header class="group-cv__card-head">
+                        <span class="group-cv__no">01</span>
+                        <h4 class="group-cv__card-title">赛事答辩材料创作</h4>
+                      </header>
+                      <ul class="group-cv__list">
+                        <li class="group-cv__item">
+                          <b class="group-cv__item-name">答辩 PPT 精工制作</b>
+                          <span class="group-cv__item-desc">系统打磨路演级演示文稿：信息分层、视觉叙事与演示节奏，让每一页都为说服评委而设计。</span>
+                        </li>
+                        <li class="group-cv__item">
+                          <b class="group-cv__item-name">技术报告书撰写</b>
+                          <span class="group-cv__item-desc">掌握竞赛报告书的结构化写作规范，将创新点、实验数据与成果凝练成严谨专业的文本。</span>
+                        </li>
+                      </ul>
+                    </section>
+                    <section class="group-cv__card">
+                      <header class="group-cv__card-head">
+                        <span class="group-cv__no">02</span>
+                        <h4 class="group-cv__card-title">答辩呈现与路演表达</h4>
+                      </header>
+                      <ul class="group-cv__list">
+                        <li class="group-cv__item">
+                          <b class="group-cv__item-name">路演话术与临场应变</b>
+                          <span class="group-cv__item-desc">通过模拟评委质询的实战演练，打磨讲解逻辑与应变能力，把团队成果讲得清晰、有力、有说服力。</span>
+                        </li>
+                        <li class="group-cv__item">
+                          <b class="group-cv__item-name">信息可视化设计</b>
+                          <span class="group-cv__item-desc">用图表与视觉语言提炼复杂技术方案，让核心创新在数秒内被评委看懂。</span>
+                        </li>
+                      </ul>
+                    </section>
+                    <section class="group-cv__card">
+                      <header class="group-cv__card-head">
+                        <span class="group-cv__no">03</span>
+                        <h4 class="group-cv__card-title">赛事财务与票据管理</h4>
+                      </header>
+                      <ul class="group-cv__list">
+                        <li class="group-cv__item">
+                          <b class="group-cv__item-name">发票核验与合规归档</b>
+                          <span class="group-cv__item-desc">熟悉报销票据规范，掌握发票真伪核验、分类整理与合规归档的全流程操作。</span>
+                        </li>
+                        <li class="group-cv__item">
+                          <b class="group-cv__item-name">报销链路全流程处理</b>
+                          <span class="group-cv__item-desc">从票据收集、系统填报到审批追踪，独立完成赛事经费报销，确保每笔开支及时到位。</span>
+                        </li>
+                      </ul>
+                    </section>
+                    <section class="group-cv__card">
+                      <header class="group-cv__card-head">
+                        <span class="group-cv__no">04</span>
+                        <h4 class="group-cv__card-title">赛事统筹与团队运转</h4>
+                      </header>
+                      <ul class="group-cv__list">
+                        <li class="group-cv__item">
+                          <b class="group-cv__item-name">经费预算规划</b>
+                          <span class="group-cv__item-desc">学习编制赛事预算，统筹物料、差旅与设备开支，让经费分配有据可依、张弛有度。</span>
+                        </li>
+                        <li class="group-cv__item">
+                          <b class="group-cv__item-name">赛务事务统筹</b>
+                          <span class="group-cv__item-desc">对接学院与赛务流程，协调答辩材料、报销与招新的时间节点，为团队后方兜底。</span>
+                        </li>
+                      </ul>
+                    </section>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -729,61 +815,754 @@
               <span>机械创新团队 · 2026 秋季招新</span>
               <span class="sheet__folio">MOD.06</span>
             </footer>
+        <span class="sheet__more" aria-hidden="true"></span>
       </article>
 
       <!-- 04 战绩与日程 -->
-      <article class="screen sheet--paper" data-screen="7" aria-label="07 · 战绩与日程">
+      <article class="screen sheet--paper sheet--honors" data-screen="7" aria-label="07 · 战绩与日程">
         <span class="sheet__sheen" aria-hidden="true"></span>
+        <span class="honors-bg" aria-hidden="true"></span>
+        <span class="honors-fx" aria-hidden="true">
+          <span class="honors-beam"></span>
+          <i class="honors-dust" style="--x: 14%; --y: 34%; --d: 0s; --s: 1"></i>
+          <i class="honors-dust" style="--x: 80%; --y: 20%; --d: 2.4s; --s: 0.7"></i>
+          <i class="honors-dust" style="--x: 58%; --y: 70%; --d: 4.6s; --s: 1.3"></i>
+          <i class="honors-dust" style="--x: 90%; --y: 56%; --d: 6.8s; --s: 0.9"></i>
+        </span>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">07</span>
-              <h2 class="sheet__masthead-title">战绩与日程 <i>HONORS &amp; TIMELINE</i></h2>
-              <span class="sheet__masthead-meta">BUILT TO COMPETE</span>
+              <h2 class="sheet__masthead-title"><span class="glitch" data-text="战绩与日程">战绩与日程</span> <i>HONORS &amp; TIMELINE</i></h2>
+              <span class="sheet__masthead-meta" data-typewriter aria-hidden="true">BUILT TO COMPETE</span>
             </header>
 
-            <div class="sheet__body sheet__body--honors">
-              <p class="sheet__lead sheet__lead--small">我们用作品说话 —— 以下为占位数据，正式介绍将由团队核实后替换。</p>
-              <div class="trophies">
-                <div class="trophy">
-                  <span class="trophy__medal" aria-hidden="true">🏆</span>
-                  <div><b class="trophy__num flick-target">N×</b><p class="trophy__text">国家级赛事奖项<br><small data-placeholder="例：中国大学生工程实践与创新能力大赛">大赛名称占位</small></p></div>
+            <div class="sheet__body sheet__body--honors console">
+              <svg class="power__gear-sym" viewBox="0 0 100 100" aria-hidden="true">
+                <symbol id="power-gear" viewBox="0 0 100 100">
+                  <g fill="none" stroke="currentColor">
+                    <g stroke-width="7">
+                      <path d="M45 7 h10 v6 l-2 5 h-6 l-2 -5 z" transform="rotate(0 50 50)"/>
+                      <path d="M45 7 h10 v6 l-2 5 h-6 l-2 -5 z" transform="rotate(45 50 50)"/>
+                      <path d="M45 7 h10 v6 l-2 5 h-6 l-2 -5 z" transform="rotate(90 50 50)"/>
+                      <path d="M45 7 h10 v6 l-2 5 h-6 l-2 -5 z" transform="rotate(135 50 50)"/>
+                      <path d="M45 7 h10 v6 l-2 5 h-6 l-2 -5 z" transform="rotate(180 50 50)"/>
+                      <path d="M45 7 h10 v6 l-2 5 h-6 l-2 -5 z" transform="rotate(225 50 50)"/>
+                      <path d="M45 7 h10 v6 l-2 5 h-6 l-2 -5 z" transform="rotate(270 50 50)"/>
+                      <path d="M45 7 h10 v6 l-2 5 h-6 l-2 -5 z" transform="rotate(315 50 50)"/>
+                    </g>
+                    <circle cx="50" cy="50" r="32" stroke-width="7"/>
+                    <circle cx="50" cy="50" r="20" stroke-width="3" stroke-dasharray="4 5" opacity="0.7"/>
+                    <!-- 辐条（机械齿轮腹板） -->
+                    <g fill="currentColor" stroke="none" opacity="0.5">
+                      <rect x="47" y="14" width="6" height="22" transform="rotate(0 50 50)"/>
+                      <rect x="47" y="14" width="6" height="22" transform="rotate(60 50 50)"/>
+                      <rect x="47" y="14" width="6" height="22" transform="rotate(120 50 50)"/>
+                    </g>
+                    <!-- 中心轴孔（套在传动轴上） -->
+                    <circle cx="50" cy="50" r="11" stroke-width="5"/>
+                    <circle cx="50" cy="50" r="14" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" fill="none" opacity="0.7"/>
+                    <circle cx="50" cy="50" r="3" fill="currentColor" stroke="none"/>
+                  </g>
+                </symbol>
+              </svg>
+
+              <div class="power__zone">
+                <div class="power__drive" aria-hidden="true">
+                  <span class="power__drivegear power__drivegear--lg"><svg viewBox="0 0 100 100"><use href="#power-gear"/></svg></span>
+                  <span class="power__drivegear power__drivegear--sm"><svg viewBox="0 0 100 100"><use href="#power-gear"/></svg></span>
                 </div>
-                <div class="trophy">
-                  <span class="trophy__medal" aria-hidden="true">🥇</span>
-                  <div><b class="trophy__num flick-target">N×</b><p class="trophy__text">省级赛事一等奖<br><small data-placeholder="省级竞赛列表">竞赛列表占位</small></p></div>
-                </div>
-                <div class="trophy">
-                  <span class="trophy__medal" aria-hidden="true">📄</span>
-                  <div><b class="trophy__num flick-target">N×</b><p class="trophy__text">专利 · 论文 · 大创项目<br><small data-placeholder="科研产出清单">产出清单占位</small></p></div>
-                </div>
+
+                <span class="power__spine" aria-hidden="true">
+                  <span class="power__spine-energy"></span>
+                  <span class="power__scale"></span>
+                  <span class="power__headlight"></span>
+                  <span class="power__pulse-dot"></span>
+                  <span class="power__foot"></span>
+                </span>
+                <div class="console__awards power">
+                <article class="award-node award-node--amber award-node--l" data-off="0" style="--i:0">
+                  <svg class="award-node__trace" viewBox="0 0 80 44" aria-hidden="true">
+                    <path class="award-node__trace-line" pathLength="1" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <path class="award-node__trace-flow" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <g class="award-node__pad">
+                      <circle cx="0" cy="20" r="6"/>
+                      <circle cx="0" cy="20" r="4"/>
+                      <circle cx="0" cy="20" r="1.5"/>
+                    </g>
+                  </svg>
+                  <div class="award-node__body">
+                    <span class="award-node__tier">NATIONAL</span>
+                    <b class="award-node__name">中国大学生工程实践与创新能力大赛</b>
+                    <span class="award-node__level award-node__level--gold">特等奖</span>
+                  </div>
+                </article>
+
+                <article class="award-node award-node--amber award-node--r" data-off="20" style="--i:1">
+                  <svg class="award-node__trace" viewBox="0 0 80 44" aria-hidden="true">
+                    <path class="award-node__trace-line" pathLength="1" d="M 0.0 10.3 H 57 L 64 17.3 V 24.3 H 80"/>
+                    <path class="award-node__trace-flow" d="M 0.0 10.3 H 57 L 64 17.3 V 24.3 H 80"/>
+                    <g class="award-node__pad">
+                      <circle cx="80" cy="24" r="6"/>
+                      <circle cx="80" cy="24" r="4"/>
+                      <circle cx="80" cy="24" r="1.5"/>
+                    </g>
+                  </svg>
+                  <div class="award-node__body">
+                    <span class="award-node__tier">NATIONAL</span>
+                    <b class="award-node__name">高教杯全国大学生先进成图技术与产品信息建模创新大赛</b>
+                    <span class="award-node__level">一等奖</span>
+                  </div>
+                </article>
+
+                <article class="award-node award-node--l" data-off="40" style="--i:2">
+                  <svg class="award-node__trace" viewBox="0 0 80 44" aria-hidden="true">
+                    <path class="award-node__trace-line" pathLength="1" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <path class="award-node__trace-flow" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <g class="award-node__pad">
+                      <circle cx="0" cy="20" r="6"/>
+                      <circle cx="0" cy="20" r="4"/>
+                      <circle cx="0" cy="20" r="1.5"/>
+                    </g>
+                  </svg>
+                  <div class="award-node__body">
+                    <span class="award-node__tier">NATIONAL</span>
+                    <b class="award-node__name">“西门子杯”中国智能制造挑战赛全国总决赛</b>
+                    <span class="award-node__level">二等奖</span>
+                  </div>
+                </article>
+
+                <article class="award-node award-node--r" data-off="60" style="--i:3">
+                  <svg class="award-node__trace" viewBox="0 0 80 44" aria-hidden="true">
+                    <path class="award-node__trace-line" pathLength="1" d="M 0.0 10.3 H 57 L 64 17.3 V 24.3 H 80"/>
+                    <path class="award-node__trace-flow" d="M 0.0 10.3 H 57 L 64 17.3 V 24.3 H 80"/>
+                    <g class="award-node__pad">
+                      <circle cx="80" cy="24" r="6"/>
+                      <circle cx="80" cy="24" r="4"/>
+                      <circle cx="80" cy="24" r="1.5"/>
+                    </g>
+                  </svg>
+                  <div class="award-node__body">
+                    <span class="award-node__tier">NATIONAL</span>
+                    <b class="award-node__name">第十一届大学生机械创新设计大赛</b>
+                    <span class="award-node__level">二等奖</span>
+                  </div>
+                </article>
+
+                <article class="award-node award-node--amber award-node--l" data-off="0" style="--i:4">
+                  <svg class="award-node__trace" viewBox="0 0 80 44" aria-hidden="true">
+                    <path class="award-node__trace-line" pathLength="1" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <path class="award-node__trace-flow" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <g class="award-node__pad">
+                      <circle cx="0" cy="20" r="6"/>
+                      <circle cx="0" cy="20" r="4"/>
+                      <circle cx="0" cy="20" r="1.5"/>
+                    </g>
+                  </svg>
+                  <div class="award-node__body">
+                    <span class="award-node__tier">NATIONAL</span>
+                    <b class="award-node__name">中国机器人及人工智能大赛全地形自适应机器人设计挑战赛</b>
+                    <span class="award-node__level">一等奖</span>
+                  </div>
+                </article>
+
+                <article class="award-node award-node--r" data-off="20" style="--i:5">
+                  <svg class="award-node__trace" viewBox="0 0 80 44" aria-hidden="true">
+                    <path class="award-node__trace-line" pathLength="1" d="M 0.0 10.3 H 57 L 64 17.3 V 24.3 H 80"/>
+                    <path class="award-node__trace-flow" d="M 0.0 10.3 H 57 L 64 17.3 V 24.3 H 80"/>
+                    <g class="award-node__pad">
+                      <circle cx="80" cy="24" r="6"/>
+                      <circle cx="80" cy="24" r="4"/>
+                      <circle cx="80" cy="24" r="1.5"/>
+                    </g>
+                  </svg>
+                  <div class="award-node__body">
+                    <span class="award-node__tier">NATIONAL</span>
+                    <b class="award-node__name">iCAN大学生创新创业大赛总决赛</b>
+                    <span class="award-node__level">一等奖</span>
+                  </div>
+                </article>
+
+                <article class="award-node award-node--l" data-off="40" style="--i:6">
+                  <svg class="award-node__trace" viewBox="0 0 80 44" aria-hidden="true">
+                    <path class="award-node__trace-line" pathLength="1" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <path class="award-node__trace-flow" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <g class="award-node__pad">
+                      <circle cx="0" cy="20" r="6"/>
+                      <circle cx="0" cy="20" r="4"/>
+                      <circle cx="0" cy="20" r="1.5"/>
+                    </g>
+                  </svg>
+                  <div class="award-node__body">
+                    <span class="award-node__tier">PROVINCE</span>
+                    <b class="award-node__name">中国大学生工程实践与创新能力大赛广东赛区</b>
+                    <span class="award-node__level">一等奖</span>
+                  </div>
+                </article>
+
+                <article class="award-node award-node--r" data-off="60" style="--i:7">
+                  <svg class="award-node__trace" viewBox="0 0 80 44" aria-hidden="true">
+                    <path class="award-node__trace-line" pathLength="1" d="M 0.0 10.3 H 57 L 64 17.3 V 24.3 H 80"/>
+                    <path class="award-node__trace-flow" d="M 0.0 10.3 H 57 L 64 17.3 V 24.3 H 80"/>
+                    <g class="award-node__pad">
+                      <circle cx="80" cy="24" r="6"/>
+                      <circle cx="80" cy="24" r="4"/>
+                      <circle cx="80" cy="24" r="1.5"/>
+                    </g>
+                  </svg>
+                  <div class="award-node__body">
+                    <span class="award-node__tier">PROVINCE</span>
+                    <b class="award-node__name">广东省工科大学省实验技能竞赛</b>
+                    <span class="award-node__level">一等奖</span>
+                  </div>
+                </article>
+
+                <article class="award-node award-node--l" data-off="0" style="--i:8">
+                  <svg class="award-node__trace" viewBox="0 0 80 44" aria-hidden="true">
+                    <path class="award-node__trace-line" pathLength="1" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <path class="award-node__trace-flow" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <g class="award-node__pad">
+                      <circle cx="0" cy="20" r="6"/>
+                      <circle cx="0" cy="20" r="4"/>
+                      <circle cx="0" cy="20" r="1.5"/>
+                    </g>
+                  </svg>
+                  <div class="award-node__body">
+                    <span class="award-node__tier">PROVINCE</span>
+                    <b class="award-node__name">广东省大学生机械创新设计大赛</b>
+                    <span class="award-node__level">一等奖</span>
+                  </div>
+                </article>
+
+                <article class="award-node award-node--r" data-off="20" style="--i:9">
+                  <svg class="award-node__trace" viewBox="0 0 80 44" aria-hidden="true">
+                    <path class="award-node__trace-line" pathLength="1" d="M 0.0 10.3 H 57 L 64 17.3 V 24.3 H 80"/>
+                    <path class="award-node__trace-flow" d="M 0.0 10.3 H 57 L 64 17.3 V 24.3 H 80"/>
+                    <g class="award-node__pad">
+                      <circle cx="80" cy="24" r="6"/>
+                      <circle cx="80" cy="24" r="4"/>
+                      <circle cx="80" cy="24" r="1.5"/>
+                    </g>
+                  </svg>
+                  <div class="award-node__body">
+                    <span class="award-node__tier">PROVINCE</span>
+                    <b class="award-node__name">大学生数学建模竞赛广东赛区</b>
+                    <span class="award-node__level">一等奖</span>
+                  </div>
+                </article>
+
+                <article class="award-node award-node--amber award-node--l" data-off="40" style="--i:10">
+                  <svg class="award-node__trace" viewBox="0 0 80 44" aria-hidden="true">
+                    <path class="award-node__trace-line" pathLength="1" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <path class="award-node__trace-flow" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <g class="award-node__pad">
+                      <circle cx="0" cy="20" r="6"/>
+                      <circle cx="0" cy="20" r="4"/>
+                      <circle cx="0" cy="20" r="1.5"/>
+                    </g>
+                  </svg>
+                  <div class="award-node__body">
+                    <span class="award-node__tier">PROVINCE</span>
+                    <b class="award-node__name">“西门子杯”中国智能制造挑战赛华南赛区</b>
+                    <span class="award-node__level award-node__level--gold">特等奖</span>
+                  </div>
+                </article>
+
+                <article class="award-node award-node--r" data-off="60" style="--i:11">
+                  <svg class="award-node__trace" viewBox="0 0 80 44" aria-hidden="true">
+                    <path class="award-node__trace-line" pathLength="1" d="M 0.0 10.3 H 57 L 64 17.3 V 24.3 H 80"/>
+                    <path class="award-node__trace-flow" d="M 0.0 10.3 H 57 L 64 17.3 V 24.3 H 80"/>
+                    <g class="award-node__pad">
+                      <circle cx="80" cy="24" r="6"/>
+                      <circle cx="80" cy="24" r="4"/>
+                      <circle cx="80" cy="24" r="1.5"/>
+                    </g>
+                  </svg>
+                  <div class="award-node__body">
+                    <span class="award-node__tier">PROVINCE</span>
+                    <b class="award-node__name">大学生“高教杯”先进成图技术与产品信息建模大赛预选赛团体</b>
+                    <span class="award-node__level">一等奖</span>
+                  </div>
+                </article>
+
+                <article class="award-node award-node--l" data-off="0" style="--i:12">
+                  <svg class="award-node__trace" viewBox="0 0 80 44" aria-hidden="true">
+                    <path class="award-node__trace-line" pathLength="1" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <path class="award-node__trace-flow" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <g class="award-node__pad">
+                      <circle cx="0" cy="20" r="6"/>
+                      <circle cx="0" cy="20" r="4"/>
+                      <circle cx="0" cy="20" r="1.5"/>
+                    </g>
+                  </svg>
+                  <div class="award-node__body">
+                    <span class="award-node__tier">PROVINCE</span>
+                    <b class="award-node__name">大学生光电设计竞赛东南区选拔赛</b>
+                    <span class="award-node__level">一等奖</span>
+                  </div>
+                </article>
+
+                <article class="award-node award-node--r" data-off="20" style="--i:13">
+                  <svg class="award-node__trace" viewBox="0 0 80 44" aria-hidden="true">
+                    <path class="award-node__trace-line" pathLength="1" d="M 0.0 10.3 H 57 L 64 17.3 V 24.3 H 80"/>
+                    <path class="award-node__trace-flow" d="M 0.0 10.3 H 57 L 64 17.3 V 24.3 H 80"/>
+                    <g class="award-node__pad">
+                      <circle cx="80" cy="24" r="6"/>
+                      <circle cx="80" cy="24" r="4"/>
+                      <circle cx="80" cy="24" r="1.5"/>
+                    </g>
+                  </svg>
+                  <div class="award-node__body">
+                    <span class="award-node__tier">PROVINCE</span>
+                    <b class="award-node__name">广东省工程训练及创新能力大赛</b>
+                    <span class="award-node__level award-node__level--dim">二等奖</span>
+                  </div>
+                </article>
+
+                <article class="award-node award-node--l" data-off="40" style="--i:14">
+                  <svg class="award-node__trace" viewBox="0 0 80 44" aria-hidden="true">
+                    <path class="award-node__trace-line" pathLength="1" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <path class="award-node__trace-flow" d="M 0.0 20.6 H 57 L 64 13.6 V 6.6 H 80"/>
+                    <g class="award-node__pad">
+                      <circle cx="0" cy="20" r="6"/>
+                      <circle cx="0" cy="20" r="4"/>
+                      <circle cx="0" cy="20" r="1.5"/>
+                    </g>
+                  </svg>
+                  <div class="award-node__body">
+                    <span class="award-node__tier">PROVINCE</span>
+                    <b class="award-node__name">大学生数学建模竞赛广东分赛</b>
+                    <span class="award-node__level award-node__level--dim">二等奖</span>
+                  </div>
+                </article>
               </div>
+
+              <section class="power__projects" aria-label="在研项目">
+                <div class="console__projects">
+                  <article class="console__project power__project power__project--l power__project--amber" style="--i:15">
+                    <svg class="power__project-trace" viewBox="0 0 88 44" aria-hidden="true">
+                      <path class="award-node__trace-line" pathLength="1" d="M 0.0 20.4 H 66 L 73 13.4 V 6.4 H 88"/>
+                      <path class="award-node__trace-flow" d="M 0.0 20.4 H 66 L 73 13.4 V 6.4 H 88"/>
+                      <g class="award-node__pad">
+                      <circle cx="0" cy="20" r="6"/>
+                      <circle cx="0" cy="20" r="4"/>
+                      <circle cx="0" cy="20" r="1.5"/>
+                    </g>
+                    </svg>
+                    <b class="console__project-name">▸ 采血管分拣机 · 实验室全自动采血管分拣系统</b>
+                    <p class="console__project-desc">面向中小型医疗机构设计的实验室全自动系统，集自动识别、分拣与传输于一体。</p>
+                    <ul class="console__points">
+                      <li><b>机械结构</b><span>CORE-XY 运动平台实现高精度全流程运动控制</span></li>
+                      <li><b>视觉识别</b><span>OPENMV 视觉自动颜色分类与条码读取</span></li>
+                      <li><b>控制系统</b><span>STM32 单片机控制，步进电机、驱动装置及梯形加减速算法实现精准移动，气动 Z 轴末端执行器抓取采血管</span></li>
+                      <li><b>传动方式</b><span>同步带传动机构自动分拣与装载</span></li>
+                      <li><b>通信交互</b><span>总线通信指令收发，预留 LIS 实验室信息系统对接</span></li>
+                      <li><b>应用特点</b><span>图形化交互界面，物联网优化数据传输</span></li>
+                    </ul>
+                  </article>
+                  <article class="console__project power__project power__project--r power__project--amber" style="--i:16">
+                    <svg class="power__project-trace" viewBox="0 0 88 44" aria-hidden="true">
+                      <path class="award-node__trace-line" pathLength="1" d="M 0.0 6.4 H 15 L 22 13.4 V 20.4 H 88"/>
+                      <path class="award-node__trace-flow" d="M 0.0 6.4 H 15 L 22 13.4 V 20.4 H 88"/>
+                      <g class="award-node__pad">
+                      <circle cx="88" cy="20" r="6"/>
+                      <circle cx="88" cy="20" r="4"/>
+                      <circle cx="88" cy="20" r="1.5"/>
+                    </g>
+                    </svg>
+                    <b class="console__project-name">▸ 智慧药房 · 智能送药小车</b>
+                    <p class="console__project-desc">面向医疗场景的药品与样本自动化转运 —— 医院药房配送、化验样本转运。</p>
+                    <ul class="console__points">
+                      <li><b>系统架构</b><span>树莓派 4B + STM32F407VET6 分层控制，阿克曼底盘</span></li>
+                      <li><b>上位机</b><span>Ubuntu 20.04 + ROS Noetic：Cartographer 建图、Lidar Location 定位、Dijkstra + TEB 路径规划、机器视觉与语音播报</span></li>
+                      <li><b>下位机</b><span>STM32F407VET6 集成 MPU6050 陀螺仪，阿克曼运动学逆解，增量式 PI 控制后轮电机与前轮舵机</span></li>
+                      <li class="console__point--honor"><b>项目荣誉</b><span>中国机器人及人工智能大赛任务挑战赛省级一等奖、国家三等奖</span></li>
+                    </ul>
+                  </article>
+                </div>
+              </section>
+              </div><!-- /power__zone -->
 
               <div class="holo-bar" aria-hidden="true">
-                <span>近五年战绩</span><b>N</b><span>国家级</span><b>N</b><span>省级</span><b>N</b><span>专利 · 论文</span>
+                <span>近年战绩</span><b class="holo-bar__num" data-count="6">6</b><span>国家级</span><b class="holo-bar__num" data-count="9">9</b><span>省级</span><b class="holo-bar__num" data-count="2">2</b><span>在研项目</span>
+                <span class="holo-bar__sync">SYNC<i class="holo-bar__pulse"></i></span>
               </div>
 
-              <div class="timeline">
+              <div class="timeline console-tl" aria-label="招新时间轴">
+                <div class="console-tl__titlebar" aria-hidden="true">
+                  <i class="console-tl__dot"></i><i class="console-tl__dot"></i><i class="console-tl__dot"></i>
+                  <span>RECRUIT_SEASON.INIT</span>
+                </div>
                 <h3 class="timeline__title">招新时间轴</h3>
                 <ol class="timeline__list">
-                  <li class="timeline__item"><b>报名开启</b><span>9 月上旬</span><small>填写本模块 08 报名表单</small></li>
-                  <li class="timeline__item"><b>报名截止</b><span class="tl-date tbd" data-placeholder="9 月 X 日">9 月 X 日</span><small>截止时间请以群公告为准</small></li>
-                  <li class="timeline__item"><b>面试安排</b><span class="tl-date tbd" data-placeholder="9 月中旬">9 月中旬</span><small>分方向面试 · 时间另行通知</small></li>
-                  <li class="timeline__item"><b>结果公布</b><span class="tl-date tbd" data-placeholder="9 月底">9 月底</span><small>请关注招新群与公众号公告</small></li>
+                  <li class="timeline__item">
+                    <span class="console-tl__status console-tl__status--open" aria-hidden="true"></span>
+                    <b>报名开启</b>
+                    <span class="tl-date">9 月上旬</span>
+                    <small>填写本模块 09 报名表单</small>
+                    <span class="console-tl__gauge" aria-hidden="true"><i style="--w: 100%"></i></span>
+                  </li>
+                  <li class="timeline__item">
+                    <span class="console-tl__status console-tl__status--open" aria-hidden="true"></span>
+                    <b>报名截止</b>
+                    <span class="tl-date tbd" data-placeholder="9 月 X 日">9 月 X 日</span>
+                    <small>截止时间请以群公告为准</small>
+                    <span class="console-tl__gauge" aria-hidden="true"><i style="--w: 72%"></i></span>
+                  </li>
+                  <li class="timeline__item">
+                    <span class="console-tl__status console-tl__status--queued" aria-hidden="true"></span>
+                    <b>面试安排</b>
+                    <span class="tl-date tbd" data-placeholder="9 月中旬">9 月中旬</span>
+                    <small>分方向面试 · 时间另行通知</small>
+                    <span class="console-tl__gauge" aria-hidden="true"><i style="--w: 40%"></i></span>
+                  </li>
+                  <li class="timeline__item">
+                    <span class="console-tl__status console-tl__status--pending" aria-hidden="true"></span>
+                    <b>结果公布</b>
+                    <span class="tl-date tbd" data-placeholder="9 月底">9 月底</span>
+                    <small>请关注招新群与公众号公告</small>
+                    <span class="console-tl__gauge" aria-hidden="true"><i style="--w: 12%"></i></span>
+                  </li>
                 </ol>
                 <p class="timeline__note">⚠ 以上日期均为占位，正式日程以团队官方群公告为准。</p>
               </div>
+
+              <footer class="console__foot" aria-hidden="true">
+                <span>DATA SYNCED</span>
+                <span>2026 RECRUIT · JICHUANG TEAM</span>
+              </footer>
             </div>
 
             <footer class="sheet__footer">
               <span>机械创新团队 · 2026 秋季招新</span>
               <span class="sheet__folio">MOD.07</span>
             </footer>
+        <span class="sheet__more" aria-hidden="true"></span>
       </article>
 
-      <!-- 05 报名 -->
-      <article class="screen sheet--paper sheet--apply" data-screen="8" id="apply-module" aria-label="08 · 报名">
+      <!-- 08 英灵殿 -->
+      <article class="screen sheet--paper sheet--valhalla" data-screen="8" aria-label="08 · 英灵殿">
         <span class="sheet__sheen" aria-hidden="true"></span>
+        <span class="honors-fx" aria-hidden="true">
+          <span class="honors-beam"></span>
+          <span class="data-rain"></span>
+        </span>
+        <svg class="valhalla__sym" viewBox="0 0 60 72" aria-hidden="true">
+          <symbol id="valhalla-hero" viewBox="0 0 60 72">
+            <g fill="none" stroke="currentColor">
+              <circle cx="30" cy="21" r="10.5" stroke-width="2.5"/>
+              <path d="M9 67 a21 23 0 0 1 42 0" stroke-width="2.5"/>
+              <path d="M30 8 v5 M14 24 h5 M41 24 h5" stroke-width="1.2" opacity="0.55"/>
+              <path d="M17 40 l-5 6 M43 40 l5 6" stroke-width="1.2" opacity="0.45"/>
+            </g>
+          </symbol>
+        </svg>
             <header class="sheet__masthead">
               <span class="sheet__masthead-id">08</span>
+              <h2 class="sheet__masthead-title"><span class="glitch" data-text="英灵殿">英灵殿</span> <i>VALHALLA ARCHIVE</i></h2>
+              <span class="sheet__masthead-meta" data-typewriter aria-hidden="true">HALL OF HONOR</span>
+            </header>
+
+            <div class="sheet__body sheet__body--valhalla console">
+              <div class="valhalla__head">
+                <span class="valhalla__hint">◄ 左右滑动切换档案 ►</span>
+                <span class="valhalla__count">ARCHIVED <b data-count="5">5</b> HEROES <i class="holo-bar__pulse" aria-hidden="true"></i></span>
+              </div>
+
+              <!-- 横滑档案卡：拖拽/箭头切换，scroll-snap 吸附；每张卡自带完整档案 -->
+              <div class="valhalla__carousel">
+                <div class="valhalla__track" id="valhallaTrack" tabindex="0" role="group" aria-label="英灵档案横向列表，左右方向键切换">
+                  <article class="vcard" data-hero="0">
+                    <span class="vcard__beam" aria-hidden="true"></span>
+                    <span class="vcard__idx" aria-hidden="true">01 / 15</span>
+                    <figure class="vcard__portrait" aria-hidden="true">
+                      <svg viewBox="0 0 60 72" class="vcard__silhouette"><use href="#valhalla-hero"/></svg>
+                    </figure>
+                    <span class="vcard__id">ARCHIVE A-001</span>
+                    <b class="vcard__name glitch" data-text="英雄名待录">英雄名待录</b>
+                    <div class="vcard__meta">
+                      <span class="vcard__tag">结构组</span>
+                      <span class="vcard__dest">保研 · 待补充</span>
+                    </div>
+                    <ul class="vcard__honors">
+                      <li>中国大学生工程实践与创新能力大赛 · 特等奖</li>
+                    </ul>
+                    <blockquote class="vcard__quote">「寄语占位：给后来者的一句话。」</blockquote>
+                  </article>
+                  <article class="vcard" data-hero="1">
+                    <span class="vcard__beam" aria-hidden="true"></span>
+                    <span class="vcard__idx" aria-hidden="true">02 / 15</span>
+                    <figure class="vcard__portrait" aria-hidden="true">
+                      <svg viewBox="0 0 60 72" class="vcard__silhouette"><use href="#valhalla-hero"/></svg>
+                    </figure>
+                    <span class="vcard__id">ARCHIVE A-002</span>
+                    <b class="vcard__name glitch" data-text="英雄名待录">英雄名待录</b>
+                    <div class="vcard__meta">
+                      <span class="vcard__tag">电控组</span>
+                      <span class="vcard__dest">就业 · 待补充</span>
+                    </div>
+                    <ul class="vcard__honors">
+                      <li>"西门子杯"中国智能制造挑战赛 · 二等奖</li>
+                      <li>中国机器人及人工智能大赛 · 一等奖</li>
+                    </ul>
+                    <blockquote class="vcard__quote">「寄语占位：给后来者的一句话。」</blockquote>
+                  </article>
+                  <article class="vcard" data-hero="2">
+                    <span class="vcard__beam" aria-hidden="true"></span>
+                    <span class="vcard__idx" aria-hidden="true">03 / 15</span>
+                    <figure class="vcard__portrait" aria-hidden="true">
+                      <svg viewBox="0 0 60 72" class="vcard__silhouette"><use href="#valhalla-hero"/></svg>
+                    </figure>
+                    <span class="vcard__id">ARCHIVE A-003</span>
+                    <b class="vcard__name glitch" data-text="英雄名待录">英雄名待录</b>
+                    <div class="vcard__meta">
+                      <span class="vcard__tag">视觉组</span>
+                      <span class="vcard__dest">深造 · 待补充</span>
+                    </div>
+                    <ul class="vcard__honors">
+                      <li>大学生数学建模竞赛 · 一等奖</li>
+                      <li>广东省工科大学生实验综合技能竞赛 · 一等奖</li>
+                      <li>"高教杯"先进成图技术与产品信息建模大赛 · 一等奖</li>
+                    </ul>
+                    <blockquote class="vcard__quote">「寄语占位：给后来者的一句话。」</blockquote>
+                  </article>
+                  <article class="vcard" data-hero="3">
+                    <span class="vcard__beam" aria-hidden="true"></span>
+                    <span class="vcard__idx" aria-hidden="true">04 / 15</span>
+                    <figure class="vcard__portrait" aria-hidden="true">
+                      <svg viewBox="0 0 60 72" class="vcard__silhouette"><use href="#valhalla-hero"/></svg>
+                    </figure>
+                    <span class="vcard__id">ARCHIVE A-004</span>
+                    <b class="vcard__name glitch" data-text="英雄名待录">英雄名待录</b>
+                    <div class="vcard__meta">
+                      <span class="vcard__tag">运营组</span>
+                      <span class="vcard__dest">保研 · 待补充</span>
+                    </div>
+                    <ul class="vcard__honors">
+                      <li>"高教杯"先进成图技术与产品信息建模大赛 · 一等奖</li>
+                    </ul>
+                    <blockquote class="vcard__quote">「寄语占位：给后来者的一句话。」</blockquote>
+                  </article>
+                  <article class="vcard" data-hero="4">
+                    <span class="vcard__beam" aria-hidden="true"></span>
+                    <span class="vcard__idx" aria-hidden="true">05 / 15</span>
+                    <figure class="vcard__portrait" aria-hidden="true">
+                      <svg viewBox="0 0 60 72" class="vcard__silhouette"><use href="#valhalla-hero"/></svg>
+                    </figure>
+                    <span class="vcard__id">ARCHIVE A-005</span>
+                    <b class="vcard__name glitch" data-text="英雄名待录">英雄名待录</b>
+                    <div class="vcard__meta">
+                      <span class="vcard__tag">结构组</span>
+                      <span class="vcard__dest">就业 · 待补充</span>
+                    </div>
+                    <ul class="vcard__honors">
+                      <li>全国大学生机械创新设计大赛 · 二等奖</li>
+                      <li>大学生光电设计竞赛 · 一等奖</li>
+                    </ul>
+                    <blockquote class="vcard__quote">「寄语占位：给后来者的一句话。」</blockquote>
+                  </article>
+                  <article class="vcard" data-hero="5">
+                    <span class="vcard__beam" aria-hidden="true"></span>
+                    <span class="vcard__idx" aria-hidden="true">06 / 15</span>
+                    <figure class="vcard__portrait" aria-hidden="true">
+                      <svg viewBox="0 0 60 72" class="vcard__silhouette"><use href="#valhalla-hero"/></svg>
+                    </figure>
+                    <span class="vcard__id">ARCHIVE A-006</span>
+                    <b class="vcard__name glitch" data-text="英雄名待录">英雄名待录</b>
+                    <div class="vcard__meta">
+                      <span class="vcard__tag">电控组</span>
+                      <span class="vcard__dest">深造 · 待补充</span>
+                    </div>
+                    <ul class="vcard__honors">
+                      <li>中国大学生工程实践与创新能力大赛 · 特等奖</li>
+                      <li>广东省大学生机械创新设计大赛 · 一等奖</li>
+                      <li>"西门子杯"中国智能制造挑战赛 · 二等奖</li>
+                    </ul>
+                    <blockquote class="vcard__quote">「寄语占位：给后来者的一句话。」</blockquote>
+                  </article>
+                  <article class="vcard" data-hero="6">
+                    <span class="vcard__beam" aria-hidden="true"></span>
+                    <span class="vcard__idx" aria-hidden="true">07 / 15</span>
+                    <figure class="vcard__portrait" aria-hidden="true">
+                      <svg viewBox="0 0 60 72" class="vcard__silhouette"><use href="#valhalla-hero"/></svg>
+                    </figure>
+                    <span class="vcard__id">ARCHIVE A-007</span>
+                    <b class="vcard__name glitch" data-text="英雄名待录">英雄名待录</b>
+                    <div class="vcard__meta">
+                      <span class="vcard__tag">视觉组</span>
+                      <span class="vcard__dest">保研 · 待补充</span>
+                    </div>
+                    <ul class="vcard__honors">
+                      <li>"西门子杯"中国智能制造挑战赛 · 二等奖</li>
+                    </ul>
+                    <blockquote class="vcard__quote">「寄语占位：给后来者的一句话。」</blockquote>
+                  </article>
+                  <article class="vcard" data-hero="7">
+                    <span class="vcard__beam" aria-hidden="true"></span>
+                    <span class="vcard__idx" aria-hidden="true">08 / 15</span>
+                    <figure class="vcard__portrait" aria-hidden="true">
+                      <svg viewBox="0 0 60 72" class="vcard__silhouette"><use href="#valhalla-hero"/></svg>
+                    </figure>
+                    <span class="vcard__id">ARCHIVE A-008</span>
+                    <b class="vcard__name glitch" data-text="英雄名待录">英雄名待录</b>
+                    <div class="vcard__meta">
+                      <span class="vcard__tag">运营组</span>
+                      <span class="vcard__dest">就业 · 待补充</span>
+                    </div>
+                    <ul class="vcard__honors">
+                      <li>大学生数学建模竞赛 · 一等奖</li>
+                      <li>广东省工科大学生实验综合技能竞赛 · 一等奖</li>
+                    </ul>
+                    <blockquote class="vcard__quote">「寄语占位：给后来者的一句话。」</blockquote>
+                  </article>
+                  <article class="vcard" data-hero="8">
+                    <span class="vcard__beam" aria-hidden="true"></span>
+                    <span class="vcard__idx" aria-hidden="true">09 / 15</span>
+                    <figure class="vcard__portrait" aria-hidden="true">
+                      <svg viewBox="0 0 60 72" class="vcard__silhouette"><use href="#valhalla-hero"/></svg>
+                    </figure>
+                    <span class="vcard__id">ARCHIVE A-009</span>
+                    <b class="vcard__name glitch" data-text="英雄名待录">英雄名待录</b>
+                    <div class="vcard__meta">
+                      <span class="vcard__tag">结构组</span>
+                      <span class="vcard__dest">深造 · 待补充</span>
+                    </div>
+                    <ul class="vcard__honors">
+                      <li>"高教杯"先进成图技术与产品信息建模大赛 · 一等奖</li>
+                      <li>iCAN 大学生创新创业大赛 · 一等奖</li>
+                      <li>全国大学生机械创新设计大赛 · 二等奖</li>
+                    </ul>
+                    <blockquote class="vcard__quote">「寄语占位：给后来者的一句话。」</blockquote>
+                  </article>
+                  <article class="vcard" data-hero="9">
+                    <span class="vcard__beam" aria-hidden="true"></span>
+                    <span class="vcard__idx" aria-hidden="true">10 / 15</span>
+                    <figure class="vcard__portrait" aria-hidden="true">
+                      <svg viewBox="0 0 60 72" class="vcard__silhouette"><use href="#valhalla-hero"/></svg>
+                    </figure>
+                    <span class="vcard__id">ARCHIVE A-010</span>
+                    <b class="vcard__name glitch" data-text="英雄名待录">英雄名待录</b>
+                    <div class="vcard__meta">
+                      <span class="vcard__tag">电控组</span>
+                      <span class="vcard__dest">保研 · 待补充</span>
+                    </div>
+                    <ul class="vcard__honors">
+                      <li>全国大学生机械创新设计大赛 · 二等奖</li>
+                    </ul>
+                    <blockquote class="vcard__quote">「寄语占位：给后来者的一句话。」</blockquote>
+                  </article>
+                  <article class="vcard" data-hero="10">
+                    <span class="vcard__beam" aria-hidden="true"></span>
+                    <span class="vcard__idx" aria-hidden="true">11 / 15</span>
+                    <figure class="vcard__portrait" aria-hidden="true">
+                      <svg viewBox="0 0 60 72" class="vcard__silhouette"><use href="#valhalla-hero"/></svg>
+                    </figure>
+                    <span class="vcard__id">ARCHIVE A-011</span>
+                    <b class="vcard__name glitch" data-text="英雄名待录">英雄名待录</b>
+                    <div class="vcard__meta">
+                      <span class="vcard__tag">视觉组</span>
+                      <span class="vcard__dest">就业 · 待补充</span>
+                    </div>
+                    <ul class="vcard__honors">
+                      <li>中国大学生工程实践与创新能力大赛 · 特等奖</li>
+                      <li>广东省大学生机械创新设计大赛 · 一等奖</li>
+                    </ul>
+                    <blockquote class="vcard__quote">「寄语占位：给后来者的一句话。」</blockquote>
+                  </article>
+                  <article class="vcard" data-hero="11">
+                    <span class="vcard__beam" aria-hidden="true"></span>
+                    <span class="vcard__idx" aria-hidden="true">12 / 15</span>
+                    <figure class="vcard__portrait" aria-hidden="true">
+                      <svg viewBox="0 0 60 72" class="vcard__silhouette"><use href="#valhalla-hero"/></svg>
+                    </figure>
+                    <span class="vcard__id">ARCHIVE A-012</span>
+                    <b class="vcard__name glitch" data-text="英雄名待录">英雄名待录</b>
+                    <div class="vcard__meta">
+                      <span class="vcard__tag">运营组</span>
+                      <span class="vcard__dest">深造 · 待补充</span>
+                    </div>
+                    <ul class="vcard__honors">
+                      <li>"西门子杯"中国智能制造挑战赛 · 二等奖</li>
+                      <li>中国机器人及人工智能大赛 · 一等奖</li>
+                      <li>大学生数学建模竞赛 · 一等奖</li>
+                    </ul>
+                    <blockquote class="vcard__quote">「寄语占位：给后来者的一句话。」</blockquote>
+                  </article>
+                  <article class="vcard" data-hero="12">
+                    <span class="vcard__beam" aria-hidden="true"></span>
+                    <span class="vcard__idx" aria-hidden="true">13 / 15</span>
+                    <figure class="vcard__portrait" aria-hidden="true">
+                      <svg viewBox="0 0 60 72" class="vcard__silhouette"><use href="#valhalla-hero"/></svg>
+                    </figure>
+                    <span class="vcard__id">ARCHIVE A-013</span>
+                    <b class="vcard__name glitch" data-text="英雄名待录">英雄名待录</b>
+                    <div class="vcard__meta">
+                      <span class="vcard__tag">结构组</span>
+                      <span class="vcard__dest">保研 · 待补充</span>
+                    </div>
+                    <ul class="vcard__honors">
+                      <li>大学生数学建模竞赛 · 一等奖</li>
+                    </ul>
+                    <blockquote class="vcard__quote">「寄语占位：给后来者的一句话。」</blockquote>
+                  </article>
+                  <article class="vcard" data-hero="13">
+                    <span class="vcard__beam" aria-hidden="true"></span>
+                    <span class="vcard__idx" aria-hidden="true">14 / 15</span>
+                    <figure class="vcard__portrait" aria-hidden="true">
+                      <svg viewBox="0 0 60 72" class="vcard__silhouette"><use href="#valhalla-hero"/></svg>
+                    </figure>
+                    <span class="vcard__id">ARCHIVE A-014</span>
+                    <b class="vcard__name glitch" data-text="英雄名待录">英雄名待录</b>
+                    <div class="vcard__meta">
+                      <span class="vcard__tag">电控组</span>
+                      <span class="vcard__dest">就业 · 待补充</span>
+                    </div>
+                    <ul class="vcard__honors">
+                      <li>"高教杯"先进成图技术与产品信息建模大赛 · 一等奖</li>
+                      <li>iCAN 大学生创新创业大赛 · 一等奖</li>
+                    </ul>
+                    <blockquote class="vcard__quote">「寄语占位：给后来者的一句话。」</blockquote>
+                  </article>
+                  <article class="vcard" data-hero="14">
+                    <span class="vcard__beam" aria-hidden="true"></span>
+                    <span class="vcard__idx" aria-hidden="true">15 / 15</span>
+                    <figure class="vcard__portrait" aria-hidden="true">
+                      <svg viewBox="0 0 60 72" class="vcard__silhouette"><use href="#valhalla-hero"/></svg>
+                    </figure>
+                    <span class="vcard__id">ARCHIVE A-015</span>
+                    <b class="vcard__name glitch" data-text="英雄名待录">英雄名待录</b>
+                    <div class="vcard__meta">
+                      <span class="vcard__tag">视觉组</span>
+                      <span class="vcard__dest">深造 · 待补充</span>
+                    </div>
+                    <ul class="vcard__honors">
+                      <li>全国大学生机械创新设计大赛 · 二等奖</li>
+                      <li>大学生光电设计竞赛 · 一等奖</li>
+                      <li>中国大学生工程实践与创新能力大赛 · 特等奖</li>
+                    </ul>
+                    <blockquote class="vcard__quote">「寄语占位：给后来者的一句话。」</blockquote>
+                  </article>
+                </div>
+                <button class="valhalla__arrow valhalla__arrow--prev" type="button" aria-label="上一张档案">‹</button>
+                <button class="valhalla__arrow valhalla__arrow--next" type="button" aria-label="下一张档案">›</button>
+              </div>
+
+              <footer class="console__foot" aria-hidden="true">
+                <span>VALHALLA ARCHIVE · READ ONLY</span>
+                <span>2026 RECRUIT · JICHUANG TEAM</span>
+              </footer>
+            </div>
+
+            <footer class="sheet__footer">
+              <span>机械创新团队 · 2026 秋季招新</span>
+              <span class="sheet__folio">MOD.08</span>
+            </footer>
+        <span class="sheet__more" aria-hidden="true"></span>
+      </article>
+      <!-- 09 报名 -->
+      <article class="screen sheet--paper sheet--apply" data-screen="9" id="apply-module" aria-label="09 · 报名">
+
+        <span class="sheet__sheen" aria-hidden="true"></span>
+            <header class="sheet__masthead">
+              <span class="sheet__masthead-id">09</span>
               <h2 class="sheet__masthead-title">报名 <i>APPLY</i></h2>
               <span class="sheet__masthead-meta">APPLICATION FORM</span>
             </header>
@@ -906,17 +1685,18 @@
 
             <footer class="sheet__footer">
               <span>机械创新团队 · 2026 秋季招新</span>
-              <span class="sheet__folio">MOD.08</span>
+              <span class="sheet__folio">MOD.09</span>
             </footer>
+        <span class="sheet__more" aria-hidden="true"></span>
       </article>
 
       <!-- 06 加入我们 -->
-      <article class="screen sheet--paper sheet--cta" data-screen="9" aria-label="09 · 加入我们">
+      <article class="screen sheet--paper sheet--cta" data-screen="10" aria-label="10 · 加入我们">
         <span class="sheet__sheen" aria-hidden="true"></span>
-        <!-- 09 页背景层：与 01 启动屏呼应（网格 + 径向 + 扫描线，去除齿轮/电路杂图案） -->
+        <!-- 10 页背景层：与 01 启动屏呼应（网格 + 径向 + 扫描线，去除齿轮/电路杂图案） -->
         <span class="cta-bg" aria-hidden="true"></span>
             <header class="sheet__masthead">
-              <span class="sheet__masthead-id">09</span>
+              <span class="sheet__masthead-id">10</span>
               <h2 class="sheet__masthead-title">想加入我们？ <i>JOIN US</i></h2>
               <span class="sheet__masthead-meta">THE FUTURE NEEDS YOU</span>
             </header>
@@ -926,13 +1706,17 @@
                 <img class="cta__logo" src="assets/logo.png" alt="机械创新团队队标" width="120" height="120">
                 <h3 class="cta__slogan">下一个让全场惊呼的机器人，<br>或许就出自你的手。</h3>
                 <p class="cta__text">不管你从零开始还是已有基础，只要愿意学习、敢于动手，机创都留好了你的位置。</p>
+                <button class="cta__action" id="ctaToApply" type="button">
+                  填写报名登记
+                  <span class="cta__action-arrow" aria-hidden="true">→</span>
+                </button>
               </div>
               <div class="cta__contacts">
                 <h4 class="cta__contacts-title">联系与关注</h4>
                 <ul class="cta__list">
                   <li><span class="cta__tag">报名邮箱</span><a class="link" href="mailto:3607199098@qq.com">3607199098@qq.com</a></li>
-                  <li><span class="cta__tag">招新群</span><span class="connect-anim" data-placeholder="群号占位，进群关注群公告">QQ 群：XXXX（占位）</span></li>
-                  <li><span class="cta__tag">公众号</span><span class="connect-anim" data-placeholder="公众号名占位">公众号：XXXX（占位）</span></li>
+                  <li><span class="cta__tag">招新群</span><span class="connect-anim" data-placeholder="群号占位，进群关注群公告">QQ 群号即将公布</span></li>
+                  <li><span class="cta__tag">公众号</span><span class="connect-anim" data-placeholder="公众号名占位">公众号即将公布</span></li>
                 </ul>
                 <div class="qr qr--holo" aria-hidden="true">
                   <svg viewBox="0 0 21 21" class="qr__svg">
@@ -953,7 +1737,7 @@
 
             <footer class="sheet__footer sheet__footer--end">
               <span>END OF EDITION · 期待你的加入</span>
-              <span class="sheet__folio">MOD.09</span>
+              <span class="sheet__folio">MOD.10</span>
             </footer>
       </article>
     </section><!-- /holo -->
@@ -969,8 +1753,9 @@
         <button class="chip" type="button" role="tab" aria-selected="false" data-go="5"><b>05</b><i>视觉</i></button>
         <button class="chip" type="button" role="tab" aria-selected="false" data-go="6"><b>06</b><i>运营</i></button>
         <button class="chip" type="button" role="tab" aria-selected="false" data-go="7"><b>07</b><i>战绩</i></button>
-        <button class="chip" type="button" role="tab" aria-selected="false" data-go="8"><b>08</b><i>报名</i></button>
-        <button class="chip" type="button" role="tab" aria-selected="false" data-go="9"><b>09</b><i>加入</i></button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="8"><b>08</b><i>英灵</i></button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="9"><b>09</b><i>报名</i></button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-go="10"><b>10</b><i>加入</i></button>
       </div>
       <button class="holo__rail-btn" id="nextBtn" type="button" aria-label="下一版面">›</button>
     </nav>
@@ -978,9 +1763,9 @@
     <p class="book-foot">设计：机创全息终端 · 队标青 <code>#107090</code> · 占位文案在 <code>index.html</code> 中替换</p>
   </main>
 
-  <script src="js/book.js?v=8"></script>
+  <script src="js/book.js?v=12"></script>
   <script src="js/form.js?v=8"></script>
-  <script src="js/fx.js?v=8"></script>
+  <script src="js/fx.js?v=20"></script>
 
   <!-- 手机端底部浮动报名按钮（长页常驻，一键滑到报名模块） -->
   <a class="mobile-cta" id="mobileApply" href="#apply-module" aria-label="立即报名">⚡ 立即报名</a>
@@ -994,7 +1779,7 @@
     </svg>
   </button>
 
-  <script src="js/holo-tip.js"></script>
+  <script src="js/holo-tip.js?v=3"></script>
 
   <!-- ============ JARVIS 队标核心终端（右下角队标，点击散开终端面板） ============ -->
   <!-- 队标核心 -->

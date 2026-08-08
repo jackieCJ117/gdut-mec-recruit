@@ -343,8 +343,18 @@ body {
    动效偏好降级
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
-  .screen { transition-duration: 0.01ms; }
+  /* 动画 + 过渡都要压制：此前只覆盖 animation，全站 transition 照常运行。
+     delay 一并归零，否则「延迟后才浮现」的元素会滞留在不可见状态。 */
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+  /* .screen 需 !important：screen.css 的 .screen.is-active（0,2,0）
+     特异性更高且加载更晚，无 !important 时切屏淡入压不掉 */
+  .screen { transition-duration: 0.01ms !important; }
 }
 
 /* ============================================================
