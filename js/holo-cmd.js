@@ -2,7 +2,7 @@
    机创全息终端 CYBER 2026 · holo-cmd.js（v4，集成到小机终端）
    终端底部输入框输入命令 → 输出滚进终端屏幕（与启动日志同屏）
    命令：help / groups / status / join / 报名 / whoami / clear
-   依赖：book.js（join 跳转 08 屏）
+   依赖：book.js（join 跳转 09 报名屏）
    ============================================================ */
 (function () {
   "use strict";
@@ -43,15 +43,15 @@
       case "status":
         line("SYSTEM STATUS: ACTIVE", "cmd-ok");
         line("DATA STREAM: 78%");
-        line("MODULES: 09/09 LOADED");
+        line("MODULES: 10/10 LOADED");
         line("四组联动: MECH / EMBED / VISION / MEDIA");
         break;
       case "join":
       case "报名":
-        line("正在跳转 08 报名模块...", "cmd-ok");
+        line("正在跳转 09 报名模块...", "cmd-ok");
         line("填写表单 → 提交 → 我们会在招新群联系你。");
         window.setTimeout(function () {
-          var chip = document.querySelector('.chip[data-go="8"]');
+          var chip = document.querySelector('.chip[data-go="9"]');
           if (chip) chip.click();
         }, 600);
         break;

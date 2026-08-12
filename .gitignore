@@ -9,3 +9,13 @@ form_content.txt
 # 源素材（于兆勤老师照片 / 各组别要求文档，不入库）
 于老.png
 各组别要求.docx
+
+# 开发/测试产物与源素材（不入库）
+audit/
+audit-self/
+scripts/
+照片/
+英灵殿内容/
+近年奖项.docx
+弹窗内容建议.md
+/*.png

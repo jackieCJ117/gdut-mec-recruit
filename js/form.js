@@ -225,7 +225,7 @@
       })
       .then(function () {
         try { localStorage.removeItem(STORE_KEY); } catch (e) { /* 忽略 */ }
-        setStatus('✓ 报名成功！你的信息已提交至团队数据库，请留意招新群与公众号的后续通知。', 'ok');
+        setStatus('✓ 报名成功！你的信息已提交至团队数据库，请留意招新群的后续通知。', 'ok');
         if (uploadList) { uploadList.innerHTML = ''; }
         pendingFiles = [];
         formB.reset();

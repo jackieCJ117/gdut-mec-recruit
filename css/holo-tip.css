@@ -306,6 +306,50 @@
   display: inline-block; margin-bottom: 8px;
 }
 
+/* —— 答题（quiz）模式 —— */
+.holo-tip__quiz { margin-top: 10px; }
+.holo-tip__quiz-q {
+  font-size: 12.5px; font-weight: 600; line-height: 1.7;
+  color: var(--title, #eef8fd); margin-bottom: 10px;
+}
+.holo-tip__quiz-opts { display: flex; flex-direction: column; gap: 7px; }
+.holo-tip__quiz-opt {
+  display: flex; align-items: center; gap: 9px; width: 100%;
+  padding: 7px 11px; text-align: left;
+  font-family: inherit; font-size: 12px; line-height: 1.6;
+  color: var(--text, #cfe4f0);
+  background: rgba(47, 196, 220, 0.05);
+  border: 1px solid rgba(94, 200, 226, 0.35); border-radius: 6px;
+  cursor: pointer; transition: all 0.18s ease;
+}
+.holo-tip__quiz-opt:hover {
+  background: rgba(47, 196, 220, 0.12);
+  border-color: var(--cyan, #2fc4dc); color: var(--title, #eef8fd);
+}
+.holo-tip__quiz-opt-key {
+  flex-shrink: 0; width: 18px; height: 18px; border-radius: 4px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-en, "Orbitron", sans-serif);
+  font-size: 11px; font-weight: 700; color: var(--cyan, #2fc4dc);
+  border: 1px solid rgba(47, 196, 220, 0.5);
+}
+.holo-tip__quiz-opt.is-correct {
+  border-color: #39d98a; background: rgba(57, 217, 138, 0.12); color: #eafbf2;
+}
+.holo-tip__quiz-opt.is-correct .holo-tip__quiz-opt-key { border-color: #39d98a; color: #39d98a; }
+.holo-tip__quiz-opt.is-wrong {
+  border-color: #ff6b6b; background: rgba(255, 107, 107, 0.1); color: #ffe8e8; opacity: 0.85;
+}
+.holo-tip__quiz-opt.is-wrong .holo-tip__quiz-opt-key { border-color: #ff6b6b; color: #ff6b6b; }
+.holo-tip__quiz.is-done .holo-tip__quiz-opt { cursor: default; }
+.holo-tip__quiz-explain {
+  margin-top: 10px; padding: 8px 10px;
+  font-size: 12px; line-height: 1.7; color: var(--cyan-soft, #7fd8e8);
+  border-left: 2px solid var(--cyan, #2fc4dc);
+  background: rgba(47, 196, 220, 0.06);
+}
+.holo-tip__quiz-explain b { color: var(--title, #eef8fd); font-weight: 700; }
+
 /* —— 底部按钮区 —— */
 .holo-tip__foot {
   position: relative; z-index: 2;

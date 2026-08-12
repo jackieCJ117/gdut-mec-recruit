@@ -283,12 +283,14 @@
       el.textContent = '';
       el.classList.add('typing');
       var i = 0;
+      /* 自适应速度：长寄语约 1.6~2.6s 打完（含随机间隔），短寄语逐字更有节奏 */
+      var base = Math.max(12, Math.min(50, Math.round(1600 / Math.max(text.length, 1))));
       (function tick() {
         if (myToken !== typeToken) return;   /* 已被更新的滚动取代 */
         if (i <= text.length) {
           el.textContent = text.slice(0, i);
           i++;
-          setTimeout(tick, 45 + Math.random() * 55);
+          setTimeout(tick, base + Math.random() * 18);
         } else {
           el.classList.remove('typing');
         }
@@ -342,7 +344,9 @@
         card.classList.add('is-flashing');
         /* 闪帧播完即移除：残留的 animation 声明会压制 .is-active 的呼吸脉冲 */
         setTimeout(function () { card.classList.remove('is-flashing'); }, 260);
-        typeInto(card.querySelector('.vcard__quote'), quoteCache[active]);
+        var qEl = card.querySelector('.vcard__quote');
+        if (qEl) typeInto(qEl, quoteCache[active]);
+        else typeToken++;   /* 无寄语卡：作废旧打字机链，避免侧边卡残留 */
         cards.forEach(function (c, j) {
           if (j === active) c.setAttribute('aria-current', 'true');
           else c.removeAttribute('aria-current');
@@ -470,6 +474,26 @@
     });
   }
 
+  /* ============================================================
+     12. 真卡滚动区「还有更多」提示：可滚时底部渐隐+▾，滚到底消失
+     ============================================================ */
+  function initScrollHints() {
+    var els = Array.prototype.slice.call(document.querySelectorAll('.vcard__scroll'));
+    if (!els.length) return;
+    function refresh() {
+      els.forEach(function (el) {
+        var can = el.scrollHeight - el.clientHeight > 12;
+        var atEnd = el.scrollTop >= el.scrollHeight - el.clientHeight - 2;
+        el.classList.toggle('has-more', can && !atEnd);
+      });
+    }
+    refresh();
+    els.forEach(function (el) {
+      el.addEventListener('scroll', refresh, { passive: true });
+    });
+    window.addEventListener('resize', refresh);
+  }
+
   /* —— 启动 —— */
   initCountUp();
   initFlick();
@@ -479,6 +503,7 @@
   initHoloCount();
   initPackets();
   initValhalla();
+  initScrollHints();
   initDataRain();
   initViewTilt();
   initPowerLink();

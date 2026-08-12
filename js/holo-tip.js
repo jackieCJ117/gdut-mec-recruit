@@ -10,86 +10,96 @@
   "use strict";
 
   /* ============================================================
-     弹窗配置：键 = 屏号（1-9）
+     弹窗配置：键 = 屏号（1-10）
      每条：title 标题 | text 正文 | list 条目数组 | tags 标签数组
-           pos 位置 | size 大小 | mode 显示模式
+           pos 位置 | size 大小 | mode 显示模式 | quiz 答题（可选）
      pos: 预设 tl/tr/bl/br/ml/mr/mt（角落/贴边，不挡正文），或自由坐标 {x, y}
      size: sm 小(300×170-260) / md 中(420×260-370) / lg 大(560×360-500)
      mode: one 单条显示（默认，FAB 循环）| all 同屏同时显示全部（上限 3）
+     quiz: { question 题目, options 选项数组, correct 正确项索引(0 起), explain 解析 }
      纵向对比技巧：大窗给 list+tags（内容多自然高），小窗只给 text（紧凑）
      ============================================================ */
   var TIP_SCREENS = {
     /* 1 启动屏：不配置弹窗（用户指定取消） */
-    2: [
-      { title: "机创冷知识 02", pos: "tl", size: "sm", mode: "all",
-        text: "【占位】有趣小知识二：<em>关于机创团队的冷知识。</em>" },
-      { title: "机创冷知识 03", pos: "tr", size: "md", mode: "all",
-        text: "【占位】有趣小知识三：<em>关于招新季的隐藏彩蛋。</em>",
-        list: ["【占位】彩蛋详情一", "【占位】彩蛋详情二"] },
-      { title: "机创冷知识 04", pos: "bl", size: "lg", mode: "all",
-        text: "【占位】有趣小知识四：<em>关于团队从图纸到赛场的历程。</em>",
-        list: ["【占位】历程要点一", "【占位】历程要点二", "【占位】历程要点三"],
-        tags: ["历史", "赛场", "机创"] }
+    2: [ /* 关于：同屏同弹（mode all，上限 3 窗） */
+      { title: "机创是什么", pos: "tl", size: "sm", mode: "all",
+        text: "机械创新团队是<em>竞赛驱动</em>的科创团队——不是兴趣社团，是带着作品上赛场的。四组联动，从图纸到落地。" },
+      { title: "2008 · 传承至今", pos: "tr", size: "md", mode: "all",
+        text: "团队从 2008 年一路走到今天，奖杯是每年一届攒下来的。<em>你是第几届，由你来写。</em>",
+        list: ["2008 年成立", "历届成员已覆盖多届学生", "今年招新，等你入队"],
+        tags: ["历史", "传承"] },
+      { title: "答题 · 成立年份", pos: "bl", size: "md", mode: "all",
+        quiz: { question: "机创团队成立于哪一年？",
+          options: ["2006", "2008", "2010", "2012"], correct: 1,
+          explain: "团队从 2008 年一路传承至今，封面 EST. 2008。" } }
     ],
-    3: [ /* 结构组：3 条逐个弹出（顺序：主介绍 → 技能 → 问答） */
-      { title: "结构组冷知识", pos: "bl", size: "lg",
-        text: "【占位】结构组主介绍：<em>例如零件命名、图纸上的小讲究。</em>",
-        list: ["【占位】结构细节一", "【占位】结构细节二", "【占位】结构细节三"],
+    3: [ /* 结构组：单条循环 */
+      { title: "结构组做什么", pos: "bl", size: "lg",
+        text: "画图、建模、出图纸、做样机——<em>一个机器人长什么样，先由结构组说了算。</em>",
+        list: ["SolidWorks 建模", "机械结构设计", "3D 打印与装配", "图纸规范"],
         tags: ["SolidWorks", "机构", "3D 打印"] },
-      { title: "结构组 · 技能图谱", pos: "tr", size: "md",
-        text: "【占位】SolidWorks / AutoCAD / 机械制图 / 3D 打印 的组内用法。",
-        list: ["【占位】建模练习", "【占位】工程制图规范"] },
-      { title: "结构组 · 招新问答", pos: "tl", size: "sm",
-        text: "【占位】零基础可以来吗？需要什么装备？" }
+      { title: "答题 · 建模软件", pos: "tr", size: "md",
+        quiz: { question: "结构组的主力建模软件是？",
+          options: ["AutoCAD", "SolidWorks", "MATLAB", "Blender"], correct: 1,
+          explain: "组内系统学习 SW2018+，建模到装配一条龙。" } }
     ],
-    4: [ /* 电控组：3 条逐个弹出（顺序：主介绍 → 细节 → 小知识） */
-      { title: "电控组冷知识 03", pos: "bl", size: "lg",
-        text: "【占位】电控组主介绍：<em>从点亮灯珠到驱动整机。</em>",
-        list: ["【占位】开发要点一", "【占位】开发要点二", "【占位】开发要点三"],
+    4: [ /* 电控组：单条循环 */
+      { title: "电控组做什么", pos: "bl", size: "lg",
+        text: "从点亮一颗灯珠，到让整台机器跑起来——<em>单片机、电机驱动、控制算法，都在电控。</em>",
+        list: ["C 语言编程", "STM32 开发", "PCB 设计与焊接", "PID 控制"],
         tags: ["单片机", "C 语言", "电路"] },
-      { title: "电控组冷知识 02", pos: "tr", size: "md",
-        text: "【占位】电控组相关小知识二。",
-        list: ["【占位】电控细节一", "【占位】电控细节二"] },
-      { title: "电控组冷知识 01", pos: "tl", size: "sm",
-        text: "【占位】电控组相关小知识一。" }
+      { title: "答题 · 主控芯片", pos: "tr", size: "md",
+        quiz: { question: "电控组核心主控芯片是？",
+          options: ["51 单片机", "STM32", "Arduino Uno", "ESP8266"], correct: 1,
+          explain: "STM32 + HAL 库，驱动外设与执行器。" } }
     ],
-    5: [ /* 视觉组：3 条逐个弹出（顺序：主介绍 → 趣事 → 问答） */
-      { title: "视觉组冷知识", pos: "tr", size: "lg",
-        text: "【占位】视觉识别组主介绍：<em>例如训练模型时的趣事。</em>",
-        list: ["【占位】算法趣事一", "【占位】算法趣事二", "【占位】算法趣事三"],
+    5: [ /* 视觉组：单条循环 */
+      { title: "视觉组做什么", pos: "tr", size: "lg",
+        text: "让机器「看见」——OpenCV 传统视觉、深度学习目标检测，<em>识别、定位、决策，都靠视觉。</em>",
+        list: ["Python / OpenCV", "目标检测（YOLO 等）", "图像处理", "模型部署到嵌入式"],
         tags: ["OpenCV", "深度学习", "YOLO"] },
-      { title: "视觉组 · 算法趣事", pos: "bl", size: "md",
-        text: "【占位】训练模型/数据集标注的组内日常。",
-        list: ["【占位】数据集趣事", "【占位】推理速度调优"] },
-      { title: "视觉组 · 招新问答", pos: "tl", size: "sm",
-        text: "【占位】数学不好能学视觉吗？需要什么配置的电脑？" }
+      { title: "答题 · 目标识别", pos: "bl", size: "md",
+        quiz: { question: "视觉组主要用什么做目标识别？",
+          options: ["OpenCV + 深度学习", "纯 OCR", "Photoshop 修图", "纯手工标注"], correct: 0,
+          explain: "传统 CV + CNN / YOLO 等深度学习模型。" } }
     ],
-    6: [ /* 运营组：2 条逐个弹出（顺序：主窗 → 小知识） */
-      { title: "运营组冷知识 02", pos: "br", size: "md",
-        text: "【占位】运营组相关小知识二。",
-        list: ["【占位】运营细节一", "【占位】运营细节二"] },
-      { title: "运营组冷知识 01", pos: "tl", size: "sm",
-        text: "【占位】运营组相关小知识一。" }
+    6: [ /* 运营组：单条循环 */
+      { title: "运营组做什么", pos: "br", size: "md",
+        text: "招新宣传、赛事记录、推文排版、PPT 答辩——<em>团队的「门面」和「喉舌」，都是运营。</em>",
+        list: ["招新与活动策划", "推文 / 排版", "摄影剪辑", "答辩 PPT"],
+        tags: ["运营", "宣传"] },
+      { title: "答题 · 运营职能", pos: "tl", size: "sm",
+        quiz: { question: "运营组主要负责什么？",
+          options: ["画电路板", "宣传策划、赛事记录与答辩 PPT", "写单片机程序", "机械建模出图"], correct: 1,
+          explain: "团队的「门面」与「喉舌」——招新宣传、记录、推文、PPT。" } }
     ],
-    7: [
+    7: [ /* 战绩：单条循环 */
       { title: "备赛冷知识", pos: "tr", size: "md",
-        text: "【占位】备赛期的小知识：<em>例如赛场上的规矩与趣闻。</em>",
-        list: ["【占位】赛场规矩一", "【占位】赛场规矩二"] }
+        text: "从选题到答辩通常<em>大半年</em>——前期调研、中期硬肝、后期打磨，一个都不能少。",
+        list: ["选题与方案", "设计与装配", "联调与测试", "答辩与展示"],
+        tags: ["备赛", "历程"] },
+      { title: "答题 · 在研项目", pos: "bl", size: "md",
+        quiz: { question: "下面哪个是团队的在研项目？",
+          options: ["采血管分拣机", "智慧药房（智能送药小车）", "机械手夹取装置", "以上都是"], correct: 3,
+          explain: "采血管分拣机、智慧药房是两个在研项目；机械手夹取是结构组典型机构设计课题。" } }
     ],
-    8: [ /* 英灵殿：3 条逐个弹出，大小位置错开（lg 右上 / sm 左下 / md 右下） */
-      { title: "英灵殿的由来", pos: "tr", size: "lg",
-        text: "【占位】「英灵殿」取自北欧神话——凡战场扬名者，皆入英灵殿。<em>这里陈列的，是曾在赛场为团队扬名的前辈档案。</em>",
-        list: ["【占位】每张档案卡代表一位已毕业的优秀师兄", "【占位】左右滑动可逐一翻阅他们的战绩与寄语", "【占位】档案内容由团队逐年更新"],
+    8: [ /* 英灵殿：单条循环 */
+      { title: "英灵殿是什么", pos: "tr", size: "lg",
+        text: "取自北欧神话——凡战场扬名者，皆入英灵殿。<em>这里陈列的，是曾在赛场为团队扬名的前辈。</em>",
+        list: ["每位前辈一张档案卡", "记录他们的战绩与寄语", "由团队逐年更新"],
         tags: ["英灵殿", "传承", "档案"] },
-      { title: "档案编号规则", pos: "bl", size: "sm",
-        text: "【占位】ARCHIVE A-001 的编号按<em>入殿顺序</em>编排，A 为在校荣誉批次。" },
-      { title: "向他们看齐", pos: "br", size: "md",
-        text: "【占位】前辈的寄语会出现在每张档案卡底部——<em>那是对后来者最直白的期待。</em>",
-        list: ["【占位】成为下一位入殿者", "【占位】把档案留给下一届"] }
+      { title: "答题 · 殿名由来", pos: "br", size: "md",
+        quiz: { question: "「英灵殿」的名字取自？",
+          options: ["希腊神话", "北欧神话", "《山海经》", "圣经"], correct: 1,
+          explain: "凡战场扬名者皆入英灵殿——这里陈列为团队扬名的前辈档案。" } }
     ],
-    9: [
+    9: [ /* 报名：单条循环 */
       { title: "报名小提示", pos: "br", size: "sm",
-        text: "【占位】报名相关的小提示/冷知识。" }
+        text: "把报名表填完整，第 6 题能配图就配图——<em>作品图比漂亮话更能说明你。</em>" },
+      { title: "答题 · 组别勾选", pos: "tl", size: "sm",
+        quiz: { question: "报名表最多可以勾选几个面试组别？",
+          options: ["只能 1 个", "可以多选", "不允许选", "最多 3 个"], correct: 1,
+          explain: "支持多选，但面试会按你的第一意向重点考察，建议想清楚最想进哪个组。" } }
     ]
     /* 10 加入我们：不配置弹窗（用户指定取消） */
   };
@@ -163,7 +173,6 @@
     tip.appendChild(head);
 
     var body = el("div", "holo-tip__body");
-    body.appendChild(el("span", "holo-tip__placeholder-note", "CONTENT SLOT · 占位待替换"));
     if (cfg.text) body.appendChild(el("p", null, cfg.text));
     if (cfg.list) {
       var ul = el("ul", "holo-tip__list");
@@ -174,6 +183,43 @@
       var tags = el("div", "holo-tip__tags");
       cfg.tags.forEach(function (t) { tags.appendChild(el("span", "holo-tip__tag", t)); });
       body.appendChild(tags);
+    }
+    /* —— 答题（quiz）模式：选项可点，对错即时反馈 + 解析 —— */
+    if (cfg.quiz) {
+      var quiz = el("div", "holo-tip__quiz");
+      quiz.appendChild(el("p", "holo-tip__quiz-q", cfg.quiz.question));
+      var opts = el("div", "holo-tip__quiz-opts");
+      cfg.quiz.options.forEach(function (opt, i) {
+        var btn = el("button", "holo-tip__quiz-opt", "");
+        btn.type = "button";
+        btn.setAttribute("data-quiz-opt", i);
+        btn.innerHTML = "<span class='holo-tip__quiz-opt-key'>" + String.fromCharCode(65 + i) +
+          "</span><span class='holo-tip__quiz-opt-text'>" + opt + "</span>";
+        opts.appendChild(btn);
+      });
+      quiz.appendChild(opts);
+      var explain = el("p", "holo-tip__quiz-explain", "");
+      explain.setAttribute("aria-live", "polite");
+      explain.hidden = true;
+      quiz.appendChild(explain);
+      /* 作答：点对绿色 + 解析，点错红色并亮出正确项 */
+      quiz.addEventListener("click", function (e) {
+        var btn = e.target.closest("[data-quiz-opt]");
+        if (!btn || quiz.classList.contains("is-done")) return;
+        quiz.classList.add("is-done");
+        var chosen = Number(btn.getAttribute("data-quiz-opt"));
+        var correct = cfg.quiz.correct;
+        var key = String.fromCharCode(65 + correct);
+        opts.children[correct].classList.add("is-correct");
+        if (chosen === correct) {
+          explain.innerHTML = "✅ 回答正确。" + (cfg.quiz.explain || "");
+        } else {
+          btn.classList.add("is-wrong");
+          explain.innerHTML = "✗ 正确答案是 <b>" + key + "</b>。" + (cfg.quiz.explain || "");
+        }
+        explain.hidden = false;
+      });
+      body.appendChild(quiz);
     }
     tip.appendChild(body);
 

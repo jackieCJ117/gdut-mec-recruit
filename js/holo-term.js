@@ -17,15 +17,15 @@
   var TERM_LOG = [
     { t: "> JICHUANG HOLO SYSTEM v2026.08", c: "cyan" },
     { t: "> BOOT SEQUENCE INITIATED .................", c: "dim" },
-    { t: "> SCANNING MODULES 01-09 .............. 9/9 OK", c: "" },
+    { t: "> SCANNING MODULES 01-10 ............. 10/10 OK", c: "" },
     { t: "> LOADING GROUP: MECH ............... ONLINE", c: "" },
     { t: "> LOADING GROUP: EMBED .............. ONLINE", c: "" },
     { t: "> LOADING GROUP: VISION ............. ONLINE", c: "" },
     { t: "> LOADING GROUP: MEDIA .............. ONLINE", c: "" },
     { t: "", c: "" },
     { t: "> 招新通道: 开启 ONLINE", c: "ok" },
-    { t: "> 报名群号: XXXX（占位）", c: "cn" },
-    { t: "> 报名截止: 9 月 X 日（占位）", c: "warn" },
+    { t: "> 报名群号: 即将公布（招新群）", c: "cn" },
+    { t: "> 招新节点: 9 月初报名 → 11 月初机智杯", c: "warn" },
     { t: "> 四组联动: MECH / EMBED / VISION / MEDIA", c: "cn" },
     { t: "", c: "" },
     { t: "> SYNC COMPLETE. WELCOME, RECRUIT.", c: "ok" }
