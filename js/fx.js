@@ -273,7 +273,9 @@
     function posOf(i) {
       var pad = parseFloat(getComputedStyle(track).paddingLeft) || 0;
       var w = originals[0].offsetWidth;
-      STEP = w + 18;   /* gap 与 CSS 的 18px 一致 */
+      /* gap 取计算值而非硬编码 18：桌面 18px / 移动端 10px，落点才和实际布局一致 */
+      var gap = parseFloat(getComputedStyle(track).gap) || 18;
+      STEP = w + gap;
       return pad + i * STEP + w / 2 - track.clientWidth / 2;
     }
 

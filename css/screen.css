@@ -55,6 +55,7 @@
     margin: 0 0 18px !important;  /* 模块卡片间距 */
     border-radius: 16px;
     transition: none;
+    overflow: visible !important;  /* 长页模式下屏不承接滚动（基线 overflow-y:auto 会让 overflow-x 也变 auto，和英灵殿横滑抢手势） */
   }
   .holo .screen .sheet {
     height: auto !important;      /* 取消固定高 + 内部滚动 */
