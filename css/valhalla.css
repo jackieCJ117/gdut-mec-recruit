@@ -491,33 +491,56 @@
 }
 
 /* ============================================================
-   桌面箭头（移动端隐藏，拖拽为主）
+   左右切换三角（全设备可见，作为横滑的可靠替代）
    ============================================================ */
 .valhalla__arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  border: 1px solid rgba(94, 200, 226, 0.35);
-  background: rgba(8, 22, 36, 0.65);
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
-  color: var(--cyan);
-  font-size: 17px;
-  line-height: 1;
+  border: 1px solid rgba(94, 200, 226, 0.45);
+  background: rgba(8, 22, 36, 0.72);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   cursor: pointer;
-  z-index: 3;
-  transition: border-color 0.15s, box-shadow 0.15s, color 0.15s;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset 0 0 12px rgba(47, 196, 220, 0.08),
+    0 0 16px rgba(47, 196, 220, 0.25);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+/* 三角：CSS 边框三角（免字体依赖，currentColor 取青色） */
+.valhalla__arrow::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 11px solid currentColor;
+}
+.valhalla__arrow--next::before {
+  border-right: none;
+  border-left: 11px solid currentColor;
 }
 .valhalla__arrow:hover {
   border-color: var(--cyan);
   color: var(--cyan-soft);
-  box-shadow: 0 0 14px rgba(47, 196, 220, 0.35);
+  box-shadow:
+    inset 0 0 14px rgba(47, 196, 220, 0.15),
+    0 0 26px rgba(47, 196, 220, 0.5);
 }
-.valhalla__arrow--prev { left: 6px; }
-.valhalla__arrow--next { right: 6px; }
+.valhalla__arrow:active { transform: translateY(-50%) scale(0.9); }
+.valhalla__arrow--prev { left: 10px; }
+.valhalla__arrow--next { right: 10px; }
+/* 触屏加大点击区 */
+@media (hover: none) {
+  .valhalla__arrow { width: 48px; height: 48px; }
+}
 
 /* ============================================================
    入场：切到本屏时轨道整体淡入（卡片透视由 JS 逐卡控制，
@@ -551,7 +574,6 @@
   .vcard__portrait--photo { width: 152px; height: 190px; }
   .vcard__name { font-size: 18px; }
   .vcard__bio p { font-size: 12px; line-height: 1.6; }
-  .valhalla__arrow { display: none; }
 }
 /* 中屏（700-1099）：轨道保持流式（FLOW 长页模式下 absolute 会塌陷为 0 高） */
 @media (min-width: 700px) and (max-width: 1099px) {
