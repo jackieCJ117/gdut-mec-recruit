@@ -491,7 +491,7 @@
 }
 
 /* ============================================================
-   左右切换三角（全设备可见，琥珀常亮，替代横滑）
+   左右切换三角（全设备可见，蓝框琥珀三角，替代横滑）
    ============================================================ */
 .valhalla__arrow {
   position: absolute;
@@ -500,7 +500,7 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 180, 107, 0.55);
+  border: 1px solid rgba(94, 200, 226, 0.45);
   background: rgba(8, 22, 36, 0.72);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
@@ -510,15 +510,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* 琥珀常亮辉光：多层同色霓虹 */
+  /* 圆形框青色蓝光常亮 */
   box-shadow:
-    inset 0 0 12px rgba(255, 180, 107, 0.1),
-    0 0 8px var(--amber-glow),
-    0 0 20px rgba(255, 180, 107, 0.4),
-    0 0 36px rgba(255, 180, 107, 0.2);
+    inset 0 0 12px rgba(47, 196, 220, 0.1),
+    0 0 8px rgba(47, 196, 220, 0.4),
+    0 0 20px rgba(47, 196, 220, 0.25),
+    0 0 36px rgba(47, 196, 220, 0.12);
   transition: box-shadow 0.2s, transform 0.15s;
 }
-/* 三角：CSS 边框三角（免字体依赖，currentColor 取琥珀色） */
+/* 三角：CSS 边框三角，琥珀色（currentColor = --amber） */
 .valhalla__arrow::before {
   content: "";
   width: 0;
@@ -535,10 +535,10 @@
 .valhalla__arrow:hover {
   color: var(--amber-soft);
   box-shadow:
-    inset 0 0 14px rgba(255, 180, 107, 0.16),
-    0 0 10px var(--amber-glow),
-    0 0 26px rgba(255, 180, 107, 0.55),
-    0 0 44px rgba(255, 180, 107, 0.3);
+    inset 0 0 14px rgba(47, 196, 220, 0.15),
+    0 0 10px rgba(47, 196, 220, 0.55),
+    0 0 26px rgba(47, 196, 220, 0.35),
+    0 0 44px rgba(47, 196, 220, 0.18);
 }
 .valhalla__arrow:active { transform: translateY(-50%) scale(0.9); }
 .valhalla__arrow--prev { left: 10px; }
